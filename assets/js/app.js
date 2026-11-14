@@ -347,7 +347,7 @@
     bag.forEach(function (x) { count += x.qty; total += x.qty * x.price; });
     var bc = $('#bagCount'); bc.hidden = count === 0; bc.textContent = count;
     if (!bag.length) {
-      list.innerHTML = '<li class="bag-empty"><b>Your bag is empty</b><span>Start with the bestsellers or build your own.</span></li>';
+      list.innerHTML = '<li class="bag-empty"><b>Your bag is empty</b><span>Start with the bestsellers.</span></li>';
     } else {
       list.innerHTML = bag.map(function (x, i) {
         var thumb = x.img ? '<img src="assets/img/' + x.img + '.jpg" alt="" style="--pos:' + (x.pos || '50% 30%') + '">' : '<canvas aria-hidden="true"></canvas>';
