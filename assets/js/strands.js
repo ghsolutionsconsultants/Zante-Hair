@@ -44,12 +44,8 @@
   var LIVE_KEYS = ['texture', 'colour', 'always', 'ambient', 'ruler', 'dark', 'glow'];
   var raf = 0;
 
-  function themeIsDark() {
-    var r = document.documentElement;
-    if (r.dataset.theme === 'dark') return true;
-    if (r.dataset.theme === 'light') return false;
-    return global.matchMedia && global.matchMedia('(prefers-color-scheme: dark)').matches;
-  }
+  // light is the default; dark only when the visitor switches it on
+  function themeIsDark() { return document.documentElement.dataset.mode === 'dark'; }
 
   function schedule() { if (!raf) raf = requestAnimationFrame(loop); }
   function loop(now) {

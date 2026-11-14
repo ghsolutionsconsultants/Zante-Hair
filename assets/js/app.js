@@ -67,18 +67,18 @@
     return { total: Math.round((2650 + steps * 160 + add * 2 + tb * 2) * DENSITY[c.density || 180] / 10) * 10 };
   }
 
-  // ======================= THEME =======================
-  var savedTheme = store('zante-theme');
-  if (savedTheme === 'dark' || savedTheme === 'light') html.dataset.theme = savedTheme;
-  function isDark() { return html.dataset.theme ? html.dataset.theme === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches; }
-  function toggleTheme() {
-    var next = isDark() ? 'light' : 'dark';
-    html.dataset.theme = next; store('zante-theme', next);
+  // ======================= THEME (light by default) =======================
+  var savedMode = store('zante-mode');
+  function applyMode(m) {
+    html.dataset.mode = m;
+    $('#themeBtn').setAttribute('aria-label', m === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+    $('#themeBtnM').textContent = m === 'dark' ? 'Light mode' : 'Dark mode';
     Hair.refreshAll();
   }
+  applyMode(savedMode === 'dark' ? 'dark' : 'light');
+  function toggleTheme() { var next = html.dataset.mode === 'dark' ? 'light' : 'dark'; store('zante-mode', next); applyMode(next); }
   $('#themeBtn').addEventListener('click', toggleTheme);
   $('#themeBtnM').addEventListener('click', toggleTheme);
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function () { Hair.refreshAll(); });
 
   // ======================= TOASTS =======================
   function toast(msg) {
@@ -116,40 +116,14 @@
     }, 4000);
   })();
 
-  // ======================= HERO LOOKS (auto crossfade) =======================
-  (function hero() {
-    var imgs = $$('.arch-img'), dots = $$('#lookDots button'), cur = 0, timer = 0;
-    function show(i) {
-      cur = i;
-      imgs.forEach(function (im, k) { im.classList.toggle('is-on', k === i); });
-      dots.forEach(function (d, k) {
-        d.classList.remove('is-on'); d.setAttribute('aria-selected', k === i);
-        if (k === i) { void d.offsetWidth; d.classList.add('is-on'); }
-      });
-    }
-    function auto() { clearInterval(timer); if (!reduced) timer = setInterval(function () { show((cur + 1) % imgs.length); }, 5500); }
-    dots.forEach(function (d, k) { d.addEventListener('click', function () { show(k); auto(); }); });
-    var arch = $('#arch');
-    arch.addEventListener('pointerenter', function () { clearInterval(timer); });
-    arch.addEventListener('pointerleave', auto);
-    auto();
-  })();
-
   // ======================= HEADER =======================
   (function header() {
-    var h = $('#header'), fill = $('#progressFill'), lastY = window.scrollY, ticking = false;
-    var megaBtn = $('#megaBtn'), mega = $('#mega'), wrap = $('.has-mega'), closeT;
-    function setMega(open) { mega.classList.toggle('is-open', open); megaBtn.setAttribute('aria-expanded', open ? 'true' : 'false'); }
-    wrap.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse') { clearTimeout(closeT); setMega(true); } });
-    wrap.addEventListener('pointerleave', function (e) { if (e.pointerType === 'mouse') closeT = setTimeout(function () { setMega(false); }, 180); });
-    megaBtn.addEventListener('click', function () { setMega(!mega.classList.contains('is-open')); });
-    mega.addEventListener('click', function (e) { if (e.target.closest('a')) setMega(false); });
-    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { setMega(false); closeMobile(); closeSearch(); closeBag(); } });
+    var h = $('#header'), lastY = window.scrollY, ticking = false;
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { closeMobile(); closeSearch(); closeBag(); } });
     function onScroll() {
-      var y = window.scrollY, max = document.documentElement.scrollHeight - innerHeight;
-      fill.style.transform = 'scaleX(' + (max > 0 ? y / max : 0) + ')';
+      var y = window.scrollY;
       h.classList.toggle('is-scrolled', y > 30);
-      var menuOpen = mega.classList.contains('is-open') || $('#mobileNav').classList.contains('is-open');
+      var menuOpen = $('#mobileNav').classList.contains('is-open');
       if (y > 400 && y > lastY + 4 && !menuOpen) h.classList.add('is-hidden');
       else if (y < lastY - 4 || y < 400) h.classList.remove('is-hidden');
       lastY = y; ticking = false;
@@ -191,21 +165,16 @@
   }
   $$('.rail').forEach(dragScroll);
 
-  // ======================= SHOP RAIL =======================
-  var cardHair = {};
-  var wishes = new Set();
+  // ======================= SHOP: scroll down, catalogue moves sideways =======================
   (function shop() {
-    var rail = $('#rail');
-    rail.innerHTML = PRODUCTS.map(function (p) {
+    var sec = $('#shop'), pin = $('#shopPin'), track = $('#rail'), bar = $('#shopBar'), hint = $('#shopHint');
+    track.innerHTML = PRODUCTS.map(function (p) {
       var mid = Math.floor((p.lengths.length - 1) / 2);
-      var colourName = COL[p.colour].name;
       return '<article class="card" data-id="' + p.id + '" data-tags="' + p.tags + '">' +
         '<div class="card-media">' +
-          '<img class="card-img" src="assets/img/' + p.img + '.jpg" alt="' + esc(p.name) + ', ' + esc(p.style.toLowerCase()) + ' in ' + esc(colourName.toLowerCase()) + '" style="--pos:' + p.pos + '" loading="lazy" draggable="false">' +
+          '<img class="card-img" src="assets/img/' + p.img + '.jpg" alt="' + esc(p.name) + ', ' + esc(p.style.toLowerCase()) + ' in ' + esc(COL[p.colour].name.toLowerCase()) + '" style="--pos:' + p.pos + '" loading="lazy" draggable="false">' +
           (p.alt ? '<img class="card-img card-img--alt" src="assets/img/' + p.alt + '.jpg" alt="" style="--pos:' + p.pos + '" loading="lazy" draggable="false">' : '') +
           (p.badge ? '<span class="card-badge">' + esc(p.badge) + '</span>' : '') +
-          '<button type="button" class="card-heart" aria-pressed="false" aria-label="Save ' + esc(p.name) + '"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7.5-4.4-7.5-10A4.3 4.3 0 0 1 12 7.4 4.3 4.3 0 0 1 19.5 10c0 5.6-7.5 10-7.5 10Z" stroke-width="1.6" stroke-linejoin="round"/></svg></button>' +
-          '<span class="lens" title="Live texture preview"><canvas aria-hidden="true"></canvas></span>' +
         '</div>' +
         '<div class="card-body">' +
           '<p class="card-type">' + esc(p.type) + ' · ' + esc(p.style) + ' · ' + esc(COL[p.colour].code) + '</p>' +
@@ -216,15 +185,9 @@
         '</div></article>';
     }).join('');
 
-    PRODUCTS.forEach(function (p, idx) {
-      var card = $('[data-id="' + p.id + '"]', rail), media = $('.card-media', card);
-      var mid = Math.floor((p.lengths.length - 1) / 2);
+    PRODUCTS.forEach(function (p) {
+      var card = $('[data-id="' + p.id + '"]', track), mid = Math.floor((p.lengths.length - 1) / 2);
       p.sel = mid;
-      if (window.matchMedia('(hover: hover)').matches) {
-        cardHair[p.id] = new Hair($('.lens canvas', card), { layout: 'curtain', texture: p.texture, colour: p.colour, length: 30, fit: 30, top: 0, count: 44, glow: false, scale: 0.34, hit: media, seed: 40 + idx });
-        media.addEventListener('pointerenter', function () { cardHair[p.id].set({ always: true }); });
-        media.addEventListener('pointerleave', function () { cardHair[p.id].set({ always: false }); });
-      }
       $('.card-lens', card).addEventListener('click', function (e) {
         var b = e.target.closest('button'); if (!b) return;
         var i = +b.dataset.i; p.sel = i;
@@ -234,46 +197,72 @@
         pb._v = p.prices[i];
         $('.card-price span', card).textContent = 'or 3 × ' + fmt(p.prices[i] / 3) + ' PayJustNow';
       });
-      var heart = $('.card-heart', card);
-      heart.addEventListener('click', function () {
-        var on = !wishes.has(p.id);
-        if (on) wishes.add(p.id); else wishes.delete(p.id);
-        heart.classList.toggle('is-on', on); heart.setAttribute('aria-pressed', on);
-        var wc = $('#wishCount'); wc.hidden = wishes.size === 0; wc.textContent = wishes.size; bump(wc);
-        toast(on ? 'Saved to your wishlist' : 'Removed from your wishlist');
-      });
       $('[data-add]', card).addEventListener('click', function (e) {
         addToBag({ key: p.id + '-' + p.sel, name: p.name, variant: p.style + ' · ' + COL[p.colour].name + ' · ' + p.lengths[p.sel] + '"', price: p.prices[p.sel], img: p.img, pos: p.pos }, e.currentTarget);
       });
     });
 
+    // the section is as tall as the sideways distance, so every pixel scrolled down moves the row one pixel left
+    var dist = 0;
+    function measure() {
+      dist = Math.max(0, track.scrollWidth - innerWidth);
+      sec.style.height = (pin.offsetHeight + dist) + 'px';
+      onScroll();
+    }
+    function progress() {
+      var top = sec.getBoundingClientRect().top;
+      return dist > 0 ? clamp(-top / dist, 0, 1) : 0;
+    }
+    function onScroll() {
+      var p = progress();
+      track.style.transform = 'translate3d(' + (-p * dist).toFixed(1) + 'px,0,0)';
+      bar.style.transform = 'scaleX(' + p.toFixed(4) + ')';
+      hint.textContent = p > 0.97 ? 'That’s the full range. Keep scrolling' : 'Keep scrolling to browse sideways';
+      prev.disabled = p < 0.01; next.disabled = p > 0.99;
+    }
+    var prev = $('#railPrev'), next = $('#railNext');
+    function stepPx() { var c = $('.card:not([hidden])', track); return c ? (c.offsetWidth + 20) * 2 : 500; }
+    prev.addEventListener('click', function () { window.scrollBy({ top: -stepPx(), behavior: reduced ? 'auto' : 'smooth' }); });
+    next.addEventListener('click', function () { window.scrollBy({ top: stepPx(), behavior: reduced ? 'auto' : 'smooth' }); });
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', measure);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
+    $$('img', track).forEach(function (im) { if (!im.complete) im.addEventListener('load', measure, { once: true }); });
+
+    // sideways trackpad swipes and finger swipes also move the row
+    sec.addEventListener('wheel', function (e) {
+      if (Math.abs(e.deltaX) > Math.abs(e.deltaY) && Math.abs(e.deltaX) > 2) { e.preventDefault(); window.scrollBy(0, e.deltaX); }
+    }, { passive: false });
+    var tx = 0, ty = 0, sideways = null;
+    track.addEventListener('touchstart', function (e) { tx = e.touches[0].clientX; ty = e.touches[0].clientY; sideways = null; }, { passive: true });
+    track.addEventListener('touchmove', function (e) {
+      var dx = e.touches[0].clientX - tx, dy = e.touches[0].clientY - ty;
+      if (sideways === null && (Math.abs(dx) > 8 || Math.abs(dy) > 8)) sideways = Math.abs(dx) > Math.abs(dy);
+      if (sideways) { e.preventDefault(); window.scrollBy(0, -dx); tx = e.touches[0].clientX; }
+    }, { passive: false });
+
     // filters
     var filters = $('#filters');
     function filter(tag) {
       $$('.chip', filters).forEach(function (c) { var on = c.dataset.filter === tag; c.classList.toggle('is-on', on); c.setAttribute('aria-selected', on); });
-      $$('.card', rail).forEach(function (c) {
+      $$('.card', track).forEach(function (c) {
         var show = tag === 'all' || (' ' + c.dataset.tags + ' ').indexOf(' ' + tag + ' ') >= 0;
-        if (show) { c.hidden = false; requestAnimationFrame(function () { c.classList.remove('is-out'); }); }
-        else { c.classList.add('is-out'); setTimeout(function () { if (c.classList.contains('is-out')) c.hidden = true; }, 300); }
+        c.hidden = !show;
+        if (show) { c.classList.add('is-out'); requestAnimationFrame(function () { requestAnimationFrame(function () { c.classList.remove('is-out'); }); }); }
       });
-      rail.scrollTo({ left: 0, behavior: reduced ? 'auto' : 'smooth' });
-      setTimeout(updateArrows, 350);
+      measure();
+      if (sec.getBoundingClientRect().top < 0) window.scrollTo({ top: sec.offsetTop, behavior: 'auto' });
     }
     filters.addEventListener('click', function (e) { var c = e.target.closest('.chip'); if (c) filter(c.dataset.filter); });
     $$('[data-filter-link]').forEach(function (a) { a.addEventListener('click', function () { filter(a.dataset.filterLink); }); });
-
-    // arrows
-    var prev = $('#railPrev'), next = $('#railNext');
-    function step() { var c = $('.card:not([hidden])', rail); return c ? (c.offsetWidth + 20) * 2 : 500; }
-    prev.addEventListener('click', function () { rail.scrollBy({ left: -step(), behavior: reduced ? 'auto' : 'smooth' }); });
-    next.addEventListener('click', function () { rail.scrollBy({ left: step(), behavior: reduced ? 'auto' : 'smooth' }); });
-    function updateArrows() {
-      prev.disabled = rail.scrollLeft < 8;
-      next.disabled = rail.scrollLeft + rail.clientWidth > rail.scrollWidth - 8;
-    }
-    rail.addEventListener('scroll', updateArrows, { passive: true });
-    window.addEventListener('resize', updateArrows);
-    updateArrows();
+    window.__zanteShopGoTo = function (id) {
+      filter('all');
+      var card = $('[data-id="' + id + '"]', track);
+      var x = clamp(card.offsetLeft - parseFloat(getComputedStyle(track).paddingLeft), 0, dist);
+      window.scrollTo({ top: sec.offsetTop + x, behavior: reduced ? 'auto' : 'smooth' });
+      setTimeout(function () { card.animate([{ transform: 'scale(1)' }, { transform: 'scale(1.04)' }, { transform: 'scale(1)' }], { duration: 700, easing: 'ease-out' }); }, 900);
+    };
+    measure();
   })();
 
   // ======================= MATCH QUIZ =======================
@@ -371,7 +360,7 @@
     e.preventDefault();
     var inp = $('#clubEmail'), msg = $('#clubMsg'), v = inp.value.trim();
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) { msg.textContent = 'Enter an email address like name@example.co.za.'; inp.focus(); return; }
-    msg.textContent = 'Welcome to the club. This is a mock-up, so no email was sent.';
+    msg.textContent = 'Welcome to the club. This is a draft, so no email was sent.';
     inp.value = '';
   });
 
@@ -449,8 +438,7 @@
   $('#bagBtn').addEventListener('click', openBag);
   $('#bagClose').addEventListener('click', closeBag);
   $('#scrim').addEventListener('click', closeBag);
-  $('#checkoutBtn').addEventListener('click', function () { toast('Checkout is not part of this mock-up'); });
-  $('#wishBtn').addEventListener('click', function () { toast(wishes.size ? 'You have ' + wishes.size + ' saved ' + (wishes.size === 1 ? 'style' : 'styles') : 'Tap the heart on any product to save it'); });
+  $('#checkoutBtn').addEventListener('click', function () { toast('Checkout is not part of this draft'); });
   renderBag();
 
   // ======================= SEARCH =======================
@@ -475,13 +463,7 @@
   sRes.addEventListener('click', function (e) {
     var b = e.target.closest('[data-go]'); if (!b) return;
     closeSearch();
-    $('#filters [data-filter="all"]').click();
-    var card = $('[data-id="' + b.dataset.go + '"]'), rail = $('#rail');
-    setTimeout(function () {
-      $('#shop').scrollIntoView({ behavior: reduced ? 'auto' : 'smooth' });
-      rail.scrollTo({ left: card.offsetLeft - rail.offsetLeft - parseFloat(getComputedStyle(rail).paddingLeft), behavior: reduced ? 'auto' : 'smooth' });
-      setTimeout(function () { card.animate([{ transform: 'scale(1)' }, { transform: 'scale(1.04)' }, { transform: 'scale(1)' }], { duration: 700, easing: 'ease-out' }); }, 700);
-    }, 380);
+    window.__zanteShopGoTo(b.dataset.go);
   });
 
   // ======================= REVEALS, COUNTERS, FOOTER MARK, RANGE FILL =======================

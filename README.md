@@ -1,4 +1,4 @@
-# Zante Hair: homepage mock-up and logo system
+# Zante Hair: draft homepage and logo system
 
 A high-end, animation-rich homepage mock-up for **Zante Hair**, a South African women's hair brand selling virgin human hair bundles, HD lace closures and frontals, and glueless wigs. It also includes a redesigned logo system.
 
@@ -8,12 +8,17 @@ All product names, prices, policies and reviews are **sample content** for the m
 
 | What | Where |
 | --- | --- |
-| Homepage | `index.html` |
-| Brand and logo sheet | `brand.html` |
+| Homepage (the only page in this draft) | `index.html` |
+| Brand and logo sheet (reference only, not part of the site) | `design/brand-sheet.html` |
 | Logo files (SVG) | `assets/brand/` |
 | Logo files (PNG, high resolution) | `assets/brand/png/` |
 
 Open `index.html` in any modern browser. No build step or server is needed.
+
+To get a public link without claude.ai, either:
+
+- **Netlify Drop (about 1 minute, no setup):** go to https://app.netlify.com/drop and drag in the unzipped draft folder. Netlify gives you a link like `https://<name>.netlify.app`.
+- **GitHub Pages:** see below.
 
 To publish it on GitHub Pages: **Settings → Pages → Build and deployment → Deploy from a branch**, then pick this branch and `/ (root)`. The site will appear at `https://ghsolutionsconsultants.github.io/Zante-Hair/`.
 
@@ -29,21 +34,16 @@ Real hair photography, the way influencer hair stores sell it (bundles on satin 
 
 ## What is on the homepage
 
-The page follows a simple shopping flow, kept short with sideways scroll rows:
+This is a **draft**: one page only, with a "DRAFT" watermark, and `noindex` so search engines skip it. Light mode is the default; visitors can switch to dark.
 
 1. **Intro**: the logo draws itself, then the curtain parts (under 2 seconds, with a Skip button).
-2. **Hero**: one headline, two buttons, and an arch photo that rotates through three looks. On phones it fits on one screen.
-3. **Shop the hair**: the catalogue as one horizontal scroll row with filter chips (Wigs, Bundles, Curly and coily, Wavy and straight, Blonde and 613), arrows, drag to scroll, a second photo on hover, length options, wishlist and quick add.
-4. **Find your match**: a three-tap quiz that recommends a product with a match percentage.
-5. **Build your own**: the live configurator for bundles, closures, frontals and glueless wigs, with an inch ruler and live price.
+2. **Hero**: a campaign image with one headline and two buttons. On phones it fits on one screen.
+3. **Shop the hair**: as you scroll down, the catalogue moves sideways (left to right). Arrows, sideways swipes and the filter chips (Wigs, Bundles, Curly and coily, Wavy and straight, Blonde and 613) also work. A progress bar shows how far along you are.
+4. **Find your match**: a three-tap quiz that recommends a product.
+5. **Build your own**: the live configurator for bundles, closures, frontals and glueless wigs.
 6. **Why Zante**: drag to compare standard lace with HD lace across five skin tones.
-7. **Install diaries**: reviews in a sideways row.
-8. **Care ritual**: five steps in a sideways row.
-9. **Soft Life Club** sign-up and the footer.
-
-Also: rotating announcement bar, mega menu, instant search (press the search icon), bag drawer with a free-delivery bar, and light and dark themes.
-
-Colours: light pink pages, pink highlights, and purple only for actions and the two deep bands.
+7. **Install diaries** and the **care ritual**: sideways rows.
+8. **Soft Life Club** sign-up and the footer. Every link stays on this page.
 
 ## The logo
 
@@ -53,7 +53,7 @@ The new mark keeps what people already know about Zante (the pink-mauve colour, 
 - **Wordmark**: custom monoline capitals. The A carries a pearl crown and a body-wave crossbar.
 - **Versions**: primary, reversed, one colour, stacked, monogram, and light and dark app icons.
 
-See `brand.html` for the before and after, the anatomy, the palette, the type and the usage rules.
+See `design/brand-sheet.html` for the before and after, the anatomy, the palette, the type and the usage rules.
 
 ## Research that shaped it
 
@@ -68,9 +68,9 @@ All photos are free to use under the [Pexels licence](https://www.pexels.com/lic
 
 | File | Pexels photo | Photographer |
 | --- | --- | --- |
-| `hero-bodywave.jpg`, `p-deepwave-bundles.jpg`, `p-deepwave-2.jpg`, `shop-wall.jpg` | [15868319](https://www.pexels.com/photo/15868319/), [15868320](https://www.pexels.com/photo/15868320/), [15868321](https://www.pexels.com/photo/15868321/), [15868318](https://www.pexels.com/photo/15868318/) | Kobi Brown |
+| `p-deepwave-bundles.jpg`, `p-deepwave-2.jpg` | [15868320](https://www.pexels.com/photo/15868320/), [15868321](https://www.pexels.com/photo/15868321/) | Kobi Brown |
 | `p-ombre-bundles.jpg`, `p-honey-bundle.jpg`, `p-platinum-bundle.jpg`, `care-tools.jpg` | [18614262](https://www.pexels.com/photo/18614262/), [18614263](https://www.pexels.com/photo/18614263/), [18614268](https://www.pexels.com/photo/18614268/), [18614264](https://www.pexels.com/photo/18614264/) | Alina Skazka |
-| `p-thandi.jpg`, `p-thandi-2.jpg` | [10375983](https://www.pexels.com/photo/10375983/), [10375984](https://www.pexels.com/photo/10375984/) | RDNE Stock project |
+| `hero-soft-life.jpg`, `p-thandi.jpg`, `p-thandi-2.jpg` | [10375985](https://www.pexels.com/photo/10375985/), [10375983](https://www.pexels.com/photo/10375983/), [10375984](https://www.pexels.com/photo/10375984/) | RDNE Stock project |
 | `p-naledi.jpg`, `p-naledi-2.jpg` | [2331545](https://www.pexels.com/photo/2331545/), [2331539](https://www.pexels.com/photo/2331539/) | Bestbe Models |
 | `p-amahle.jpg` | [18775836](https://www.pexels.com/photo/18775836/) | Audu Samson |
 | `p-lerato.jpg` | [20417302](https://www.pexels.com/photo/20417302/) | Sherman Trotz |
@@ -80,7 +80,7 @@ All photos are free to use under the [Pexels licence](https://www.pexels.com/lic
 
 ```
 index.html            Homepage
-brand.html            Brand and logo sheet
+design/brand-sheet.html  Brand and logo sheet (reference only)
 assets/css/zante.css  Styles and design tokens (light and dark)
 assets/js/strands.js  The live hair strand engine
 assets/js/app.js      Page interactions, sample catalogue, bag, quiz, lab
