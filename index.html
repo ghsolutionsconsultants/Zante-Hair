@@ -81,7 +81,6 @@
     <nav class="nav" aria-label="Main">
       <a class="nav-link" href="#shop">Shop</a>
       <a class="nav-link" href="#match">Find your match</a>
-      <a class="nav-link" href="#lab">Build your own</a>
       <a class="nav-link" href="#care">Hair care</a>
     </nav>
     <div class="header-tools">
@@ -103,7 +102,6 @@
 <nav class="mobile-nav" id="mobileNav" aria-label="Mobile">
   <a href="#shop">Shop the hair</a>
   <a href="#match">Find your match</a>
-  <a href="#lab">Build your own</a>
   <a href="#care">Hair care</a>
   <div class="mobile-nav-foot">
     <button type="button" class="chip" id="themeBtnM">Dark mode</button>
@@ -228,73 +226,6 @@
   </div>
 </section>
 
-<!-- ============ 4. BUILD YOUR OWN ============ -->
-<section class="section lab" id="lab" aria-labelledby="labTitle">
-  <div class="wrap">
-    <div class="section-head section-head--stack">
-      <h2 class="h2" id="labTitle">Build your own unit</h2>
-      <p class="section-lede">Choose the type, texture, colour and length. The preview and price update as you go.</p>
-    </div>
-    <div class="lab-grid">
-      <div class="lab-stage">
-        <canvas class="lab-canvas" id="labCanvas" aria-label="Live preview of your custom hair unit" role="img"></canvas>
-        <span class="lab-stage-tag" id="labTag">Body Wave, Natural Black, 22"</span>
-      </div>
-      <form class="lab-panel" id="labForm" autocomplete="off">
-        <fieldset>
-          <legend>Unit</legend>
-          <div class="seg" id="labUnit">
-            <button type="button" class="seg-btn is-on" data-unit="bundle">Bundles</button>
-            <button type="button" class="seg-btn" data-unit="closure">5x5 Closure</button>
-            <button type="button" class="seg-btn" data-unit="frontal">13x4 Frontal</button>
-            <button type="button" class="seg-btn" data-unit="wig">Glueless Wig</button>
-          </div>
-        </fieldset>
-        <fieldset>
-          <legend>Texture</legend>
-          <div class="chips chips--dark" id="labTexture">
-            <button type="button" class="chip" data-texture="straight">Straight</button>
-            <button type="button" class="chip is-on" data-texture="body">Body Wave</button>
-            <button type="button" class="chip" data-texture="deep">Deep Wave</button>
-            <button type="button" class="chip" data-texture="kinkyStraight">Kinky Straight</button>
-            <button type="button" class="chip" data-texture="kinkyCurly">Kinky Curly</button>
-          </div>
-        </fieldset>
-        <fieldset>
-          <legend>Colour <span class="legend-val" id="labColourName">Natural Black (1B)</span></legend>
-          <div class="swatches" id="labColour">
-            <button type="button" class="swatch is-on" data-colour="1b" aria-label="Natural Black 1B"></button>
-            <button type="button" class="swatch" data-colour="mauve" aria-label="Pink Ombre"></button>
-            <button type="button" class="swatch" data-colour="27" aria-label="Honey Blonde 27"></button>
-            <button type="button" class="swatch" data-colour="99j" aria-label="Burgundy 99J"></button>
-            <button type="button" class="swatch" data-colour="613" aria-label="Platinum 613"></button>
-          </div>
-        </fieldset>
-        <fieldset>
-          <legend>Length <span class="legend-val"><b id="labLenOut">22</b> inches</span></legend>
-          <input type="range" id="labLength" min="10" max="30" step="2" value="22" aria-label="Length in inches">
-        </fieldset>
-        <fieldset id="labDensityWrap" hidden>
-          <legend>Density</legend>
-          <div class="seg seg--sm" id="labDensity">
-            <button type="button" class="seg-btn" data-density="150">150%</button>
-            <button type="button" class="seg-btn is-on" data-density="180">180%</button>
-            <button type="button" class="seg-btn" data-density="250">250%</button>
-          </div>
-        </fieldset>
-        <div class="lab-out">
-          <div>
-            <p class="lab-need" id="labNeed">You’ll need 4 bundles for a full sew-in</p>
-            <p class="lab-price" id="labPrice">R4 400</p>
-            <p class="lab-split" id="labSplit">or 4 × R1 100 with Payflex</p>
-          </div>
-          <button type="submit" class="btn btn--pink" id="labAdd"><span>Add to bag</span></button>
-        </div>
-      </form>
-    </div>
-  </div>
-</section>
-
 <!-- ============ 5. WHY ZANTE ============ -->
 <section class="section melt" id="melt" aria-labelledby="meltTitle">
   <div class="wrap melt-grid">
@@ -384,7 +315,7 @@
         <p class="footer-tag">Hair with a soft life.</p>
         <p class="footer-small">Virgin human hair for Black women, shipped from Johannesburg with The Courier Guy and Pargo pickup points.</p>
       </div>
-      <nav aria-label="Shop links"><p class="eyebrow eyebrow--light">Shop</p><a href="#shop" data-filter-link="wigs">Wigs</a><a href="#shop" data-filter-link="bundles">Bundles</a><a href="#lab">Build your own</a></nav>
+      <nav aria-label="Shop links"><p class="eyebrow eyebrow--light">Shop</p><a href="#shop" data-filter-link="wigs">Wigs</a><a href="#shop" data-filter-link="bundles">Bundles</a></nav>
       <nav aria-label="Help links"><p class="eyebrow eyebrow--light">Help</p><a href="#match">Find your match</a><a href="#care">Hair care</a><a href="#club">Soft Life Club</a></nav>
       <nav aria-label="Zante links"><p class="eyebrow eyebrow--light">Zante</p><a href="#melt">Our standard</a><a href="#reviews">Install diaries</a><a href="#top">Back to top</a></nav>
     </div>

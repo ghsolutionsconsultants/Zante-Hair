@@ -55,18 +55,6 @@
     ['My 613 took colour so well. My stylist was impressed.', 'Thato R.', 'Polokwane', 'Platinum 613 Bundle, 20"']
   ];
 
-  var TEX_BASE = { straight: 650, body: 720, deep: 780, kinkyStraight: 760, kinkyCurly: 820 };
-  var COL_ADD = { '1b': 0, mauve: 180, '27': 140, '99j': 140, '613': 220, ombre: 200 };
-  var DENSITY = { 150: 1, 180: 1.12, 250: 1.35 };
-  function bundlesNeeded(len) { return len <= 20 ? 3 : len <= 26 ? 4 : 5; }
-  function quote(c) {
-    var steps = (c.length - 10) / 2, add = COL_ADD[c.colour], tb = TEX_BASE[c.texture] - 650;
-    if (c.unit === 'bundle') { var per = TEX_BASE[c.texture] + steps * 70 + add, n = bundlesNeeded(c.length); return { total: per * n, per: per, n: n }; }
-    if (c.unit === 'closure') return { total: 1050 + steps * 60 + add + tb };
-    if (c.unit === 'frontal') return { total: 1450 + steps * 80 + add + tb };
-    return { total: Math.round((2650 + steps * 160 + add * 2 + tb * 2) * DENSITY[c.density || 180] / 10) * 10 };
-  }
-
   // ======================= THEME (light by default) =======================
   var savedMode = store('zante-mode');
   function applyMode(m) {
@@ -304,41 +292,6 @@
     });
   })();
 
-  // ======================= BUILD YOUR OWN (Texture Lab) =======================
-  (function lab() {
-    var st = { unit: 'bundle', texture: 'body', colour: '1b', length: 22, density: 180 };
-    var layoutFor = { bundle: 'weft', closure: 'closure', frontal: 'frontal', wig: 'dome' };
-    var unitName = { bundle: 'Bundles', closure: '5x5 HD Closure', frontal: '13x4 HD Frontal', wig: 'Glueless Wig' };
-    var labHair = new Hair($('#labCanvas'), { layout: 'weft', texture: st.texture, colour: st.colour, length: st.length, fit: 33, top: 0.08, count: 230, always: true, ruler: true, dark: true, glow: false, headW: 0.2, seed: 3 });
-    var priceEl = $('#labPrice'), range = $('#labLength');
-    function topFor(u) { return u === 'wig' ? 0.07 : u === 'frontal' ? 0.12 : u === 'closure' ? 0.1 : 0.08; }
-    function render() {
-      var q = quote(st), from = priceEl._v || q.total;
-      tween(from, q.total, 600, function (v) { priceEl.textContent = fmt(v); });
-      priceEl._v = q.total;
-      $('#labSplit').textContent = 'or 4 × ' + fmt(q.total / 4) + ' with Payflex';
-      $('#labNeed').textContent = st.unit === 'bundle' ? 'You’ll need ' + q.n + ' bundles for a full sew-in (' + q.n * 100 + ' g), ' + fmt(q.per) + ' each'
-        : st.unit === 'wig' ? 'Glueless 13x4 HD wig at ' + st.density + '% density, ready to wear'
-        : st.unit === 'closure' ? 'Pairs with 3 bundles for a closure sew-in' : 'Pairs with 3 or 4 bundles for an ear-to-ear install';
-      $('#labTag').textContent = TEX[st.texture].label + ', ' + COL[st.colour].name + ', ' + st.length + '"';
-      $('#labColourName').textContent = COL[st.colour].name + ' (' + COL[st.colour].code + ')';
-      $('#labLenOut').textContent = st.length;
-      range.style.setProperty('--fill', ((st.length - 10) / 20 * 100) + '%');
-      $('#labDensityWrap').hidden = st.unit !== 'wig';
-    }
-    choose($('#labUnit'), 'data-unit', function (v) { st.unit = v; labHair.set({ layout: layoutFor[v], top: topFor(v), count: v === 'wig' ? 300 : 230, density: v === 'wig' ? DENSITY[st.density] : 1 }); render(); });
-    choose($('#labTexture'), 'data-texture', function (v) { st.texture = v; labHair.set({ texture: v }); render(); });
-    choose($('#labColour'), 'data-colour', function (v) { st.colour = v; labHair.set({ colour: v }); render(); });
-    choose($('#labDensity'), 'data-density', function (v) { st.density = +v; labHair.set({ density: DENSITY[st.density] }); render(); });
-    range.addEventListener('input', function () { st.length = +range.value; labHair.set({ length: st.length }); render(); });
-    $('#labForm').addEventListener('submit', function (e) {
-      e.preventDefault();
-      var q = quote(st);
-      addToBag({ key: 'lab-' + [st.unit, st.texture, st.colour, st.length, st.density].join('-'), name: 'Custom ' + TEX[st.texture].label + ' ' + unitName[st.unit] + (st.unit === 'bundle' ? ' × ' + q.n : ''), variant: COL[st.colour].name + ', ' + st.length + '"' + (st.unit === 'wig' ? ', ' + st.density + '%' : ''), price: q.total, look: { layout: layoutFor[st.unit], texture: st.texture, colour: st.colour, length: st.length } }, $('#labAdd'));
-    });
-    render();
-  })();
-
   // ======================= HD LACE MELT =======================
   (function melt() {
     var stage = $('#meltStage'), range = $('#meltRange');
@@ -475,7 +428,7 @@
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.remove('pre'); io.unobserve(e.target); } });
     }, { rootMargin: '0px 0px -6% 0px' });
-    $$('.section-head, .match-grid, .lab-grid, .melt-grid, .club-inner').forEach(function (el) {
+    $$('.section-head, .match-grid, .melt-grid, .club-inner').forEach(function (el) {
       if (el.getBoundingClientRect().top > innerHeight * 0.92) { el.setAttribute('data-reveal', ''); el.classList.add('pre'); io.observe(el); }
     });
     var cio = new IntersectionObserver(function (entries) {

@@ -40,10 +40,9 @@ This is a **draft**: one page only, with a "DRAFT" watermark, and `noindex` so s
 2. **Hero**: a campaign image with one headline and two buttons. On phones it fits on one screen.
 3. **Shop the hair**: as you scroll down, the catalogue moves sideways (left to right). Arrows, sideways swipes and the filter chips (Wigs, Bundles, Curly and coily, Wavy and straight, Blonde and 613) also work. A progress bar shows how far along you are.
 4. **Find your match**: a three-tap quiz that recommends a product.
-5. **Build your own**: the live configurator for bundles, closures, frontals and glueless wigs.
-6. **Why Zante**: drag to compare standard lace with HD lace across five skin tones.
-7. **Install diaries** and the **care ritual**: sideways rows.
-8. **Soft Life Club** sign-up and the footer. Every link stays on this page.
+5. **Why Zante**: drag to compare standard lace with HD lace across five skin tones.
+6. **Install diaries** and the **care ritual**: sideways rows.
+7. **Soft Life Club** sign-up and the footer. Every link stays on this page.
 
 ## The logo
 
