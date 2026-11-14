@@ -1,0 +1,457 @@
+<!doctype html>
+<html lang="en-ZA" data-mode="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Zante Hair</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Zante Hair: virgin human hair bundles, glueless wigs and HD lace for Black women, delivered across South Africa. Draft homepage.">
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="assets/brand/zante-app-icon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..800;1,6..96,400..800&family=DM+Mono:wght@400;500&family=Outfit:wght@300..700&display=swap">
+<link rel="stylesheet" href="assets/css/zante.css">
+</head>
+<body>
+
+<!-- ============ DRAFT WATERMARK ============ -->
+<div class="watermark" aria-hidden="true"></div>
+<p class="draft-pill">Draft · not live</p>
+
+<!-- ============ INTRO: the logo draws itself, then the curtain parts ============ -->
+<div class="intro" id="intro" aria-hidden="true">
+  <div class="intro-panel intro-panel--l"></div>
+  <div class="intro-panel intro-panel--r"></div>
+  <div class="intro-stage">
+    <svg class="intro-mono" viewBox="0 0 120 120">
+      <defs>
+        <linearGradient id="in-g1" x1="20" y1="20" x2="100" y2="100" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#7B3FA6"/><stop offset=".55" stop-color="#E06AA0"/><stop offset="1" stop-color="#FAC4DA"/></linearGradient>
+        <linearGradient id="in-g2" x1="20" y1="20" x2="100" y2="100" gradientUnits="userSpaceOnUse"><stop offset="0" class="stop-ink"/><stop offset=".6" class="stop-deep"/><stop offset="1" stop-color="#E06AA0"/></linearGradient>
+        <linearGradient id="in-g3" x1="20" y1="20" x2="100" y2="100" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#CDB0E8"/><stop offset="1" stop-color="#FAC4DA"/></linearGradient>
+        <radialGradient id="in-pearl" cx=".36" cy=".32" r=".75"><stop offset="0" stop-color="#fff"/><stop offset=".45" stop-color="#FAC4DA"/><stop offset="1" stop-color="#7B3FA6"/></radialGradient>
+      </defs>
+      <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path class="draw d1" pathLength="1" d="M31 32 H85 Q90 32 87 36 C76 50 58 52 56 60 C54 68 44 74 36 83 Q33 87 40 87 H90" stroke="url(#in-g2)" stroke-width="2.8" transform="translate(0 -4.2)"/>
+        <path class="draw d2" pathLength="1" d="M31 32 H85 Q90 32 87 36 C76 50 58 52 56 60 C54 68 44 74 36 83 Q33 87 40 87 H90" stroke="url(#in-g1)" stroke-width="4"/>
+        <path class="draw d3" pathLength="1" d="M31 32 H85 Q90 32 87 36 C76 50 58 52 56 60 C54 68 44 74 36 83 Q33 87 40 87 H90" stroke="url(#in-g3)" stroke-width="2.3" transform="translate(0 4.2)"/>
+      </g>
+      <g class="intro-pearl"><circle cx="23" cy="28" r="7.2" fill="url(#in-pearl)"/><circle cx="20.8" cy="25.5" r="2.1" fill="#fff" opacity=".9"/></g>
+    </svg>
+    <svg class="intro-word" viewBox="-6 10 342 78">
+      <path class="draw d4" pathLength="1" d="M0 20 H44 L0 80 H46 M72 80 L93.6 28.4 M122 80 L100.4 28.4 M81.6 59 C89 49 105 69 112.4 59 M148 80 V20 L192 80 V20 M218 20 H264 M241 20 V80 M330 20 H290 V80 H330 M290 50 H322" fill="none" stroke="currentColor" stroke-width="4.6" stroke-linecap="round" stroke-linejoin="round"/>
+      <g class="intro-apex"><circle cx="97" cy="21" r="6.2" fill="url(#in-pearl)"/><circle cx="95.1" cy="18.9" r="1.8" fill="#fff" opacity=".9"/></g>
+    </svg>
+    <p class="intro-hair">Hair</p>
+  </div>
+  <button class="intro-skip" id="introSkip" type="button">Skip</button>
+</div>
+
+<!-- ============ ANNOUNCEMENT ============ -->
+<div class="announce" role="region" aria-label="Store news">
+  <p class="announce-msg is-on">Free delivery on orders over R1 500</p>
+  <p class="announce-msg">Pay in 3 with PayJustNow or 4 with Payflex. No interest.</p>
+  <p class="announce-msg">30-day exchanges on unworn units</p>
+</div>
+
+<!-- ============ HEADER ============ -->
+<header class="site-header" id="header">
+  <div class="header-inner wrap">
+    <button class="icon-btn burger" type="button" id="burgerBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav"><span></span><span></span></button>
+    <a class="brand" href="#top" aria-label="Zante Hair, back to top">
+      <svg class="brand-mono" viewBox="16 18 80 76" aria-hidden="true">
+        <defs>
+          <linearGradient id="hd-g1" x1="20" y1="20" x2="100" y2="100" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#7B3FA6"/><stop offset=".55" stop-color="#E06AA0"/><stop offset="1" stop-color="#FAC4DA"/></linearGradient>
+          <linearGradient id="hd-g2" x1="20" y1="20" x2="100" y2="100" gradientUnits="userSpaceOnUse"><stop offset="0" class="stop-ink"/><stop offset=".6" class="stop-deep"/><stop offset="1" stop-color="#E06AA0"/></linearGradient>
+          <linearGradient id="hd-g3" x1="20" y1="20" x2="100" y2="100" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#CDB0E8"/><stop offset="1" stop-color="#FAC4DA"/></linearGradient>
+          <radialGradient id="hd-pearl" cx=".36" cy=".32" r=".75"><stop offset="0" stop-color="#fff"/><stop offset=".45" stop-color="#FAC4DA"/><stop offset="1" stop-color="#7B3FA6"/></radialGradient>
+        </defs>
+        <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M31 32 H85 Q90 32 87 36 C76 50 58 52 56 60 C54 68 44 74 36 83 Q33 87 40 87 H90" stroke="url(#hd-g2)" stroke-width="3.4" transform="translate(0 -4.4)"/>
+          <path d="M31 32 H85 Q90 32 87 36 C76 50 58 52 56 60 C54 68 44 74 36 83 Q33 87 40 87 H90" stroke="url(#hd-g1)" stroke-width="4.6"/>
+          <path d="M31 32 H85 Q90 32 87 36 C76 50 58 52 56 60 C54 68 44 74 36 83 Q33 87 40 87 H90" stroke="url(#hd-g3)" stroke-width="2.8" transform="translate(0 4.4)"/>
+        </g>
+        <circle cx="23" cy="28" r="7.2" fill="url(#hd-pearl)"/><circle cx="20.8" cy="25.5" r="2.1" fill="#fff" opacity=".9"/>
+      </svg>
+      <svg class="brand-word" viewBox="-6 10 342 78" aria-hidden="true">
+        <path d="M0 20 H44 L0 80 H46 M72 80 L93.6 28.4 M122 80 L100.4 28.4 M81.6 59 C89 49 105 69 112.4 59 M148 80 V20 L192 80 V20 M218 20 H264 M241 20 V80 M330 20 H290 V80 H330 M290 50 H322" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="97" cy="21" r="7.4" fill="url(#hd-pearl)"/>
+      </svg>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a class="nav-link" href="#shop">Shop</a>
+      <a class="nav-link" href="#match">Find your match</a>
+      <a class="nav-link" href="#lab">Build your own</a>
+      <a class="nav-link" href="#care">Hair care</a>
+    </nav>
+    <div class="header-tools">
+      <button class="icon-btn" type="button" id="searchBtn" aria-label="Search">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M15.5 15.5 20 20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </button>
+      <button class="icon-btn hide-sm" type="button" id="themeBtn" aria-label="Switch to dark mode">
+        <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M19.5 14.5A8 8 0 0 1 9.5 4.5a8 8 0 1 0 10 10Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+        <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </button>
+      <button class="icon-btn" type="button" id="bagBtn" aria-label="Open bag">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1.2 11.2a1.5 1.5 0 0 1-1.5 1.3H7.7a1.5 1.5 0 0 1-1.5-1.3Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+        <span class="badge" id="bagCount" hidden>0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobileNav" aria-label="Mobile">
+  <a href="#shop">Shop the hair</a>
+  <a href="#match">Find your match</a>
+  <a href="#lab">Build your own</a>
+  <a href="#care">Hair care</a>
+  <div class="mobile-nav-foot">
+    <button type="button" class="chip" id="themeBtnM">Dark mode</button>
+    <p>Free delivery over R1 500 · Pay in 3 with PayJustNow</p>
+  </div>
+</nav>
+
+<main id="top">
+
+<!-- ============ 1. HERO (campaign) ============ -->
+<section class="hero" id="hero" aria-labelledby="heroTitle">
+  <div class="hero-photo">
+    <img src="assets/img/hero-soft-life.jpg" alt="Smiling woman with long glossy wavy hair, on the phone" width="1500" height="1800" fetchpriority="high">
+  </div>
+  <div class="wrap hero-inner">
+    <div class="hero-copy">
+      <p class="eyebrow">The Soft Life edit · New season</p>
+      <h1 class="hero-title" id="heroTitle">
+        <span class="line"><span>Soft life,</span></span>
+        <span class="line line--i"><span>strand by strand.</span></span>
+      </h1>
+      <p class="hero-lede">Virgin human hair for Black women. Raw bundles, glueless wigs and HD lace, delivered across South Africa.</p>
+      <div class="hero-ctas">
+        <a class="btn btn--solid" href="#shop"><span>Shop the hair</span><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5.5 15.5 10 11 14.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a class="btn btn--ghost" href="#match"><span>Find my match</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="trust-bar">
+  <ul class="trust wrap" aria-label="Why shop with Zante">
+    <li><b>Free delivery</b><span>over R1 500</span></li>
+    <li><b>Pay in 3</b><span>PayJustNow or Payflex</span></li>
+    <li><b>30-day</b><span>exchanges</span></li>
+    <li><b>24 h</b><span>dispatch</span></li>
+  </ul>
+</div>
+
+<!-- ============ 2. SHOP: scroll down, the catalogue moves sideways ============ -->
+<section class="shop" id="shop" aria-labelledby="shopTitle">
+  <div class="shop-pin" id="shopPin">
+    <div class="wrap shop-top">
+      <div class="shop-head">
+        <div>
+          <p class="eyebrow">Shop the hair</p>
+          <h2 class="h2" id="shopTitle">Bestsellers and new drops</h2>
+        </div>
+        <div class="shop-arrows">
+          <button type="button" class="arrow" id="railPrev" aria-label="Previous products"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M12.5 4.5 7 10l5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <button type="button" class="arrow" id="railNext" aria-label="Next products"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7.5 4.5 13 10l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </div>
+      </div>
+      <div class="filters" id="filters" role="tablist" aria-label="Filter hair">
+        <button type="button" role="tab" class="chip is-on" aria-selected="true" data-filter="all">All</button>
+        <button type="button" role="tab" class="chip" aria-selected="false" data-filter="wigs">Wigs</button>
+        <button type="button" role="tab" class="chip" aria-selected="false" data-filter="bundles">Bundles</button>
+        <button type="button" role="tab" class="chip" aria-selected="false" data-filter="curly">Curly and coily</button>
+        <button type="button" role="tab" class="chip" aria-selected="false" data-filter="wavy">Wavy and straight</button>
+        <button type="button" role="tab" class="chip" aria-selected="false" data-filter="blonde">Blonde and 613</button>
+      </div>
+    </div>
+    <div class="shop-window">
+      <div class="shop-track" id="rail" aria-label="Hair catalogue"></div>
+    </div>
+    <div class="wrap shop-foot">
+      <div class="shop-progress" aria-hidden="true"><span id="shopBar"></span></div>
+      <p class="shop-hint" id="shopHint">Keep scrolling to browse sideways</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3. FIND YOUR MATCH ============ -->
+<section class="section match" id="match" aria-labelledby="matchTitle">
+  <div class="wrap match-grid">
+    <div class="match-head">
+      <p class="eyebrow">Find your match</p>
+      <h2 class="h2" id="matchTitle">Not sure? Three taps.</h2>
+      <p class="section-lede">Tell us how you like to wear your hair. We match you to a unit from the shop.</p>
+    </div>
+    <div class="quiz" id="quiz">
+      <div class="quiz-progress" aria-hidden="true"><span id="quizBar"></span></div>
+      <div class="quiz-step is-on" data-step="0">
+        <p class="quiz-q"><span class="quiz-n">1 of 3</span>How do you want to install?</p>
+        <div class="quiz-opts">
+          <button type="button" data-k="install" data-v="sewin"><b>Sew-in</b><span>Bundles and a closure, done by your stylist</span></button>
+          <button type="button" data-k="install" data-v="glueless"><b>Glueless</b><span>Wear and go, no glue</span></button>
+          <button type="button" data-k="install" data-v="quick"><b>Quick switch</b><span>Headband wig, on in five minutes</span></button>
+        </div>
+      </div>
+      <div class="quiz-step" data-step="1">
+        <p class="quiz-q"><span class="quiz-n">2 of 3</span>What’s the vibe?</p>
+        <div class="quiz-opts">
+          <button type="button" data-k="vibe" data-v="sleek"><b>Sleek</b><span>Straight or loose wave</span></button>
+          <button type="button" data-k="vibe" data-v="waves"><b>Soft waves</b><span>Bouncy body wave</span></button>
+          <button type="button" data-k="vibe" data-v="curls"><b>Curls and coils</b><span>Deep wave, curly, kinky</span></button>
+        </div>
+      </div>
+      <div class="quiz-step" data-step="2">
+        <p class="quiz-q"><span class="quiz-n">3 of 3</span>What’s your budget?</p>
+        <div class="quiz-opts">
+          <button type="button" data-k="budget" data-v="2000"><b>Under R2 000</b><span>Smart and sorted</span></button>
+          <button type="button" data-k="budget" data-v="4000"><b>R2 000 to R4 000</b><span>The sweet spot</span></button>
+          <button type="button" data-k="budget" data-v="9999"><b>R4 000 and up</b><span>Treat yourself</span></button>
+        </div>
+      </div>
+      <div class="quiz-step quiz-result" data-step="3" aria-live="polite">
+        <div class="result-visual">
+          <img id="matchImg" src="assets/img/p-thandi.jpg" alt="">
+          <svg class="ring" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="56" class="ring-bg"/><circle cx="60" cy="60" r="56" class="ring-fg" id="ringFg" pathLength="100"/></svg>
+          <p class="ring-num"><b id="matchPct">0</b><span>% match</span></p>
+        </div>
+        <div class="result-copy">
+          <p class="eyebrow">Your match</p>
+          <h3 id="matchName">Thandi Glueless Wig</h3>
+          <p id="matchWhy">Glueless, soft waves, and inside your budget.</p>
+          <p class="result-price" id="matchPrice">R3 950</p>
+          <div class="result-ctas">
+            <button type="button" class="btn btn--solid" id="matchAdd"><span>Add to bag</span></button>
+            <button type="button" class="btn btn--ghost" id="matchRestart"><span>Start over</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4. BUILD YOUR OWN ============ -->
+<section class="section lab" id="lab" aria-labelledby="labTitle">
+  <div class="wrap">
+    <div class="section-head section-head--stack">
+      <p class="eyebrow eyebrow--light">Build your own</p>
+      <h2 class="h2" id="labTitle">Your texture, your length, your price.</h2>
+      <p class="section-lede">Choose bundles, a closure, a frontal or a glueless wig. The preview, the inch ruler and the price update as you go.</p>
+    </div>
+    <div class="lab-grid">
+      <div class="lab-stage">
+        <canvas class="lab-canvas" id="labCanvas" aria-label="Live preview of your custom hair unit" role="img"></canvas>
+        <span class="lab-stage-tag" id="labTag">Body Wave · Natural Black · 22"</span>
+      </div>
+      <form class="lab-panel" id="labForm" autocomplete="off">
+        <fieldset>
+          <legend>Unit</legend>
+          <div class="seg" id="labUnit">
+            <button type="button" class="seg-btn is-on" data-unit="bundle">Bundles</button>
+            <button type="button" class="seg-btn" data-unit="closure">5x5 Closure</button>
+            <button type="button" class="seg-btn" data-unit="frontal">13x4 Frontal</button>
+            <button type="button" class="seg-btn" data-unit="wig">Glueless Wig</button>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Texture</legend>
+          <div class="chips chips--dark" id="labTexture">
+            <button type="button" class="chip" data-texture="straight">Straight</button>
+            <button type="button" class="chip is-on" data-texture="body">Body Wave</button>
+            <button type="button" class="chip" data-texture="deep">Deep Wave</button>
+            <button type="button" class="chip" data-texture="kinkyStraight">Kinky Straight</button>
+            <button type="button" class="chip" data-texture="kinkyCurly">Kinky Curly</button>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Colour <span class="legend-val" id="labColourName">Natural Black (1B)</span></legend>
+          <div class="swatches" id="labColour">
+            <button type="button" class="swatch is-on" data-colour="1b" aria-label="Natural Black 1B"></button>
+            <button type="button" class="swatch" data-colour="mauve" aria-label="Pink Ombre"></button>
+            <button type="button" class="swatch" data-colour="27" aria-label="Honey Blonde 27"></button>
+            <button type="button" class="swatch" data-colour="99j" aria-label="Burgundy 99J"></button>
+            <button type="button" class="swatch" data-colour="613" aria-label="Platinum 613"></button>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Length <span class="legend-val"><b id="labLenOut">22</b> inches</span></legend>
+          <input type="range" id="labLength" min="10" max="30" step="2" value="22" aria-label="Length in inches">
+        </fieldset>
+        <fieldset id="labDensityWrap" hidden>
+          <legend>Density</legend>
+          <div class="seg seg--sm" id="labDensity">
+            <button type="button" class="seg-btn" data-density="150">150%</button>
+            <button type="button" class="seg-btn is-on" data-density="180">180%</button>
+            <button type="button" class="seg-btn" data-density="250">250%</button>
+          </div>
+        </fieldset>
+        <div class="lab-out">
+          <div>
+            <p class="lab-need" id="labNeed">You’ll need 4 bundles for a full sew-in</p>
+            <p class="lab-price" id="labPrice">R4 400</p>
+            <p class="lab-split" id="labSplit">or 4 × R1 100 with Payflex</p>
+          </div>
+          <button type="submit" class="btn btn--pink" id="labAdd"><span>Add to bag</span></button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5. WHY ZANTE ============ -->
+<section class="section melt" id="melt" aria-labelledby="meltTitle">
+  <div class="wrap melt-grid">
+    <div class="melt-copy">
+      <p class="eyebrow">Why Zante</p>
+      <h2 class="h2" id="meltTitle">HD lace that melts on every skin tone.</h2>
+      <p class="section-lede">Drag the pearl to compare standard lace with our Swiss HD lace, then switch the skin tone.</p>
+      <div class="tones" id="tones" role="group" aria-label="Skin tone">
+        <button type="button" class="tone" style="--tone:#D9A882" data-tone="#D9A882" aria-label="Light brown"></button>
+        <button type="button" class="tone" style="--tone:#B07850" data-tone="#B07850" aria-label="Brown"></button>
+        <button type="button" class="tone is-on" style="--tone:#8A5A3C" data-tone="#8A5A3C" aria-label="Deep brown"></button>
+        <button type="button" class="tone" style="--tone:#6A4029" data-tone="#6A4029" aria-label="Dark brown"></button>
+        <button type="button" class="tone" style="--tone:#45291D" data-tone="#45291D" aria-label="Rich deep"></button>
+      </div>
+      <ul class="stats">
+        <li><b data-count="100">0</b><span>grams in every bundle</span></li>
+        <li><b data-count="50" data-suffix="+">0</b><span>washes the pattern holds</span></li>
+        <li><b data-count="1">0</b><span>donor per bundle</span></li>
+      </ul>
+    </div>
+    <div class="melt-stage" id="meltStage" style="--skin:#8A5A3C; --pos:50%">
+      <canvas class="melt-hair" id="meltHair" aria-hidden="true"></canvas>
+      <div class="melt-lace melt-lace--std" aria-hidden="true"></div>
+      <div class="melt-lace melt-lace--hd" aria-hidden="true"></div>
+      <span class="melt-tag melt-tag--l">Standard lace</span>
+      <span class="melt-tag melt-tag--r">Zante HD lace</span>
+      <div class="melt-handle" aria-hidden="true"><span></span></div>
+      <input class="melt-range" id="meltRange" type="range" min="4" max="96" value="50" aria-label="Compare standard and HD lace">
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6. REVIEWS ============ -->
+<section class="section diaries" id="reviews" aria-labelledby="diariesTitle">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Install diaries</p>
+        <h2 class="h2" id="diariesTitle">Mzansi, in her own words.</h2>
+      </div>
+      <p class="fineprint fineprint--inline">Sample reviews for this draft.</p>
+    </div>
+  </div>
+  <div class="rail" id="reviewRail" tabindex="0" aria-label="Reviews, scroll sideways"></div>
+</section>
+
+<!-- ============ 7. CARE ============ -->
+<section class="section care" id="care" aria-labelledby="careTitle">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Make it last</p>
+        <h2 class="h2" id="careTitle">The five-step care ritual</h2>
+      </div>
+    </div>
+  </div>
+  <div class="rail" tabindex="0" aria-label="Care steps, scroll sideways">
+    <article class="care-card care-card--img"><img src="assets/img/care-tools.jpg" alt="Scissors, comb and tint brush on pink" loading="lazy"><p class="care-tip">Your kit: wide-tooth comb, sulfate-free shampoo, satin bag</p></article>
+    <article class="care-card"><span class="care-n">01</span><h3>Detangle</h3><p>Start at the ends with a wide-tooth comb, then work up to the weft.</p></article>
+    <article class="care-card"><span class="care-n">02</span><h3>Wash</h3><p>Cool water, sulfate-free shampoo, downward strokes only. Never rub.</p></article>
+    <article class="care-card"><span class="care-n">03</span><h3>Condition</h3><p>Mid-lengths to ends for 10 minutes. Keep it off the lace knots.</p></article>
+    <article class="care-card"><span class="care-n">04</span><h3>Air-dry</h3><p>Pat dry, then dry on a wig stand. If you use heat, stay under 180 °C.</p></article>
+    <article class="care-card"><span class="care-n">05</span><h3>Store</h3><p>Loose braid, satin bag, cool and dry. Ready for the next install.</p></article>
+  </div>
+</section>
+
+<!-- ============ 8. CLUB ============ -->
+<section class="section club" id="club" aria-labelledby="clubTitle">
+  <div class="wrap club-inner">
+    <div class="club-copy">
+      <p class="eyebrow eyebrow--light">Soft Life Club</p>
+      <h2 class="h2" id="clubTitle">R150 off your first install.</h2>
+      <p class="section-lede">Early access to new drops and care reminders timed to your install.</p>
+    </div>
+    <form class="club-form" id="clubForm" novalidate>
+      <label class="sr-only" for="clubEmail">Email address</label>
+      <input id="clubEmail" type="email" placeholder="you@example.co.za" autocomplete="email" required>
+      <button class="btn btn--pink" type="submit"><span>Join the club</span></button>
+      <p class="club-msg" id="clubMsg" role="status"></p>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER (home page only: every link stays on this page) ============ -->
+<footer class="footer" id="footer">
+  <div class="wrap">
+    <div class="footer-cols">
+      <div class="footer-brand">
+        <p class="footer-tag">Hair with a soft life.</p>
+        <p class="footer-small">Virgin human hair for Black women, shipped from Johannesburg with The Courier Guy and Pargo pickup points.</p>
+      </div>
+      <nav aria-label="Shop links"><p class="eyebrow eyebrow--light">Shop</p><a href="#shop" data-filter-link="wigs">Wigs</a><a href="#shop" data-filter-link="bundles">Bundles</a><a href="#lab">Build your own</a></nav>
+      <nav aria-label="Help links"><p class="eyebrow eyebrow--light">Help</p><a href="#match">Find your match</a><a href="#care">Hair care</a><a href="#club">Soft Life Club</a></nav>
+      <nav aria-label="Zante links"><p class="eyebrow eyebrow--light">Zante</p><a href="#melt">Our standard</a><a href="#reviews">Install diaries</a><a href="#top">Back to top</a></nav>
+    </div>
+    <ul class="pay" aria-label="Payment options">
+      <li>Visa</li><li>Mastercard</li><li>PayJustNow</li><li>Payflex</li><li>Ozow</li><li>SnapScan</li>
+    </ul>
+  </div>
+  <div class="footer-mark" aria-hidden="true">
+    <svg viewBox="-6 10 342 78" id="footerWord">
+      <defs><radialGradient id="ft-pearl" cx=".36" cy=".32" r=".75"><stop offset="0" stop-color="#fff"/><stop offset=".45" stop-color="#FAC4DA"/><stop offset="1" stop-color="#7B3FA6"/></radialGradient></defs>
+      <path class="draw" pathLength="1" d="M0 20 H44 L0 80 H46 M72 80 L93.6 28.4 M122 80 L100.4 28.4 M81.6 59 C89 49 105 69 112.4 59 M148 80 V20 L192 80 V20 M218 20 H264 M241 20 V80 M330 20 H290 V80 H330 M290 50 H322" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle class="footer-pearl" cx="97" cy="21" r="5.4" fill="url(#ft-pearl)"/>
+    </svg>
+  </div>
+  <div class="wrap footer-base">
+    <p>© 2026 Zante Hair · Draft homepage</p>
+    <p>Products, prices, policies and reviews are sample content. Photos: Pexels, free licence.</p>
+  </div>
+</footer>
+
+<!-- ============ OVERLAYS ============ -->
+<div class="scrim" id="scrim" hidden></div>
+
+<aside class="drawer" id="bag" aria-label="Your bag" aria-hidden="true" tabindex="-1">
+  <div class="drawer-head">
+    <h2>Your bag</h2>
+    <button type="button" class="icon-btn" id="bagClose" aria-label="Close bag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+  </div>
+  <div class="ship">
+    <p id="shipMsg">Add R1 500 for free delivery</p>
+    <div class="ship-bar"><span id="shipFill"></span></div>
+  </div>
+  <ul class="bag-lines" id="bagLines"></ul>
+  <div class="drawer-foot">
+    <div class="bag-total"><span>Subtotal</span><b id="bagTotal">R0</b></div>
+    <p class="bag-split" id="bagSplit"></p>
+    <button type="button" class="btn btn--solid btn--block" id="checkoutBtn"><span>Checkout</span></button>
+    <p class="fineprint">Checkout is not part of this draft.</p>
+  </div>
+</aside>
+
+<div class="search" id="search" role="dialog" aria-modal="true" aria-label="Search" hidden>
+  <div class="search-inner wrap">
+    <div class="search-bar">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M15.5 15.5 20 20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      <label class="sr-only" for="searchInput">Search hair</label>
+      <input id="searchInput" type="search" placeholder="Try “body wave”, “curly” or “613”">
+      <button type="button" class="icon-btn" id="searchClose" aria-label="Close search"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+    </div>
+    <div class="search-sugg" id="searchSugg">
+      <button type="button">glueless</button><button type="button">body wave</button><button type="button">curly</button><button type="button">kinky</button><button type="button">613</button><button type="button">bundles</button>
+    </div>
+    <ul class="search-results" id="searchResults"></ul>
+  </div>
+</div>
+
+<div class="toasts" id="toasts" aria-live="polite"></div>
+
+<script src="assets/js/strands.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
