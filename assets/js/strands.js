@@ -32,7 +32,7 @@
 
   var COLOURS = {
     '1b':  { name: 'Natural Black', code: '1B',  stops: ['#100B0E', '#241920', '#3B2B34'], hi: '#A28D99', swatch: '#2A1E24' },
-    mauve: { name: 'Zante Mauve',   code: 'ZM',  stops: ['#2B1D2E', '#8C5A80', '#E6BED3'], hi: '#FFF3FA', swatch: '#B07FA3' },
+    mauve: { name: 'Pink Ombre',    code: 'PK',  stops: ['#2B1433', '#A6478A', '#F7B3CF'], hi: '#FFF3FA', swatch: '#E06AA0' },
     '27':  { name: 'Honey Blonde',  code: '27',  stops: ['#3C2617', '#A06A39', '#E6BA78'], hi: '#FFF1D4', swatch: '#C4904F' },
     '99j': { name: 'Burgundy',      code: '99J', stops: ['#1D0710', '#651A2D', '#A83C58'], hi: '#F7AFC3', swatch: '#7A2238' },
     '613': { name: 'Platinum',      code: '613', stops: ['#857870', '#CBBDAF', '#F0E6DA'], hi: '#FFFFFF', swatch: '#E6DACB' },
@@ -490,8 +490,8 @@
     var cy = d.ecy || (d.top + H * 0.3);
     var r = Math.max(W, H) * 0.55;
     var gg = ctx.createRadialGradient(d.cx, cy, 0, d.cx, cy, r);
-    if (dark) { gg.addColorStop(0, 'rgba(201,149,188,0.30)'); gg.addColorStop(0.5, 'rgba(120,90,130,0.12)'); gg.addColorStop(1, 'rgba(0,0,0,0)'); }
-    else { gg.addColorStop(0, 'rgba(255,255,255,0.85)'); gg.addColorStop(0.45, 'rgba(231,195,211,0.35)'); gg.addColorStop(1, 'rgba(231,195,211,0)'); }
+    if (dark) { gg.addColorStop(0, 'rgba(201,154,240,0.30)'); gg.addColorStop(0.5, 'rgba(123,63,166,0.14)'); gg.addColorStop(1, 'rgba(0,0,0,0)'); }
+    else { gg.addColorStop(0, 'rgba(255,255,255,0.85)'); gg.addColorStop(0.45, 'rgba(250,196,218,0.38)'); gg.addColorStop(1, 'rgba(250,196,218,0)'); }
     ctx.fillStyle = gg; ctx.fillRect(0, 0, W, H);
   };
 
@@ -529,9 +529,9 @@
     if (d.layout === 'weft') {
       var y = d.top - 5 * k, h = 10 * k;
       ctx.save();
-      ctx.fillStyle = dark ? '#F3E9F0' : '#2B1D2E';
+      ctx.fillStyle = dark ? '#FFEFF6' : '#2B1433';
       roundRect(ctx, d.x0 - 8 * k, y, d.bw + 16 * k, h, h / 2); ctx.fill();
-      ctx.fillStyle = dark ? '#2B1D2E' : '#F6EEF4';
+      ctx.fillStyle = dark ? '#2B1433' : '#FFEFF6';
       ctx.font = '500 ' + Math.max(7, 7.5 * k) + 'px "DM Mono", ui-monospace, monospace';
       ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
       if (k > 0.42) ctx.fillText('ZANTE · 100 g · DOUBLE WEFT', d.cx, y + h / 2 + 0.5);
@@ -547,7 +547,7 @@
         if (i === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
       }
       var bg = ctx.createLinearGradient(d.cx - ax, 0, d.cx + ax, 0);
-      bg.addColorStop(0, '#8C5A80'); bg.addColorStop(0.5, '#E7C3D3'); bg.addColorStop(1, '#8C5A80');
+      bg.addColorStop(0, '#7B3FA6'); bg.addColorStop(0.5, '#FAC4DA'); bg.addColorStop(1, '#7B3FA6');
       ctx.strokeStyle = bg; ctx.lineWidth = 13 * k; ctx.lineCap = 'round'; ctx.stroke();
       ctx.strokeStyle = 'rgba(255,255,255,0.55)'; ctx.lineWidth = 2 * k; ctx.stroke();
       ctx.restore();
@@ -571,7 +571,7 @@
     }
     // marker at selected length
     var my = y0 + this.o.length * pxIn * (1 - 0.3 * this.tex.curl);
-    ctx.fillStyle = '#B07FA3';
+    ctx.fillStyle = '#E06AA0';
     ctx.beginPath(); ctx.arc(x + 5, my, 5, 0, TAU); ctx.fill();
     ctx.fillStyle = 'rgba(255,255,255,0.9)';
     ctx.beginPath(); ctx.arc(x + 3.6, my - 1.6, 1.6, 0, TAU); ctx.fill();

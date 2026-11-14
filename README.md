@@ -29,26 +29,25 @@ Real hair photography, the way influencer hair stores sell it (bundles on satin 
 
 ## What is on the homepage
 
-1. **Intro**: the logo draws itself strand by strand, a "Detangling 000–100%" counter runs, then the curtain parts and the hair falls into place.
-2. **Hero "get this look"**: four real looks in an arch frame. Tap a look and the photo reveals with a circular wipe, the live strands behind it change texture, and a glass price card shows what to buy. Hotspots on the photo explain the hair.
-3. **Texture marquee**: speeds up and skews with your scroll speed.
-4. **Texture wall**: five expanding photo panels that go from soft grey to full colour as they open.
-5. **The edit**: real product photos with 3D tilt, light glare, a small live texture lens, length selectors that change the price, a wishlist heart burst, and a quick add that flies a pearl into the bag.
-6. **Texture Lab**: build a custom unit (bundles, closure, frontal or glueless wig), with texture, colour, length (10–30") and density. An inch ruler, a bundle calculator ("You'll need 4 bundles for a full sew-in") and a price with Payflex split update live.
-7. **HD lace melt**: drag a pearl to compare standard lace with HD lace across five skin tones.
-8. **Find your match**: a three-tap quiz that scores the catalogue and returns a match percentage.
-9. **Install diaries**: two review rows drifting in opposite directions.
-10. **Care ritual**: a pinned section that scrolls sideways while a strand draws through the five steps.
-11. **Soft Life Club**: email sign-up with a pearl burst.
-12. **Footer**: a giant wordmark that draws itself.
+The page follows a simple shopping flow, kept short with sideways scroll rows:
 
-Also: a custom pearl cursor with a silk trail, magnetic buttons, a mega menu with a live hair preview, an instant search overlay (press `/`), a bag drawer with a free-delivery progress bar, light and dark themes, and a hidden game. **Find 5 pearls on the page to unlock a code.**
+1. **Intro**: the logo draws itself, then the curtain parts (under 2 seconds, with a Skip button).
+2. **Hero**: one headline, two buttons, and an arch photo that rotates through three looks. On phones it fits on one screen.
+3. **Shop the hair**: the catalogue as one horizontal scroll row with filter chips (Wigs, Bundles, Curly and coily, Wavy and straight, Blonde and 613), arrows, drag to scroll, a second photo on hover, length options, wishlist and quick add.
+4. **Find your match**: a three-tap quiz that recommends a product with a match percentage.
+5. **Build your own**: the live configurator for bundles, closures, frontals and glueless wigs, with an inch ruler and live price.
+6. **Why Zante**: drag to compare standard lace with HD lace across five skin tones.
+7. **Install diaries**: reviews in a sideways row.
+8. **Care ritual**: five steps in a sideways row.
+9. **Soft Life Club** sign-up and the footer.
 
-It works on phones, respects "reduce motion" settings, and is keyboard accessible.
+Also: rotating announcement bar, mega menu, instant search (press the search icon), bag drawer with a free-delivery bar, and light and dark themes.
+
+Colours: light pink pages, pink highlights, and purple only for actions and the two deep bands.
 
 ## The logo
 
-The new mark keeps what people already know about Zante (the mauve, the glossy bubbles, the silk) and makes it work at every size:
+The new mark keeps what people already know about Zante (the pink-mauve colour, the glossy bubbles, the silk) and makes it work at every size. It now uses the site palette: pink, light pink and purple accents.
 
 - **Monogram**: three strands of hair form a Z. The diagonal is a body wave. The strands start at a pearl, taken from the bubbles in the original artwork.
 - **Wordmark**: custom monoline capitals. The A carries a pearl crown and a body-wave crossbar.
@@ -69,15 +68,13 @@ All photos are free to use under the [Pexels licence](https://www.pexels.com/lic
 
 | File | Pexels photo | Photographer |
 | --- | --- | --- |
-| `hero-bodywave.jpg`, `p-deepwave-bundles.jpg`, `shop-wall.jpg` | [15868319](https://www.pexels.com/photo/15868319/), [15868320](https://www.pexels.com/photo/15868320/), [15868318](https://www.pexels.com/photo/15868318/) | Kobi Brown |
-| `p-ombre-bundles.jpg`, `p-honey-bundle.jpg`, `p-platinum-bundle.jpg`, `t-bodywave.jpg`, `care-tools.jpg` | [18614262](https://www.pexels.com/photo/18614262/), [18614263](https://www.pexels.com/photo/18614263/), [18614268](https://www.pexels.com/photo/18614268/), [18614269](https://www.pexels.com/photo/18614269/), [18614264](https://www.pexels.com/photo/18614264/) | Alina Skazka |
-| `p-thandi.jpg` | [10375983](https://www.pexels.com/photo/10375983/) | RDNE Stock project |
-| `p-naledi.jpg` | [2331545](https://www.pexels.com/photo/2331545/) | Bestbe Models |
+| `hero-bodywave.jpg`, `p-deepwave-bundles.jpg`, `p-deepwave-2.jpg`, `shop-wall.jpg` | [15868319](https://www.pexels.com/photo/15868319/), [15868320](https://www.pexels.com/photo/15868320/), [15868321](https://www.pexels.com/photo/15868321/), [15868318](https://www.pexels.com/photo/15868318/) | Kobi Brown |
+| `p-ombre-bundles.jpg`, `p-honey-bundle.jpg`, `p-platinum-bundle.jpg`, `care-tools.jpg` | [18614262](https://www.pexels.com/photo/18614262/), [18614263](https://www.pexels.com/photo/18614263/), [18614268](https://www.pexels.com/photo/18614268/), [18614264](https://www.pexels.com/photo/18614264/) | Alina Skazka |
+| `p-thandi.jpg`, `p-thandi-2.jpg` | [10375983](https://www.pexels.com/photo/10375983/), [10375984](https://www.pexels.com/photo/10375984/) | RDNE Stock project |
+| `p-naledi.jpg`, `p-naledi-2.jpg` | [2331545](https://www.pexels.com/photo/2331545/), [2331539](https://www.pexels.com/photo/2331539/) | Bestbe Models |
 | `p-amahle.jpg` | [18775836](https://www.pexels.com/photo/18775836/) | Audu Samson |
 | `p-lerato.jpg` | [20417302](https://www.pexels.com/photo/20417302/) | Sherman Trotz |
-| `t-kinkystraight.jpg`, `t-kinkycurly.jpg` | [11515408](https://www.pexels.com/photo/11515408/), [4297233](https://www.pexels.com/photo/4297233/) | kehinde solomon o ogunsanya |
-| `t-straight.jpg` | [11431138](https://www.pexels.com/photo/11431138/) | Néo Rioux |
-| `t-deepwave.jpg` | [3065207](https://www.pexels.com/photo/3065207/) | Pexels contributor |
+| `p-kinkystraight.jpg`, `p-afro.jpg` | [11515408](https://www.pexels.com/photo/11515408/), [4297233](https://www.pexels.com/photo/4297233/) | kehinde solomon o ogunsanya |
 
 ## Files
 

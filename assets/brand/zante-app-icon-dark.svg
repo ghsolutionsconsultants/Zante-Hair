@@ -1,17 +1,17 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" ><defs>
   <linearGradient id="zd-g1" x1="20" y1="20" x2="100" y2="100" gradientUnits="userSpaceOnUse">
-    <stop offset="0" stop-color="#8C5A80"/><stop offset=".55" stop-color="#B07FA3"/><stop offset="1" stop-color="#E7C3D3"/>
+    <stop offset="0" stop-color="#7B3FA6"/><stop offset=".55" stop-color="#E06AA0"/><stop offset="1" stop-color="#FAC4DA"/>
   </linearGradient>
   <linearGradient id="zd-g2" x1="20" y1="20" x2="100" y2="100" gradientUnits="userSpaceOnUse">
-    <stop offset="0" stop-color="#FBF7FA"/><stop offset=".6" stop-color="#E7C3D3"/><stop offset="1" stop-color="#B07FA3"/>
+    <stop offset="0" stop-color="#FFF8FB"/><stop offset=".6" stop-color="#FAC4DA"/><stop offset="1" stop-color="#E06AA0"/>
   </linearGradient>
   <linearGradient id="zd-g3" x1="20" y1="20" x2="100" y2="100" gradientUnits="userSpaceOnUse">
-    <stop offset="0" stop-color="#A9B2C6"/><stop offset="1" stop-color="#E7C3D3"/>
+    <stop offset="0" stop-color="#CDB0E8"/><stop offset="1" stop-color="#FAC4DA"/>
   </linearGradient>
   <radialGradient id="zd-pearl" cx=".36" cy=".32" r=".75">
-    <stop offset="0" stop-color="#FFFFFF"/><stop offset=".45" stop-color="#E7C3D3"/><stop offset="1" stop-color="#8C5A80"/>
+    <stop offset="0" stop-color="#FFFFFF"/><stop offset=".45" stop-color="#FAC4DA"/><stop offset="1" stop-color="#7B3FA6"/>
   </radialGradient>
-  <linearGradient id="zd-bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2B1D2E"/><stop offset="1" stop-color="#160F18"/></linearGradient></defs>
+  <linearGradient id="zd-bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3A1650"/><stop offset="1" stop-color="#1D0B29"/></linearGradient></defs>
   <rect width="120" height="120" rx="28" fill="url(#zd-bg)"/>
   <g transform="translate(6 3) scale(.9)">
   <g fill="none" stroke-linecap="round" stroke-linejoin="round">

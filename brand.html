@@ -18,13 +18,13 @@
   .b-hero h1 { margin: 0; font-family: var(--f-display); font-size: var(--t-2xl); font-weight: 500; line-height: 1.02; max-width: 16ch; text-wrap: balance; }
   .b-hero h1 i { color: var(--mauve-ink); font-weight: 400; }
   .b-hero p { margin: 0; max-width: 62ch; color: var(--ink-2); font-size: 1.08rem; }
-  .b-stage { border-radius: 32px; background: radial-gradient(70% 90% at 50% 20%, #fff, #F1E4EC); padding: clamp(36px, 8vw, 120px) clamp(20px, 6vw, 90px); display: grid; place-items: center; box-shadow: inset 0 0 0 1px rgba(43, 29, 46, 0.08); }
+  .b-stage { border-radius: 32px; background: radial-gradient(70% 90% at 50% 20%, #fff, #FFE4EF); padding: clamp(36px, 8vw, 120px) clamp(20px, 6vw, 90px); display: grid; place-items: center; box-shadow: inset 0 0 0 1px rgba(43, 29, 46, 0.08); }
   .b-stage img { width: min(760px, 100%); height: auto; }
   .b-sec { padding-block: clamp(56px, 8vw, 110px); border-top: 1px solid var(--line); }
   .b-sec-head { display: grid; gap: 14px; margin-bottom: 36px; max-width: 760px; }
   .b-ba { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
   .b-ba figure { margin: 0; display: grid; gap: 12px; }
-  .b-ba .frame { aspect-ratio: 1; border-radius: 24px; overflow: hidden; display: grid; place-items: center; background: #FBF7FA; box-shadow: inset 0 0 0 1px rgba(43, 29, 46, 0.08); }
+  .b-ba .frame { aspect-ratio: 1; border-radius: 24px; overflow: hidden; display: grid; place-items: center; background: #FFF8FB; box-shadow: inset 0 0 0 1px rgba(43, 29, 46, 0.08); }
   .b-ba .frame img { width: 100%; height: 100%; object-fit: cover; }
   .b-ba .frame--new img { width: 78%; height: auto; object-fit: contain; }
   figcaption { font-family: var(--f-mono); font-size: var(--t-xs); color: var(--mute); letter-spacing: 0.06em; }
@@ -36,18 +36,18 @@
   .b-card { border-radius: 26px; padding: 28px; background: var(--panel); box-shadow: inset 0 0 0 1px var(--line); display: grid; gap: 16px; align-content: start; }
   .b-card h3 { margin: 0; font-family: var(--f-display); font-size: 1.6rem; font-weight: 500; }
   .b-card p { margin: 0; color: var(--ink-2); font-size: var(--t-s); }
-  .b-card .art { border-radius: 18px; background: #FBF7FA; display: grid; place-items: center; padding: 22px; height: clamp(200px, 22vw, 260px); overflow: hidden; }
+  .b-card .art { border-radius: 18px; background: #FFF8FB; display: grid; place-items: center; padding: 22px; height: clamp(200px, 22vw, 260px); overflow: hidden; }
   .b-card .art img, .b-card .art svg { width: 100%; height: 100%; object-fit: contain; overflow: hidden; }
   .b-lockups { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 14px; }
   .b-lock { border-radius: 22px; display: grid; place-items: center; padding: 28px; min-height: 200px; box-shadow: inset 0 0 0 1px rgba(43, 29, 46, 0.08); }
   .b-lock img { max-width: 100%; height: auto; }
   .b-lock--wide { grid-column: span 3; }
   .b-lock--sq { grid-column: span 2; }
-  .b-lock--pearl { background: #FBF7FA; }
-  .b-lock--night { background: #2B1D2E; }
-  .b-lock--mauve { background: #B07FA3; }
+  .b-lock--pearl { background: #FFF8FB; }
+  .b-lock--night { background: #2B1433; }
+  .b-lock--mauve { background: #E06AA0; }
   .b-lock--white { background: #FFFFFF; }
-  .b-lock--rose { background: #F1E4EC; }
+  .b-lock--rose { background: #FFE4EF; }
   .b-icons { display: flex; gap: 22px; align-items: end; flex-wrap: wrap; justify-content: center; }
   .b-icons img { border-radius: 22%; box-shadow: 0 10px 30px -14px rgba(43, 29, 46, 0.5); }
   .b-palette { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px; }
@@ -65,16 +65,16 @@
   .b-files li { padding: 10px 14px; border-radius: 12px; background: var(--bg-2); overflow-wrap: anywhere; }
   .b-use { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
   .mock { border-radius: 24px; min-height: 260px; display: grid; place-items: center; padding: 24px; position: relative; overflow: hidden; }
-  .mock--avatar { background: radial-gradient(circle at 50% 30%, #F6EEF4, #E3D1DE); }
-  .mock--avatar .av { width: 150px; height: 150px; border-radius: 50%; background: #FBF7FA; display: grid; place-items: center; box-shadow: 0 0 0 4px #fff, 0 0 0 6px #B07FA3, 0 20px 40px -20px rgba(43, 29, 46, 0.6); }
+  .mock--avatar { background: radial-gradient(circle at 50% 30%, #FFF0F7, #FAD3E3); }
+  .mock--avatar .av { width: 150px; height: 150px; border-radius: 50%; background: #FFF8FB; display: grid; place-items: center; box-shadow: 0 0 0 4px #fff, 0 0 0 6px #E06AA0, 0 20px 40px -20px rgba(43, 29, 46, 0.6); }
   .mock--avatar .av img { width: 70%; }
-  .mock--tag { background: linear-gradient(160deg, #2B1D2E, #1B131D); }
-  .tag { width: 170px; height: 250px; border-radius: 16px 16px 20px 20px; background: #FBF7FA; display: grid; justify-items: center; align-content: center; gap: 16px; padding: 20px; position: relative; transform: rotate(-6deg); box-shadow: 0 30px 50px -20px rgba(0, 0, 0, 0.6); }
-  .tag::before { content: ""; position: absolute; top: 14px; width: 14px; height: 14px; border-radius: 50%; background: #2B1D2E; box-shadow: inset 0 0 0 3px #B07FA3; }
+  .mock--tag { background: linear-gradient(160deg, #2B1433, #1D0B29); }
+  .tag { width: 170px; height: 250px; border-radius: 16px 16px 20px 20px; background: #FFF8FB; display: grid; justify-items: center; align-content: center; gap: 16px; padding: 20px; position: relative; transform: rotate(-6deg); box-shadow: 0 30px 50px -20px rgba(0, 0, 0, 0.6); }
+  .tag::before { content: ""; position: absolute; top: 14px; width: 14px; height: 14px; border-radius: 50%; background: #2B1433; box-shadow: inset 0 0 0 3px #E06AA0; }
   .tag img { width: 70%; }
-  .tag span { font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.12em; color: #8C5A80; text-align: center; line-height: 1.6; }
-  .mock--band { background: radial-gradient(circle at 50% 40%, #F6EEF4, #DCC7D5); }
-  .band { width: 88%; height: 46px; border-radius: 23px; background: #2B1D2E; display: flex; align-items: center; justify-content: center; gap: 14px; color: #F6EEF4; font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.14em; box-shadow: 0 20px 30px -16px rgba(43, 29, 46, 0.7); }
+  .tag span { font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.12em; color: #7B3FA6; text-align: center; line-height: 1.6; }
+  .mock--band { background: radial-gradient(circle at 50% 40%, #FFF0F7, #F7C6DA); }
+  .band { width: 88%; height: 46px; border-radius: 23px; background: #2B1433; display: flex; align-items: center; justify-content: center; gap: 14px; color: #FFF0F7; font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.14em; box-shadow: 0 20px 30px -16px rgba(43, 29, 46, 0.7); }
   .band img { height: 24px; width: auto; }
   .mock p { position: absolute; left: 18px; bottom: 14px; margin: 0; font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(43, 29, 46, 0.6); }
   .mock--tag p { color: rgba(246, 238, 244, 0.6); }
@@ -101,7 +101,7 @@
   <header class="b-hero">
     <p class="eyebrow">The new Zante mark</p>
     <h1>Same soul. <i>Sharper</i> at every size.</h1>
-    <p>The new logo keeps what people already know about Zante: the mauve, the glossy bubbles and the flowing silk. It turns them into a mark that works on a 16-pixel browser tab, a satin bag, a bundle band and a billboard.</p>
+    <p>The new logo keeps what people already know about Zante: the pink-mauve colour, the glossy bubbles and the flowing silk. It turns them into a mark that works on a 16-pixel browser tab, a satin bag, a bundle band and a billboard.</p>
   </header>
 
   <div class="b-stage"><img src="assets/brand/zante-logo-primary.svg" alt="Zante Hair primary logo: a Z made of three strands of hair with a pearl, beside the ZANTE wordmark" width="760" height="198"></div>
@@ -122,7 +122,7 @@
       </figure>
     </div>
     <ul class="b-why">
-      <li><b>Kept</b><span>Zante Mauve as the hero colour, soft rounded strokes from the bubble lettering, and the misty silk mood.</span></li>
+      <li><b>Kept</b><span>The pink-mauve family, now warmer pink with purple accents, soft rounded strokes from the bubble lettering, and the misty silk mood.</span></li>
       <li><b>Changed</b><span>The background artwork is no longer part of the logo. It becomes a brand texture you can use behind the logo instead.</span></li>
       <li><b>Added</b><span>A monogram for social avatars, favicons and packaging, plus a pearl that ties every touchpoint together.</span></li>
     </ul>
@@ -137,17 +137,17 @@
       <div class="b-card">
         <div class="art"><img src="assets/brand/zante-monogram.svg" alt="Zante monogram"></div>
         <h3>The Z monogram</h3>
-        <p>Three strands of hair, in aubergine, mauve and silk mist, run together to form a Z. The diagonal is a soft body wave instead of a straight line, so the letter reads as hair. The strands start at a pearl, taken from the bubbles in the original artwork.</p>
+        <p>Three strands of hair, in plum, pink and lilac, run together to form a Z. The diagonal is a soft body wave instead of a straight line, so the letter reads as hair. The strands start at a pearl, taken from the bubbles in the original artwork.</p>
       </div>
       <div class="b-card">
         <div class="art">
           <svg viewBox="62 8 136 82" aria-label="Detail of the A in the wordmark">
-            <defs><radialGradient id="an-p" cx=".36" cy=".32" r=".75"><stop offset="0" stop-color="#fff"/><stop offset=".45" stop-color="#E7C3D3"/><stop offset="1" stop-color="#8C5A80"/></radialGradient></defs>
-            <path d="M72 80 L93.6 28.4 M122 80 L100.4 28.4" fill="none" stroke="#2B1D2E" stroke-width="5.6" stroke-linecap="round"/>
-            <path d="M81.6 59 C89 49 105 69 112.4 59" fill="none" stroke="#B07FA3" stroke-width="5.6" stroke-linecap="round"/>
+            <defs><radialGradient id="an-p" cx=".36" cy=".32" r=".75"><stop offset="0" stop-color="#fff"/><stop offset=".45" stop-color="#FAC4DA"/><stop offset="1" stop-color="#7B3FA6"/></radialGradient></defs>
+            <path d="M72 80 L93.6 28.4 M122 80 L100.4 28.4" fill="none" stroke="#2B1433" stroke-width="5.6" stroke-linecap="round"/>
+            <path d="M81.6 59 C89 49 105 69 112.4 59" fill="none" stroke="#E06AA0" stroke-width="5.6" stroke-linecap="round"/>
             <circle cx="97" cy="21" r="6.2" fill="url(#an-p)"/>
-            <path d="M118 21 H140" stroke="#B07FA3" stroke-width=".8" stroke-dasharray="2 2"/><text x="142" y="23.5" font-family="DM Mono, monospace" font-size="6" fill="#8C5A80">pearl crown</text>
-            <path d="M116 59 H140" stroke="#B07FA3" stroke-width=".8" stroke-dasharray="2 2"/><text x="142" y="61.5" font-family="DM Mono, monospace" font-size="6" fill="#8C5A80">wave crossbar</text>
+            <path d="M118 21 H140" stroke="#E06AA0" stroke-width=".8" stroke-dasharray="2 2"/><text x="142" y="23.5" font-family="DM Mono, monospace" font-size="6" fill="#7B3FA6">pearl crown</text>
+            <path d="M116 59 H140" stroke="#E06AA0" stroke-width=".8" stroke-dasharray="2 2"/><text x="142" y="61.5" font-family="DM Mono, monospace" font-size="6" fill="#7B3FA6">wave crossbar</text>
           </svg>
         </div>
         <h3>The wordmark</h3>
@@ -166,7 +166,7 @@
       <div class="b-lock b-lock--night b-lock--wide"><img src="assets/brand/zante-logo-white.svg" alt="Reversed logo on aubergine" width="420" height="109"></div>
       <div class="b-lock b-lock--white b-lock--sq"><img src="assets/brand/zante-logo-stacked.svg" alt="Stacked logo" width="230" height="135"></div>
       <div class="b-lock b-lock--rose b-lock--sq"><img src="assets/brand/zante-logo-mono.svg" alt="One-colour logo for stamping and embroidery" width="250" height="65"></div>
-      <div class="b-lock b-lock--mauve b-lock--sq"><img src="assets/brand/zante-logo-white.svg" alt="Reversed logo on Zante Mauve" width="250" height="65"></div>
+      <div class="b-lock b-lock--mauve b-lock--sq"><img src="assets/brand/zante-logo-white.svg" alt="Reversed logo on Zante Pink" width="250" height="65"></div>
       <div class="b-lock b-lock--pearl" style="grid-column:1/-1">
         <div class="b-icons">
           <img src="assets/brand/zante-app-icon.svg" alt="App icon, light" width="120" height="120">
@@ -182,16 +182,16 @@
   <section class="b-sec" aria-labelledby="pal">
     <div class="b-sec-head">
       <p class="eyebrow">Colour</p>
-      <h2 class="h2" id="pal">Pearl mist and night silk</h2>
+      <h2 class="h2" id="pal">Pink, light pink, a touch of purple</h2>
       <p class="section-lede">Tap a colour to copy its hex code.</p>
     </div>
     <div class="b-palette" id="palette">
-      <button type="button" class="b-sw" style="--c:#2B1D2E" data-hex="#2B1D2E"><span class="chip-c"></span><span class="meta"><b>Aubergine Ink</b><code>#2B1D2E</code></span></button>
-      <button type="button" class="b-sw" style="--c:#8C5A80" data-hex="#8C5A80"><span class="chip-c"></span><span class="meta"><b>Deep Mauve</b><code>#8C5A80</code></span></button>
-      <button type="button" class="b-sw" style="--c:#B07FA3" data-hex="#B07FA3"><span class="chip-c"></span><span class="meta"><b>Zante Mauve</b><code>#B07FA3</code></span></button>
-      <button type="button" class="b-sw" style="--c:#E7C3D3" data-hex="#E7C3D3"><span class="chip-c"></span><span class="meta"><b>Rose Pearl</b><code>#E7C3D3</code></span></button>
-      <button type="button" class="b-sw" style="--c:#A9B2C6" data-hex="#A9B2C6"><span class="chip-c"></span><span class="meta"><b>Silk Mist</b><code>#A9B2C6</code></span></button>
-      <button type="button" class="b-sw" style="--c:#FBF7FA" data-hex="#FBF7FA"><span class="chip-c"></span><span class="meta"><b>Pearl</b><code>#FBF7FA</code></span></button>
+      <button type="button" class="b-sw" style="--c:#2B1433" data-hex="#2B1433"><span class="chip-c"></span><span class="meta"><b>Plum Ink</b><code>#2B1433</code></span></button>
+      <button type="button" class="b-sw" style="--c:#7B3FA6" data-hex="#7B3FA6"><span class="chip-c"></span><span class="meta"><b>Zante Purple</b><code>#7B3FA6</code></span></button>
+      <button type="button" class="b-sw" style="--c:#E06AA0" data-hex="#E06AA0"><span class="chip-c"></span><span class="meta"><b>Zante Pink</b><code>#E06AA0</code></span></button>
+      <button type="button" class="b-sw" style="--c:#FAC4DA" data-hex="#FAC4DA"><span class="chip-c"></span><span class="meta"><b>Light Pink</b><code>#FAC4DA</code></span></button>
+      <button type="button" class="b-sw" style="--c:#CDB0E8" data-hex="#CDB0E8"><span class="chip-c"></span><span class="meta"><b>Lilac</b><code>#CDB0E8</code></span></button>
+      <button type="button" class="b-sw" style="--c:#FFF8FB" data-hex="#FFF8FB"><span class="chip-c"></span><span class="meta"><b>Pearl</b><code>#FFF8FB</code></span></button>
     </div>
   </section>
 
@@ -230,7 +230,7 @@
         <ul>
           <li>Leave clear space around the logo equal to the height of the pearl times three.</li>
           <li>Use the monogram alone below 120 pixels wide. Use the full lockup above that.</li>
-          <li>Place the logo on Pearl, Aubergine Ink or Zante Mauve.</li>
+          <li>Place the logo on Pearl, Plum Ink, Zante Purple or Zante Pink.</li>
           <li>Use the misty silk artwork as a background behind the logo, not inside it.</li>
         </ul>
       </div>

@@ -1,15 +1,15 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" ><defs>
   <linearGradient id="zm-g1" x1="20" y1="20" x2="100" y2="100" gradientUnits="userSpaceOnUse">
-    <stop offset="0" stop-color="#8C5A80"/><stop offset=".55" stop-color="#B07FA3"/><stop offset="1" stop-color="#E7C3D3"/>
+    <stop offset="0" stop-color="#7B3FA6"/><stop offset=".55" stop-color="#E06AA0"/><stop offset="1" stop-color="#FAC4DA"/>
   </linearGradient>
   <linearGradient id="zm-g2" x1="20" y1="20" x2="100" y2="100" gradientUnits="userSpaceOnUse">
-    <stop offset="0" stop-color="#2B1D2E"/><stop offset=".6" stop-color="#8C5A80"/><stop offset="1" stop-color="#B07FA3"/>
+    <stop offset="0" stop-color="#2B1433"/><stop offset=".6" stop-color="#7B3FA6"/><stop offset="1" stop-color="#E06AA0"/>
   </linearGradient>
   <linearGradient id="zm-g3" x1="20" y1="20" x2="100" y2="100" gradientUnits="userSpaceOnUse">
-    <stop offset="0" stop-color="#A9B2C6"/><stop offset="1" stop-color="#E7C3D3"/>
+    <stop offset="0" stop-color="#CDB0E8"/><stop offset="1" stop-color="#FAC4DA"/>
   </linearGradient>
   <radialGradient id="zm-pearl" cx=".36" cy=".32" r=".75">
-    <stop offset="0" stop-color="#FFFFFF"/><stop offset=".45" stop-color="#E7C3D3"/><stop offset="1" stop-color="#8C5A80"/>
+    <stop offset="0" stop-color="#FFFFFF"/><stop offset=".45" stop-color="#FAC4DA"/><stop offset="1" stop-color="#7B3FA6"/>
   </radialGradient></defs>
   <g fill="none" stroke-linecap="round" stroke-linejoin="round">
     <path d="M31 32 H85 Q90 32 87 36 C76 50 58 52 56 60 C54 68 44 74 36 83 Q33 87 40 87 H90" stroke="url(#zm-g2)" stroke-width="2.8" transform="translate(0 -4.2)"/>

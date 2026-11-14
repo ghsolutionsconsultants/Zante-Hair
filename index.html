@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Zante Hair</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="Zante Hair: virgin human hair bundles, lace frontals and glueless wigs, delivered across South Africa. Homepage mock-up.">
+<meta name="description" content="Zante Hair: virgin human hair bundles, glueless wigs and HD lace for Black women, delivered across South Africa. Homepage mock-up.">
 <link rel="icon" type="image/svg+xml" href="assets/brand/zante-app-icon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,17 +14,17 @@
 </head>
 <body>
 
-<!-- ============ INTRO: the logo is drawn strand by strand, then the curtain parts ============ -->
+<!-- ============ INTRO: the logo draws itself, then the curtain parts ============ -->
 <div class="intro" id="intro" aria-hidden="true">
   <div class="intro-panel intro-panel--l"></div>
   <div class="intro-panel intro-panel--r"></div>
   <div class="intro-stage">
     <svg class="intro-mono" viewBox="0 0 120 120">
       <defs>
-        <linearGradient id="in-g1" x1="20" y1="20" x2="100" y2="100" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8C5A80"/><stop offset=".55" stop-color="#B07FA3"/><stop offset="1" stop-color="#E7C3D3"/></linearGradient>
-        <linearGradient id="in-g2" x1="20" y1="20" x2="100" y2="100" gradientUnits="userSpaceOnUse"><stop offset="0" class="stop-ink"/><stop offset=".6" class="stop-deep"/><stop offset="1" stop-color="#B07FA3"/></linearGradient>
-        <linearGradient id="in-g3" x1="20" y1="20" x2="100" y2="100" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#A9B2C6"/><stop offset="1" stop-color="#E7C3D3"/></linearGradient>
-        <radialGradient id="in-pearl" cx=".36" cy=".32" r=".75"><stop offset="0" stop-color="#fff"/><stop offset=".45" stop-color="#E7C3D3"/><stop offset="1" stop-color="#8C5A80"/></radialGradient>
+        <linearGradient id="in-g1" x1="20" y1="20" x2="100" y2="100" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#7B3FA6"/><stop offset=".55" stop-color="#E06AA0"/><stop offset="1" stop-color="#FAC4DA"/></linearGradient>
+        <linearGradient id="in-g2" x1="20" y1="20" x2="100" y2="100" gradientUnits="userSpaceOnUse"><stop offset="0" class="stop-ink"/><stop offset=".6" class="stop-deep"/><stop offset="1" stop-color="#E06AA0"/></linearGradient>
+        <linearGradient id="in-g3" x1="20" y1="20" x2="100" y2="100" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#CDB0E8"/><stop offset="1" stop-color="#FAC4DA"/></linearGradient>
+        <radialGradient id="in-pearl" cx=".36" cy=".32" r=".75"><stop offset="0" stop-color="#fff"/><stop offset=".45" stop-color="#FAC4DA"/><stop offset="1" stop-color="#7B3FA6"/></radialGradient>
       </defs>
       <g fill="none" stroke-linecap="round" stroke-linejoin="round">
         <path class="draw d1" pathLength="1" d="M31 32 H85 Q90 32 87 36 C76 50 58 52 56 60 C54 68 44 74 36 83 Q33 87 40 87 H90" stroke="url(#in-g2)" stroke-width="2.8" transform="translate(0 -4.2)"/>
@@ -38,37 +38,29 @@
       <g class="intro-apex"><circle cx="97" cy="21" r="6.2" fill="url(#in-pearl)"/><circle cx="95.1" cy="18.9" r="1.8" fill="#fff" opacity=".9"/></g>
     </svg>
     <p class="intro-hair">Hair</p>
-    <div class="intro-meter"><span class="intro-meter-fill"></span></div>
-    <p class="intro-count"><span>Detangling</span> <b id="introCount">000</b><span>%</span></p>
   </div>
-  <button class="intro-skip" id="introSkip" type="button">Skip intro</button>
+  <button class="intro-skip" id="introSkip" type="button">Skip</button>
 </div>
-
-<!-- ============ CURSOR ============ -->
-<canvas class="trail" id="trail" aria-hidden="true"></canvas>
-<div class="cursor" id="cursor" aria-hidden="true"><span class="cursor-ring"></span><span class="cursor-dot"></span><span class="cursor-label" id="cursorLabel"></span></div>
 
 <!-- ============ ANNOUNCEMENT ============ -->
 <div class="announce" role="region" aria-label="Store news">
-  <div class="announce-track" data-marquee>
-    <span>Free delivery on orders over R1 500</span><i></i>
-    <span>Pay in 3 with PayJustNow, or 4 with Payflex. No interest.</span><i></i>
-    <span>Same-day delivery in Joburg and Pretoria when you order before 11:00</span><i></i>
-    <span>30-day exchanges on unworn units</span><i></i>
-    <span>Find 5 hidden pearls on this page for a surprise</span><i></i>
-  </div>
+  <p class="announce-msg is-on">Free delivery on orders over R1 500</p>
+  <p class="announce-msg">Pay in 3 with PayJustNow or 4 with Payflex. No interest.</p>
+  <p class="announce-msg">Same-day delivery in Joburg and Pretoria before 11:00</p>
+  <p class="announce-msg">30-day exchanges on unworn units</p>
 </div>
 
 <!-- ============ HEADER ============ -->
 <header class="site-header" id="header">
   <div class="header-inner wrap">
+    <button class="icon-btn burger" type="button" id="burgerBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav"><span></span><span></span></button>
     <a class="brand" href="#top" aria-label="Zante Hair, home">
       <svg class="brand-mono" viewBox="16 18 80 76" aria-hidden="true">
         <defs>
-          <linearGradient id="hd-g1" x1="20" y1="20" x2="100" y2="100" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8C5A80"/><stop offset=".55" stop-color="#B07FA3"/><stop offset="1" stop-color="#E7C3D3"/></linearGradient>
-          <linearGradient id="hd-g2" x1="20" y1="20" x2="100" y2="100" gradientUnits="userSpaceOnUse"><stop offset="0" class="stop-ink"/><stop offset=".6" class="stop-deep"/><stop offset="1" stop-color="#B07FA3"/></linearGradient>
-          <linearGradient id="hd-g3" x1="20" y1="20" x2="100" y2="100" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#A9B2C6"/><stop offset="1" stop-color="#E7C3D3"/></linearGradient>
-          <radialGradient id="hd-pearl" cx=".36" cy=".32" r=".75"><stop offset="0" stop-color="#fff"/><stop offset=".45" stop-color="#E7C3D3"/><stop offset="1" stop-color="#8C5A80"/></radialGradient>
+          <linearGradient id="hd-g1" x1="20" y1="20" x2="100" y2="100" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#7B3FA6"/><stop offset=".55" stop-color="#E06AA0"/><stop offset="1" stop-color="#FAC4DA"/></linearGradient>
+          <linearGradient id="hd-g2" x1="20" y1="20" x2="100" y2="100" gradientUnits="userSpaceOnUse"><stop offset="0" class="stop-ink"/><stop offset=".6" class="stop-deep"/><stop offset="1" stop-color="#E06AA0"/></linearGradient>
+          <linearGradient id="hd-g3" x1="20" y1="20" x2="100" y2="100" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#CDB0E8"/><stop offset="1" stop-color="#FAC4DA"/></linearGradient>
+          <radialGradient id="hd-pearl" cx=".36" cy=".32" r=".75"><stop offset="0" stop-color="#fff"/><stop offset=".45" stop-color="#FAC4DA"/><stop offset="1" stop-color="#7B3FA6"/></radialGradient>
         </defs>
         <g fill="none" stroke-linecap="round" stroke-linejoin="round">
           <path d="M31 32 H85 Q90 32 87 36 C76 50 58 52 56 60 C54 68 44 74 36 83 Q33 87 40 87 H90" stroke="url(#hd-g2)" stroke-width="3.4" transform="translate(0 -4.4)"/>
@@ -89,39 +81,36 @@
         <div class="mega" id="mega" role="region" aria-label="Shop menu">
           <div class="mega-inner">
             <div class="mega-col">
-              <p class="eyebrow">Bundles</p>
-              <a href="#edit" data-filter-link="bundles" data-hover-texture="straight">Silk Straight</a>
-              <a href="#edit" data-filter-link="bundles" data-hover-texture="body">Body Wave</a>
-              <a href="#edit" data-filter-link="bundles" data-hover-texture="deep">Deep Wave</a>
-              <a href="#edit" data-filter-link="bundles" data-hover-texture="kinkyStraight">Kinky Straight</a>
-              <a href="#edit" data-filter-link="bundles" data-hover-texture="kinkyCurly">Kinky Curly</a>
-            </div>
-            <div class="mega-col">
               <p class="eyebrow">Wigs</p>
-              <a href="#edit" data-filter-link="wigs">Glueless wigs</a>
-              <a href="#edit" data-filter-link="wigs">13x4 HD frontal wigs</a>
-              <a href="#edit" data-filter-link="wigs">5x5 closure wigs</a>
-              <a href="#edit" data-filter-link="wigs">Bobs</a>
-              <a href="#edit" data-filter-link="wigs">Half and headband wigs</a>
+              <a href="#shop" data-filter-link="wigs">All wigs</a>
+              <a href="#shop" data-filter-link="curly">Curly and coily wigs</a>
+              <a href="#shop" data-filter-link="wavy">Wavy and straight wigs</a>
+              <a href="#lab">Build a glueless wig</a>
             </div>
             <div class="mega-col">
-              <p class="eyebrow">Lace</p>
-              <a href="#lab">4x4 closures</a>
-              <a href="#lab">5x5 HD closures</a>
-              <a href="#lab">13x4 HD frontals</a>
-              <a href="#lab">13x6 HD frontals</a>
-              <a href="#melt">See the HD melt</a>
+              <p class="eyebrow">Bundles</p>
+              <a href="#shop" data-filter-link="bundles">All bundles</a>
+              <a href="#shop" data-filter-link="curly">Deep wave and kinky</a>
+              <a href="#shop" data-filter-link="blonde">Blonde, honey and 613</a>
+              <a href="#lab">Closures and frontals</a>
             </div>
-            <a class="mega-feature" href="#edit" data-filter-link="bundles">
+            <div class="mega-col">
+              <p class="eyebrow">Help</p>
+              <a href="#match">Find your match</a>
+              <a href="#melt">See the HD lace melt</a>
+              <a href="#care">Hair care</a>
+              <a href="#club">Delivery and returns</a>
+            </div>
+            <a class="mega-feature" href="#shop" data-filter-link="bundles">
               <img class="mega-img" src="assets/img/shop-wall.jpg" alt="Hair studio wall lined with raw bundles" loading="lazy">
-              <span class="mega-feature-copy"><span class="eyebrow">New drop</span><b>Raw Deep Wave</b><span>Single-donor bundles, 100 g each, double weft. Shop the drop.</span></span>
+              <span class="mega-feature-copy"><span class="eyebrow">New drop</span><b>Raw Deep Wave</b><span>Single-donor bundles, 100 g each.</span></span>
             </a>
           </div>
         </div>
       </div>
-      <a class="nav-link" href="#edit" data-filter-link="wigs">Wigs</a>
-      <a class="nav-link" href="#edit" data-filter-link="bundles">Bundles</a>
-      <a class="nav-link" href="#lab">Texture Lab</a>
+      <a class="nav-link" href="#shop" data-filter-link="wigs">Wigs</a>
+      <a class="nav-link" href="#shop" data-filter-link="bundles">Bundles</a>
+      <a class="nav-link" href="#lab">Build your own</a>
       <a class="nav-link" href="#care">Hair care</a>
     </nav>
 
@@ -129,322 +118,127 @@
       <button class="icon-btn" type="button" id="searchBtn" aria-label="Search">
         <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M15.5 15.5 20 20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
       </button>
-      <button class="icon-btn" type="button" id="themeBtn" aria-label="Switch light or dark theme">
+      <button class="icon-btn hide-sm" type="button" id="themeBtn" aria-label="Switch light or dark theme">
         <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
         <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M19.5 14.5A8 8 0 0 1 9.5 4.5a8 8 0 1 0 10 10Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
       </button>
-      <button class="icon-btn" type="button" id="wishBtn" aria-label="Wishlist">
+      <button class="icon-btn hide-sm" type="button" id="wishBtn" aria-label="Wishlist">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7.5-4.4-7.5-10A4.3 4.3 0 0 1 12 7.4 4.3 4.3 0 0 1 19.5 10c0 5.6-7.5 10-7.5 10Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
         <span class="badge" id="wishCount" hidden>0</span>
       </button>
-      <button class="icon-btn bag-btn" type="button" id="bagBtn" aria-label="Open bag">
+      <button class="icon-btn" type="button" id="bagBtn" aria-label="Open bag">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1.2 11.2a1.5 1.5 0 0 1-1.5 1.3H7.7a1.5 1.5 0 0 1-1.5-1.3Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
         <span class="badge" id="bagCount" hidden>0</span>
       </button>
-      <button class="icon-btn burger" type="button" id="burgerBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav"><span></span><span></span></button>
     </div>
   </div>
   <div class="progress-strand" aria-hidden="true"><span id="progressFill"></span></div>
 </header>
 
 <nav class="mobile-nav" id="mobileNav" aria-label="Mobile">
-  <a href="#edit" data-filter-link="wigs">Wigs</a>
-  <a href="#edit" data-filter-link="bundles">Bundles</a>
-  <a href="#lab">Closures and frontals</a>
-  <a href="#lab">Texture Lab</a>
+  <a href="#shop" data-filter-link="wigs">Wigs</a>
+  <a href="#shop" data-filter-link="bundles">Bundles</a>
+  <a href="#lab">Build your own</a>
   <a href="#match">Find your match</a>
   <a href="#care">Hair care</a>
-  <p class="mobile-nav-foot">Free delivery over R1 500 · Pay in 3 with PayJustNow</p>
+  <div class="mobile-nav-foot">
+    <button type="button" class="chip" id="themeBtnM">Switch theme</button>
+    <p>Free delivery over R1 500 · Pay in 3 with PayJustNow</p>
+  </div>
 </nav>
 
 <main id="top">
 
-<!-- ============ HERO ============ -->
+<!-- ============ 1. HERO ============ -->
 <section class="hero" id="hero" aria-labelledby="heroTitle">
-  <canvas class="hero-canvas" id="heroCanvas" aria-hidden="true"></canvas>
-  <div class="hero-mist" aria-hidden="true"></div>
-
-  <div class="pearls" id="pearls" aria-label="Hidden pearls"></div>
-
-  <div class="hero-inner wrap">
+  <div class="wrap hero-grid">
+    <div class="hero-media">
+      <div class="arch" id="arch">
+        <img class="arch-img is-on" src="assets/img/hero-bodywave.jpg" alt="Model with long body wave hair holding hair bundles in a hair studio" style="--pos:50% 28%" width="1273" height="1500" fetchpriority="high">
+        <img class="arch-img" src="assets/img/p-lerato.jpg" alt="Model with defined curly hair" style="--pos:50% 28%" width="826" height="1100" loading="lazy">
+        <img class="arch-img" src="assets/img/p-amahle.jpg" alt="Model with a full kinky curly afro" style="--pos:50% 25%" width="880" height="1100" loading="lazy">
+      </div>
+      <div class="look-dots" id="lookDots" role="tablist" aria-label="Hero looks">
+        <button type="button" role="tab" class="is-on" aria-selected="true"><span>Body Wave</span></button>
+        <button type="button" role="tab" aria-selected="false"><span>Curly</span></button>
+        <button type="button" role="tab" aria-selected="false"><span>Kinky Curly</span></button>
+      </div>
+    </div>
     <div class="hero-copy">
-      <p class="eyebrow hero-eyebrow"><span class="dot"></span>Virgin human hair · Delivered across South Africa</p>
+      <p class="eyebrow">Virgin human hair · Made for our textures</p>
       <h1 class="hero-title" id="heroTitle">
         <span class="line"><span>Soft life,</span></span>
-        <span class="line line--i"><span>strand by</span></span>
-        <span class="line line--i"><span>strand.</span></span>
+        <span class="line line--i"><span>strand by strand.</span></span>
       </h1>
-      <p class="hero-lede">Raw bundles, glueless wigs and HD lace, worn and loved by real women across Mzansi. Tap a look to try it, then shop it in one click.</p>
+      <p class="hero-lede">Raw bundles, glueless wigs and HD lace for Black women. Delivered across South Africa.</p>
       <div class="hero-ctas">
-        <a class="btn btn--solid magnetic" href="#edit"><span>Shop the new drop</span><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5.5 15.5 10 11 14.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-        <a class="btn btn--ghost magnetic" href="#lab"><span>Build your own unit</span></a>
+        <a class="btn btn--solid" href="#shop"><span>Shop the hair</span><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5.5 15.5 10 11 14.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a class="btn btn--ghost" href="#match"><span>Find my match</span></a>
       </div>
-
-      <div class="tryon" role="group" aria-label="Choose a look">
-        <div class="tryon-row">
-          <span class="tryon-label">Look</span>
-          <div class="chips" id="heroLooks">
-            <button type="button" class="chip is-on" data-look="body">Body Wave</button>
-            <button type="button" class="chip" data-look="loose">Loose Wave</button>
-            <button type="button" class="chip" data-look="curly">Curly</button>
-            <button type="button" class="chip" data-look="kinky">Kinky Curly</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="hero-visual">
-      <div class="arch" id="arch" data-cursor="Shop look">
-        <img class="arch-img is-on" data-look="body" src="assets/img/hero-bodywave.jpg" alt="Model with long body wave hair holding hair bundles in a hair studio" style="--pos:50% 30%" width="1273" height="1500" fetchpriority="high">
-        <img class="arch-img" data-look="loose" src="assets/img/p-naledi.jpg" alt="Model with long loose wave hair on a black background" style="--pos:66% 40%" width="1100" height="734" loading="lazy">
-        <img class="arch-img" data-look="curly" src="assets/img/p-lerato.jpg" alt="Model with defined curly hair" style="--pos:50% 30%" width="826" height="1100" loading="lazy">
-        <img class="arch-img" data-look="kinky" src="assets/img/p-amahle.jpg" alt="Model with a full kinky curly afro" style="--pos:50% 25%" width="880" height="1100" loading="lazy">
-        <div class="hotspots" id="hotspots">
-          <button type="button" class="hotspot" style="--x:80%;--y:44%"><span>Raw body wave, 24 inches</span></button>
-          <button type="button" class="hotspot" style="--x:22%;--y:13%"><span>100 g double-weft bundles</span></button>
-          <button type="button" class="hotspot" style="--x:12%;--y:47%"><span>Steam-set. Holds 50+ washes.</span></button>
-        </div>
-        <span class="arch-shine" aria-hidden="true"></span>
-      </div>
-      <aside class="capsule" aria-live="polite">
-        <p class="capsule-k">Get this look</p>
-        <p class="capsule-name" id="capName">Body Wave Bundles × 4</p>
-        <p class="capsule-spec" id="capSpec">Natural Black 1B · 24" · 400 g</p>
-        <div class="capsule-row">
-          <p class="capsule-price" id="capPrice">R4 840</p>
-          <button type="button" class="btn btn--mini" id="capAdd">Add to bag</button>
-        </div>
-      </aside>
     </div>
   </div>
-
-  <ul class="hero-facts wrap" aria-label="Why Zante">
-    <li><b>100 g</b><span>per bundle, double weft</span></li>
-    <li><b>HD</b><span>Swiss lace that melts</span></li>
-    <li><b>10–30"</b><span>lengths in every texture</span></li>
-    <li><b>24 h</b><span>dispatch on stock orders</span></li>
-  </ul>
+  <div class="wrap">
+    <ul class="trust" aria-label="Why shop with Zante">
+      <li><b>Free delivery</b><span>over R1 500</span></li>
+      <li><b>Pay in 3</b><span>PayJustNow or Payflex</span></li>
+      <li><b>30-day</b><span>exchanges</span></li>
+      <li><b>24 h</b><span>dispatch</span></li>
+    </ul>
+  </div>
 </section>
 
-<!-- ============ TEXTURE MARQUEE (reacts to scroll speed) ============ -->
-<div class="tex-marquee" aria-hidden="true">
-  <div class="tex-marquee-track" id="texMarquee">
-    <span>Silk Straight</span><i></i><span class="o">Body Wave</span><i></i><span>Deep Wave</span><i></i><span class="o">Kinky Straight</span><i></i><span>Kinky Curly</span><i></i>
-    <span>Silk Straight</span><i></i><span class="o">Body Wave</span><i></i><span>Deep Wave</span><i></i><span class="o">Kinky Straight</span><i></i><span>Kinky Curly</span><i></i>
-  </div>
-</div>
-
-<!-- ============ TEXTURE WALL ============ -->
-<section class="section textures" id="textures" aria-labelledby="texTitle">
+<!-- ============ 2. SHOP (horizontal catalogue) ============ -->
+<section class="section shop" id="shop" aria-labelledby="shopTitle">
   <div class="wrap">
     <div class="section-head">
-      <p class="eyebrow">Shop by texture</p>
-      <h2 class="h2" id="texTitle" data-split>Five textures. Find yours.</h2>
-      <p class="section-lede">Hover or tap a texture to see it up close. Every texture comes in 10 to 30 inches, as bundles, closures, frontals or a ready-to-wear wig.</p>
-    </div>
-    <div class="tex-wall" id="texWall">
-      <article class="tex-panel" data-texture="straight" data-colour="1b" tabindex="0">
-        <img src="assets/img/t-straight.jpg" alt="Long sleek straight hair with soft highlights" style="--pos:50% 40%" loading="lazy">
-        <div class="tex-panel-body">
-          <p class="tex-num">Straight</p>
-          <h3>Silk Straight</h3>
-          <p>Bone straight with a natural sheen. Flat irons once, holds for days.</p>
-          <p class="tex-meta"><span>From R650</span><span>Low shedding</span></p>
-          <a class="tex-link" href="#edit" data-filter-link="bundles">Shop straight</a>
-        </div>
-      </article>
-      <article class="tex-panel is-open" data-texture="body" data-colour="mauve" tabindex="0">
-        <img src="assets/img/t-bodywave.jpg" alt="Ombre body wave hair bundle on a pink background" style="--pos:50% 50%" loading="lazy">
-        <div class="tex-panel-body">
-          <p class="tex-num">Wave</p>
-          <h3>Body Wave</h3>
-          <p>Soft S-waves that bounce back after every wash. Our best seller.</p>
-          <p class="tex-meta"><span>From R720</span><span>Steam-set</span></p>
-          <a class="tex-link" href="#edit" data-filter-link="bundles">Shop body wave</a>
-        </div>
-      </article>
-      <article class="tex-panel" data-texture="deep" data-colour="27" tabindex="0">
-        <img src="assets/img/t-deepwave.jpg" alt="Close-up of defined deep wave curls with a honey ombre" style="--pos:50% 50%" loading="lazy">
-        <div class="tex-panel-body">
-          <p class="tex-num">Wave</p>
-          <h3>Deep Wave</h3>
-          <p>Tight, defined ripples with lots of volume. Wash and go.</p>
-          <p class="tex-meta"><span>From R780</span><span>Big volume</span></p>
-          <a class="tex-link" href="#edit" data-filter-link="bundles">Shop deep wave</a>
-        </div>
-      </article>
-      <article class="tex-panel" data-texture="kinkyStraight" data-colour="99j" tabindex="0">
-        <img src="assets/img/t-kinkystraight.jpg" alt="Two women with full blown-out natural hair" style="--pos:50% 22%" loading="lazy">
-        <div class="tex-panel-body">
-          <p class="tex-num">Natural</p>
-          <h3>Kinky Straight</h3>
-          <p>Looks like blown-out natural hair. Blends with relaxed or 4B leave-out.</p>
-          <p class="tex-meta"><span>From R760</span><span>Blends easily</span></p>
-          <a class="tex-link" href="#edit" data-filter-link="bundles">Shop kinky straight</a>
-        </div>
-      </article>
-      <article class="tex-panel" data-texture="kinkyCurly" data-colour="1b" tabindex="0">
-        <img src="assets/img/t-kinkycurly.jpg" alt="Portrait of a woman with a full kinky curly afro" style="--pos:50% 30%" loading="lazy">
-        <div class="tex-panel-body">
-          <p class="tex-num">Natural</p>
-          <h3>Kinky Curly</h3>
-          <p>Coily and full, made to match 4A to 4C hair. Shrinks like the real thing.</p>
-          <p class="tex-meta"><span>From R820</span><span>Coil defined</span></p>
-          <a class="tex-link" href="#edit" data-filter-link="bundles">Shop kinky curly</a>
-        </div>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- ============ THE EDIT: products ============ -->
-<section class="section edit" id="edit" aria-labelledby="editTitle">
-  <div class="wrap">
-    <div class="section-head section-head--row">
       <div>
-        <p class="eyebrow">The edit</p>
-        <h2 class="h2" id="editTitle" data-split>Most-loved this month</h2>
+        <p class="eyebrow">Shop the hair</p>
+        <h2 class="h2" id="shopTitle">Bestsellers and new drops</h2>
       </div>
-      <div class="tabs" role="tablist" aria-label="Filter products" id="editTabs">
-        <button type="button" role="tab" class="tab is-on" aria-selected="true" data-filter="all">All</button>
-        <button type="button" role="tab" class="tab" aria-selected="false" data-filter="wigs">Wigs</button>
-        <button type="button" role="tab" class="tab" aria-selected="false" data-filter="bundles">Bundles</button>
-        <span class="tab-pill" aria-hidden="true"></span>
+      <div class="rail-arrows">
+        <button type="button" class="arrow" id="railPrev" aria-label="Scroll back"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M12.5 4.5 7 10l5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button type="button" class="arrow" id="railNext" aria-label="Scroll forward"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7.5 4.5 13 10l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
       </div>
     </div>
-    <div class="grid" id="productGrid"></div>
-    <p class="fineprint">Product names, prices and stock are sample content. Photos are free-licence placeholders from Pexels until Zante’s own shoot.</p>
+    <div class="filters" id="filters" role="tablist" aria-label="Filter hair">
+      <button type="button" role="tab" class="chip is-on" aria-selected="true" data-filter="all">All</button>
+      <button type="button" role="tab" class="chip" aria-selected="false" data-filter="wigs">Wigs</button>
+      <button type="button" role="tab" class="chip" aria-selected="false" data-filter="bundles">Bundles</button>
+      <button type="button" role="tab" class="chip" aria-selected="false" data-filter="curly">Curly and coily</button>
+      <button type="button" role="tab" class="chip" aria-selected="false" data-filter="wavy">Wavy and straight</button>
+      <button type="button" role="tab" class="chip" aria-selected="false" data-filter="blonde">Blonde and 613</button>
+    </div>
   </div>
-</section>
-
-<!-- ============ TEXTURE LAB ============ -->
-<section class="section lab" id="lab" aria-labelledby="labTitle">
+  <div class="rail" id="rail" tabindex="0" aria-label="Hair catalogue, scroll sideways"></div>
   <div class="wrap">
-    <div class="section-head">
-      <p class="eyebrow eyebrow--light">Texture Lab</p>
-      <h2 class="h2" id="labTitle" data-split>Build your unit. Watch it change.</h2>
-      <p class="section-lede">Pick a texture, colour and length. The hair, the ruler and the price update as you go.</p>
-    </div>
-    <div class="lab-grid">
-      <div class="lab-stage">
-        <canvas class="lab-canvas" id="labCanvas" aria-label="Live preview of your custom hair unit" role="img"></canvas>
-        <div class="lab-stage-tools">
-          <button type="button" class="ghost-mini" id="labFlip">Flip it</button>
-          <span class="lab-stage-tag" id="labTag">Body Wave · Zante Mauve · 22"</span>
-        </div>
-      </div>
-      <form class="lab-panel" id="labForm" autocomplete="off">
-        <fieldset>
-          <legend>Unit</legend>
-          <div class="seg" id="labUnit">
-            <button type="button" class="seg-btn is-on" data-unit="bundle">Bundles</button>
-            <button type="button" class="seg-btn" data-unit="closure">5x5 Closure</button>
-            <button type="button" class="seg-btn" data-unit="frontal">13x4 Frontal</button>
-            <button type="button" class="seg-btn" data-unit="wig">Glueless Wig</button>
-          </div>
-        </fieldset>
-        <fieldset>
-          <legend>Texture</legend>
-          <div class="chips chips--light" id="labTexture">
-            <button type="button" class="chip" data-texture="straight">Straight</button>
-            <button type="button" class="chip is-on" data-texture="body">Body Wave</button>
-            <button type="button" class="chip" data-texture="deep">Deep Wave</button>
-            <button type="button" class="chip" data-texture="kinkyStraight">Kinky Straight</button>
-            <button type="button" class="chip" data-texture="kinkyCurly">Kinky Curly</button>
-          </div>
-        </fieldset>
-        <fieldset>
-          <legend>Colour <span class="legend-val" id="labColourName">Zante Mauve</span></legend>
-          <div class="swatches swatches--lg" id="labColour">
-            <button type="button" class="swatch" data-colour="1b" aria-label="Natural Black 1B"><span>1B</span></button>
-            <button type="button" class="swatch is-on" data-colour="mauve" aria-label="Zante Mauve"><span>ZM</span></button>
-            <button type="button" class="swatch" data-colour="27" aria-label="Honey Blonde 27"><span>27</span></button>
-            <button type="button" class="swatch" data-colour="99j" aria-label="Burgundy 99J"><span>99J</span></button>
-            <button type="button" class="swatch" data-colour="613" aria-label="Platinum 613"><span>613</span></button>
-          </div>
-        </fieldset>
-        <fieldset>
-          <legend>Length <span class="legend-val"><b id="labLenOut">22</b> inches</span></legend>
-          <input type="range" id="labLength" min="10" max="30" step="2" value="22" aria-label="Length in inches">
-          <div class="range-ticks" aria-hidden="true"><span>10"</span><span>14"</span><span>18"</span><span>22"</span><span>26"</span><span>30"</span></div>
-        </fieldset>
-        <fieldset id="labDensityWrap" hidden>
-          <legend>Density</legend>
-          <div class="seg seg--sm" id="labDensity">
-            <button type="button" class="seg-btn" data-density="150">150%</button>
-            <button type="button" class="seg-btn is-on" data-density="180">180%</button>
-            <button type="button" class="seg-btn" data-density="250">250%</button>
-          </div>
-        </fieldset>
-        <div class="lab-out">
-          <div>
-            <p class="lab-need" id="labNeed">You’ll need 4 bundles for a full sew-in (400 g)</p>
-            <p class="lab-price"><span id="labPrice">R4 400</span></p>
-            <p class="lab-split" id="labSplit">or 4 × R1 100 with Payflex</p>
-          </div>
-          <button type="submit" class="btn btn--pearl magnetic" id="labAdd"><span>Add to bag</span></button>
-        </div>
-      </form>
-    </div>
+    <p class="fineprint">Sample products and prices. Photos are free-licence placeholders from Pexels until Zante’s own shoot.</p>
   </div>
 </section>
 
-<!-- ============ HD LACE MELT ============ -->
-<section class="section melt" id="melt" aria-labelledby="meltTitle">
-  <div class="wrap melt-grid">
-    <div class="melt-copy">
-      <p class="eyebrow">The Zante standard</p>
-      <h2 class="h2" id="meltTitle" data-split>HD lace that melts on every skin tone.</h2>
-      <p class="section-lede">Drag the pearl to compare standard lace with our Swiss HD lace. Then switch the skin tone. No tinting, no foundation, no visible line.</p>
-      <div class="tones" id="tones" role="group" aria-label="Skin tone">
-        <button type="button" class="tone" style="--tone:#F0D2BC" data-tone="#F0D2BC" aria-label="Fair"></button>
-        <button type="button" class="tone" style="--tone:#D3A07A" data-tone="#D3A07A" aria-label="Light brown"></button>
-        <button type="button" class="tone is-on" style="--tone:#A87150" data-tone="#A87150" aria-label="Brown"></button>
-        <button type="button" class="tone" style="--tone:#7A4B34" data-tone="#7A4B34" aria-label="Deep brown"></button>
-        <button type="button" class="tone" style="--tone:#4A2D21" data-tone="#4A2D21" aria-label="Rich deep"></button>
-      </div>
-      <ul class="stats">
-        <li><b data-count="100">0</b><span>grams in every bundle, double machine weft</span></li>
-        <li><b data-count="50" data-suffix="+">0</b><span>washes the steam-set pattern is made to hold</span></li>
-        <li><b data-count="1">0</b><span>donor per bundle, cuticles all facing one way</span></li>
-      </ul>
-    </div>
-    <div class="melt-stage" id="meltStage" style="--skin:#A87150; --pos:50%">
-      <canvas class="melt-hair" id="meltHair" aria-hidden="true"></canvas>
-      <div class="melt-lace melt-lace--std" aria-hidden="true"></div>
-      <div class="melt-lace melt-lace--hd" aria-hidden="true"></div>
-      <span class="melt-tag melt-tag--l">Standard lace</span>
-      <span class="melt-tag melt-tag--r">Zante HD lace</span>
-      <div class="melt-handle" aria-hidden="true"><span></span></div>
-      <input class="melt-range" id="meltRange" type="range" min="4" max="96" value="50" aria-label="Compare standard and HD lace">
-    </div>
-  </div>
-</section>
-
-<!-- ============ MATCH QUIZ ============ -->
+<!-- ============ 3. FIND YOUR MATCH ============ -->
 <section class="section match" id="match" aria-labelledby="matchTitle">
   <div class="wrap match-grid">
     <div class="match-head">
       <p class="eyebrow">Find your match</p>
-      <h2 class="h2" id="matchTitle" data-split>Not sure? Three taps.</h2>
-      <p class="section-lede">Tell us how you like to wear your hair. We match you to a unit from the edit.</p>
+      <h2 class="h2" id="matchTitle">Not sure? Three taps.</h2>
+      <p class="section-lede">Tell us how you like to wear your hair. We match you to a unit from the shop.</p>
     </div>
     <div class="quiz" id="quiz">
       <div class="quiz-progress" aria-hidden="true"><span id="quizBar"></span></div>
       <div class="quiz-step is-on" data-step="0">
         <p class="quiz-q"><span class="quiz-n">1 of 3</span>How do you want to install?</p>
         <div class="quiz-opts">
-          <button type="button" data-k="install" data-v="sewin"><b>Sew-in</b><span>Bundles and a closure or frontal, done by your stylist</span></button>
-          <button type="button" data-k="install" data-v="glueless"><b>Glueless</b><span>Wear and go, no glue, no stylist</span></button>
-          <button type="button" data-k="install" data-v="quick"><b>Quick switch</b><span>Half wig or headband wig, on in five minutes</span></button>
+          <button type="button" data-k="install" data-v="sewin"><b>Sew-in</b><span>Bundles and a closure, done by your stylist</span></button>
+          <button type="button" data-k="install" data-v="glueless"><b>Glueless</b><span>Wear and go, no glue</span></button>
+          <button type="button" data-k="install" data-v="quick"><b>Quick switch</b><span>Headband wig, on in five minutes</span></button>
         </div>
       </div>
       <div class="quiz-step" data-step="1">
         <p class="quiz-q"><span class="quiz-n">2 of 3</span>What’s the vibe?</p>
         <div class="quiz-opts">
-          <button type="button" data-k="vibe" data-v="sleek"><b>Sleek</b><span>Straight, glossy, swingy</span></button>
-          <button type="button" data-k="vibe" data-v="waves"><b>Soft waves</b><span>Bouncy body, easy volume</span></button>
-          <button type="button" data-k="vibe" data-v="curls"><b>Big curls</b><span>Coils, texture, presence</span></button>
+          <button type="button" data-k="vibe" data-v="sleek"><b>Sleek</b><span>Straight or loose wave</span></button>
+          <button type="button" data-k="vibe" data-v="waves"><b>Soft waves</b><span>Bouncy body wave</span></button>
+          <button type="button" data-k="vibe" data-v="curls"><b>Curls and coils</b><span>Deep wave, curly, kinky</span></button>
         </div>
       </div>
       <div class="quiz-step" data-step="2">
@@ -458,7 +252,7 @@
       <div class="quiz-step quiz-result" data-step="3" aria-live="polite">
         <div class="result-visual">
           <img id="matchImg" src="assets/img/p-thandi.jpg" alt="">
-          <svg class="ring" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="52" class="ring-bg"/><circle cx="60" cy="60" r="52" class="ring-fg" id="ringFg" pathLength="100"/></svg>
+          <svg class="ring" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="56" class="ring-bg"/><circle cx="60" cy="60" r="56" class="ring-fg" id="ringFg" pathLength="100"/></svg>
           <p class="ring-num"><b id="matchPct">0</b><span>% match</span></p>
         </div>
         <div class="result-copy">
@@ -476,52 +270,152 @@
   </div>
 </section>
 
-<!-- ============ INSTALL DIARIES (reviews) ============ -->
-<section class="section diaries" id="diaries" aria-labelledby="diariesTitle">
+<!-- ============ 4. BUILD YOUR OWN (Texture Lab) ============ -->
+<section class="section lab" id="lab" aria-labelledby="labTitle">
   <div class="wrap">
-    <div class="section-head section-head--row">
+    <div class="section-head section-head--stack">
+      <p class="eyebrow eyebrow--light">Build your own</p>
+      <h2 class="h2" id="labTitle">Your texture, your length, your price.</h2>
+      <p class="section-lede">Choose bundles, a closure, a frontal or a glueless wig. The preview, the inch ruler and the price update as you go.</p>
+    </div>
+    <div class="lab-grid">
+      <div class="lab-stage">
+        <canvas class="lab-canvas" id="labCanvas" aria-label="Live preview of your custom hair unit" role="img"></canvas>
+        <span class="lab-stage-tag" id="labTag">Body Wave · Natural Black · 22"</span>
+      </div>
+      <form class="lab-panel" id="labForm" autocomplete="off">
+        <fieldset>
+          <legend>Unit</legend>
+          <div class="seg" id="labUnit">
+            <button type="button" class="seg-btn is-on" data-unit="bundle">Bundles</button>
+            <button type="button" class="seg-btn" data-unit="closure">5x5 Closure</button>
+            <button type="button" class="seg-btn" data-unit="frontal">13x4 Frontal</button>
+            <button type="button" class="seg-btn" data-unit="wig">Glueless Wig</button>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Texture</legend>
+          <div class="chips chips--dark" id="labTexture">
+            <button type="button" class="chip" data-texture="straight">Straight</button>
+            <button type="button" class="chip is-on" data-texture="body">Body Wave</button>
+            <button type="button" class="chip" data-texture="deep">Deep Wave</button>
+            <button type="button" class="chip" data-texture="kinkyStraight">Kinky Straight</button>
+            <button type="button" class="chip" data-texture="kinkyCurly">Kinky Curly</button>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Colour <span class="legend-val" id="labColourName">Natural Black (1B)</span></legend>
+          <div class="swatches" id="labColour">
+            <button type="button" class="swatch is-on" data-colour="1b" aria-label="Natural Black 1B"></button>
+            <button type="button" class="swatch" data-colour="mauve" aria-label="Pink Ombre"></button>
+            <button type="button" class="swatch" data-colour="27" aria-label="Honey Blonde 27"></button>
+            <button type="button" class="swatch" data-colour="99j" aria-label="Burgundy 99J"></button>
+            <button type="button" class="swatch" data-colour="613" aria-label="Platinum 613"></button>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Length <span class="legend-val"><b id="labLenOut">22</b> inches</span></legend>
+          <input type="range" id="labLength" min="10" max="30" step="2" value="22" aria-label="Length in inches">
+        </fieldset>
+        <fieldset id="labDensityWrap" hidden>
+          <legend>Density</legend>
+          <div class="seg seg--sm" id="labDensity">
+            <button type="button" class="seg-btn" data-density="150">150%</button>
+            <button type="button" class="seg-btn is-on" data-density="180">180%</button>
+            <button type="button" class="seg-btn" data-density="250">250%</button>
+          </div>
+        </fieldset>
+        <div class="lab-out">
+          <div>
+            <p class="lab-need" id="labNeed">You’ll need 4 bundles for a full sew-in</p>
+            <p class="lab-price" id="labPrice">R4 400</p>
+            <p class="lab-split" id="labSplit">or 4 × R1 100 with Payflex</p>
+          </div>
+          <button type="submit" class="btn btn--pink" id="labAdd"><span>Add to bag</span></button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5. WHY ZANTE (HD lace + standard) ============ -->
+<section class="section melt" id="melt" aria-labelledby="meltTitle">
+  <div class="wrap melt-grid">
+    <div class="melt-copy">
+      <p class="eyebrow">Why Zante</p>
+      <h2 class="h2" id="meltTitle">HD lace that melts on every skin tone.</h2>
+      <p class="section-lede">Drag the pearl to compare standard lace with our Swiss HD lace, then switch the skin tone. No tinting and no visible line.</p>
+      <div class="tones" id="tones" role="group" aria-label="Skin tone">
+        <button type="button" class="tone" style="--tone:#D9A882" data-tone="#D9A882" aria-label="Light brown"></button>
+        <button type="button" class="tone" style="--tone:#B07850" data-tone="#B07850" aria-label="Brown"></button>
+        <button type="button" class="tone is-on" style="--tone:#8A5A3C" data-tone="#8A5A3C" aria-label="Deep brown"></button>
+        <button type="button" class="tone" style="--tone:#6A4029" data-tone="#6A4029" aria-label="Dark brown"></button>
+        <button type="button" class="tone" style="--tone:#45291D" data-tone="#45291D" aria-label="Rich deep"></button>
+      </div>
+      <ul class="stats">
+        <li><b data-count="100">0</b><span>grams in every bundle</span></li>
+        <li><b data-count="50" data-suffix="+">0</b><span>washes the pattern holds</span></li>
+        <li><b data-count="1">0</b><span>donor per bundle</span></li>
+      </ul>
+    </div>
+    <div class="melt-stage" id="meltStage" style="--skin:#8A5A3C; --pos:50%">
+      <canvas class="melt-hair" id="meltHair" aria-hidden="true"></canvas>
+      <div class="melt-lace melt-lace--std" aria-hidden="true"></div>
+      <div class="melt-lace melt-lace--hd" aria-hidden="true"></div>
+      <span class="melt-tag melt-tag--l">Standard lace</span>
+      <span class="melt-tag melt-tag--r">Zante HD lace</span>
+      <div class="melt-handle" aria-hidden="true"><span></span></div>
+      <input class="melt-range" id="meltRange" type="range" min="4" max="96" value="50" aria-label="Compare standard and HD lace">
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6. REVIEWS (horizontal) ============ -->
+<section class="section diaries" id="reviews" aria-labelledby="diariesTitle">
+  <div class="wrap">
+    <div class="section-head">
       <div>
         <p class="eyebrow">Install diaries</p>
-        <h2 class="h2" id="diariesTitle" data-split>Mzansi, in her own words.</h2>
+        <h2 class="h2" id="diariesTitle">Mzansi, in her own words.</h2>
       </div>
       <p class="fineprint fineprint--inline">Sample reviews written for this mock-up.</p>
     </div>
   </div>
-  <div class="reviews" id="reviews"></div>
+  <div class="rail rail--reviews" id="reviewRail" tabindex="0" aria-label="Reviews, scroll sideways"></div>
 </section>
 
-<!-- ============ CARE RITUAL (horizontal scroll) ============ -->
-<section class="care" id="care" aria-labelledby="careTitle">
-  <div class="care-pin">
-    <div class="care-head wrap">
-      <p class="eyebrow">Make it last</p>
-      <h2 class="h2" id="careTitle">The five-step care ritual</h2>
-      <p class="care-hint">Keep scrolling. The strand follows you.</p>
+<!-- ============ 7. CARE (horizontal) ============ -->
+<section class="section care" id="care" aria-labelledby="careTitle">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Make it last</p>
+        <h2 class="h2" id="careTitle">The five-step care ritual</h2>
+      </div>
     </div>
-    <div class="care-track" id="careTrack">
-      <svg class="care-strand" id="careStrand" preserveAspectRatio="none" viewBox="0 0 1000 100" aria-hidden="true"><path id="careStrandPath" d="M0 50 C 100 10, 150 90, 250 50 S 400 10, 500 50 S 650 90, 750 50 S 900 10, 1000 50" pathLength="1"/></svg>
-      <article class="care-card care-card--img"><img src="assets/img/care-tools.jpg" alt="Scissors, comb and tint brush held by a white hand on pink" loading="lazy"><p class="care-tip">Your kit: wide-tooth comb, sulfate-free shampoo, satin bag</p></article>
-      <article class="care-card"><span class="care-n">01</span><h3>Detangle</h3><p>Start at the ends with a wide-tooth comb, then work up toward the weft. Never comb from the root down.</p><p class="care-tip">Tool: wide-tooth comb</p></article>
-      <article class="care-card"><span class="care-n">02</span><h3>Wash</h3><p>Cool water and a sulfate-free shampoo. Smooth downward strokes only. Never rub or twist.</p><p class="care-tip">Every 8 to 10 wears</p></article>
-      <article class="care-card"><span class="care-n">03</span><h3>Condition</h3><p>Mid-lengths to ends for 10 minutes. Keep conditioner off the lace so the knots stay tight.</p><p class="care-tip">10 minutes, ends only</p></article>
-      <article class="care-card"><span class="care-n">04</span><h3>Air-dry</h3><p>Pat with a microfibre towel, then dry on a wig stand. If you use heat, stay under 180 °C.</p><p class="care-tip">Max 180 °C</p></article>
-      <article class="care-card"><span class="care-n">05</span><h3>Store</h3><p>Loose braid, satin bag, cool and dry place. It will be ready for the next install.</p><p class="care-tip">Satin, never plastic</p></article>
-    </div>
+  </div>
+  <div class="rail rail--care" tabindex="0" aria-label="Care steps, scroll sideways">
+    <article class="care-card care-card--img"><img src="assets/img/care-tools.jpg" alt="Scissors, comb and tint brush on pink" loading="lazy"><p class="care-tip">Your kit: wide-tooth comb, sulfate-free shampoo, satin bag</p></article>
+    <article class="care-card"><span class="care-n">01</span><h3>Detangle</h3><p>Start at the ends with a wide-tooth comb, then work up to the weft.</p><p class="care-tip">Wide-tooth comb</p></article>
+    <article class="care-card"><span class="care-n">02</span><h3>Wash</h3><p>Cool water, sulfate-free shampoo, downward strokes only. Never rub.</p><p class="care-tip">Every 8 to 10 wears</p></article>
+    <article class="care-card"><span class="care-n">03</span><h3>Condition</h3><p>Mid-lengths to ends for 10 minutes. Keep it off the lace knots.</p><p class="care-tip">10 minutes, ends only</p></article>
+    <article class="care-card"><span class="care-n">04</span><h3>Air-dry</h3><p>Pat dry, then dry on a wig stand. If you use heat, stay under 180 °C.</p><p class="care-tip">Max 180 °C</p></article>
+    <article class="care-card"><span class="care-n">05</span><h3>Store</h3><p>Loose braid, satin bag, cool and dry. Ready for the next install.</p><p class="care-tip">Satin, never plastic</p></article>
   </div>
 </section>
 
-<!-- ============ SOFT LIFE CLUB ============ -->
+<!-- ============ 8. CLUB ============ -->
 <section class="section club" id="club" aria-labelledby="clubTitle">
   <div class="wrap club-inner">
     <div class="club-copy">
       <p class="eyebrow eyebrow--light">Soft Life Club</p>
-      <h2 class="h2" id="clubTitle" data-split>R150 off your first install.</h2>
-      <p class="section-lede">Early access to every drop, care reminders timed to your install date, and birthday treats. One email a week, at most.</p>
+      <h2 class="h2" id="clubTitle">R150 off your first install.</h2>
+      <p class="section-lede">Early access to new drops and care reminders timed to your install. One email a week, at most.</p>
     </div>
     <form class="club-form" id="clubForm" novalidate>
       <label class="sr-only" for="clubEmail">Email address</label>
       <input id="clubEmail" type="email" placeholder="you@example.co.za" autocomplete="email" required>
-      <button class="btn btn--pearl magnetic" type="submit"><span>Join the club</span></button>
+      <button class="btn btn--pink" type="submit"><span>Join the club</span></button>
       <p class="club-msg" id="clubMsg" role="status"></p>
     </form>
   </div>
@@ -535,11 +429,11 @@
     <div class="footer-cols">
       <div class="footer-brand">
         <p class="footer-tag">Hair with a soft life.</p>
-        <p class="footer-small">Virgin human hair, hand-picked and steam-set. Shipped from Johannesburg to every corner of South Africa with The Courier Guy and Pargo pickup points.</p>
+        <p class="footer-small">Virgin human hair for Black women, shipped from Johannesburg with The Courier Guy and Pargo pickup points.</p>
       </div>
-      <nav aria-label="Shop links"><p class="eyebrow eyebrow--light">Shop</p><a href="#edit">Wigs</a><a href="#edit">Bundles</a><a href="#edit">Closures and frontals</a><a href="#lab">Texture Lab</a></nav>
+      <nav aria-label="Shop links"><p class="eyebrow eyebrow--light">Shop</p><a href="#shop" data-filter-link="wigs">Wigs</a><a href="#shop" data-filter-link="bundles">Bundles</a><a href="#lab">Closures and frontals</a><a href="#lab">Build your own</a></nav>
       <nav aria-label="Help links"><p class="eyebrow eyebrow--light">Help</p><a href="#club">Delivery</a><a href="#club">Returns and exchanges</a><a href="#care">Hair care</a><a href="#match">Find your match</a></nav>
-      <nav aria-label="Brand links"><p class="eyebrow eyebrow--light">Zante</p><a href="brand.html">Brand and logo sheet</a><a href="#melt">Our standard</a><a href="#diaries">Install diaries</a><a href="#club">Soft Life Club</a></nav>
+      <nav aria-label="Brand links"><p class="eyebrow eyebrow--light">Zante</p><a href="brand.html">Brand and logo sheet</a><a href="#melt">Our standard</a><a href="#reviews">Install diaries</a><a href="#club">Soft Life Club</a></nav>
     </div>
     <ul class="pay" aria-label="Payment options">
       <li>Visa</li><li>Mastercard</li><li>PayJustNow</li><li>Payflex</li><li>Ozow</li><li>SnapScan</li>
@@ -547,7 +441,7 @@
   </div>
   <div class="footer-mark" aria-hidden="true">
     <svg viewBox="-6 10 342 78" id="footerWord">
-      <defs><radialGradient id="ft-pearl" cx=".36" cy=".32" r=".75"><stop offset="0" stop-color="#fff"/><stop offset=".45" stop-color="#E7C3D3"/><stop offset="1" stop-color="#8C5A80"/></radialGradient></defs>
+      <defs><radialGradient id="ft-pearl" cx=".36" cy=".32" r=".75"><stop offset="0" stop-color="#fff"/><stop offset=".45" stop-color="#FAC4DA"/><stop offset="1" stop-color="#7B3FA6"/></radialGradient></defs>
       <path class="draw" pathLength="1" d="M0 20 H44 L0 80 H46 M72 80 L93.6 28.4 M122 80 L100.4 28.4 M81.6 59 C89 49 105 69 112.4 59 M148 80 V20 L192 80 V20 M218 20 H264 M241 20 V80 M330 20 H290 V80 H330 M290 50 H322" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
       <circle class="footer-pearl" cx="97" cy="21" r="5.4" fill="url(#ft-pearl)"/>
     </svg>
@@ -588,7 +482,7 @@
       <button type="button" class="icon-btn" id="searchClose" aria-label="Close search"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
     </div>
     <div class="search-sugg" id="searchSugg">
-      <button type="button">glueless</button><button type="button">body wave</button><button type="button">curly</button><button type="button">bundles</button><button type="button">613</button><button type="button">ombre</button>
+      <button type="button">glueless</button><button type="button">body wave</button><button type="button">curly</button><button type="button">kinky</button><button type="button">613</button><button type="button">bundles</button>
     </div>
     <ul class="search-results" id="searchResults"></ul>
   </div>
