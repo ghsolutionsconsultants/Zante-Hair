@@ -27,15 +27,16 @@
 
   // ======================= DATA (sample content) =======================
   var PRODUCTS = [
-    { id: 'thandi', name: 'Thandi Glueless Wig', cat: 'wigs', layout: 'dome', texture: 'body', colour: 'mauve', spec: '13x4 HD lace · 180% · glueless', lengths: [18, 22, 26], prices: [3650, 3950, 4450], badge: 'Signature', install: ['glueless'], vibe: ['waves'] },
-    { id: 'naledi', name: 'Naledi Bob Wig', cat: 'wigs', layout: 'dome', texture: 'straight', colour: '1b', spec: '5x5 HD closure · 150% · blunt cut', lengths: [10, 12, 14], prices: [1850, 1990, 2190], badge: 'Bestseller', install: ['glueless', 'quick'], vibe: ['sleek'] },
-    { id: 'bodywave', name: 'Body Wave Bundle', cat: 'bundles', layout: 'weft', texture: 'body', colour: '1b', spec: '100 g · double weft · single donor', lengths: [14, 18, 22, 26], prices: [780, 920, 1060, 1240], badge: 'Bestseller', install: ['sewin'], vibe: ['waves'], sets: 3 },
-    { id: 'deepwave', name: 'Deep Wave Bundle', cat: 'bundles', layout: 'weft', texture: 'deep', colour: '27', spec: '100 g · double weft · honey 27', lengths: [16, 20, 24], prices: [960, 1120, 1290], install: ['sewin'], vibe: ['curls', 'waves'], sets: 3 },
-    { id: 'amahle', name: 'Amahle Headband Wig', cat: 'wigs', layout: 'half', texture: 'kinkyCurly', colour: '1b', spec: 'No glue · no lace · on in 5 min', lengths: [16, 20], prices: [2150, 2450], badge: 'No glue', install: ['quick'], vibe: ['curls'] },
-    { id: 'lerato', name: 'Lerato Frontal Wig', cat: 'wigs', layout: 'dome', texture: 'body', colour: '99j', spec: '13x4 HD lace · 200% · burgundy 99J', lengths: [24, 28], prices: [4250, 4890], badge: 'New drop', install: ['glueless'], vibe: ['waves'] },
-    { id: 'frontal', name: '13x4 HD Lace Frontal', cat: 'lace', layout: 'frontal', texture: 'straight', colour: '613', spec: 'Swiss HD lace · pre-plucked · 613', lengths: [16, 18, 20], prices: [1750, 1890, 2050], install: ['sewin'], vibe: ['sleek'] },
-    { id: 'closure', name: '5x5 HD Lace Closure', cat: 'lace', layout: 'closure', texture: 'deep', colour: '1b', spec: 'Swiss HD lace · bleached knots', lengths: [14, 16], prices: [1150, 1250], badge: 'Melts', install: ['sewin'], vibe: ['curls'] }
+    { id: 'thandi', name: 'Thandi Glueless Wig', cat: 'wigs', img: 'p-thandi', pos: '50% 18%', texture: 'body', colour: '1b', spec: '13x4 HD lace · 180% · glueless', lengths: [18, 22, 26], prices: [3650, 3950, 4450], badge: 'Signature', install: ['glueless'], vibe: ['waves'] },
+    { id: 'naledi', name: 'Naledi Loose Wave Wig', cat: 'wigs', img: 'p-naledi', pos: '68% 40%', texture: 'body', style: 'Loose Wave', colour: '1b', spec: '5x5 HD closure · 180% · jet black', lengths: [20, 24, 28], prices: [2650, 2890, 3290], badge: 'Bestseller', install: ['glueless', 'quick'], vibe: ['waves', 'sleek'] },
+    { id: 'amahle', name: 'Amahle Kinky Curly Wig', cat: 'wigs', img: 'p-amahle', pos: '50% 22%', texture: 'kinkyCurly', colour: '1b', spec: 'Headband or glueless · 250% · 4C blend', lengths: [14, 16, 18], prices: [2150, 2350, 2550], badge: 'No glue', install: ['quick', 'glueless'], vibe: ['curls'] },
+    { id: 'lerato', name: 'Lerato Curly Wig', cat: 'wigs', img: 'p-lerato', pos: '50% 26%', texture: 'deep', style: 'Curly', colour: '1b', spec: '4x4 closure · 200% · bouncy curls', lengths: [16, 20], prices: [2450, 2790], badge: 'New drop', install: ['glueless', 'quick'], vibe: ['curls'] },
+    { id: 'deepwave', name: 'Raw Deep Wave Bundles', cat: 'bundles', img: 'p-deepwave-bundles', pos: '62% 38%', texture: 'deep', colour: '1b', spec: '100 g · double weft · single donor', lengths: [16, 20, 24], prices: [960, 1120, 1290], badge: 'Bestseller', install: ['sewin'], vibe: ['curls', 'waves'], sets: 3 },
+    { id: 'ombre', name: 'Ombre Body Wave Bundles', cat: 'bundles', img: 'p-ombre-bundles', pos: '50% 40%', texture: 'body', colour: 'ombre', spec: '100 g · bulk hair · tied', lengths: [18, 22, 26], prices: [1150, 1290, 1490], badge: 'New', install: ['sewin'], vibe: ['waves'], sets: 3 },
+    { id: 'honey', name: 'Honey Blonde Wave Bundle', cat: 'bundles', img: 'p-honey-bundle', pos: '50% 50%', texture: 'body', colour: '27', spec: '100 g · double weft · colour 27', lengths: [18, 22], prices: [990, 1150], install: ['sewin'], vibe: ['waves'], sets: 3 },
+    { id: 'platinum', name: 'Platinum 613 Bundle', cat: 'bundles', img: 'p-platinum-bundle', pos: '50% 45%', texture: 'straight', colour: '613', spec: '100 g · pre-lightened · tones easily', lengths: [16, 20, 24], prices: [1050, 1190, 1350], badge: 'Colour ready', install: ['sewin'], vibe: ['sleek'], sets: 3 }
   ];
+  function styleOf(p) { return p.style || TEX[p.texture].label; }
 
   var REVIEWS = [
     ['The body wave survived a Durban summer and still bounces.', 'Nomsa K.', 'Durban', 'Body Wave Bundle, 22"', '#8C5A80', '#E7C3D3'],
@@ -98,29 +99,35 @@
   }
   function selectText(el) { if (!el) return; var r = document.createRange(); r.selectNodeContents(el); var s = getSelection(); s.removeAllRanges(); s.addRange(r); }
 
-  // ======================= HERO HAIR =======================
+  // ======================= HERO LOOKS =======================
   var heroEl = $('#hero');
-  var heroCfg = { texture: 'body', colour: 'mauve', length: 24 };
-  function heroGeom() {
-    return narrow.matches
-      ? { cx: 0.5, top: 0.05, headW: 0.2, count: 260 }
-      : { cx: 0.71, top: 0.09, headW: 0.125, count: 440 };
-  }
-  var hg = heroGeom();
+  var LOOKS = {
+    body: { texture: 'body', bundle: { texture: 'body', colour: '1b', length: 24 } },
+    loose: { texture: 'straight', product: 'naledi' },
+    curly: { texture: 'deep', product: 'lerato' },
+    kinky: { texture: 'kinkyCurly', product: 'amahle' }
+  };
+  var look = 'body';
   var hero = new Hair($('#heroCanvas'), {
-    layout: 'dome', texture: heroCfg.texture, colour: heroCfg.colour, length: heroCfg.length, fit: 30,
-    count: hg.count, cx: hg.cx, top: hg.top, headW: hg.headW, grow: true, autoGrow: false,
-    always: true, hit: heroEl, seed: 11
+    layout: 'curtain', texture: 'body', colour: 'mauve', length: 30, fit: 30, top: 0,
+    count: narrow.matches ? 110 : 170, grow: true, autoGrow: false, always: true, glow: false, hit: heroEl, seed: 11
   });
-  narrow.addEventListener('change', function () { var g = heroGeom(); hero.set({ cx: g.cx, top: g.top, headW: g.headW, count: g.count }); });
-
+  function lookItem(k) {
+    var L = LOOKS[k];
+    if (L.bundle) {
+      var q = quote({ unit: 'bundle', texture: L.bundle.texture, colour: L.bundle.colour, length: L.bundle.length });
+      return { key: 'look-body', name: 'Body Wave Bundles × ' + q.n, variant: COL[L.bundle.colour].name + ' 1B · ' + L.bundle.length + '" · ' + q.n * 100 + ' g', spec: 'Natural Black 1B · ' + L.bundle.length + '" · ' + q.n * 100 + ' g', price: q.total, img: 'hero-bodywave', pos: '50% 30%' };
+    }
+    var p = PRODUCTS.filter(function (x) { return x.id === L.product; })[0], m = Math.floor((p.lengths.length - 1) / 2);
+    return { key: p.id + '-' + m, name: p.name, variant: COL[p.colour].name + ' · ' + p.lengths[m] + '"', spec: styleOf(p) + ' · ' + p.lengths[m] + '" · ' + p.spec.split(' · ')[0], price: p.prices[m], img: p.img, pos: p.pos };
+  }
   function updateCapsule() {
-    var q = quote({ unit: 'wig', texture: heroCfg.texture, colour: heroCfg.colour, length: heroCfg.length, density: 180 });
-    $('#capName').textContent = TEX[heroCfg.texture].label + ' · ' + COL[heroCfg.colour].name;
-    $('#capSpec').textContent = 'Glueless wig · 13x4 HD lace · ' + heroCfg.length + '"';
-    var el = $('#capPrice'), from = el._v || q.total;
-    tween(from, q.total, 600, function (v) { el.textContent = fmt(Math.round(v / 10) * 10); });
-    el._v = q.total;
+    var it = lookItem(look);
+    $('#capName').textContent = it.name;
+    $('#capSpec').textContent = it.spec;
+    var el = $('#capPrice'), from = el._v || it.price;
+    tween(from, it.price, 600, function (v) { el.textContent = fmt(Math.round(v / 10) * 10); });
+    el._v = it.price;
   }
   updateCapsule();
 
@@ -128,15 +135,45 @@
     group.addEventListener('click', function (e) {
       var b = e.target.closest('[' + attr + ']'); if (!b) return;
       $$('[' + attr + ']', group).forEach(function (x) { x.classList.toggle('is-on', x === b); });
-      cb(b.getAttribute(attr), b);
+      cb(b.getAttribute(attr), b, e);
     });
   }
-  choose($('#heroTextures'), 'data-texture', function (v) { heroCfg.texture = v; hero.set({ texture: v }); updateCapsule(); });
-  choose($('#heroColours'), 'data-colour', function (v) { heroCfg.colour = v; hero.set({ colour: v }); updateCapsule(); });
-  $('#heroFlip').addEventListener('click', function () { hero.flip(Math.random() < 0.5 ? -1 : 1); });
+  var arch = $('#arch');
+  choose($('#heroLooks'), 'data-look', function (v, b, e) {
+    if (v === look) return;
+    look = v;
+    var r = arch.getBoundingClientRect();
+    var cx = e && e.clientX ? clamp((e.clientX - r.left) / r.width * 100, 0, 100) : 50;
+    $$('.arch-img', arch).forEach(function (img) {
+      var on = img.dataset.look === v;
+      img.classList.remove('was-on');
+      if (img.classList.contains('is-on') && !on) img.classList.add('was-on');
+      img.style.setProperty('--cx', (on ? 50 : cx) + '%');
+      img.style.setProperty('--cy', on ? '100%' : '50%');
+      img.classList.toggle('is-on', on);
+    });
+    setTimeout(function () { $$('.arch-img.was-on', arch).forEach(function (img) { img.classList.remove('was-on'); }); }, 1150);
+    $('#hotspots').classList.toggle('is-off', v !== 'body');
+    hero.set({ texture: LOOKS[v].texture });
+    hero.flip(0.6);
+    updateCapsule();
+  });
+  // gentle parallax on the arch photo
+  arch.addEventListener('pointermove', function (e) {
+    if (reduced || e.pointerType !== 'mouse') return;
+    var r = arch.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5;
+    var img = $('.arch-img.is-on', arch);
+    if (img) { img.style.setProperty('--px', (-x * 18).toFixed(1) + 'px'); img.style.setProperty('--py', (-y * 18).toFixed(1) + 'px'); }
+  });
+  arch.addEventListener('pointerleave', function () { $$('.arch-img', arch).forEach(function (img) { img.style.setProperty('--px', '0px'); img.style.setProperty('--py', '0px'); }); });
+  arch.addEventListener('click', function (e) {
+    var hs = e.target.closest('.hotspot');
+    if (hs) { $$('.hotspot', arch).forEach(function (h) { h.classList.toggle('is-show', h === hs && !h.classList.contains('is-show')); }); return; }
+    var t = $('#edit'); if (t) t.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth' });
+  });
   $('#capAdd').addEventListener('click', function (e) {
-    var q = quote({ unit: 'wig', texture: heroCfg.texture, colour: heroCfg.colour, length: heroCfg.length, density: 180 });
-    addToBag({ key: 'hero-' + heroCfg.texture + heroCfg.colour, name: TEX[heroCfg.texture].label + ' Glueless Wig', variant: COL[heroCfg.colour].name + ' · 24" · 13x4 HD', price: q.total, look: { layout: 'dome', texture: heroCfg.texture, colour: heroCfg.colour, length: 24 } }, e.currentTarget);
+    var it = lookItem(look);
+    addToBag({ key: it.key, name: it.name, variant: it.variant, price: it.price, img: it.img, pos: it.pos }, e.currentTarget);
   });
 
   // ======================= INTRO =======================
@@ -200,19 +237,13 @@
   (function header() {
     var h = $('#header'), fill = $('#progressFill'), lastY = window.scrollY, ticking = false;
     var megaBtn = $('#megaBtn'), mega = $('#mega'), wrap = $('.has-mega'), closeT;
-    var megaHair = null;
     function setMega(open) {
       mega.classList.toggle('is-open', open);
       megaBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
-      if (open && !megaHair) megaHair = new Hair($('#megaCanvas'), { layout: 'dome', texture: 'body', colour: 'mauve', length: 20, fit: 26, count: 150, top: 0.1, headW: 0.24, always: true, glow: false, seed: 4 });
-      if (megaHair) megaHair.set({ always: open });
     }
     wrap.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse') { clearTimeout(closeT); setMega(true); } });
     wrap.addEventListener('pointerleave', function (e) { if (e.pointerType === 'mouse') closeT = setTimeout(function () { setMega(false); }, 180); });
     megaBtn.addEventListener('click', function () { setMega(!mega.classList.contains('is-open')); });
-    $$('[data-hover-texture]', mega).forEach(function (a) {
-      a.addEventListener('pointerenter', function () { if (megaHair) megaHair.set({ texture: a.dataset.hoverTexture }); });
-    });
     mega.addEventListener('click', function (e) { if (e.target.closest('a')) setMega(false); });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { setMega(false); closeMobile(); closeSearch(); closeBag(); } });
 
@@ -265,11 +296,8 @@
   // ======================= TEXTURE WALL =======================
   (function wall() {
     var panels = $$('.tex-panel');
-    var hairs = panels.map(function (p, i) {
-      return new Hair($('canvas', p), { layout: 'curtain', texture: p.dataset.texture, colour: p.dataset.colour, length: 30, fit: 31, top: 0, count: 130, glow: false, always: p.classList.contains('is-open'), seed: 20 + i });
-    });
     function open(p) {
-      panels.forEach(function (x, i) { var on = x === p; x.classList.toggle('is-open', on); hairs[i].set({ always: on }); });
+      panels.forEach(function (x) { x.classList.toggle('is-open', x === p); });
     }
     panels.forEach(function (p) {
       p.setAttribute('data-cursor', 'Open');
@@ -288,15 +316,16 @@
     grid.innerHTML = PRODUCTS.map(function (p) {
       var mid = Math.floor((p.lengths.length - 1) / 2);
       return '<article class="card" data-id="' + p.id + '" data-cat="' + p.cat + '" data-reveal>' +
-        '<div class="card-media" data-cursor="Feel it">' +
-          '<canvas aria-hidden="true"></canvas>' +
+        '<div class="card-media" data-cursor="View">' +
+          '<img class="card-img" src="assets/img/' + p.img + '.jpg" alt="' + esc(p.name) + ', ' + esc(styleOf(p).toLowerCase()) + ' in ' + esc(COL[p.colour].name.toLowerCase()) + '" style="--pos:' + p.pos + '" loading="lazy">' +
+          '<span class="lens" title="Live texture preview"><canvas aria-hidden="true"></canvas></span>' +
           (p.badge ? '<span class="card-badge">' + p.badge + '</span>' : '') +
           '<button type="button" class="card-heart" aria-pressed="false" aria-label="Save ' + esc(p.name) + '"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7.5-4.4-7.5-10A4.3 4.3 0 0 1 12 7.4 4.3 4.3 0 0 1 19.5 10c0 5.6-7.5 10-7.5 10Z" stroke-width="1.6" stroke-linejoin="round"/></svg></button>' +
           '<div class="card-quick"><button type="button" class="btn btn--solid" data-add><span>Quick add · <span data-len>' + p.lengths[mid] + '"</span></span></button></div>' +
         '</div>' +
         '<div class="card-body">' +
           '<h3 class="card-name">' + esc(p.name) + '</h3>' +
-          '<p class="card-spec">' + TEX[p.texture].label + ' · ' + COL[p.colour].name + ' · ' + esc(p.spec) + '</p>' +
+          '<p class="card-spec">' + styleOf(p) + ' · ' + COL[p.colour].name + ' · ' + esc(p.spec) + '</p>' +
           '<div class="card-lens" role="group" aria-label="Length">' + p.lengths.map(function (l, i) { return '<button type="button" class="' + (i === mid ? 'is-on' : '') + '" data-i="' + i + '" aria-pressed="' + (i === mid) + '">' + l + '"</button>'; }).join('') + '</div>' +
           '<p class="card-price"><b>' + fmt(p.prices[mid]) + '</b><span>or 3 × ' + fmt(p.prices[mid] / 3) + ' with PayJustNow</span></p>' +
         '</div></article>';
@@ -306,12 +335,12 @@
       var card = $('[data-id="' + p.id + '"]', grid), media = $('.card-media', card);
       var mid = Math.floor((p.lengths.length - 1) / 2);
       p.sel = mid;
-      cardHair[p.id] = new Hair($('canvas', card), {
-        layout: p.layout, texture: p.texture, colour: p.colour, length: p.lengths[mid],
-        fit: p.layout === 'dome' || p.layout === 'half' ? 27 : 30,
-        top: p.layout === 'dome' || p.layout === 'half' ? 0.1 : p.layout === 'frontal' ? 0.16 : 0.13,
-        headW: 0.22, count: p.layout === 'weft' ? 120 : 180, hit: media, seed: 40 + idx
+      cardHair[p.id] = new Hair($('.lens canvas', card), {
+        layout: 'curtain', texture: p.texture, colour: p.colour, length: 30, fit: 30, top: 0,
+        count: 44, glow: false, scale: 0.34, hit: media, seed: 40 + idx
       });
+      media.addEventListener('pointerenter', function () { cardHair[p.id].set({ always: true }); });
+      media.addEventListener('pointerleave', function () { cardHair[p.id].set({ always: false }); });
       // tilt + glare
       media.addEventListener('pointermove', function (e) {
         if (e.pointerType !== 'mouse' || reduced) return;
@@ -331,8 +360,7 @@
         pb._v = p.prices[i];
         $('.card-price span', card).textContent = 'or 3 × ' + fmt(p.prices[i] / 3) + ' with PayJustNow';
         $('[data-len]', card).textContent = p.lengths[i] + '"';
-        cardHair[p.id].set({ length: p.lengths[i] });
-        cardHair[p.id].flip(0.4);
+        cardHair[p.id].flip(0.5);
       });
       // wishlist
       var heart = $('.card-heart', card);
@@ -346,7 +374,7 @@
       });
       // quick add
       $('[data-add]', card).addEventListener('click', function (e) {
-        addToBag({ key: p.id + '-' + p.sel, name: p.name, variant: COL[p.colour].name + ' · ' + p.lengths[p.sel] + '"', price: p.prices[p.sel], look: { layout: p.layout, texture: p.texture, colour: p.colour, length: p.lengths[p.sel] } }, e.currentTarget);
+        addToBag({ key: p.id + '-' + p.sel, name: p.name, variant: COL[p.colour].name + ' · ' + p.lengths[p.sel] + '"', price: p.prices[p.sel], img: p.img, pos: p.pos }, e.currentTarget);
       });
     });
 
@@ -442,7 +470,7 @@
 
   // ======================= MATCH QUIZ =======================
   (function quiz() {
-    var q = $('#quiz'), steps = $$('.quiz-step', q), bar = $('#quizBar'), ans = {}, matchHair = null, best = null;
+    var q = $('#quiz'), steps = $$('.quiz-step', q), bar = $('#quizBar'), ans = {}, best = null;
     function go(i) {
       steps.forEach(function (s, k) { s.classList.toggle('is-on', k === i); });
       bar.style.width = (i / 3 * 100) + '%';
@@ -468,11 +496,10 @@
       $('#matchName').textContent = p.name + (p.sets ? ' × ' + p.sets : '');
       var inst = { sewin: 'sew-in', glueless: 'glueless', quick: 'quick-switch' }[ans.install];
       var vibe = { sleek: 'sleek', waves: 'soft-wave', curls: 'big-curl' }[ans.vibe];
-      $('#matchWhy').textContent = 'Made for a ' + inst + ' install with a ' + vibe + ' finish. ' + TEX[p.texture].label + ' in ' + COL[p.colour].name + ', ' + p.lengths[mid] + '".' + (best.price > budget ? ' A little over budget, but worth a look.' : '');
+      $('#matchWhy').textContent = 'Made for a ' + inst + ' install with a ' + vibe + ' finish. ' + styleOf(p) + ' in ' + COL[p.colour].name + ', ' + p.lengths[mid] + '".' + (best.price > budget ? ' A little over budget, but worth a look.' : '');
       $('#matchPrice').textContent = fmt(best.price) + (p.sets ? ' for ' + p.sets + ' bundles' : '');
-      var look = { layout: p.layout, texture: p.texture, colour: p.colour, length: p.lengths[mid] };
-      if (!matchHair) matchHair = new Hair($('#matchCanvas'), Object.assign({ fit: 31, top: 0.12, headW: 0.22, count: 160, always: true, glow: false, seed: 5 }, look));
-      else matchHair.set(look);
+      var mi = $('#matchImg');
+      mi.src = 'assets/img/' + p.img + '.jpg'; mi.alt = p.name; mi.style.setProperty('--pos', p.pos);
       var ring = $('#ringFg'); ring.style.strokeDashoffset = 100;
       requestAnimationFrame(function () { requestAnimationFrame(function () { ring.style.strokeDashoffset = 100 - pct; }); });
       tween(0, pct, 1500, function (v) { $('#matchPct').textContent = Math.round(v); });
@@ -481,7 +508,7 @@
     $('#matchAdd').addEventListener('click', function (e) {
       if (!best) return;
       var p = best.p, mid = Math.floor((p.lengths.length - 1) / 2);
-      addToBag({ key: p.id + '-quiz', name: p.name + (p.sets ? ' × ' + p.sets : ''), variant: COL[p.colour].name + ' · ' + p.lengths[mid] + '"', price: best.price, look: { layout: p.layout, texture: p.texture, colour: p.colour, length: p.lengths[mid] } }, e.currentTarget);
+      addToBag({ key: p.id + '-quiz', name: p.name + (p.sets ? ' × ' + p.sets : ''), variant: COL[p.colour].name + ' · ' + p.lengths[mid] + '"', price: best.price, img: p.img, pos: p.pos }, e.currentTarget);
     });
   })();
 
@@ -568,11 +595,13 @@
       list.innerHTML = '<li class="bag-empty"><b>Your bag is empty</b><span>Start with the Texture Lab or the edit.</span></li>';
     } else {
       list.innerHTML = bag.map(function (x, i) {
-        return '<li class="bag-line"><div class="bag-thumb"><canvas aria-hidden="true"></canvas></div><div><h3>' + esc(x.name) + '</h3><p>' + esc(x.variant) + '</p>' +
+        var thumb = x.img ? '<img src="assets/img/' + x.img + '.jpg" alt="" style="--pos:' + (x.pos || '50% 30%') + '">' : '<canvas aria-hidden="true"></canvas>';
+        return '<li class="bag-line"><div class="bag-thumb">' + thumb + '</div><div><h3>' + esc(x.name) + '</h3><p>' + esc(x.variant) + '</p>' +
           '<div class="qty"><button type="button" data-q="-1" data-i="' + i + '" aria-label="One less">−</button><span>' + x.qty + '</span><button type="button" data-q="1" data-i="' + i + '" aria-label="One more">+</button></div></div>' +
           '<div class="bag-line-price">' + fmt(x.price * x.qty) + '<button type="button" data-rm="' + i + '">Remove</button></div></li>';
       }).join('');
-      $$('.bag-thumb canvas', list).forEach(function (c, i) {
+      $$('.bag-thumb', list).forEach(function (t, i) {
+        var c = $('canvas', t); if (!c) return;
         var l = bag[i].look || {};
         thumbs.push(new Hair(c, { layout: l.layout || 'weft', texture: l.texture || 'body', colour: l.colour || '1b', length: l.length || 20, fit: 30, top: 0.12, headW: 0.26, count: 60, interactive: false, ambient: false, glow: false, scale: 0.18, seed: i + 1 }));
       });
@@ -619,13 +648,13 @@
     var q = sInput.value.trim().toLowerCase();
     var terms = q.split(/\s+/).filter(Boolean);
     var hits = PRODUCTS.filter(function (p) {
-      var hay = (p.name + ' ' + p.spec + ' ' + TEX[p.texture].label + ' ' + COL[p.colour].name + ' ' + COL[p.colour].code + ' ' + p.cat + (p.layout === 'dome' && p.lengths[0] <= 12 ? ' bob' : '') + (p.texture === 'kinkyCurly' || p.texture === 'deep' ? ' curly curls' : '')).toLowerCase();
+      var hay = (p.name + ' ' + p.spec + ' ' + styleOf(p) + ' ' + TEX[p.texture].label + ' ' + COL[p.colour].name + ' ' + COL[p.colour].code + ' ' + p.cat + (p.texture === 'kinkyCurly' || p.texture === 'deep' ? ' curly curls' : '')).toLowerCase();
       return terms.every(function (t) { return hay.indexOf(t) >= 0; });
     });
     if (!terms.length) hits = PRODUCTS;
     function hl(s) { var out = esc(s); terms.forEach(function (t) { if (t.length > 1) out = out.replace(new RegExp('(' + t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'ig'), '<mark>$1</mark>'); }); return out; }
     sRes.innerHTML = hits.length ? hits.map(function (p, i) {
-      return '<li><button type="button" data-go="' + p.id + '" style="animation-delay:' + i * 40 + 'ms"><span class="dot" style="background:' + COL[p.colour].swatch + '"></span><span><b>' + hl(p.name) + '</b><small>' + hl(TEX[p.texture].label + ' · ' + COL[p.colour].name + ' · ' + p.spec) + '</small></span><span>' + fmt(p.prices[0]) + '+</span></button></li>';
+      return '<li><button type="button" data-go="' + p.id + '" style="animation-delay:' + i * 40 + 'ms"><img class="dot" src="assets/img/' + p.img + '.jpg" alt="" style="object-position:' + p.pos + '"><span><b>' + hl(p.name) + '</b><small>' + hl(styleOf(p) + ' · ' + COL[p.colour].name + ' · ' + p.spec) + '</small></span><span>' + fmt(p.prices[0]) + '+</span></button></li>';
     }).join('') : '<li class="search-none">No match for “' + esc(q) + '”. Try a texture like “deep wave” or a lace size like “5x5”.</li>';
   }
   $('#searchBtn').addEventListener('click', openSearch);

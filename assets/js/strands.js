@@ -35,7 +35,8 @@
     mauve: { name: 'Zante Mauve',   code: 'ZM',  stops: ['#2B1D2E', '#8C5A80', '#E6BED3'], hi: '#FFF3FA', swatch: '#B07FA3' },
     '27':  { name: 'Honey Blonde',  code: '27',  stops: ['#3C2617', '#A06A39', '#E6BA78'], hi: '#FFF1D4', swatch: '#C4904F' },
     '99j': { name: 'Burgundy',      code: '99J', stops: ['#1D0710', '#651A2D', '#A83C58'], hi: '#F7AFC3', swatch: '#7A2238' },
-    '613': { name: 'Platinum',      code: '613', stops: ['#857870', '#CBBDAF', '#F0E6DA'], hi: '#FFFFFF', swatch: '#E6DACB' }
+    '613': { name: 'Platinum',      code: '613', stops: ['#857870', '#CBBDAF', '#F0E6DA'], hi: '#FFFFFF', swatch: '#E6DACB' },
+    ombre: { name: 'Ombre 4/613',   code: '4/613', stops: ['#3B2A22', '#A8835E', '#EFE3CC'], hi: '#FFFFFF', swatch: '#C9AE88' }
   };
 
   var all = [];

@@ -19,7 +19,7 @@ To publish it on GitHub Pages: **Settings → Pages → Build and deployment →
 
 ## The big idea
 
-Every hair visual on the page is **drawn live in code** by one strand engine (`assets/js/strands.js`). There are no stock photos. Hundreds of individual strands are rendered on a canvas, and they:
+Real hair photography, the way influencer hair stores sell it (bundles on satin pink, raw bundles in hand, models wearing the unit), combined with a **live strand engine** (`assets/js/strands.js`) that no other SA hair store has. The engine draws hundreds of individual strands on a canvas, and they:
 
 - **part when you run your cursor or finger through them**, then spring back
 - **morph between textures** (Silk Straight, Body Wave, Deep Wave, Kinky Straight, Kinky Curly). Kinky Curly even shrinks like real coily hair
@@ -30,10 +30,10 @@ Every hair visual on the page is **drawn live in code** by one strand engine (`a
 ## What is on the homepage
 
 1. **Intro**: the logo draws itself strand by strand, a "Detangling 000–100%" counter runs, then the curtain parts and the hair falls into place.
-2. **Hero try-on**: change the texture and colour of the hero wig live. A glass price card updates as you go.
+2. **Hero "get this look"**: four real looks in an arch frame. Tap a look and the photo reveals with a circular wipe, the live strands behind it change texture, and a glass price card shows what to buy. Hotspots on the photo explain the hair.
 3. **Texture marquee**: speeds up and skews with your scroll speed.
-4. **Texture wall**: five expanding panels, each a live swatch.
-5. **The edit**: product cards with 3D tilt, light glare, length selectors that change the price and the hair length, a wishlist heart burst, and a quick add that flies a pearl into the bag.
+4. **Texture wall**: five expanding photo panels that go from soft grey to full colour as they open.
+5. **The edit**: real product photos with 3D tilt, light glare, a small live texture lens, length selectors that change the price, a wishlist heart burst, and a quick add that flies a pearl into the bag.
 6. **Texture Lab**: build a custom unit (bundles, closure, frontal or glueless wig), with texture, colour, length (10–30") and density. An inch ruler, a bundle calculator ("You'll need 4 bundles for a full sew-in") and a price with Payflex split update live.
 7. **HD lace melt**: drag a pearl to compare standard lace with HD lace across five skin tones.
 8. **Find your match**: a three-tap quiz that scores the catalogue and returns a match percentage.
@@ -63,6 +63,22 @@ See `brand.html` for the before and after, the anatomy, the palette, the type an
 - **Luxy Hair** and **Bellami** win with tools: shade matching, quizzes and stylist chat.
 - Most South African hair stores use standard store templates with static photos. Interactive tools are the gap Zante can own.
 
+## Photo credits
+
+All photos are free to use under the [Pexels licence](https://www.pexels.com/license/). They are placeholders until Zante has its own product shoot. The people shown are models, not Zante customers.
+
+| File | Pexels photo | Photographer |
+| --- | --- | --- |
+| `hero-bodywave.jpg`, `p-deepwave-bundles.jpg`, `shop-wall.jpg` | [15868319](https://www.pexels.com/photo/15868319/), [15868320](https://www.pexels.com/photo/15868320/), [15868318](https://www.pexels.com/photo/15868318/) | Kobi Brown |
+| `p-ombre-bundles.jpg`, `p-honey-bundle.jpg`, `p-platinum-bundle.jpg`, `t-bodywave.jpg`, `care-tools.jpg` | [18614262](https://www.pexels.com/photo/18614262/), [18614263](https://www.pexels.com/photo/18614263/), [18614268](https://www.pexels.com/photo/18614268/), [18614269](https://www.pexels.com/photo/18614269/), [18614264](https://www.pexels.com/photo/18614264/) | Alina Skazka |
+| `p-thandi.jpg` | [10375983](https://www.pexels.com/photo/10375983/) | RDNE Stock project |
+| `p-naledi.jpg` | [2331545](https://www.pexels.com/photo/2331545/) | Bestbe Models |
+| `p-amahle.jpg` | [18775836](https://www.pexels.com/photo/18775836/) | Audu Samson |
+| `p-lerato.jpg` | [20417302](https://www.pexels.com/photo/20417302/) | Sherman Trotz |
+| `t-kinkystraight.jpg`, `t-kinkycurly.jpg` | [11515408](https://www.pexels.com/photo/11515408/), [4297233](https://www.pexels.com/photo/4297233/) | kehinde solomon o ogunsanya |
+| `t-straight.jpg` | [11431138](https://www.pexels.com/photo/11431138/) | Néo Rioux |
+| `t-deepwave.jpg` | [3065207](https://www.pexels.com/photo/3065207/) | Pexels contributor |
+
 ## Files
 
 ```
@@ -72,11 +88,12 @@ assets/css/zante.css  Styles and design tokens (light and dark)
 assets/js/strands.js  The live hair strand engine
 assets/js/app.js      Page interactions, sample catalogue, bag, quiz, lab
 assets/brand/         Logo SVGs, PNG exports and the original logo for comparison
+assets/img/           Product and model photos (Pexels, free licence)
 ```
 
 ## Suggested next steps
 
 1. Replace sample products, prices and policies with the real catalogue.
-2. Add real model photography beside the live hair renders, for product pages.
+2. Replace the Pexels placeholders with Zante's own product and model shoot.
 3. Move to a store platform (for example Shopify) and keep the strand engine as a custom section.
 4. Run a trademark search on the new mark before final sign-off.
