@@ -528,9 +528,9 @@
       ctx.fillStyle = dark ? '#FFEFF6' : '#2B1433';
       roundRect(ctx, d.x0 - 8 * k, y, d.bw + 16 * k, h, h / 2); ctx.fill();
       ctx.fillStyle = dark ? '#2B1433' : '#FFEFF6';
-      ctx.font = '500 ' + Math.max(7, 7.5 * k) + 'px "DM Mono", ui-monospace, monospace';
+      ctx.font = '500 ' + Math.max(7, 7.5 * k) + 'px "Outfit", system-ui, sans-serif';
       ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-      if (k > 0.42) ctx.fillText('ZANTE · 100 g · DOUBLE WEFT', d.cx, y + h / 2 + 0.5);
+      if (k > 0.42) ctx.fillText('ZANTE 100 g', d.cx, y + h / 2 + 0.5);
       ctx.restore();
     } else if (d.layout === 'half') {
       // satin headband across the crown
@@ -557,7 +557,7 @@
     ctx.fillStyle = dark ? 'rgba(245,237,243,0.75)' : 'rgba(43,29,46,0.7)';
     ctx.lineWidth = 1;
     ctx.beginPath(); ctx.moveTo(x, y0); ctx.lineTo(x, y0 + pxIn * 30); ctx.stroke();
-    ctx.font = '500 10px "DM Mono", ui-monospace, monospace';
+    ctx.font = '500 10px "Outfit", system-ui, sans-serif';
     ctx.textAlign = 'right'; ctx.textBaseline = 'middle';
     for (var i = 0; i <= 30; i++) {
       var y = y0 + i * pxIn;
@@ -577,7 +577,7 @@
   function label(ctx, txt, x, y, k, dark) {
     if (k < 0.42) return;
     ctx.save();
-    ctx.font = '500 ' + Math.max(8, 9 * k) + 'px "DM Mono", ui-monospace, monospace';
+    ctx.font = '500 ' + Math.max(8, 9 * k) + 'px "Outfit", system-ui, sans-serif';
     ctx.fillStyle = dark ? 'rgba(245,237,243,0.6)' : 'rgba(43,29,46,0.55)';
     ctx.textAlign = 'center'; ctx.textBaseline = 'bottom';
     ctx.fillText(txt, x, y);

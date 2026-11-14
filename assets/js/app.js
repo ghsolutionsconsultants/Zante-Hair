@@ -177,7 +177,7 @@
           (p.badge ? '<span class="card-badge">' + esc(p.badge) + '</span>' : '') +
         '</div>' +
         '<div class="card-body">' +
-          '<p class="card-type">' + esc(p.type) + ' · ' + esc(p.style) + ' · ' + esc(COL[p.colour].code) + '</p>' +
+          '<p class="card-type">' + esc(p.style) + ', ' + esc(COL[p.colour].name.toLowerCase()) + '</p>' +
           '<h3 class="card-name">' + esc(p.name) + '</h3>' +
           '<div class="card-lens" role="group" aria-label="Length">' + p.lengths.map(function (l, i) { return '<button type="button" class="' + (i === mid ? 'is-on' : '') + '" data-i="' + i + '" aria-pressed="' + (i === mid) + '">' + l + '"</button>'; }).join('') + '</div>' +
           '<div class="card-foot"><p class="card-price"><b>' + fmt(p.prices[mid]) + '</b><span>or 3 × ' + fmt(p.prices[mid] / 3) + ' PayJustNow</span></p>' +
@@ -198,7 +198,7 @@
         $('.card-price span', card).textContent = 'or 3 × ' + fmt(p.prices[i] / 3) + ' PayJustNow';
       });
       $('[data-add]', card).addEventListener('click', function (e) {
-        addToBag({ key: p.id + '-' + p.sel, name: p.name, variant: p.style + ' · ' + COL[p.colour].name + ' · ' + p.lengths[p.sel] + '"', price: p.prices[p.sel], img: p.img, pos: p.pos }, e.currentTarget);
+        addToBag({ key: p.id + '-' + p.sel, name: p.name, variant: p.style + ', ' + COL[p.colour].name + ', ' + p.lengths[p.sel] + '"', price: p.prices[p.sel], img: p.img, pos: p.pos }, e.currentTarget);
       });
     });
 
@@ -217,7 +217,7 @@
       var p = progress();
       track.style.transform = 'translate3d(' + (-p * dist).toFixed(1) + 'px,0,0)';
       bar.style.transform = 'scaleX(' + p.toFixed(4) + ')';
-      hint.textContent = p > 0.97 ? 'That’s the full range. Keep scrolling' : 'Keep scrolling to browse sideways';
+      hint.textContent = p > 0.97 ? 'That’s everything. Keep scrolling for more.' : 'Scroll to see more hair';
       prev.disabled = p < 0.01; next.disabled = p > 0.99;
     }
     var prev = $('#railPrev'), next = $('#railNext');
@@ -300,7 +300,7 @@
     $('#matchAdd').addEventListener('click', function (e) {
       if (!best) return;
       var p = best.p, mid = Math.floor((p.lengths.length - 1) / 2);
-      addToBag({ key: p.id + '-quiz', name: p.name + (p.sets ? ' × ' + p.sets : ''), variant: COL[p.colour].name + ' · ' + p.lengths[mid] + '"', price: best.price, img: p.img, pos: p.pos }, e.currentTarget);
+      addToBag({ key: p.id + '-quiz', name: p.name + (p.sets ? ' × ' + p.sets : ''), variant: COL[p.colour].name + ', ' + p.lengths[mid] + '"', price: best.price, img: p.img, pos: p.pos }, e.currentTarget);
     });
   })();
 
@@ -309,7 +309,7 @@
     var st = { unit: 'bundle', texture: 'body', colour: '1b', length: 22, density: 180 };
     var layoutFor = { bundle: 'weft', closure: 'closure', frontal: 'frontal', wig: 'dome' };
     var unitName = { bundle: 'Bundles', closure: '5x5 HD Closure', frontal: '13x4 HD Frontal', wig: 'Glueless Wig' };
-    var labHair = new Hair($('#labCanvas'), { layout: 'weft', texture: st.texture, colour: st.colour, length: st.length, fit: 33, top: 0.08, count: 230, always: true, ruler: true, dark: true, headW: 0.2, seed: 3 });
+    var labHair = new Hair($('#labCanvas'), { layout: 'weft', texture: st.texture, colour: st.colour, length: st.length, fit: 33, top: 0.08, count: 230, always: true, ruler: true, dark: true, glow: false, headW: 0.2, seed: 3 });
     var priceEl = $('#labPrice'), range = $('#labLength');
     function topFor(u) { return u === 'wig' ? 0.07 : u === 'frontal' ? 0.12 : u === 'closure' ? 0.1 : 0.08; }
     function render() {
@@ -317,10 +317,10 @@
       tween(from, q.total, 600, function (v) { priceEl.textContent = fmt(v); });
       priceEl._v = q.total;
       $('#labSplit').textContent = 'or 4 × ' + fmt(q.total / 4) + ' with Payflex';
-      $('#labNeed').textContent = st.unit === 'bundle' ? 'You’ll need ' + q.n + ' bundles for a full sew-in (' + q.n * 100 + ' g) · ' + fmt(q.per) + ' each'
+      $('#labNeed').textContent = st.unit === 'bundle' ? 'You’ll need ' + q.n + ' bundles for a full sew-in (' + q.n * 100 + ' g), ' + fmt(q.per) + ' each'
         : st.unit === 'wig' ? 'Glueless 13x4 HD wig at ' + st.density + '% density, ready to wear'
         : st.unit === 'closure' ? 'Pairs with 3 bundles for a closure sew-in' : 'Pairs with 3 or 4 bundles for an ear-to-ear install';
-      $('#labTag').textContent = TEX[st.texture].label + ' · ' + COL[st.colour].name + ' · ' + st.length + '"';
+      $('#labTag').textContent = TEX[st.texture].label + ', ' + COL[st.colour].name + ', ' + st.length + '"';
       $('#labColourName').textContent = COL[st.colour].name + ' (' + COL[st.colour].code + ')';
       $('#labLenOut').textContent = st.length;
       range.style.setProperty('--fill', ((st.length - 10) / 20 * 100) + '%');
@@ -334,7 +334,7 @@
     $('#labForm').addEventListener('submit', function (e) {
       e.preventDefault();
       var q = quote(st);
-      addToBag({ key: 'lab-' + [st.unit, st.texture, st.colour, st.length, st.density].join('-'), name: 'Custom ' + TEX[st.texture].label + ' ' + unitName[st.unit] + (st.unit === 'bundle' ? ' × ' + q.n : ''), variant: COL[st.colour].name + ' · ' + st.length + '"' + (st.unit === 'wig' ? ' · ' + st.density + '%' : ''), price: q.total, look: { layout: layoutFor[st.unit], texture: st.texture, colour: st.colour, length: st.length } }, $('#labAdd'));
+      addToBag({ key: 'lab-' + [st.unit, st.texture, st.colour, st.length, st.density].join('-'), name: 'Custom ' + TEX[st.texture].label + ' ' + unitName[st.unit] + (st.unit === 'bundle' ? ' × ' + q.n : ''), variant: COL[st.colour].name + ', ' + st.length + '"' + (st.unit === 'wig' ? ', ' + st.density + '%' : ''), price: q.total, look: { layout: layoutFor[st.unit], texture: st.texture, colour: st.colour, length: st.length } }, $('#labAdd'));
     });
     render();
   })();
@@ -453,7 +453,7 @@
     });
     function hl(s) { var out = esc(s); terms.forEach(function (t) { if (t.length > 1) out = out.replace(new RegExp('(' + t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'ig'), '<mark>$1</mark>'); }); return out; }
     sRes.innerHTML = hits.length ? hits.map(function (p, i) {
-      return '<li><button type="button" data-go="' + p.id + '" style="animation-delay:' + i * 35 + 'ms"><img class="dot" src="assets/img/' + p.img + '.jpg" alt="" style="object-position:' + p.pos + '"><span><b>' + hl(p.name) + '</b><small>' + hl(p.type + ' · ' + p.style + ' · ' + COL[p.colour].name) + '</small></span><span>' + fmt(p.prices[0]) + '+</span></button></li>';
+      return '<li><button type="button" data-go="' + p.id + '" style="animation-delay:' + i * 35 + 'ms"><img class="dot" src="assets/img/' + p.img + '.jpg" alt="" style="object-position:' + p.pos + '"><span><b>' + hl(p.name) + '</b><small>' + hl(p.style + ', ' + COL[p.colour].name) + '</small></span><span>' + fmt(p.prices[0]) + '+</span></button></li>';
     }).join('') : '<li class="search-none">No match for “' + esc(q) + '”. Try a texture like “deep wave” or a colour like “613”.</li>';
   }
   $('#searchBtn').addEventListener('click', openSearch);
@@ -470,7 +470,6 @@
   (function reveals() {
     if (!('IntersectionObserver' in window) || reduced) {
       $$('[data-count]').forEach(function (el) { el.textContent = el.dataset.count + (el.dataset.suffix || ''); });
-      $('.footer-mark').classList.add('is-in');
       return;
     }
     var io = new IntersectionObserver(function (entries) {
@@ -487,7 +486,5 @@
       });
     }, { threshold: 0.6 });
     $$('[data-count]').forEach(function (el) { cio.observe(el); });
-    var fm = $('.footer-mark');
-    new IntersectionObserver(function (e, o) { if (e[0].isIntersecting) { fm.classList.add('is-in'); o.disconnect(); } }, { threshold: 0.3 }).observe(fm);
   })();
 })();
