@@ -1,0 +1,351 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Zante Beauty logo concepts</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Jost:wght@300;400;500;600&family=Pinyon+Script&family=Playfair+Display:wght@900&family=Bodoni+Moda:opsz,wght@6..96,400..800&display=swap">
+<style>
+@page { size: 1600px 900px; margin: 0; }
+* { box-sizing: border-box; }
+body { margin: 0; font-family: Jost, sans-serif; color: #2B1433; background: #ccc; }
+.page { width: 1600px; height: 900px; background: #FFF8F5; position: relative; padding: 50px 64px 44px; page-break-after: always; overflow: hidden; display: flex; flex-direction: column; gap: 18px; }
+header { display: flex; align-items: baseline; gap: 16px; }
+.num { font-size: 15px; font-weight: 600; color: #D9558F; letter-spacing: .08em; }
+h2 { margin: 0; font-family: 'Libre Caslon Display', serif; font-weight: 400; font-size: 46px; }
+.best { margin: 0 0 0 auto; font-size: 15px; letter-spacing: .12em; text-transform: uppercase; color: #6E3290; font-weight: 500; }
+footer { position: absolute; left: 64px; bottom: 18px; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: #A58FA4; }
+.layout { flex: 1; min-height: 0; display: grid; gap: 14px; grid-template-columns: 1fr 1fr 1fr; grid-template-rows: 1fr 0.62fr 0.9fr;
+  grid-template-areas: "hero hero dark" "hero hero syms" "cards tags ig"; }
+.layout > div { border-radius: 4px; overflow: hidden; min-height: 0; }
+.hero { grid-area: hero; background: #FDEEF4; display: grid; place-items: center; }
+.hero svg { width: 74%; max-height: 300px; }
+.dark { grid-area: dark; background: #2B1433; display: grid; place-items: center; }
+.dark svg { width: 78%; max-height: 150px; }
+.syms { grid-area: syms; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.sym { display: grid; place-items: center; border-radius: 4px; }
+.sym svg { width: 62%; max-height: 80%; }
+.sym.light { background: #FDEEF4; } .sym.pink { background: #D9558F; } .sym.plum { background: #2B1433; }
+.mock { position: relative; background: #EFE4E8; }
+.cards { grid-area: cards; }
+.card { position: absolute; width: 250px; height: 145px; border-radius: 6px; display: grid; place-items: center; box-shadow: 0 1px 2px rgba(0,0,0,.12), 0 18px 30px -14px rgba(43,20,51,.45); }
+.card svg { width: 70%; max-height: 70%; }
+.card.back { background: #FDEEF4; left: 46%; top: 22%; transform: rotate(7deg); }
+.card.back svg { width: 34%; }
+.card.front { background: #2B1433; left: 8%; top: 28%; transform: rotate(-5deg); }
+.tags { grid-area: tags; display: flex; align-items: center; justify-content: center; gap: 26px; background: #E9DCE2; }
+.tag { width: 120px; height: 190px; border-radius: 10px 10px 16px 16px; background: #F6B8CF; display: grid; place-items: center; position: relative; box-shadow: 0 16px 26px -14px rgba(43,20,51,.5); transform: rotate(-4deg); }
+.tag::before { content: ""; position: absolute; top: 14px; left: 50%; width: 14px; height: 14px; margin-left: -7px; border-radius: 50%; background: #E9DCE2; box-shadow: inset 0 1px 2px rgba(0,0,0,.25); }
+.tag svg { width: 64%; }
+.tag.t2 { background: #2B1433; transform: rotate(5deg) translateY(10px); }
+.tag.t2::before { background: #E9DCE2; }
+.ig { grid-area: ig; display: grid; place-items: center; background: #F3E9ED; }
+.phone { width: 230px; height: 230px; background: #fff; border-radius: 14px; padding: 18px; display: grid; justify-items: center; align-content: start; gap: 8px; box-shadow: 0 18px 30px -16px rgba(43,20,51,.45); }
+.ava { width: 76px; height: 76px; border-radius: 50%; background: #D9558F; display: grid; place-items: center; box-shadow: 0 0 0 3px #fff, 0 0 0 5px #F6B8CF; }
+.ava svg { width: 64%; }
+.phone b { font-size: 15px; font-weight: 600; }
+.bars { display: flex; gap: 6px; } .bars i { display: block; width: 40px; height: 6px; border-radius: 3px; background: #EEE3E8; }
+.tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; width: 100%; margin-top: 4px; }
+.tiles i { display: block; height: 24px; background: #FDEEF4; } .tiles i:nth-child(2n) { background: #F6B8CF; } .tiles i:nth-child(3) { background: #2B1433; }
+.why { margin: 0; font-size: 18px; line-height: 1.5; color: #5F4868; max-width: 1150px; }
+.cover { background: #2B1433; color: #FFF8F5; justify-content: center; }
+.cover-in { display: grid; gap: 16px; max-width: 760px; }
+.kicker { margin: 0; font-size: 15px; letter-spacing: .2em; text-transform: uppercase; color: #F6B8CF; }
+.cover h1 { margin: 0; font-family: 'Libre Caslon Display', serif; font-weight: 400; font-size: 110px; line-height: 1; }
+.sub { margin: 0; font-size: 22px; line-height: 1.5; color: #E8CDE2; }
+.cover-logo { position: absolute; right: 64px; bottom: 90px; width: 420px; opacity: .95; }
+.cover footer { color: #9C7FA0; }
+.ovgrid { flex: 1; display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: 1fr 1fr; gap: 14px; }
+.ov { background: #FDEEF4; border-radius: 4px; display: grid; grid-template-rows: 1fr auto; padding: 16px 18px; }
+.ov-l { display: grid; place-items: center; min-height: 0; } .ov-l svg { width: 86%; max-height: 130px; }
+.ov p { margin: 0; font-size: 15px; font-weight: 500; } .ov span { color: #D9558F; margin-right: 8px; font-weight: 600; }
+.pal { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; height: 520px; }
+.sw { border-radius: 4px; display: flex; align-items: flex-end; padding: 18px; box-shadow: inset 0 0 0 1px rgba(43,20,51,.06); }
+.sw span { font-size: 16px; line-height: 1.5; } .sw b { font-weight: 500; letter-spacing: .06em; }
+</style></head><body><section class="page cover"><div class="cover-in">
+      <p class="kicker">Brand identity · Round 2</p><h1>Zante Beauty</h1><p class="sub">Seven logo directions, each shown as a full system: wordmark, symbol, colour and real-world use.</p></div>
+      <div class="cover-logo"><svg viewBox="0 0 520 150">
+  <g transform="translate(0 8) scale(1.05)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M31 32 H85 Q90 32 87 36 C76 50 58 52 56 60 C54 68 44 74 36 83 Q33 87 40 87 H90" stroke="#FFF8F5" stroke-width="3" transform="translate(0 -4.4)"/>
+    <path d="M31 32 H85 Q90 32 87 36 C76 50 58 52 56 60 C54 68 44 74 36 83 Q33 87 40 87 H90" stroke="#F6B8CF" stroke-width="3.6"/>
+    <path d="M31 32 H85 Q90 32 87 36 C76 50 58 52 56 60 C54 68 44 74 36 83 Q33 87 40 87 H90" stroke="#8E5AA8" stroke-width="2.6" transform="translate(0 4.4)"/></g>
+  <g transform="translate(150 22)"><path d="M0 20 H44 L0 80 H46 M72 80 L93.6 28.4 M122 80 L100.4 28.4 M81.6 59 C89 49 105 69 112.4 59 M148 80 V20 L192 80 V20 M218 20 H264 M241 20 V80 M330 20 H290 V80 H330 M290 50 H322" fill="none" stroke="#FFF8F5" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="97" cy="21" r="5.6" fill="#F6B8CF"/></g>
+  <text x="315" y="134" text-anchor="middle" font-family="Jost" font-size="14" font-weight="500" letter-spacing="10" fill="#FFF8F5" fill-opacity=".7">BEAUTY</text></svg></div><footer>Zante Beauty · Logo concepts · Round 2</footer></section><section class="page"><header><h2>The seven directions</h2><p class="best">Choose one or two to refine</p></header><div class="ovgrid"><div class="ov"><div class="ov-l"><svg viewBox="0 0 520 190">
+  <text x="40" y="112" font-family="Libre Caslon Display" font-size="132" letter-spacing="-2" fill="#2B1433">zante</text>
+  <path d="M60 128 C150 150 230 112 320 130 S440 140 478 120" fill="none" stroke="#D9558F" stroke-width="2.4" stroke-linecap="round"/>
+  <text x="262" y="176" text-anchor="middle" font-family="Jost" font-size="15" font-weight="500" letter-spacing="11" fill="#2B1433">BEAUTY</text></svg></div><p><span>01</span>Editorial</p></div><div class="ov"><div class="ov-l"><svg viewBox="0 0 560 200">
+  <g transform="translate(20 10)"><g transform="scale(0.95)">
+    <text x="78" y="170" font-family="Bodoni Moda" font-weight="500" font-size="150" style="font-variation-settings:'opsz' 30" fill="#D9558F">B</text>
+    <text x="18" y="146" font-family="Bodoni Moda" font-weight="500" font-size="170" style="font-variation-settings:'opsz' 30" fill="#2B1433">Z</text></g></g>
+  <line x1="208" y1="50" x2="208" y2="150" stroke="#2B1433" stroke-opacity=".25" stroke-width="1.2"/>
+  <text x="236" y="108" font-family="Bodoni Moda" font-weight="500" font-size="54" letter-spacing="14" style="font-variation-settings:'opsz' 28" fill="#2B1433">ZANTE</text>
+  <text x="239" y="142" font-family="Jost" font-size="14" font-weight="500" letter-spacing="12.5" fill="#D9558F">BEAUTY</text></svg></div><p><span>02</span>Maison Monogram</p></div><div class="ov"><div class="ov-l"><svg viewBox="0 0 360 170">
+  <path transform="translate(34 50) scale(1.18)" d="M4 6 H46 C30 18 40 26 24 32 C10 38 18 46 4 54 H48" fill="none" stroke="#2B1433" stroke-width="10" stroke-linecap="square" stroke-linejoin="miter"/>
+  <text x="98" y="114" font-family="Jost" font-weight="500" font-size="96" letter-spacing="-1" fill="#2B1433">ante</text>
+  <circle cx="295" cy="108" r="7.5" fill="#D9558F"/>
+  <text x="38" y="152" font-family="Jost" font-size="15" font-weight="500" letter-spacing="9.5" fill="#2B1433" fill-opacity=".75">BEAUTY</text></svg></div><p><span>03</span>Modern Wave</p></div><div class="ov"><div class="ov-l"><svg viewBox="-40 -40 415.7952 170"><g><path d="M0 0 H47.36 L0 64 H47.36 M74.24 64 L100.288 0 L126.336 64 M153.216 64 V0 L195.84 64 V0 M222.72000000000003 0 H270.08000000000004 M246.40000000000003 0 V64 M335.7952 0 H296.96000000000004 V64 H335.7952 M296.96000000000004 32.0 H330.112" fill="none" stroke="#2B1433" stroke-width="4.2" stroke-linejoin="miter" stroke-linecap="butt"/></g>
+  <text x="167.8976" y="112" text-anchor="middle" font-family="Jost" font-size="14" font-weight="500" letter-spacing="14" fill="#D9558F">BEAUTY</text></svg></div><p><span>04</span>Quiet Luxury</p></div><div class="ov"><div class="ov-l"><svg viewBox="0 0 520 150">
+  <g transform="translate(0 8) scale(1.05)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M31 32 H85 Q90 32 87 36 C76 50 58 52 56 60 C54 68 44 74 36 83 Q33 87 40 87 H90" stroke="#2B1433" stroke-width="3" transform="translate(0 -4.4)"/>
+    <path d="M31 32 H85 Q90 32 87 36 C76 50 58 52 56 60 C54 68 44 74 36 83 Q33 87 40 87 H90" stroke="#D9558F" stroke-width="3.6"/>
+    <path d="M31 32 H85 Q90 32 87 36 C76 50 58 52 56 60 C54 68 44 74 36 83 Q33 87 40 87 H90" stroke="#F6B8CF" stroke-width="2.6" transform="translate(0 4.4)"/></g>
+  <g transform="translate(150 22)"><path d="M0 20 H44 L0 80 H46 M72 80 L93.6 28.4 M122 80 L100.4 28.4 M81.6 59 C89 49 105 69 112.4 59 M148 80 V20 L192 80 V20 M218 20 H264 M241 20 V80 M330 20 H290 V80 H330 M290 50 H322" fill="none" stroke="#2B1433" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="97" cy="21" r="5.6" fill="#D9558F"/></g>
+  <text x="315" y="134" text-anchor="middle" font-family="Jost" font-size="14" font-weight="500" letter-spacing="10" fill="#2B1433" fill-opacity=".7">BEAUTY</text></svg></div><p><span>05</span>Silk Strand</p></div><div class="ov"><div class="ov-l"><svg viewBox="0 0 520 210">
+  <text x="258" y="136" text-anchor="middle" font-family="Pinyon Script" font-size="112" fill="#2B1433">Zante</text>
+  <text x="262" y="190" text-anchor="middle" font-family="Jost" font-size="14" font-weight="500" letter-spacing="13" fill="#D9558F">BEAUTY</text></svg></div><p><span>06</span>Signature</p></div><div class="ov"><div class="ov-l"><svg viewBox="0 0 560 210"><defs><mask id="cutlight" maskUnits="userSpaceOnUse" x="0" y="0" width="560" height="210">
+    <rect width="560" height="210" fill="#fff"/>
+    <path d="M-10 104 C60 74 120 130 200 100 S330 74 400 104 S500 128 570 92" fill="none" stroke="#000" stroke-width="16"/></mask></defs>
+  <text x="280" y="138" text-anchor="middle" font-family="Playfair Display" font-weight="900" font-size="124" letter-spacing="0" fill="#2B1433" mask="url(#cutlight)">ZANTE</text>
+  <path d="M-10 104 C60 74 120 130 200 100 S330 74 400 104 S500 128 570 92" fill="none" stroke="#D9558F" stroke-width="2.6"/>
+  <text x="283" y="188" text-anchor="middle" font-family="Jost" font-size="15" font-weight="500" letter-spacing="16" fill="#2B1433">BEAUTY</text></svg></div><p><span>07</span>Statement</p></div></div><footer>Zante Beauty · Logo concepts · Round 2</footer></section><section class="page">
+  <header><span class="num">01</span><h2>Editorial</h2><p class="best">Premium, timeless, works on everything</p></header>
+  <div class="layout">
+    <div class="hero"><svg viewBox="0 0 520 190">
+  <text x="40" y="112" font-family="Libre Caslon Display" font-size="132" letter-spacing="-2" fill="#2B1433">zante</text>
+  <path d="M60 128 C150 150 230 112 320 130 S440 140 478 120" fill="none" stroke="#D9558F" stroke-width="2.4" stroke-linecap="round"/>
+  <text x="262" y="176" text-anchor="middle" font-family="Jost" font-size="15" font-weight="500" letter-spacing="11" fill="#2B1433">BEAUTY</text></svg></div>
+    <div class="dark"><svg viewBox="0 0 520 190">
+  <text x="40" y="112" font-family="Libre Caslon Display" font-size="132" letter-spacing="-2" fill="#FFF8F5">zante</text>
+  <path d="M60 128 C150 150 230 112 320 130 S440 140 478 120" fill="none" stroke="#F6B8CF" stroke-width="2.4" stroke-linecap="round"/>
+  <text x="262" y="176" text-anchor="middle" font-family="Jost" font-size="15" font-weight="500" letter-spacing="11" fill="#FFF8F5">BEAUTY</text></svg></div>
+    <div class="syms"><div class="sym light"><svg viewBox="0 0 120 120"><text x="58" y="82" text-anchor="middle" font-family="Libre Caslon Display" font-size="104" fill="#2B1433">z</text>
+  <path d="M26 96 C50 106 74 86 98 94" fill="none" stroke="#D9558F" stroke-width="3" stroke-linecap="round"/></svg></div><div class="sym pink"><svg viewBox="0 0 120 120"><text x="58" y="82" text-anchor="middle" font-family="Libre Caslon Display" font-size="104" fill="#2B1433">z</text>
+  <path d="M26 96 C50 106 74 86 98 94" fill="none" stroke="#FFF8F5" stroke-width="3" stroke-linecap="round"/></svg></div><div class="sym plum"><svg viewBox="0 0 120 120"><text x="58" y="82" text-anchor="middle" font-family="Libre Caslon Display" font-size="104" fill="#FFF8F5">z</text>
+  <path d="M26 96 C50 106 74 86 98 94" fill="none" stroke="#F6B8CF" stroke-width="3" stroke-linecap="round"/></svg></div></div>
+    <div class="mock cards"><div class="card back"><svg viewBox="0 0 120 120"><text x="58" y="82" text-anchor="middle" font-family="Libre Caslon Display" font-size="104" fill="#2B1433">z</text>
+  <path d="M26 96 C50 106 74 86 98 94" fill="none" stroke="#D9558F" stroke-width="3" stroke-linecap="round"/></svg></div><div class="card front"><svg viewBox="0 0 520 190">
+  <text x="40" y="112" font-family="Libre Caslon Display" font-size="132" letter-spacing="-2" fill="#FFF8F5">zante</text>
+  <path d="M60 128 C150 150 230 112 320 130 S440 140 478 120" fill="none" stroke="#F6B8CF" stroke-width="2.4" stroke-linecap="round"/>
+  <text x="262" y="176" text-anchor="middle" font-family="Jost" font-size="15" font-weight="500" letter-spacing="11" fill="#FFF8F5">BEAUTY</text></svg></div></div>
+    <div class="mock tags"><div class="tag"><svg viewBox="0 0 120 120"><text x="58" y="82" text-anchor="middle" font-family="Libre Caslon Display" font-size="104" fill="#2B1433">z</text>
+  <path d="M26 96 C50 106 74 86 98 94" fill="none" stroke="#D9558F" stroke-width="3" stroke-linecap="round"/></svg></div><div class="tag t2"><svg viewBox="0 0 120 120"><text x="58" y="82" text-anchor="middle" font-family="Libre Caslon Display" font-size="104" fill="#FFF8F5">z</text>
+  <path d="M26 96 C50 106 74 86 98 94" fill="none" stroke="#F6B8CF" stroke-width="3" stroke-linecap="round"/></svg></div></div>
+    <div class="mock ig"><div class="phone"><div class="ava"><svg viewBox="0 0 120 120"><text x="58" y="82" text-anchor="middle" font-family="Libre Caslon Display" font-size="104" fill="#2B1433">z</text>
+  <path d="M26 96 C50 106 74 86 98 94" fill="none" stroke="#FFF8F5" stroke-width="3" stroke-linecap="round"/></svg></div><b>Zante Beauty</b><div class="bars"><i></i><i></i><i></i></div>
+      <div class="tiles"><i></i><i></i><i></i><i></i><i></i><i></i></div></div></div>
+  </div>
+  <p class="why">A lowercase serif wordmark with a single hand-drawn hair wave under the word. Calm and confident, the way premium beauty brands present themselves.</p>
+  <footer>Zante Beauty · Logo concepts · Round 2</footer>
+</section><section class="page">
+  <header><span class="num">02</span><h2>Maison Monogram</h2><p class="best">Luxury and packaging</p></header>
+  <div class="layout">
+    <div class="hero"><svg viewBox="0 0 560 200">
+  <g transform="translate(20 10)"><g transform="scale(0.95)">
+    <text x="78" y="170" font-family="Bodoni Moda" font-weight="500" font-size="150" style="font-variation-settings:'opsz' 30" fill="#D9558F">B</text>
+    <text x="18" y="146" font-family="Bodoni Moda" font-weight="500" font-size="170" style="font-variation-settings:'opsz' 30" fill="#2B1433">Z</text></g></g>
+  <line x1="208" y1="50" x2="208" y2="150" stroke="#2B1433" stroke-opacity=".25" stroke-width="1.2"/>
+  <text x="236" y="108" font-family="Bodoni Moda" font-weight="500" font-size="54" letter-spacing="14" style="font-variation-settings:'opsz' 28" fill="#2B1433">ZANTE</text>
+  <text x="239" y="142" font-family="Jost" font-size="14" font-weight="500" letter-spacing="12.5" fill="#D9558F">BEAUTY</text></svg></div>
+    <div class="dark"><svg viewBox="0 0 560 200">
+  <g transform="translate(20 10)"><g transform="scale(0.95)">
+    <text x="78" y="170" font-family="Bodoni Moda" font-weight="500" font-size="150" style="font-variation-settings:'opsz' 30" fill="#F6B8CF">B</text>
+    <text x="18" y="146" font-family="Bodoni Moda" font-weight="500" font-size="170" style="font-variation-settings:'opsz' 30" fill="#FFF8F5">Z</text></g></g>
+  <line x1="208" y1="50" x2="208" y2="150" stroke="#FFF8F5" stroke-opacity=".25" stroke-width="1.2"/>
+  <text x="236" y="108" font-family="Bodoni Moda" font-weight="500" font-size="54" letter-spacing="14" style="font-variation-settings:'opsz' 28" fill="#FFF8F5">ZANTE</text>
+  <text x="239" y="142" font-family="Jost" font-size="14" font-weight="500" letter-spacing="12.5" fill="#F6B8CF">BEAUTY</text></svg></div>
+    <div class="syms"><div class="sym light"><svg viewBox="0 0 200 200"><g transform="translate(14 6)"><g transform="scale(0.92)">
+    <text x="78" y="170" font-family="Bodoni Moda" font-weight="500" font-size="150" style="font-variation-settings:'opsz' 30" fill="#D9558F">B</text>
+    <text x="18" y="146" font-family="Bodoni Moda" font-weight="500" font-size="170" style="font-variation-settings:'opsz' 30" fill="#2B1433">Z</text></g></g></svg></div><div class="sym pink"><svg viewBox="0 0 200 200"><g transform="translate(14 6)"><g transform="scale(0.92)">
+    <text x="78" y="170" font-family="Bodoni Moda" font-weight="500" font-size="150" style="font-variation-settings:'opsz' 30" fill="#FFF8F5">B</text>
+    <text x="18" y="146" font-family="Bodoni Moda" font-weight="500" font-size="170" style="font-variation-settings:'opsz' 30" fill="#2B1433">Z</text></g></g></svg></div><div class="sym plum"><svg viewBox="0 0 200 200"><g transform="translate(14 6)"><g transform="scale(0.92)">
+    <text x="78" y="170" font-family="Bodoni Moda" font-weight="500" font-size="150" style="font-variation-settings:'opsz' 30" fill="#F6B8CF">B</text>
+    <text x="18" y="146" font-family="Bodoni Moda" font-weight="500" font-size="170" style="font-variation-settings:'opsz' 30" fill="#FFF8F5">Z</text></g></g></svg></div></div>
+    <div class="mock cards"><div class="card back"><svg viewBox="0 0 200 200"><g transform="translate(14 6)"><g transform="scale(0.92)">
+    <text x="78" y="170" font-family="Bodoni Moda" font-weight="500" font-size="150" style="font-variation-settings:'opsz' 30" fill="#D9558F">B</text>
+    <text x="18" y="146" font-family="Bodoni Moda" font-weight="500" font-size="170" style="font-variation-settings:'opsz' 30" fill="#2B1433">Z</text></g></g></svg></div><div class="card front"><svg viewBox="0 0 560 200">
+  <g transform="translate(20 10)"><g transform="scale(0.95)">
+    <text x="78" y="170" font-family="Bodoni Moda" font-weight="500" font-size="150" style="font-variation-settings:'opsz' 30" fill="#F6B8CF">B</text>
+    <text x="18" y="146" font-family="Bodoni Moda" font-weight="500" font-size="170" style="font-variation-settings:'opsz' 30" fill="#FFF8F5">Z</text></g></g>
+  <line x1="208" y1="50" x2="208" y2="150" stroke="#FFF8F5" stroke-opacity=".25" stroke-width="1.2"/>
+  <text x="236" y="108" font-family="Bodoni Moda" font-weight="500" font-size="54" letter-spacing="14" style="font-variation-settings:'opsz' 28" fill="#FFF8F5">ZANTE</text>
+  <text x="239" y="142" font-family="Jost" font-size="14" font-weight="500" letter-spacing="12.5" fill="#F6B8CF">BEAUTY</text></svg></div></div>
+    <div class="mock tags"><div class="tag"><svg viewBox="0 0 200 200"><g transform="translate(14 6)"><g transform="scale(0.92)">
+    <text x="78" y="170" font-family="Bodoni Moda" font-weight="500" font-size="150" style="font-variation-settings:'opsz' 30" fill="#D9558F">B</text>
+    <text x="18" y="146" font-family="Bodoni Moda" font-weight="500" font-size="170" style="font-variation-settings:'opsz' 30" fill="#2B1433">Z</text></g></g></svg></div><div class="tag t2"><svg viewBox="0 0 200 200"><g transform="translate(14 6)"><g transform="scale(0.92)">
+    <text x="78" y="170" font-family="Bodoni Moda" font-weight="500" font-size="150" style="font-variation-settings:'opsz' 30" fill="#F6B8CF">B</text>
+    <text x="18" y="146" font-family="Bodoni Moda" font-weight="500" font-size="170" style="font-variation-settings:'opsz' 30" fill="#FFF8F5">Z</text></g></g></svg></div></div>
+    <div class="mock ig"><div class="phone"><div class="ava"><svg viewBox="0 0 200 200"><g transform="translate(14 6)"><g transform="scale(0.92)">
+    <text x="78" y="170" font-family="Bodoni Moda" font-weight="500" font-size="150" style="font-variation-settings:'opsz' 30" fill="#FFF8F5">B</text>
+    <text x="18" y="146" font-family="Bodoni Moda" font-weight="500" font-size="170" style="font-variation-settings:'opsz' 30" fill="#2B1433">Z</text></g></g></svg></div><b>Zante Beauty</b><div class="bars"><i></i><i></i><i></i></div>
+      <div class="tiles"><i></i><i></i><i></i><i></i><i></i><i></i></div></div></div>
+  </div>
+  <p class="why">A Z and B monogram in a high-contrast serif, set like a fashion-house crest beside a spaced wordmark. Made for embossing, foiling and packaging.</p>
+  <footer>Zante Beauty · Logo concepts · Round 2</footer>
+</section><section class="page">
+  <header><span class="num">03</span><h2>Modern Wave</h2><p class="best">Social media and a young audience</p></header>
+  <div class="layout">
+    <div class="hero"><svg viewBox="0 0 360 170">
+  <path transform="translate(34 50) scale(1.18)" d="M4 6 H46 C30 18 40 26 24 32 C10 38 18 46 4 54 H48" fill="none" stroke="#2B1433" stroke-width="10" stroke-linecap="square" stroke-linejoin="miter"/>
+  <text x="98" y="114" font-family="Jost" font-weight="500" font-size="96" letter-spacing="-1" fill="#2B1433">ante</text>
+  <circle cx="295" cy="108" r="7.5" fill="#D9558F"/>
+  <text x="38" y="152" font-family="Jost" font-size="15" font-weight="500" letter-spacing="9.5" fill="#2B1433" fill-opacity=".75">BEAUTY</text></svg></div>
+    <div class="dark"><svg viewBox="0 0 360 170">
+  <path transform="translate(34 50) scale(1.18)" d="M4 6 H46 C30 18 40 26 24 32 C10 38 18 46 4 54 H48" fill="none" stroke="#FFF8F5" stroke-width="10" stroke-linecap="square" stroke-linejoin="miter"/>
+  <text x="98" y="114" font-family="Jost" font-weight="500" font-size="96" letter-spacing="-1" fill="#FFF8F5">ante</text>
+  <circle cx="295" cy="108" r="7.5" fill="#F6B8CF"/>
+  <text x="38" y="152" font-family="Jost" font-size="15" font-weight="500" letter-spacing="9.5" fill="#FFF8F5" fill-opacity=".75">BEAUTY</text></svg></div>
+    <div class="syms"><div class="sym light"><svg viewBox="0 0 120 120"><path transform="translate(28 28) scale(1.15)" d="M4 6 H46 C30 18 40 26 24 32 C10 38 18 46 4 54 H48" fill="none" stroke="#2B1433" stroke-width="10" stroke-linecap="square" stroke-linejoin="miter"/><circle cx="94" cy="88" r="7" fill="#D9558F"/></svg></div><div class="sym pink"><svg viewBox="0 0 120 120"><path transform="translate(28 28) scale(1.15)" d="M4 6 H46 C30 18 40 26 24 32 C10 38 18 46 4 54 H48" fill="none" stroke="#2B1433" stroke-width="10" stroke-linecap="square" stroke-linejoin="miter"/><circle cx="94" cy="88" r="7" fill="#FFF8F5"/></svg></div><div class="sym plum"><svg viewBox="0 0 120 120"><path transform="translate(28 28) scale(1.15)" d="M4 6 H46 C30 18 40 26 24 32 C10 38 18 46 4 54 H48" fill="none" stroke="#FFF8F5" stroke-width="10" stroke-linecap="square" stroke-linejoin="miter"/><circle cx="94" cy="88" r="7" fill="#F6B8CF"/></svg></div></div>
+    <div class="mock cards"><div class="card back"><svg viewBox="0 0 120 120"><path transform="translate(28 28) scale(1.15)" d="M4 6 H46 C30 18 40 26 24 32 C10 38 18 46 4 54 H48" fill="none" stroke="#2B1433" stroke-width="10" stroke-linecap="square" stroke-linejoin="miter"/><circle cx="94" cy="88" r="7" fill="#D9558F"/></svg></div><div class="card front"><svg viewBox="0 0 360 170">
+  <path transform="translate(34 50) scale(1.18)" d="M4 6 H46 C30 18 40 26 24 32 C10 38 18 46 4 54 H48" fill="none" stroke="#FFF8F5" stroke-width="10" stroke-linecap="square" stroke-linejoin="miter"/>
+  <text x="98" y="114" font-family="Jost" font-weight="500" font-size="96" letter-spacing="-1" fill="#FFF8F5">ante</text>
+  <circle cx="295" cy="108" r="7.5" fill="#F6B8CF"/>
+  <text x="38" y="152" font-family="Jost" font-size="15" font-weight="500" letter-spacing="9.5" fill="#FFF8F5" fill-opacity=".75">BEAUTY</text></svg></div></div>
+    <div class="mock tags"><div class="tag"><svg viewBox="0 0 120 120"><path transform="translate(28 28) scale(1.15)" d="M4 6 H46 C30 18 40 26 24 32 C10 38 18 46 4 54 H48" fill="none" stroke="#2B1433" stroke-width="10" stroke-linecap="square" stroke-linejoin="miter"/><circle cx="94" cy="88" r="7" fill="#D9558F"/></svg></div><div class="tag t2"><svg viewBox="0 0 120 120"><path transform="translate(28 28) scale(1.15)" d="M4 6 H46 C30 18 40 26 24 32 C10 38 18 46 4 54 H48" fill="none" stroke="#FFF8F5" stroke-width="10" stroke-linecap="square" stroke-linejoin="miter"/><circle cx="94" cy="88" r="7" fill="#F6B8CF"/></svg></div></div>
+    <div class="mock ig"><div class="phone"><div class="ava"><svg viewBox="0 0 120 120"><path transform="translate(28 28) scale(1.15)" d="M4 6 H46 C30 18 40 26 24 32 C10 38 18 46 4 54 H48" fill="none" stroke="#2B1433" stroke-width="10" stroke-linecap="square" stroke-linejoin="miter"/><circle cx="94" cy="88" r="7" fill="#FFF8F5"/></svg></div><b>Zante Beauty</b><div class="bars"><i></i><i></i><i></i></div>
+      <div class="tiles"><i></i><i></i><i></i><i></i><i></i><i></i></div></div></div>
+  </div>
+  <p class="why">A clean lowercase sans where the z is redrawn with a soft hair wave in its diagonal, finished with a pink full stop. Friendly, current and very readable on a phone.</p>
+  <footer>Zante Beauty · Logo concepts · Round 2</footer>
+</section><section class="page">
+  <header><span class="num">04</span><h2>Quiet Luxury</h2><p class="best">Upmarket positioning</p></header>
+  <div class="layout">
+    <div class="hero"><svg viewBox="-40 -40 415.7952 170"><g><path d="M0 0 H47.36 L0 64 H47.36 M74.24 64 L100.288 0 L126.336 64 M153.216 64 V0 L195.84 64 V0 M222.72000000000003 0 H270.08000000000004 M246.40000000000003 0 V64 M335.7952 0 H296.96000000000004 V64 H335.7952 M296.96000000000004 32.0 H330.112" fill="none" stroke="#2B1433" stroke-width="4.2" stroke-linejoin="miter" stroke-linecap="butt"/></g>
+  <text x="167.8976" y="112" text-anchor="middle" font-family="Jost" font-size="14" font-weight="500" letter-spacing="14" fill="#D9558F">BEAUTY</text></svg></div>
+    <div class="dark"><svg viewBox="-40 -40 415.7952 170"><g><path d="M0 0 H47.36 L0 64 H47.36 M74.24 64 L100.288 0 L126.336 64 M153.216 64 V0 L195.84 64 V0 M222.72000000000003 0 H270.08000000000004 M246.40000000000003 0 V64 M335.7952 0 H296.96000000000004 V64 H335.7952 M296.96000000000004 32.0 H330.112" fill="none" stroke="#FFF8F5" stroke-width="4.2" stroke-linejoin="miter" stroke-linecap="butt"/></g>
+  <text x="167.8976" y="112" text-anchor="middle" font-family="Jost" font-size="14" font-weight="500" letter-spacing="14" fill="#F6B8CF">BEAUTY</text></svg></div>
+    <div class="syms"><div class="sym light"><svg viewBox="0 0 120 120"><path d="M14 20 H66 L14 90 H66" fill="none" stroke="#2B1433" stroke-width="4.5" stroke-linejoin="miter"/>
+  <path d="M60 90 L79 20 L98 90" fill="none" stroke="#D9558F" stroke-width="4.5" stroke-linejoin="miter"/></svg></div><div class="sym pink"><svg viewBox="0 0 120 120"><path d="M14 20 H66 L14 90 H66" fill="none" stroke="#2B1433" stroke-width="4.5" stroke-linejoin="miter"/>
+  <path d="M60 90 L79 20 L98 90" fill="none" stroke="#FFF8F5" stroke-width="4.5" stroke-linejoin="miter"/></svg></div><div class="sym plum"><svg viewBox="0 0 120 120"><path d="M14 20 H66 L14 90 H66" fill="none" stroke="#FFF8F5" stroke-width="4.5" stroke-linejoin="miter"/>
+  <path d="M60 90 L79 20 L98 90" fill="none" stroke="#F6B8CF" stroke-width="4.5" stroke-linejoin="miter"/></svg></div></div>
+    <div class="mock cards"><div class="card back"><svg viewBox="0 0 120 120"><path d="M14 20 H66 L14 90 H66" fill="none" stroke="#2B1433" stroke-width="4.5" stroke-linejoin="miter"/>
+  <path d="M60 90 L79 20 L98 90" fill="none" stroke="#D9558F" stroke-width="4.5" stroke-linejoin="miter"/></svg></div><div class="card front"><svg viewBox="-40 -40 415.7952 170"><g><path d="M0 0 H47.36 L0 64 H47.36 M74.24 64 L100.288 0 L126.336 64 M153.216 64 V0 L195.84 64 V0 M222.72000000000003 0 H270.08000000000004 M246.40000000000003 0 V64 M335.7952 0 H296.96000000000004 V64 H335.7952 M296.96000000000004 32.0 H330.112" fill="none" stroke="#FFF8F5" stroke-width="4.2" stroke-linejoin="miter" stroke-linecap="butt"/></g>
+  <text x="167.8976" y="112" text-anchor="middle" font-family="Jost" font-size="14" font-weight="500" letter-spacing="14" fill="#F6B8CF">BEAUTY</text></svg></div></div>
+    <div class="mock tags"><div class="tag"><svg viewBox="0 0 120 120"><path d="M14 20 H66 L14 90 H66" fill="none" stroke="#2B1433" stroke-width="4.5" stroke-linejoin="miter"/>
+  <path d="M60 90 L79 20 L98 90" fill="none" stroke="#D9558F" stroke-width="4.5" stroke-linejoin="miter"/></svg></div><div class="tag t2"><svg viewBox="0 0 120 120"><path d="M14 20 H66 L14 90 H66" fill="none" stroke="#FFF8F5" stroke-width="4.5" stroke-linejoin="miter"/>
+  <path d="M60 90 L79 20 L98 90" fill="none" stroke="#F6B8CF" stroke-width="4.5" stroke-linejoin="miter"/></svg></div></div>
+    <div class="mock ig"><div class="phone"><div class="ava"><svg viewBox="0 0 120 120"><path d="M14 20 H66 L14 90 H66" fill="none" stroke="#2B1433" stroke-width="4.5" stroke-linejoin="miter"/>
+  <path d="M60 90 L79 20 L98 90" fill="none" stroke="#FFF8F5" stroke-width="4.5" stroke-linejoin="miter"/></svg></div><b>Zante Beauty</b><div class="bars"><i></i><i></i><i></i></div>
+      <div class="tiles"><i></i><i></i><i></i><i></i><i></i><i></i></div></div></div>
+  </div>
+  <p class="why">Wide geometric capitals with an open A (no crossbar), the way fashion houses draw their names. Minimal and expensive-looking.</p>
+  <footer>Zante Beauty · Logo concepts · Round 2</footer>
+</section><section class="page">
+  <header><span class="num">05</span><h2>Silk Strand</h2><p class="best">Ownable, matches the website</p></header>
+  <div class="layout">
+    <div class="hero"><svg viewBox="0 0 520 150">
+  <g transform="translate(0 8) scale(1.05)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M31 32 H85 Q90 32 87 36 C76 50 58 52 56 60 C54 68 44 74 36 83 Q33 87 40 87 H90" stroke="#2B1433" stroke-width="3" transform="translate(0 -4.4)"/>
+    <path d="M31 32 H85 Q90 32 87 36 C76 50 58 52 56 60 C54 68 44 74 36 83 Q33 87 40 87 H90" stroke="#D9558F" stroke-width="3.6"/>
+    <path d="M31 32 H85 Q90 32 87 36 C76 50 58 52 56 60 C54 68 44 74 36 83 Q33 87 40 87 H90" stroke="#F6B8CF" stroke-width="2.6" transform="translate(0 4.4)"/></g>
+  <g transform="translate(150 22)"><path d="M0 20 H44 L0 80 H46 M72 80 L93.6 28.4 M122 80 L100.4 28.4 M81.6 59 C89 49 105 69 112.4 59 M148 80 V20 L192 80 V20 M218 20 H264 M241 20 V80 M330 20 H290 V80 H330 M290 50 H322" fill="none" stroke="#2B1433" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="97" cy="21" r="5.6" fill="#D9558F"/></g>
+  <text x="315" y="134" text-anchor="middle" font-family="Jost" font-size="14" font-weight="500" letter-spacing="10" fill="#2B1433" fill-opacity=".7">BEAUTY</text></svg></div>
+    <div class="dark"><svg viewBox="0 0 520 150">
+  <g transform="translate(0 8) scale(1.05)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M31 32 H85 Q90 32 87 36 C76 50 58 52 56 60 C54 68 44 74 36 83 Q33 87 40 87 H90" stroke="#FFF8F5" stroke-width="3" transform="translate(0 -4.4)"/>
+    <path d="M31 32 H85 Q90 32 87 36 C76 50 58 52 56 60 C54 68 44 74 36 83 Q33 87 40 87 H90" stroke="#F6B8CF" stroke-width="3.6"/>
+    <path d="M31 32 H85 Q90 32 87 36 C76 50 58 52 56 60 C54 68 44 74 36 83 Q33 87 40 87 H90" stroke="#8E5AA8" stroke-width="2.6" transform="translate(0 4.4)"/></g>
+  <g transform="translate(150 22)"><path d="M0 20 H44 L0 80 H46 M72 80 L93.6 28.4 M122 80 L100.4 28.4 M81.6 59 C89 49 105 69 112.4 59 M148 80 V20 L192 80 V20 M218 20 H264 M241 20 V80 M330 20 H290 V80 H330 M290 50 H322" fill="none" stroke="#FFF8F5" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="97" cy="21" r="5.6" fill="#F6B8CF"/></g>
+  <text x="315" y="134" text-anchor="middle" font-family="Jost" font-size="14" font-weight="500" letter-spacing="10" fill="#FFF8F5" fill-opacity=".7">BEAUTY</text></svg></div>
+    <div class="syms"><div class="sym light"><svg viewBox="16 16 84 84"><g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M31 32 H85 Q90 32 87 36 C76 50 58 52 56 60 C54 68 44 74 36 83 Q33 87 40 87 H90" stroke="#2B1433" stroke-width="3.4" transform="translate(0 -4.6)"/>
+    <path d="M31 32 H85 Q90 32 87 36 C76 50 58 52 56 60 C54 68 44 74 36 83 Q33 87 40 87 H90" stroke="#D9558F" stroke-width="4"/>
+    <path d="M31 32 H85 Q90 32 87 36 C76 50 58 52 56 60 C54 68 44 74 36 83 Q33 87 40 87 H90" stroke="#F6B8CF" stroke-width="3" transform="translate(0 4.6)"/></g>
+    <circle cx="23" cy="28" r="6" fill="#D9558F"/></svg></div><div class="sym pink"><svg viewBox="16 16 84 84"><g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M31 32 H85 Q90 32 87 36 C76 50 58 52 56 60 C54 68 44 74 36 83 Q33 87 40 87 H90" stroke="#2B1433" stroke-width="3.4" transform="translate(0 -4.6)"/>
+    <path d="M31 32 H85 Q90 32 87 36 C76 50 58 52 56 60 C54 68 44 74 36 83 Q33 87 40 87 H90" stroke="#FFF8F5" stroke-width="4"/>
+    <path d="M31 32 H85 Q90 32 87 36 C76 50 58 52 56 60 C54 68 44 74 36 83 Q33 87 40 87 H90" stroke="#FFF8F5" stroke-width="3" transform="translate(0 4.6)"/></g>
+    <circle cx="23" cy="28" r="6" fill="#FFF8F5"/></svg></div><div class="sym plum"><svg viewBox="16 16 84 84"><g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M31 32 H85 Q90 32 87 36 C76 50 58 52 56 60 C54 68 44 74 36 83 Q33 87 40 87 H90" stroke="#FFF8F5" stroke-width="3.4" transform="translate(0 -4.6)"/>
+    <path d="M31 32 H85 Q90 32 87 36 C76 50 58 52 56 60 C54 68 44 74 36 83 Q33 87 40 87 H90" stroke="#F6B8CF" stroke-width="4"/>
+    <path d="M31 32 H85 Q90 32 87 36 C76 50 58 52 56 60 C54 68 44 74 36 83 Q33 87 40 87 H90" stroke="#8E5AA8" stroke-width="3" transform="translate(0 4.6)"/></g>
+    <circle cx="23" cy="28" r="6" fill="#F6B8CF"/></svg></div></div>
+    <div class="mock cards"><div class="card back"><svg viewBox="16 16 84 84"><g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M31 32 H85 Q90 32 87 36 C76 50 58 52 56 60 C54 68 44 74 36 83 Q33 87 40 87 H90" stroke="#2B1433" stroke-width="3.4" transform="translate(0 -4.6)"/>
+    <path d="M31 32 H85 Q90 32 87 36 C76 50 58 52 56 60 C54 68 44 74 36 83 Q33 87 40 87 H90" stroke="#D9558F" stroke-width="4"/>
+    <path d="M31 32 H85 Q90 32 87 36 C76 50 58 52 56 60 C54 68 44 74 36 83 Q33 87 40 87 H90" stroke="#F6B8CF" stroke-width="3" transform="translate(0 4.6)"/></g>
+    <circle cx="23" cy="28" r="6" fill="#D9558F"/></svg></div><div class="card front"><svg viewBox="0 0 520 150">
+  <g transform="translate(0 8) scale(1.05)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M31 32 H85 Q90 32 87 36 C76 50 58 52 56 60 C54 68 44 74 36 83 Q33 87 40 87 H90" stroke="#FFF8F5" stroke-width="3" transform="translate(0 -4.4)"/>
+    <path d="M31 32 H85 Q90 32 87 36 C76 50 58 52 56 60 C54 68 44 74 36 83 Q33 87 40 87 H90" stroke="#F6B8CF" stroke-width="3.6"/>
+    <path d="M31 32 H85 Q90 32 87 36 C76 50 58 52 56 60 C54 68 44 74 36 83 Q33 87 40 87 H90" stroke="#8E5AA8" stroke-width="2.6" transform="translate(0 4.4)"/></g>
+  <g transform="translate(150 22)"><path d="M0 20 H44 L0 80 H46 M72 80 L93.6 28.4 M122 80 L100.4 28.4 M81.6 59 C89 49 105 69 112.4 59 M148 80 V20 L192 80 V20 M218 20 H264 M241 20 V80 M330 20 H290 V80 H330 M290 50 H322" fill="none" stroke="#FFF8F5" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="97" cy="21" r="5.6" fill="#F6B8CF"/></g>
+  <text x="315" y="134" text-anchor="middle" font-family="Jost" font-size="14" font-weight="500" letter-spacing="10" fill="#FFF8F5" fill-opacity=".7">BEAUTY</text></svg></div></div>
+    <div class="mock tags"><div class="tag"><svg viewBox="16 16 84 84"><g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M31 32 H85 Q90 32 87 36 C76 50 58 52 56 60 C54 68 44 74 36 83 Q33 87 40 87 H90" stroke="#2B1433" stroke-width="3.4" transform="translate(0 -4.6)"/>
+    <path d="M31 32 H85 Q90 32 87 36 C76 50 58 52 56 60 C54 68 44 74 36 83 Q33 87 40 87 H90" stroke="#D9558F" stroke-width="4"/>
+    <path d="M31 32 H85 Q90 32 87 36 C76 50 58 52 56 60 C54 68 44 74 36 83 Q33 87 40 87 H90" stroke="#F6B8CF" stroke-width="3" transform="translate(0 4.6)"/></g>
+    <circle cx="23" cy="28" r="6" fill="#D9558F"/></svg></div><div class="tag t2"><svg viewBox="16 16 84 84"><g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M31 32 H85 Q90 32 87 36 C76 50 58 52 56 60 C54 68 44 74 36 83 Q33 87 40 87 H90" stroke="#FFF8F5" stroke-width="3.4" transform="translate(0 -4.6)"/>
+    <path d="M31 32 H85 Q90 32 87 36 C76 50 58 52 56 60 C54 68 44 74 36 83 Q33 87 40 87 H90" stroke="#F6B8CF" stroke-width="4"/>
+    <path d="M31 32 H85 Q90 32 87 36 C76 50 58 52 56 60 C54 68 44 74 36 83 Q33 87 40 87 H90" stroke="#8E5AA8" stroke-width="3" transform="translate(0 4.6)"/></g>
+    <circle cx="23" cy="28" r="6" fill="#F6B8CF"/></svg></div></div>
+    <div class="mock ig"><div class="phone"><div class="ava"><svg viewBox="16 16 84 84"><g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M31 32 H85 Q90 32 87 36 C76 50 58 52 56 60 C54 68 44 74 36 83 Q33 87 40 87 H90" stroke="#2B1433" stroke-width="3.4" transform="translate(0 -4.6)"/>
+    <path d="M31 32 H85 Q90 32 87 36 C76 50 58 52 56 60 C54 68 44 74 36 83 Q33 87 40 87 H90" stroke="#FFF8F5" stroke-width="4"/>
+    <path d="M31 32 H85 Q90 32 87 36 C76 50 58 52 56 60 C54 68 44 74 36 83 Q33 87 40 87 H90" stroke="#FFF8F5" stroke-width="3" transform="translate(0 4.6)"/></g>
+    <circle cx="23" cy="28" r="6" fill="#FFF8F5"/></svg></div><b>Zante Beauty</b><div class="bars"><i></i><i></i><i></i></div>
+      <div class="tiles"><i></i><i></i><i></i><i></i><i></i><i></i></div></div></div>
+  </div>
+  <p class="why">The custom mark from the website, now in flat colour. Three strands of hair form the Z, and a pearl crowns the A. Fully custom, so nobody else can own it.</p>
+  <footer>Zante Beauty · Logo concepts · Round 2</footer>
+</section><section class="page">
+  <header><span class="num">06</span><h2>Signature</h2><p class="best">A personal, founder-led brand</p></header>
+  <div class="layout">
+    <div class="hero"><svg viewBox="0 0 520 210">
+  <text x="258" y="136" text-anchor="middle" font-family="Pinyon Script" font-size="112" fill="#2B1433">Zante</text>
+  <text x="262" y="190" text-anchor="middle" font-family="Jost" font-size="14" font-weight="500" letter-spacing="13" fill="#D9558F">BEAUTY</text></svg></div>
+    <div class="dark"><svg viewBox="0 0 520 210">
+  <text x="258" y="136" text-anchor="middle" font-family="Pinyon Script" font-size="112" fill="#FFF8F5">Zante</text>
+  <text x="262" y="190" text-anchor="middle" font-family="Jost" font-size="14" font-weight="500" letter-spacing="13" fill="#F6B8CF">BEAUTY</text></svg></div>
+    <div class="syms"><div class="sym light"><svg viewBox="0 0 120 120"><text x="60" y="94" text-anchor="middle" font-family="Pinyon Script" font-size="104" fill="#2B1433">Z</text></svg></div><div class="sym pink"><svg viewBox="0 0 120 120"><text x="60" y="94" text-anchor="middle" font-family="Pinyon Script" font-size="104" fill="#2B1433">Z</text></svg></div><div class="sym plum"><svg viewBox="0 0 120 120"><text x="60" y="94" text-anchor="middle" font-family="Pinyon Script" font-size="104" fill="#FFF8F5">Z</text></svg></div></div>
+    <div class="mock cards"><div class="card back"><svg viewBox="0 0 120 120"><text x="60" y="94" text-anchor="middle" font-family="Pinyon Script" font-size="104" fill="#2B1433">Z</text></svg></div><div class="card front"><svg viewBox="0 0 520 210">
+  <text x="258" y="136" text-anchor="middle" font-family="Pinyon Script" font-size="112" fill="#FFF8F5">Zante</text>
+  <text x="262" y="190" text-anchor="middle" font-family="Jost" font-size="14" font-weight="500" letter-spacing="13" fill="#F6B8CF">BEAUTY</text></svg></div></div>
+    <div class="mock tags"><div class="tag"><svg viewBox="0 0 120 120"><text x="60" y="94" text-anchor="middle" font-family="Pinyon Script" font-size="104" fill="#2B1433">Z</text></svg></div><div class="tag t2"><svg viewBox="0 0 120 120"><text x="60" y="94" text-anchor="middle" font-family="Pinyon Script" font-size="104" fill="#FFF8F5">Z</text></svg></div></div>
+    <div class="mock ig"><div class="phone"><div class="ava"><svg viewBox="0 0 120 120"><text x="60" y="94" text-anchor="middle" font-family="Pinyon Script" font-size="104" fill="#2B1433">Z</text></svg></div><b>Zante Beauty</b><div class="bars"><i></i><i></i><i></i></div>
+      <div class="tiles"><i></i><i></i><i></i><i></i><i></i><i></i></div></div></div>
+  </div>
+  <p class="why">A refined contemporary script, as if the founder signed it, balanced by a spaced sans line. Personal and warm, the influencer-brand feel done properly.</p>
+  <footer>Zante Beauty · Logo concepts · Round 2</footer>
+</section><section class="page">
+  <header><span class="num">07</span><h2>Statement</h2><p class="best">Maximum impact and recall</p></header>
+  <div class="layout">
+    <div class="hero"><svg viewBox="0 0 560 210"><defs><mask id="cutlight" maskUnits="userSpaceOnUse" x="0" y="0" width="560" height="210">
+    <rect width="560" height="210" fill="#fff"/>
+    <path d="M-10 104 C60 74 120 130 200 100 S330 74 400 104 S500 128 570 92" fill="none" stroke="#000" stroke-width="16"/></mask></defs>
+  <text x="280" y="138" text-anchor="middle" font-family="Playfair Display" font-weight="900" font-size="124" letter-spacing="0" fill="#2B1433" mask="url(#cutlight)">ZANTE</text>
+  <path d="M-10 104 C60 74 120 130 200 100 S330 74 400 104 S500 128 570 92" fill="none" stroke="#D9558F" stroke-width="2.6"/>
+  <text x="283" y="188" text-anchor="middle" font-family="Jost" font-size="15" font-weight="500" letter-spacing="16" fill="#2B1433">BEAUTY</text></svg></div>
+    <div class="dark"><svg viewBox="0 0 560 210"><defs><mask id="cutdark" maskUnits="userSpaceOnUse" x="0" y="0" width="560" height="210">
+    <rect width="560" height="210" fill="#fff"/>
+    <path d="M-10 104 C60 74 120 130 200 100 S330 74 400 104 S500 128 570 92" fill="none" stroke="#000" stroke-width="16"/></mask></defs>
+  <text x="280" y="138" text-anchor="middle" font-family="Playfair Display" font-weight="900" font-size="124" letter-spacing="0" fill="#FFF8F5" mask="url(#cutdark)">ZANTE</text>
+  <path d="M-10 104 C60 74 120 130 200 100 S330 74 400 104 S500 128 570 92" fill="none" stroke="#F6B8CF" stroke-width="2.6"/>
+  <text x="283" y="188" text-anchor="middle" font-family="Jost" font-size="15" font-weight="500" letter-spacing="16" fill="#FFF8F5">BEAUTY</text></svg></div>
+    <div class="syms"><div class="sym light"><svg viewBox="0 0 120 120"><defs><mask id="cutslight" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="120">
+    <rect width="120" height="120" fill="#fff"/><path d="M0 62 C30 44 60 80 120 52" fill="none" stroke="#000" stroke-width="10"/></mask></defs>
+  <text x="60" y="98" text-anchor="middle" font-family="Playfair Display" font-weight="900" font-size="110" fill="#2B1433" mask="url(#cutslight)">Z</text>
+  <path d="M0 62 C30 44 60 80 120 52" fill="none" stroke="#D9558F" stroke-width="2"/></svg></div><div class="sym pink"><svg viewBox="0 0 120 120"><defs><mask id="cutspink" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="120">
+    <rect width="120" height="120" fill="#fff"/><path d="M0 62 C30 44 60 80 120 52" fill="none" stroke="#000" stroke-width="10"/></mask></defs>
+  <text x="60" y="98" text-anchor="middle" font-family="Playfair Display" font-weight="900" font-size="110" fill="#2B1433" mask="url(#cutspink)">Z</text>
+  <path d="M0 62 C30 44 60 80 120 52" fill="none" stroke="#FFF8F5" stroke-width="2"/></svg></div><div class="sym plum"><svg viewBox="0 0 120 120"><defs><mask id="cutsdark" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="120">
+    <rect width="120" height="120" fill="#fff"/><path d="M0 62 C30 44 60 80 120 52" fill="none" stroke="#000" stroke-width="10"/></mask></defs>
+  <text x="60" y="98" text-anchor="middle" font-family="Playfair Display" font-weight="900" font-size="110" fill="#FFF8F5" mask="url(#cutsdark)">Z</text>
+  <path d="M0 62 C30 44 60 80 120 52" fill="none" stroke="#F6B8CF" stroke-width="2"/></svg></div></div>
+    <div class="mock cards"><div class="card back"><svg viewBox="0 0 120 120"><defs><mask id="cutslight" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="120">
+    <rect width="120" height="120" fill="#fff"/><path d="M0 62 C30 44 60 80 120 52" fill="none" stroke="#000" stroke-width="10"/></mask></defs>
+  <text x="60" y="98" text-anchor="middle" font-family="Playfair Display" font-weight="900" font-size="110" fill="#2B1433" mask="url(#cutslight)">Z</text>
+  <path d="M0 62 C30 44 60 80 120 52" fill="none" stroke="#D9558F" stroke-width="2"/></svg></div><div class="card front"><svg viewBox="0 0 560 210"><defs><mask id="cutdark" maskUnits="userSpaceOnUse" x="0" y="0" width="560" height="210">
+    <rect width="560" height="210" fill="#fff"/>
+    <path d="M-10 104 C60 74 120 130 200 100 S330 74 400 104 S500 128 570 92" fill="none" stroke="#000" stroke-width="16"/></mask></defs>
+  <text x="280" y="138" text-anchor="middle" font-family="Playfair Display" font-weight="900" font-size="124" letter-spacing="0" fill="#FFF8F5" mask="url(#cutdark)">ZANTE</text>
+  <path d="M-10 104 C60 74 120 130 200 100 S330 74 400 104 S500 128 570 92" fill="none" stroke="#F6B8CF" stroke-width="2.6"/>
+  <text x="283" y="188" text-anchor="middle" font-family="Jost" font-size="15" font-weight="500" letter-spacing="16" fill="#FFF8F5">BEAUTY</text></svg></div></div>
+    <div class="mock tags"><div class="tag"><svg viewBox="0 0 120 120"><defs><mask id="cutslight" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="120">
+    <rect width="120" height="120" fill="#fff"/><path d="M0 62 C30 44 60 80 120 52" fill="none" stroke="#000" stroke-width="10"/></mask></defs>
+  <text x="60" y="98" text-anchor="middle" font-family="Playfair Display" font-weight="900" font-size="110" fill="#2B1433" mask="url(#cutslight)">Z</text>
+  <path d="M0 62 C30 44 60 80 120 52" fill="none" stroke="#D9558F" stroke-width="2"/></svg></div><div class="tag t2"><svg viewBox="0 0 120 120"><defs><mask id="cutsdark" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="120">
+    <rect width="120" height="120" fill="#fff"/><path d="M0 62 C30 44 60 80 120 52" fill="none" stroke="#000" stroke-width="10"/></mask></defs>
+  <text x="60" y="98" text-anchor="middle" font-family="Playfair Display" font-weight="900" font-size="110" fill="#FFF8F5" mask="url(#cutsdark)">Z</text>
+  <path d="M0 62 C30 44 60 80 120 52" fill="none" stroke="#F6B8CF" stroke-width="2"/></svg></div></div>
+    <div class="mock ig"><div class="phone"><div class="ava"><svg viewBox="0 0 120 120"><defs><mask id="cutspink" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="120">
+    <rect width="120" height="120" fill="#fff"/><path d="M0 62 C30 44 60 80 120 52" fill="none" stroke="#000" stroke-width="10"/></mask></defs>
+  <text x="60" y="98" text-anchor="middle" font-family="Playfair Display" font-weight="900" font-size="110" fill="#2B1433" mask="url(#cutspink)">Z</text>
+  <path d="M0 62 C30 44 60 80 120 52" fill="none" stroke="#FFF8F5" stroke-width="2"/></svg></div><b>Zante Beauty</b><div class="bars"><i></i><i></i><i></i></div>
+      <div class="tiles"><i></i><i></i><i></i><i></i><i></i><i></i></div></div></div>
+  </div>
+  <p class="why">Heavy high-contrast capitals with a hair wave cut straight through the letters. Bold enough for a billboard, and the cut makes it unmistakably about hair.</p>
+  <footer>Zante Beauty · Logo concepts · Round 2</footer>
+</section><section class="page"><header><h2>Colour and type</h2><p class="best">Shared by every direction</p></header>
+      <div class="pal"><div class="sw" style="background:#2B1433"><span style="color:#FFF8F5">Plum<br><b>#2B1433</b></span></div><div class="sw" style="background:#6E3290"><span style="color:#FFF8F5">Orchid<br><b>#6E3290</b></span></div><div class="sw" style="background:#D9558F"><span style="color:#FFF8F5">Zante Pink<br><b>#D9558F</b></span></div><div class="sw" style="background:#F6B8CF"><span style="color:#2B1433">Petal<br><b>#F6B8CF</b></span></div><div class="sw" style="background:#FDEEF4"><span style="color:#2B1433">Blush<br><b>#FDEEF4</b></span></div><div class="sw" style="background:#FFF8F5"><span style="color:#2B1433">Cream<br><b>#FFF8F5</b></span></div></div>
+      <p class="why">Plum carries the name. Pink is the signature accent and is used sparingly, so it always means Zante. Blush and cream are the backgrounds. Every logo also works in a single colour for printing, embossing and foil.</p>
+      <footer>Zante Beauty · Logo concepts · Round 2</footer></section></body></html>
