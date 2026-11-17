@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" width="800" height="1000">
+<rect width="400" height="500" fill="#FFE3EE"/>
+<ellipse cx="200" cy="430" rx="120" ry="14" fill="#2D1240" opacity=".08"/>
+
+<rect x="150" y="170" width="100" height="230" rx="22" fill="#fff"/>
+<rect x="150" y="250" width="100" height="90" fill="#F6A5C5"/>
+<text x="200" y="300" text-anchor="middle" font-family="Didot, Georgia, serif" font-size="22" font-weight="600" fill="#2D1240">Zante</text>
+<text x="200" y="320" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" font-weight="700" fill="#2D1240" letter-spacing="2">HEAT SHIELD</text>
+<rect x="180" y="130" width="40" height="42" rx="6" fill="#7B3FA6"/>
+<path d="M220 140 H262 V156 H220" fill="#7B3FA6"/>
+<path d="M162 190 V380" stroke="#FFE3EE" stroke-width="8" stroke-linecap="round" opacity=".6"/>
+
+</svg>

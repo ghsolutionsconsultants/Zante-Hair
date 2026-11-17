@@ -1,9 +1,9 @@
 <!-- ============ PAGE HEADER ============ -->
 <section class="page-hero">
   <div class="wrap">
-    <p class="eyebrow">Shop the Drop</p>
-    <h1 class="page-title">Two units. One signature texture.</h1>
-    <p class="lede">The Zante Half Wig and U-Part Wig, in 100% virgin human hair with our signature kinky straight texture. Choose your length from 10" to 22".</p>
+    <p class="eyebrow">Zante Beauty</p>
+    <h1 class="page-title">Shop the Drop</h1>
+    <p class="lede">Half wigs, U-part wigs, extensions and care. 100% virgin human hair in our signature kinky straight texture, 10" to 22".</p>
     <a class="drop-strip" href="hair-drop.html">
       <span class="dot" aria-hidden="true"></span>
       <span><b data-drop-name>The next drop</b> closes <span data-drop-date>Monday</span>, 18:00 SAST</span>
@@ -15,7 +15,56 @@
 <!-- ============ PRODUCTS ============ -->
 <section class="section section--tight shop" id="shop" aria-label="Products">
   <div class="wrap">
-    <div class="products" id="products" data-full></div>
+    <nav class="cat-tabs" id="catTabs" aria-label="Categories">
+      <button type="button" class="cat-tab is-on" data-cat="all" aria-pressed="true">All</button>
+      <button type="button" class="cat-tab" data-cat="wigs" aria-pressed="false">Wigs</button>
+      <button type="button" class="cat-tab" data-cat="extensions" aria-pressed="false">Extensions</button>
+      <button type="button" class="cat-tab" data-cat="care" aria-pressed="false">Care and accessories</button>
+      <button type="button" class="cat-tab" data-cat="gifts" aria-pressed="false">Gifts</button>
+    </nav>
+    <div class="shop-layout">
+      <aside class="fpanel" id="fpanel" aria-label="Filters">
+        <div class="fpanel-head"><h2>Filter</h2><button type="button" class="icon-btn" id="fClose" aria-label="Close filters"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button></div>
+        <fieldset class="fgroup"><legend>Length</legend><div class="fchips" id="fLength"></div></fieldset>
+        <fieldset class="fgroup"><legend>Price</legend>
+          <label class="fcheck"><input type="radio" name="fprice" value="" checked> Any price</label>
+          <label class="fcheck"><input type="radio" name="fprice" value="0-500"> Under R500</label>
+          <label class="fcheck"><input type="radio" name="fprice" value="500-2500"> R500 to R2 500</label>
+          <label class="fcheck"><input type="radio" name="fprice" value="2500-3500"> R2 500 to R3 500</label>
+          <label class="fcheck"><input type="radio" name="fprice" value="3500-99999"> Over R3 500</label>
+        </fieldset>
+        <fieldset class="fgroup"><legend>Type</legend><div id="fType"></div></fieldset>
+        <fieldset class="fgroup"><legend>Highlights</legend>
+          <label class="fcheck"><input type="checkbox" value="new" data-flag> New in</label>
+          <label class="fcheck"><input type="checkbox" value="best" data-flag> Bestsellers</label>
+          <label class="fcheck"><input type="checkbox" value="deal" data-flag> Deals</label>
+        </fieldset>
+        <div class="fpanel-foot">
+          <button type="button" class="btn" id="fClear">Clear all</button>
+          <button type="button" class="btn btn--solid" id="fApply">Show <span id="fCount">0</span> products</button>
+        </div>
+      </aside>
+      <div class="shop-main">
+        <div class="toolbar">
+          <button type="button" class="btn btn--sm ftoggle" id="fOpen"><svg viewBox="0 0 24 24" aria-hidden="true" width="16" height="16"><path d="M4 7h16M7 12h10M10 17h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>Filter <span class="fbadge" id="fBadge" hidden>0</span></button>
+          <p class="small" id="shopCount" aria-live="polite"></p>
+          <label class="sort"><span>Sort</span>
+            <select id="fSort">
+              <option value="featured">Featured</option>
+              <option value="price-asc">Price: low to high</option>
+              <option value="price-desc">Price: high to low</option>
+              <option value="name">Name A to Z</option>
+            </select>
+          </label>
+        </div>
+        <div class="active-filters" id="activeFilters"></div>
+        <div class="pgrid pgrid--shop" id="products" data-products></div>
+        <div class="empty" id="shopEmpty" hidden>
+          <p>No products match these filters.</p>
+          <button type="button" class="btn" data-clear>Clear filters</button>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 

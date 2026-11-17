@@ -24,55 +24,79 @@
   <div class="wrap">
     <h2 class="h2" id="howTitle">How it works</h2>
     <div class="spacer"></div>
-    <ol class="steps">
-      <li><b>Choose your look</b><span>Pick the Half Wig or U-Part Wig, choose your length and pay in full at checkout.</span></li>
-      <li><b>Secure your order</b><span>Your order joins the next available drop.</span></li>
-      <li><b>Production begins</b><span>When the drop closes on Monday, your order goes to our factory.</span></li>
-      <li><b>Your hair travels to us</b><span>Allow about two weeks for international shipping after production.</span></li>
-      <li><b>The Zante finish</b><span>We receive, inspect and pre-wash every unit, then pack it for the next Monday dispatch.</span></li>
-      <li><b>Delivery to you</b><span>We dispatch on Mondays and send your tracking details.</span></li>
+    <div class="drop-facts">
+      <div><b>2</b><span>drops every month</span></div>
+      <div><b>18:00</b><span>cut-off on the first and third Monday (SAST)</span></div>
+      <div><b>3–4 weeks</b><span>from cut-off until your unit is ready</span></div>
+      <div><b>Mondays</b><span>local dispatch, with tracking</span></div>
+    </div>
+    <ol class="timeline">
+      <li><span class="tl-num" aria-hidden="true">01</span><div class="tl-body"><h3>Choose your look</h3><p>Pick the Half Wig or U-Part Wig and your length. Pay in full at checkout or in 3 with PayJustNow.</p></div></li>
+      <li><span class="tl-num" aria-hidden="true">02</span><div class="tl-body"><h3>Secure your order</h3><p>Your order joins the next open drop. You get a confirmation with your drop name.</p></div></li>
+      <li><span class="tl-num" aria-hidden="true">03</span><div class="tl-body"><h3>Production begins</h3><p>When the drop closes on Monday at 18:00, your order goes to our factory.</p></div></li>
+      <li><span class="tl-num" aria-hidden="true">04</span><div class="tl-body"><h3>Your hair travels to us</h3><p>Allow about two weeks for international shipping after production.</p></div></li>
+      <li><span class="tl-num" aria-hidden="true">05</span><div class="tl-body"><h3>The Zante finish</h3><p>We receive, inspect and pre-wash every unit, then pack it for the next Monday.</p></div></li>
+      <li><span class="tl-num" aria-hidden="true">06</span><div class="tl-body"><h3>Delivery to you</h3><p>We dispatch on Mondays and send your tracking details.</p></div></li>
     </ol>
+  </div>
+</section>
 
-    <div class="drop-grid">
-      <article class="panel">
-        <h3>Our cut-off dates</h3>
-        <p>Two drops every month. Orders close at <b>18:00 SAST</b> on:</p>
-        <ul class="plain"><li>The <b>first Monday</b> of the month</li><li>The <b>third Monday</b> of the month</li></ul>
-        <p class="small">Coming up:</p>
-        <ul class="dates" id="dropDates"></ul>
+<!-- ============ DATES AND WAITING ============ -->
+<section class="section" aria-labelledby="datesTitle">
+  <div class="wrap drop-cols">
+    <article class="panel panel--line">
+      <h2 class="h3" id="datesTitle">Upcoming drops</h2>
+      <p class="small">Orders close at 18:00 SAST on the first and third Monday of each month.</p>
+      <ul class="cal" id="dropDates"></ul>
+    </article>
+    <article class="panel panel--line">
+      <h2 class="h3">How long will I wait?</h2>
+      <p class="big-num">3 to 4 weeks</p>
+      <p>From your drop's cut-off until your unit is ready for local dispatch. This covers production, international shipping and our Ready Ritual.</p>
+      <p class="small">Local courier time comes after dispatch. International shipping and clearance can vary, so delays are sometimes possible. We keep you updated at every step.</p>
+    </article>
+  </div>
+</section>
+
+<!-- ============ DELIVERY ============ -->
+<section class="section section--soft" id="delivery" aria-labelledby="delTitle">
+  <div class="wrap">
+    <h2 class="h2" id="delTitle">Delivery options</h2>
+    <div class="ship-opts">
+      <article class="ship">
+        <h3>PostNet to PostNet</h3>
+        <p class="ship-price">R109</p>
+        <p>About 2 to 3 working days to main centres. Collect from the PostNet branch you choose.</p>
       </article>
-      <article class="panel">
-        <h3>How long will I wait?</h3>
-        <p>Allow about <b>3 to 4 weeks</b> from your drop's cut-off for production, international shipping and our Ready Ritual. Local courier time comes after dispatch.</p>
-        <p class="small">International shipping and clearance can vary, so delays are sometimes possible. We keep you updated at every step.</p>
-      </article>
-      <article class="panel" id="delivery">
-        <h3>Delivery</h3>
-        <ul class="plain">
-          <li><b>PostNet to PostNet</b>: R109, about 2 to 3 working days to main centres.</li>
-          <li><b>Aramex store-to-door</b>: price shown at checkout, about 24 to 72 hours to main centres.</li>
-        </ul>
-        <p class="small">Remote and regional areas can take longer.</p>
+      <article class="ship">
+        <h3>Aramex to your door</h3>
+        <p class="ship-price">Price at checkout</p>
+        <p>About 24 to 72 hours to main centres. Delivered to your physical address.</p>
       </article>
     </div>
+    <p class="small center">Remote and regional areas can take longer.</p>
+  </div>
+</section>
 
-    <div class="tracker" aria-labelledby="trackTitle">
+<!-- ============ TRACKER ============ -->
+<section class="section" aria-labelledby="trackTitle">
+  <div class="wrap">
+    <div class="tracker">
       <div class="tracker-head">
-        <h3 id="trackTitle">You will always know where your hair is</h3>
-        <p class="small">You get a WhatsApp or email update only when each step really happens. Example:</p>
+        <h2 class="h3" id="trackTitle">You will always know where your hair is</h2>
+        <p class="small">You get a WhatsApp or email update only when each step really happens. Here is an example order:</p>
       </div>
       <ol class="milestones" id="milestones">
-        <li class="done"><b>Order secured</b><span>Your payment is in and your order is in <i data-drop-name>the next drop</i>.</span></li>
-        <li class="done"><b>Production underway</b><span>Your order has gone to our factory.</span></li>
-        <li class="now"><b>On its way to Zante</b><span>Your unit is travelling to South Africa.</span></li>
-        <li><b>Arrived at Zante</b><span>Inspection and the Ready Ritual.</span></li>
-        <li><b>Ready for dispatch</b><span>Inspected, pre-washed and packed.</span></li>
-        <li><b>Dispatched</b><span>Handed to the courier, with tracking.</span></li>
+        <li class="done"><h3>Order secured</h3><p>Payment received. Your order is in <span data-drop-name>the next drop</span>.</p></li>
+        <li class="done"><h3>Production underway</h3><p>Your order has gone to our factory.</p></li>
+        <li class="now"><h3>On its way to Zante</h3><p>Your unit is travelling to South Africa.</p></li>
+        <li><h3>Arrived at Zante</h3><p>Inspection and the Ready Ritual.</p></li>
+        <li><h3>Ready for dispatch</h3><p>Inspected, pre-washed and packed.</p></li>
+        <li><h3>Dispatched</h3><p>Handed to the courier, with tracking.</p></li>
       </ol>
     </div>
   </div>
 </section>
-
 
 <!-- ============ SHIPPING DETAIL ============ -->
 <section class="section" aria-labelledby="shipTitle">

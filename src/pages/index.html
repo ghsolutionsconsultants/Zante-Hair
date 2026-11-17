@@ -1,14 +1,26 @@
-<!-- ============ 1. HERO: Half wig | countdown | U-part ============ -->
-<section class="hero" aria-labelledby="heroTitle">
+<!-- ============ 1. HERO: live Half wig | countdown | U-part ============ -->
+<section class="hero hero--live" id="hero" aria-labelledby="heroTitle">
+  <svg class="strands" viewBox="0 0 1440 360" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M-40 250 C 200 120, 380 330, 620 210 S 1000 90, 1480 230"/>
+    <path d="M-40 290 C 240 170, 420 360, 680 250 S 1080 140, 1480 280"/>
+    <path d="M-40 210 C 160 90, 360 280, 560 170 S 960 40, 1480 180"/>
+    <path d="M-40 320 C 260 220, 520 380, 760 290 S 1160 200, 1480 320"/>
+  </svg>
   <div class="hero-head wrap">
     <p class="eyebrow">Kinky straight. 100% virgin human hair.</p>
-    <h1 class="hero-title" id="heroTitle">Your hair. Your way.</h1>
+    <h1 class="hero-title" id="heroTitle">Your hair. <span class="rotator" aria-live="off"><span class="rot-word">Your way.</span></span></h1>
     <p class="hero-sub">The beauty of having options.</p>
   </div>
 
-  <div class="split">
-    <a class="split-panel" href="shop.html#p-halfwig" data-pick="halfwig">
-      <img src="assets/img/z-halfwig.jpg" alt="Woman wearing the Zante kinky straight half wig with a headband" width="900" height="1200" fetchpriority="high">
+  <div class="split" id="split">
+    <a class="split-panel" href="shop.html#p-halfwig">
+      <div class="bars" aria-hidden="true"></div>
+      <div class="slides">
+        <img class="slide is-on" src="assets/img/z-halfwig.jpg" alt="Woman wearing the Zante kinky straight half wig with a headband" width="900" height="1200" fetchpriority="high">
+        <img class="slide" src="assets/img/z-halfwig-side.jpg" alt="" width="900" height="1200" loading="lazy">
+        <video class="slide" data-src="assets/video/v-texture.mp4" poster="assets/video/v-texture.jpg" muted playsinline preload="none"></video>
+        <img class="slide" src="assets/img/z-story.jpg" alt="" width="900" height="1200" loading="lazy">
+      </div>
       <span class="split-copy">
         <span class="split-kicker">The Half Wig</span>
         <span class="split-line">Your everyday style, without the effort.</span>
@@ -30,8 +42,14 @@
       <p class="drop-note">Orders placed after the cut-off move into the next drop.</p>
     </div>
 
-    <a class="split-panel" href="shop.html#p-upart" data-pick="upart">
-      <img src="assets/img/z-upart.jpg" alt="Woman wearing the Zante kinky straight U-part wig" width="900" height="1200">
+    <a class="split-panel" href="shop.html#p-upart">
+      <div class="bars" aria-hidden="true"></div>
+      <div class="slides">
+        <img class="slide is-on" src="assets/img/z-upart.jpg" alt="Woman wearing the Zante kinky straight U-part wig" width="900" height="1200">
+        <video class="slide" data-src="assets/video/v-install.mp4" poster="assets/video/v-install.jpg" muted playsinline preload="none"></video>
+        <img class="slide" src="assets/img/z-sleek.jpg" alt="" width="900" height="1200" loading="lazy">
+        <img class="slide" src="assets/img/z-upart-front.jpg" alt="" width="731" height="1300" loading="lazy">
+      </div>
       <span class="split-copy">
         <span class="split-kicker">The U-Part Wig</span>
         <span class="split-line">The blend you love. The freedom you need.</span>
@@ -56,15 +74,28 @@
   <p class="promise-tag">Less installation. More versatility. Your hair, your way.</p>
 </section>
 
+<!-- ============ SHOP BY CATEGORY ============ -->
+<section class="section section--tight cats" aria-labelledby="catsTitle">
+  <div class="wrap">
+    <h2 class="h2 center" id="catsTitle">Shop by category</h2>
+    <div class="cat-grid">
+      <a class="cat-card" href="shop.html#cat-wigs"><img src="assets/img/z-halfwig.jpg" alt="" loading="lazy"><span><b>Wigs</b><small>Half wigs, U-parts and sets</small></span></a>
+      <a class="cat-card" href="shop.html#cat-extensions"><img src="assets/img/z-clip.jpg" alt="" loading="lazy"><span><b>Extensions</b><small>Clip-ins and bundles</small></span></a>
+      <a class="cat-card" href="shop.html#cat-care"><img src="assets/img/care-tools.jpg" alt="" loading="lazy"><span><b>Care and accessories</b><small>Bonnets, headbands, tools</small></span></a>
+      <a class="cat-card" href="shop.html#cat-gifts"><img src="assets/img/prod-giftcard.svg" alt="" loading="lazy"><span><b>Gifts</b><small>Zante gift cards</small></span></a>
+    </div>
+  </div>
+</section>
+
 <!-- ============ 3. SHOP: two products, each with its own personality ============ -->
 <section class="section shop" id="shop" aria-labelledby="shopTitle">
   <div class="wrap">
     <div class="section-head">
       <h2 class="h2" id="shopTitle">Shop the Drop</h2>
-      <p class="muted">Two units. One signature texture. Your choice of length.</p>
+      <p class="muted">Wigs, extensions and care, in our signature kinky straight texture.</p>
     </div>
-    <div class="products" id="products"></div>
-    <p class="more"><a class="btn" href="shop.html">See full product details</a></p>
+    <div class="pgrid" id="products" data-products data-limit="10"></div>
+    <p class="more"><a class="btn" href="shop.html">Shop all products</a></p>
   </div>
 </section>
 
@@ -163,16 +194,20 @@
       </div>
       <p class="muted">Two scheduled drops every month, so you can secure your style and length instead of waiting for random restocks.</p>
     </div>
-
-    <ol class="steps">
-      <li><b>Choose your look</b><span>Pick the Half Wig or U-Part Wig, choose your length and pay in full at checkout.</span></li>
-      <li><b>Secure your order</b><span>Your order joins the next available drop.</span></li>
-      <li><b>Production begins</b><span>When the drop closes on Monday, your order goes to our factory.</span></li>
-      <li><b>Your hair travels to us</b><span>Allow about two weeks for international shipping after production.</span></li>
-      <li><b>The Zante finish</b><span>We receive, inspect and pre-wash every unit, then pack it for the next Monday dispatch.</span></li>
-      <li><b>Delivery to you</b><span>We dispatch on Mondays and send your tracking details.</span></li>
+    <div class="drop-facts">
+      <div><b>2</b><span>drops every month</span></div>
+      <div><b>18:00</b><span>cut-off on the first and third Monday (SAST)</span></div>
+      <div><b>3–4 weeks</b><span>from cut-off until your unit is ready</span></div>
+      <div><b>Mondays</b><span>local dispatch, with tracking</span></div>
+    </div>
+    <ol class="timeline">
+      <li><span class="tl-num" aria-hidden="true">01</span><div class="tl-body"><h3>Choose your look</h3><p>Pick the Half Wig or U-Part Wig and your length. Pay in full at checkout or in 3 with PayJustNow.</p></div></li>
+      <li><span class="tl-num" aria-hidden="true">02</span><div class="tl-body"><h3>Secure your order</h3><p>Your order joins the next open drop. You get a confirmation with your drop name.</p></div></li>
+      <li><span class="tl-num" aria-hidden="true">03</span><div class="tl-body"><h3>Production begins</h3><p>When the drop closes on Monday at 18:00, your order goes to our factory.</p></div></li>
+      <li><span class="tl-num" aria-hidden="true">04</span><div class="tl-body"><h3>Your hair travels to us</h3><p>Allow about two weeks for international shipping after production.</p></div></li>
+      <li><span class="tl-num" aria-hidden="true">05</span><div class="tl-body"><h3>The Zante finish</h3><p>We receive, inspect and pre-wash every unit, then pack it for the next Monday.</p></div></li>
+      <li><span class="tl-num" aria-hidden="true">06</span><div class="tl-body"><h3>Delivery to you</h3><p>We dispatch on Mondays and send your tracking details.</p></div></li>
     </ol>
-
     <p class="more"><a class="btn" href="hair-drop.html">How the Drop works</a></p>
   </div>
 </section>
