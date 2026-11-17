@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Zante Beauty</title>
 <meta name="robots" content="noindex, nofollow">
-<meta name="description" content="Zante Beauty: kinky straight half wigs and U-part wigs in 100% virgin human hair, pre-washed before dispatch. Ordered in two Zante Hair Drops a month. Draft homepage.">
-<meta name="theme-color" content="#FFF8FB">
+<meta name="description" content="Zante Beauty: kinky straight half wigs and U-part wigs in 100% virgin human hair, pre-washed before dispatch. Ordered in two Zante Hair Drops a month. Draft site.">
+<meta name="theme-color" content="#FFFFFF">
 <link rel="icon" type="image/svg+xml" href="assets/brand/zante-app-icon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,27 +24,21 @@
 <div class="watermark" aria-hidden="true"></div>
 <p class="draft-tab" aria-hidden="true">Draft, not live</p>
 
-<!-- intro -->
+<!-- intro (homepage only) -->
 <div class="intro" id="intro" aria-hidden="true">
   <p class="intro-mark"><span class="intro-z">Zante</span><span class="intro-b">Beauty</span></p>
 </div>
 
 <!-- announcement: always the real next drop -->
 <div class="announce">
-  <p><span class="dot" aria-hidden="true"></span><b data-drop-name>The next Zante Hair Drop</b> closes <span data-drop-close>soon</span>. <a href="#drop">How the Drop works</a></p>
+  <p><span class="dot" aria-hidden="true"></span><b data-drop-name>The next Zante Hair Drop</b> closes <span data-drop-close>soon</span>. <a href="hair-drop.html">How the Drop works</a></p>
 </div>
 
 <header class="header" id="header">
   <div class="wrap header-in">
     <button class="burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mnav"><span></span><span></span></button>
-    <a class="logo" href="#top" aria-label="Zante Beauty, home"><span class="logo-z">Zante</span><span class="logo-b">Beauty</span></a>
-    <nav class="nav" aria-label="Main">
-      <a href="#shop">Shop</a>
-      <a href="#drop">The Hair Drop</a>
-      <a href="#guide">Hair guide</a>
-      <a href="#story">Our story</a>
-      <a href="#faq">FAQs</a>
-    </nav>
+    <a class="logo" href="index.html" aria-label="Zante Beauty, home"><span class="logo-z">Zante</span><span class="logo-b">Beauty</span></a>
+    <nav class="nav" aria-label="Main"><a href="shop.html">Shop</a><a href="hair-drop.html">The Hair Drop</a><a href="hair-guide.html">Hair guide</a><a href="our-story.html">Our story</a><a href="faqs.html">FAQs</a></nav>
     <div class="header-actions">
       <button class="icon-btn hide-sm" id="themeBtn" type="button" aria-label="Switch to dark mode">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
@@ -56,14 +50,13 @@
     </div>
   </div>
   <nav class="mnav" id="mnav" aria-label="Mobile">
-    <a href="#shop">Shop</a><a href="#drop">The Hair Drop</a><a href="#guide">Hair guide</a><a href="#story">Our story</a><a href="#faq">FAQs</a>
+    <a href="index.html" aria-current="page">Home</a><a href="shop.html">Shop</a><a href="hair-drop.html">The Hair Drop</a><a href="hair-guide.html">Hair guide</a><a href="our-story.html">Our story</a><a href="faqs.html">FAQs</a>
     <button type="button" id="themeBtnM">Dark mode</button>
   </nav>
 </header>
 
 <main id="main">
 <span id="top"></span>
-
 <!-- ============ 1. HERO: Half wig | countdown | U-part ============ -->
 <section class="hero" aria-labelledby="heroTitle">
   <div class="hero-head wrap">
@@ -73,7 +66,7 @@
   </div>
 
   <div class="split">
-    <a class="split-panel" href="#p-halfwig" data-pick="halfwig">
+    <a class="split-panel" href="shop.html#p-halfwig" data-pick="halfwig">
       <img src="assets/img/z-halfwig.jpg" alt="Woman wearing the Zante kinky straight half wig with a headband" width="900" height="1200" fetchpriority="high">
       <span class="split-copy">
         <span class="split-kicker">The Half Wig</span>
@@ -86,17 +79,17 @@
       <p class="drop-status"><span class="dot" aria-hidden="true"></span>Preorders open</p>
       <h2 class="drop-name" data-drop-name>The next Zante Hair Drop</h2>
       <div class="count" role="timer" aria-label="Time left until this drop closes">
-        <p><b id="cdD">00</b><span>Days</span></p>
-        <p><b id="cdH">00</b><span>Hours</span></p>
-        <p><b id="cdM">00</b><span>Min</span></p>
-        <p><b id="cdS">00</b><span>Sec</span></p>
+        <p><b data-cd="d">00</b><span>Days</span></p>
+        <p><b data-cd="h">00</b><span>Hours</span></p>
+        <p><b data-cd="m">00</b><span>Min</span></p>
+        <p><b data-cd="s">00</b><span>Sec</span></p>
       </div>
       <p class="drop-when">Closes <b data-drop-date>Monday</b> at 18:00 SAST</p>
-      <a class="btn btn--solid" href="#shop">Shop the Drop</a>
+      <a class="btn btn--solid" href="shop.html">Shop the Drop</a>
       <p class="drop-note">Orders placed after the cut-off move into the next drop.</p>
     </div>
 
-    <a class="split-panel" href="#p-upart" data-pick="upart">
+    <a class="split-panel" href="shop.html#p-upart" data-pick="upart">
       <img src="assets/img/z-upart.jpg" alt="Woman wearing the Zante kinky straight U-part wig" width="900" height="1200">
       <span class="split-copy">
         <span class="split-kicker">The U-Part Wig</span>
@@ -130,6 +123,7 @@
       <p class="muted">Two units. One signature texture. Your choice of length.</p>
     </div>
     <div class="products" id="products"></div>
+    <p class="more"><a class="btn" href="shop.html">See full product details</a></p>
   </div>
 </section>
 
@@ -179,7 +173,7 @@
             <li>You want a quick grab-and-go wig.</li>
             <li>You want a removable alternative to a traditional sew-in.</li>
           </ul>
-          <a class="btn" href="#p-halfwig">Shop the Half Wig</a>
+          <a class="btn" href="shop.html#p-halfwig">Shop the Half Wig</a>
         </div>
       </article>
       <article class="vs-card">
@@ -193,24 +187,11 @@
             <li>You prefer a middle or side-parted look.</li>
             <li>You want a removable wig without a traditional installation.</li>
           </ul>
-          <a class="btn" href="#p-upart">Shop the U-Part</a>
+          <a class="btn" href="shop.html#p-upart">Shop the U-Part</a>
         </div>
       </article>
     </div>
-    <div class="facts">
-      <article>
-        <h3>Understanding our texture</h3>
-        <p>Our signature kinky straight texture gives the fullness and subtle texture of natural-looking straight hair. It is not bone straight. Expect a soft, textured finish you can wear as a blow-out, sleek or curled.</p>
-      </article>
-      <article>
-        <h3>Understanding density</h3>
-        <p>All our units are 180% density. Density is the fullness of the hair, not the length of the unit.</p>
-      </article>
-      <article>
-        <h3>True to length</h3>
-        <p>Our hair is true length, so you get the full inches you pay for. That is why our units often look longer than others.</p>
-      </article>
-    </div>
+    <p class="more"><a class="btn" href="hair-guide.html">Read the full hair guide</a></p>
   </div>
 </section>
 
@@ -228,22 +209,6 @@
     <figure class="reel"><video data-src="assets/video/v-blend.mp4" poster="assets/video/v-blend.jpg" muted loop playsinline preload="none"></video><figcaption>The blend, up close</figcaption></figure>
     <figure class="reel"><video data-src="assets/video/v-texture.mp4" poster="assets/video/v-texture.jpg" muted loop playsinline preload="none"></video><figcaption>Kinky straight vs silk pressed</figcaption></figure>
     <figure class="reel"><video data-src="assets/video/v-opening.mp4" poster="assets/video/v-opening.jpg" muted loop playsinline preload="none"></video><figcaption>The U-shaped opening</figcaption></figure>
-  </div>
-</section>
-
-<!-- ============ 7. READY RITUAL ============ -->
-<section class="section ritual" aria-labelledby="ritualTitle">
-  <div class="wrap ritual-in">
-    <div class="ritual-media">
-      <video src="assets/video/v-ritual.mp4" poster="assets/video/v-ritual.jpg" muted loop playsinline autoplay preload="none" aria-label="A freshly washed Zante unit on a stand"></video>
-    </div>
-    <div class="ritual-copy">
-      <p class="eyebrow">The Zante Ready Ritual</p>
-      <h2 class="h2" id="ritualTitle">Every unit deserves a little preparation before it reaches you.</h2>
-      <p>Unlike units shipped straight from the factory to the customer, every Zante wig is received, inspected and pre-washed before dispatch.</p>
-      <p>We take this extra step to give your unit a fresh start and make your first day with your new hair that much easier.</p>
-      <p class="ritual-sign">Because the little details matter.</p>
-    </div>
   </div>
 </section>
 
@@ -267,43 +232,7 @@
       <li><b>Delivery to you</b><span>We dispatch on Mondays and send your tracking details.</span></li>
     </ol>
 
-    <div class="drop-grid">
-      <article class="panel">
-        <h3>Our cut-off dates</h3>
-        <p>Two drops every month. Orders close at <b>18:00 SAST</b> on:</p>
-        <ul class="plain"><li>The <b>first Monday</b> of the month</li><li>The <b>third Monday</b> of the month</li></ul>
-        <p class="small">Coming up:</p>
-        <ul class="dates" id="dropDates"></ul>
-      </article>
-      <article class="panel">
-        <h3>How long will I wait?</h3>
-        <p>Allow about <b>3 to 4 weeks</b> from your drop's cut-off for production, international shipping and our Ready Ritual. Local courier time comes after dispatch.</p>
-        <p class="small">International shipping and clearance can vary, so delays are sometimes possible. We keep you updated at every step.</p>
-      </article>
-      <article class="panel">
-        <h3>Delivery</h3>
-        <ul class="plain">
-          <li><b>PostNet to PostNet</b>: R109, about 2 to 3 working days to main centres.</li>
-          <li><b>Aramex store-to-door</b>: price shown at checkout, about 24 to 72 hours to main centres.</li>
-        </ul>
-        <p class="small">Remote and regional areas can take longer.</p>
-      </article>
-    </div>
-
-    <div class="tracker" aria-labelledby="trackTitle">
-      <div class="tracker-head">
-        <h3 id="trackTitle">You will always know where your hair is</h3>
-        <p class="small">You get a WhatsApp or email update only when each step really happens. Example:</p>
-      </div>
-      <ol class="milestones" id="milestones">
-        <li class="done"><b>Order secured</b><span>Your payment is in and your order is in <i data-drop-name>the next drop</i>.</span></li>
-        <li class="done"><b>Production underway</b><span>Your order has gone to our factory.</span></li>
-        <li class="now"><b>On its way to Zante</b><span>Your unit is travelling to South Africa.</span></li>
-        <li><b>Arrived at Zante</b><span>Inspection and the Ready Ritual.</span></li>
-        <li><b>Ready for dispatch</b><span>Inspected, pre-washed and packed.</span></li>
-        <li><b>Dispatched</b><span>Handed to the courier, with tracking.</span></li>
-      </ol>
-    </div>
+    <p class="more"><a class="btn" href="hair-drop.html">How the Drop works</a></p>
   </div>
 </section>
 
@@ -330,6 +259,7 @@
       <h2 class="h2" id="storyTitle">Born from a name. Built around her.</h2>
       <p>Zante Beauty began in 2021 and launched nationwide in 2026, inspired by the bond between a mother and daughter. The name Zante joins two names, <b>Zama</b> and <b>Asante</b>, to create something of our own.</p>
       <p>We believe beautiful hair should complement who you are. We are drawn to kinky straight because it is a beautiful middle ground: the fullness and character of natural hair, with the versatility of straight styling.</p>
+      <p><a class="btn" href="our-story.html">Read our story</a></p>
       <p class="story-sign">Your styling freedom. Wear it your way.</p>
     </div>
   </div>
@@ -342,7 +272,7 @@
       <h2 class="h2" id="faqTitle">FAQs</h2>
       <p class="muted">Still unsure? Send us a message on WhatsApp.</p>
     </div>
-    <div class="faq-list" id="faqList"></div>
+    <div><div class="faq-list" id="faqList" data-limit="5"></div><p class="more"><a class="btn" href="faqs.html">All FAQs</a></p></div>
   </div>
 </section>
 
@@ -366,16 +296,16 @@
 <footer class="footer">
   <div class="wrap footer-in">
     <div class="footer-brand">
-      <a class="logo logo--light" href="#top" aria-label="Zante Beauty, back to top"><span class="logo-z">Zante</span><span class="logo-b">Beauty</span></a>
+      <a class="logo logo--light" href="index.html" aria-label="Zante Beauty, home"><span class="logo-z">Zante</span><span class="logo-b">Beauty</span></a>
       <p>Your styling freedom. Wear it your way.</p>
     </div>
-    <nav aria-label="Shop links"><p class="foot-h">Shop</p><a href="#p-halfwig">Half Wigs</a><a href="#p-upart">U-Part Wigs</a><a href="#drop">The Zante Hair Drop</a><a href="#guide">Hair guide</a></nav>
-    <nav aria-label="Help links"><p class="foot-h">Help</p><a href="#faq">FAQs</a><a href="#drop">Shipping and delivery</a><a href="#returns" data-draft>Returns and refunds</a><a href="#contact" data-draft>Contact us</a></nav>
+    <nav aria-label="Shop links"><p class="foot-h">Shop</p><a href="shop.html#p-halfwig">Half Wigs</a><a href="shop.html#p-upart">U-Part Wigs</a><a href="hair-drop.html">The Zante Hair Drop</a><a href="hair-guide.html">Hair guide</a></nav>
+    <nav aria-label="Help links"><p class="foot-h">Help</p><a href="faqs.html">FAQs</a><a href="hair-drop.html#delivery">Shipping and delivery</a><a href="faqs.html#returns">Returns and refunds</a><a href="#contact" data-draft>Contact us</a></nav>
     <nav aria-label="Legal links"><p class="foot-h">Legal</p><a href="#privacy" data-draft>Privacy policy</a><a href="#terms" data-draft>Terms and conditions</a><a href="#payments" data-draft>Payment methods</a></nav>
   </div>
   <div class="wrap footer-base">
-    <p>© <span id="year">2026</span> Zante Beauty. Draft homepage, not a live shop.</p>
-    <p>All photos, videos and client messages are real Zante content. Policies and checkout are not live yet.</p>
+    <p>© <span id="year">2026</span> Zante Beauty. Draft site, not a live shop.</p>
+    <p>All photos, videos and client messages are real Zante content. Contact, legal pages and checkout are not live yet.</p>
   </div>
 </footer>
 
@@ -397,7 +327,6 @@
   <form class="modal-box" id="reviewForm" novalidate>
     <div class="drawer-head"><h2 id="rvTitle">Write a review</h2><button class="icon-btn" type="button" data-close aria-label="Close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button></div>
     <p class="small">Your name is never shown. We use your order number only to confirm you are a Zante client. Reviews appear after we approve them.</p>
-
     <fieldset class="stars-in"><legend>Your rating</legend><div class="stars-row">
       <input type="radio" name="rating" id="r5" value="5" checked><label for="r5" title="5 stars">★</label>
       <input type="radio" name="rating" id="r4" value="4"><label for="r4" title="4 stars">★</label>
@@ -405,7 +334,6 @@
       <input type="radio" name="rating" id="r2" value="2"><label for="r2" title="2 stars">★</label>
       <input type="radio" name="rating" id="r1" value="1"><label for="r1" title="1 star">★</label>
     </div></fieldset>
-
     <div class="field-row">
       <label class="field">Product
         <select name="product" required><option value="">Choose</option><option value="halfwig">Half Wig</option><option value="upart">U-Part Wig</option></select>
