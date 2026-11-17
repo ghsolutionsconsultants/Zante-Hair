@@ -366,6 +366,40 @@
     });
   })();
 
+  // ======================= ORDER MILESTONES (auto-plays, tap to pick) =======================
+  $$('[data-tracker]').forEach(function (tr) {
+    var steps = $$('.ms', tr), bar = $('.track-bar i', tr);
+    var MSG = [
+      'Hi! 💜 Your payment has been received and your order is secured in ' + current.name + '. Your reference is ' + current.ref + '_07.',
+      'Production update: your order has been submitted to our factory. Your Zante unit is now being prepared.',
+      'Good news! Your unit has been dispatched and is on its way to South Africa. ✈️',
+      'Your unit has arrived at Zante 🎉 It is now going through our inspection and Ready Ritual.',
+      'Your unit has passed inspection, been pre-washed and packaged. It goes out with Monday’s dispatch.',
+      'Your parcel is with the courier! 📦 Tracking number: PNT 4471 2093. Thank you for choosing Zante Beauty.'
+    ];
+    var WHEN = ['Today, 18:04', 'Tuesday, 10:12', 'Monday, 14:30', 'Thursday, 09:45', 'Sunday, 16:20', 'Monday, 11:05'];
+    var at = 0, timer = null, seen = false;
+    function go(i) {
+      at = i;
+      steps.forEach(function (s, j) {
+        s.classList.toggle('done', j < i); s.classList.toggle('now', j === i);
+        $('.ms-btn', s).setAttribute('aria-pressed', j === i);
+      });
+      bar.style.width = (i / (steps.length - 1) * 100) + '%';
+      var chat = $('.phone-chat', tr), from = Math.max(0, i - 2);
+      chat.innerHTML = MSG.slice(from, i + 1).map(function (m, j) {
+        var k = from + j, last = k === i;
+        return '<p class="bubble' + (last ? ' pop' : ' old') + '">' + esc(m) + '</p><p class="bubble-time">' + WHEN[k] + ' ✓✓</p>';
+      }).join('');
+    }
+    function play() { if (reduce || timer) return; timer = setInterval(function () { go((at + 1) % steps.length); }, 2800); }
+    function pause() { clearInterval(timer); timer = null; }
+    steps.forEach(function (s, i) { $('.ms-btn', s).addEventListener('click', function () { pause(); go(i); setTimeout(play, 8000); }); });
+    go(0);
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (en) { en[0].isIntersecting ? play() : pause(); }, { threshold: 0.3 }).observe(tr);
+    else play();
+  });
+
   // ======================= PRODUCTS =======================
   // <div id="products" data-limit="4" data-cat="wigs"> renders a grid; #shopFilters adds category chips.
   var SOON_TILE = '<div class="soon-tile" aria-hidden="true"><span class="soon-z">Zante</span><span class="soon-t">Photo coming soon</span></div>';
