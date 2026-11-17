@@ -37,11 +37,11 @@
       opts: lens(L, [4350, 4550, 4850, 5050, 5250, 5750, 6250]),
       details: ['One Half Wig and one U-Part Wig in the same length'].concat(HAIR) },
     { id: 'clipins', type: 'Clip-ins', cat: 'extensions', est: true, name: 'Kinky Straight Clip-Ins', short: 'Clip-Ins', line: 'Seven pieces. Instant length and fullness.',
-      img: null, soon: true, optLabel: 'Length', def: 1,
+      img: 'z-clip.jpg', alt: 'z-halfwig-back.jpg', optLabel: 'Length', def: 1,
       opts: lens([14, 16, 18, 20, 22], [1650, 1750, 1850, 1990, 2150]),
       details: ['7 pieces, about 120 g', 'Silicone-lined clips'].concat(HAIR) },
     { id: 'bundles', type: 'Bundles', cat: 'extensions', est: true, name: 'Kinky Straight Bundles', short: 'Bundles (set of 3)', line: 'For sew-ins and custom units.',
-      img: null, soon: true, optLabel: 'Length', def: 3,
+      img: 'z-texture.jpg', alt: 'z-halfwig-back.jpg', optLabel: 'Length', def: 3,
       opts: lens(L, [1650, 1800, 1950, 2100, 2250, 2450, 2650]),
       details: ['3 bundles, about 100 g each'].concat(HAIR) },
     { id: 'carekit', type: 'Hair care', cat: 'care', est: true, name: 'Zante Care Kit', short: 'Care Kit', line: 'Everything your unit needs between wears.',
@@ -179,7 +179,12 @@
     if (left <= 0) { renderDrops(); left = current.close - new Date(); } // never count down to a past date
     var s = Math.floor(left / 1000);
     var v = { d: pad(Math.floor(s / 86400)), h: pad(Math.floor(s % 86400 / 3600)), m: pad(Math.floor(s % 3600 / 60)), s: pad(s % 60) };
-    $$('[data-cd]').forEach(function (el) { el.textContent = v[el.dataset.cd]; });
+    $$('[data-cd]').forEach(function (el) {
+      var nv = v[el.dataset.cd];
+      if (el.textContent === nv) return;
+      el.textContent = nv;
+      if (!reduce) { el.classList.remove('flip'); void el.offsetWidth; el.classList.add('flip'); }
+    });
   }
   renderDrops(); tick(); setInterval(tick, 1000);
 
@@ -285,6 +290,80 @@
       split.style.setProperty('--py', ((e.clientY - r.top) / r.height - 0.5).toFixed(3));
     });
     split.addEventListener('pointerleave', function () { split.style.setProperty('--px', 0); split.style.setProperty('--py', 0); });
+  })();
+
+  // ======================= HERO MOTION DESIGN =======================
+  (function heroMotion() {
+    var heroes = $$('.hero--live, .page-hero--rich');
+    if (!heroes.length) return;
+    // 1. masked word reveal on the headline
+    heroes.forEach(function (h) {
+      var t = $('.hero-title, .page-title', h); if (!t || t.dataset.split) return;
+      t.dataset.split = '1';
+      var i = 0;
+      function wrap(node) {
+        Array.prototype.slice.call(node.childNodes).forEach(function (n) {
+          if (n.nodeType === 3) {
+            var frag = document.createDocumentFragment();
+            n.textContent.split(/(\s+)/).forEach(function (w) {
+              if (!w) return;
+              if (/^\s+$/.test(w)) { frag.appendChild(document.createTextNode(w)); return; }
+              var m = document.createElement('span'); m.className = 'mw';
+              var s = document.createElement('span'); s.className = 'mw-in'; s.style.setProperty('--i', i++); s.textContent = w;
+              m.appendChild(s); frag.appendChild(m);
+            });
+            node.replaceChild(frag, n);
+          } else if (n.nodeType === 1 && n.classList.contains('rotator')) {
+            var m2 = document.createElement('span'); m2.className = 'mw';
+            n.parentNode.insertBefore(m2, n); m2.appendChild(n); n.classList.add('mw-in'); n.style.setProperty('--i', i++);
+          } else if (n.nodeType === 1) { wrap(n); }
+        });
+      }
+      wrap(t);
+    });
+    requestAnimationFrame(function () { setTimeout(function () { heroes.forEach(function (h) { h.classList.add('is-live'); }); }, document.getElementById('intro') && !reduce ? 1100 : 60); });
+    if (reduce) return;
+
+    // 2. pointer: tilt, parallax, spotlight
+    heroes.forEach(function (h) {
+      h.addEventListener('pointermove', function (e) {
+        if (e.pointerType !== 'mouse') return;
+        var r = h.getBoundingClientRect();
+        h.style.setProperty('--mx', ((e.clientX - r.left) / r.width - 0.5).toFixed(3));
+        h.style.setProperty('--my', ((e.clientY - r.top) / r.height - 0.5).toFixed(3));
+        h.style.setProperty('--cx', (e.clientX - r.left) + 'px');
+        h.style.setProperty('--cy', (e.clientY - r.top) + 'px');
+      });
+      h.addEventListener('pointerleave', function () { h.style.setProperty('--mx', 0); h.style.setProperty('--my', 0); });
+    });
+
+    // 3. scroll-linked depth, plus marquee speed from scroll velocity
+    var lastY = scrollY, vel = 0, ticking = false;
+    function frame() {
+      ticking = false;
+      var y = scrollY; vel = vel * 0.85 + (y - lastY) * 0.15; lastY = y;
+      heroes.forEach(function (h) {
+        var r = h.getBoundingClientRect();
+        if (r.bottom < 0 || r.top > innerHeight) return;
+        var p = Math.min(1, Math.max(0, -r.top / Math.max(1, r.height)));
+        h.style.setProperty('--sy', p.toFixed(3));
+        h.style.setProperty('--vel', Math.max(-1, Math.min(1, vel / 40)).toFixed(3));
+      });
+      if (Math.abs(vel) > 0.1) { ticking = true; requestAnimationFrame(frame); }
+    }
+    addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(frame); } }, { passive: true });
+
+    // 4. magnetic buttons
+    $$('.hero--live .btn, .page-hero--rich .btn').forEach(function (b) {
+      b.classList.add('magnetic');
+      b.addEventListener('pointermove', function (e) {
+        if (e.pointerType !== 'mouse') return;
+        var r = b.getBoundingClientRect();
+        b.style.setProperty('--bx', ((e.clientX - r.left - r.width / 2) * 0.25).toFixed(1) + 'px');
+        b.style.setProperty('--by', ((e.clientY - r.top - r.height / 2) * 0.35).toFixed(1) + 'px');
+      });
+      b.addEventListener('pointerleave', function () { b.style.setProperty('--bx', '0px'); b.style.setProperty('--by', '0px'); });
+    });
   })();
 
   // ======================= PRODUCTS =======================
