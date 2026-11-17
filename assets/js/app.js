@@ -33,7 +33,9 @@
   // ======================= CATALOGUE (sample content) =======================
   // tags drive the filter chips: wigs, bundles, curly, wavy, blonde
   var PRODUCTS = [
-    { id: 'thandi', name: 'Thandi Glueless Wig', type: 'Wig', img: 'p-thandi', alt: 'p-thandi-2', pos: '50% 18%', texture: 'body', style: 'Body Wave', colour: '1b', tags: 'wigs wavy', lengths: [18, 22, 26], prices: [3650, 3950, 4450], badge: 'Bestseller', install: ['glueless'], vibe: ['waves'] },
+    { id: 'halfwig', name: 'Kinky Straight Half Wig', type: 'Half wig', img: 'z-halfwig', alt: 'z-halfwig-2', pos: '50% 30%', texture: 'kinkyStraight', style: 'Kinky Straight', colour: '1b', tags: 'wigs curly', lengths: [16, 18, 20], prices: [2450, 2650, 2850], badge: 'Customer favourite', install: ['quick', 'glueless'], vibe: ['curls', 'sleek'] },
+    { id: 'upart', name: 'Kinky Straight U-Part Wig', type: 'U-part wig', img: 'z-upart', alt: 'z-upart-2', pos: '50% 28%', texture: 'kinkyStraight', style: 'Kinky Straight', colour: '1b', tags: 'wigs curly', lengths: [16, 18, 20], prices: [2550, 2750, 2950], badge: 'Blends with leave-out', install: ['quick', 'glueless'], vibe: ['curls', 'sleek'] },
+    { id: 'thandi', name: 'Thandi Glueless Wig', type: 'Wig', img: 'p-thandi', alt: 'p-thandi-2', pos: '50% 18%', texture: 'body', style: 'Body Wave', colour: '1b', tags: 'wigs wavy', lengths: [18, 22, 26], prices: [3650, 3950, 4450], install: ['glueless'], vibe: ['waves'] },
     { id: 'deepwave', name: 'Raw Deep Wave Bundles', type: 'Bundles', img: 'p-deepwave-bundles', alt: 'p-deepwave-2', pos: '62% 38%', texture: 'deep', style: 'Deep Wave', colour: '1b', tags: 'bundles curly', lengths: [16, 20, 24], prices: [960, 1120, 1290], badge: 'New drop', install: ['sewin'], vibe: ['curls'], sets: 3 },
     { id: 'amahle', name: 'Amahle Kinky Curly Wig', type: 'Headband wig', img: 'p-amahle', pos: '50% 22%', texture: 'kinkyCurly', style: 'Kinky Curly', colour: '1b', tags: 'wigs curly', lengths: [14, 16, 18], prices: [2150, 2350, 2550], badge: 'No glue', install: ['quick', 'glueless'], vibe: ['curls'] },
     { id: 'naledi', name: 'Naledi Loose Wave Wig', type: 'Wig', img: 'p-naledi', alt: 'p-naledi-2', pos: '68% 40%', texture: 'body', style: 'Loose Wave', colour: '1b', tags: 'wigs wavy', lengths: [20, 24, 28], prices: [2650, 2890, 3290], install: ['glueless', 'quick'], vibe: ['waves', 'sleek'] },
@@ -45,14 +47,17 @@
     { id: 'platinum', name: 'Platinum 613 Bundle', type: 'Bundles', img: 'p-platinum-bundle', pos: '50% 45%', texture: 'straight', style: 'Silky Straight', colour: '613', tags: 'bundles wavy blonde', lengths: [16, 20, 24], prices: [1050, 1190, 1350], badge: 'Colour ready', install: ['sewin'], vibe: ['sleek'], sets: 3 }
   ];
 
+  // real client messages (WhatsApp), shared by Zante. First names left out on purpose.
   var REVIEWS = [
-    ['The body wave survived a Durban summer and still bounces.', 'Nomsa K.', 'Durban', 'Thandi Glueless Wig, 22"'],
-    ['Glueless means I was ready for church in fifteen minutes.', 'Lindiwe M.', 'Soweto', 'Thandi Glueless Wig, 22"'],
-    ['The HD lace actually melted on my skin tone. No tinting at all.', 'Refilwe S.', 'Pretoria', '13x4 HD frontal'],
-    ['Three bundles, full head, zero shedding after a month.', 'Precious N.', 'Bloemfontein', 'Raw Deep Wave Bundles, 20"'],
-    ['The kinky straight blends with my 4C leave-out perfectly.', 'Zanele B.', 'Pietermaritzburg', 'Kinky Straight Bundles, 20"'],
-    ['Ordered at nine, wearing it by five. Same-day is real.', 'Kgothatso D.', 'Midrand', 'Amahle Kinky Curly Wig, 16"'],
-    ['My 613 took colour so well. My stylist was impressed.', 'Thato R.', 'Polokwane', 'Platinum 613 Bundle, 20"']
+    ['People literally thought it\u2019s my natural hair. I fooled a few people and I was complimented on the hair.', 'It\u2019s a 5 star rating from me'],
+    ['Your service was absolutely outstanding. I honestly felt like I matter. It never felt like just another purchase.', 'Supports Black female businesses'],
+    ['What a pleasant surprise to receive such a beautifully packaged parcel, with a freshly washed wig and thoughtful freebies.', 'Opened her parcel'],
+    ['I\u2019m still loving my Zante hair. I\u2019m actually rocking it now silk pressed.', 'Weeks later'],
+    ['People at the office really think it\u2019s my hair.', 'Back at work'],
+    ['I really love this hair. And thanks for the gifts inside. I wish there was a way to rate your service because it is top tier.', 'Collected in person'],
+    ['You\u2019ve certainly left a beautiful impression on me. I will certainly be back for my second unit.', 'Coming back for more'],
+    ['The hair looks and feels amazing! Thank you so much!', 'First wear'],
+    ['I collected the wig yesterday. Thank you for your exceptional service and for the extra goodies. I rocked the wig today.', 'Day one']
   ];
 
   // ======================= THEME (light by default) =======================
@@ -303,9 +308,8 @@
 
   // ======================= REVIEWS =======================
   $('#reviewRail').innerHTML = REVIEWS.map(function (r) {
-    var initials = r[1].split(' ').map(function (w) { return w[0]; }).join('');
     return '<article class="review"><span class="review-stars" aria-label="5 out of 5">★★★★★</span><q>' + esc(r[0]) + '</q>' +
-      '<div class="review-who"><span class="review-av">' + initials + '</span><p>' + esc(r[1]) + ', ' + esc(r[2]) + '<span>' + esc(r[3]) + '</span></p></div></article>';
+      '<div class="review-who"><span class="review-av" aria-hidden="true">Z</span><p>Verified client<span>Sent on WhatsApp</span></p></div></article>';
   }).join('');
 
   // ======================= CLUB =======================
