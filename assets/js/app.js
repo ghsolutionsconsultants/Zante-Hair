@@ -51,21 +51,21 @@
   ];
 
   var FAQS = [
-    ['Is your hair 100% human hair?', 'Yes. Our units are made from 100% virgin human hair in our signature kinky straight texture.'],
-    ['What does 180% density mean?', 'Density describes how full your wig is. All our standard units are 180% density. It is about fullness, not length.'],
-    ['Why do your units look longer than most?', 'Our hair is true to length, so you get the full inches you pay for.'],
-    ['Half wig or U-part: which is more protective?', 'Both help you protect your natural hair. Choose the one that suits your lifestyle. Our hair guide above can help.'],
-    ['Can I wear a middle or side part with a half wig?', 'Not a defined part. You can wear a middle or side flip-over with no distinct parting. If you want a defined part, choose the U-part wig.'],
-    ['Can I straighten or curl my Zante unit?', 'Yes. It is human hair and can be heat styled. Always use heat protection and moderate temperatures. The natural texture can return after washing, moisture or high humidity.'],
-    ['Can kinky straight be bone straight?', 'It can be silk pressed for a straight finish, but it keeps a subtle texture. It gives a fuller, more natural-looking straight finish rather than bone straight.'],
-    ['Once I silk press my unit, will it stay straight?', 'No. The hair goes back to its natural, full blow-out texture after washing, moisture or high humidity.'],
-    ['Do I need to straighten my natural hair?', 'Not always. It depends on your natural texture and the look you want. Avoid unnecessary heat or tension, and style the unit to match your hair.'],
-    ['Can I colour a Zante unit?', 'Yes, human hair can be coloured, but results vary and colour can affect the condition of the hair. We recommend a professional colourist and a strand test first.'],
-    ['Can I sew in my Zante unit?', 'Yes. Remove the clips and combs first so they do not rub against and damage your natural hair.'],
-    ['Are the wigs ready to wear?', 'Yes. We inspect and pre-wash every unit before dispatch at no extra cost. If you may want to return it, please do not wear it, so it stays eligible for a refund.'],
-    ['Why do preorders take longer?', 'We group orders into a production drop before the hair is made and shipped to South Africa. This lets us source and prepare every unit properly. Allow 3 to 4 weeks from your drop’s cut-off.'],
-    ['Can I change my order after payment?', 'Contact us as soon as possible. Changes may be possible before your drop closes, but we cannot guarantee them once the drop has gone to production.'],
-    ['Do you offer installation?', 'Not at the moment. Our collection is designed for beginner-friendly, DIY, removable styling.']
+    ['Is your hair 100% human hair?', 'Yes. Our units are made from 100% virgin human hair in our signature kinky straight texture.', 'hair'],
+    ['What does 180% density mean?', 'Density describes how full your wig is. All our standard units are 180% density. It is about fullness, not length.', 'hair'],
+    ['Why do your units look longer than most?', 'Our hair is true to length, so you get the full inches you pay for.', 'hair'],
+    ['Half wig or U-part: which is more protective?', 'Both help you protect your natural hair. Choose the one that suits your lifestyle. Our hair guide above can help.', 'styling'],
+    ['Can I wear a middle or side part with a half wig?', 'Not a defined part. You can wear a middle or side flip-over with no distinct parting. If you want a defined part, choose the U-part wig.', 'styling'],
+    ['Can I straighten or curl my Zante unit?', 'Yes. It is human hair and can be heat styled. Always use heat protection and moderate temperatures. The natural texture can return after washing, moisture or high humidity.', 'styling'],
+    ['Can kinky straight be bone straight?', 'It can be silk pressed for a straight finish, but it keeps a subtle texture. It gives a fuller, more natural-looking straight finish rather than bone straight.', 'styling'],
+    ['Once I silk press my unit, will it stay straight?', 'No. The hair goes back to its natural, full blow-out texture after washing, moisture or high humidity.', 'styling'],
+    ['Do I need to straighten my natural hair?', 'Not always. It depends on your natural texture and the look you want. Avoid unnecessary heat or tension, and style the unit to match your hair.', 'styling'],
+    ['Can I colour a Zante unit?', 'Yes, human hair can be coloured, but results vary and colour can affect the condition of the hair. We recommend a professional colourist and a strand test first.', 'styling'],
+    ['Can I sew in my Zante unit?', 'Yes. Remove the clips and combs first so they do not rub against and damage your natural hair.', 'styling'],
+    ['Are the wigs ready to wear?', 'Yes. We inspect and pre-wash every unit before dispatch at no extra cost. If you may want to return it, please do not wear it, so it stays eligible for a refund.', 'orders'],
+    ['Why do preorders take longer?', 'We group orders into a production drop before the hair is made and shipped to South Africa. This lets us source and prepare every unit properly. Allow 3 to 4 weeks from your drop’s cut-off.', 'orders'],
+    ['Can I change my order after payment?', 'Contact us as soon as possible. Changes may be possible before your drop closes, but we cannot guarantee them once the drop has gone to production.', 'orders'],
+    ['Do you offer installation?', 'Not at the moment. Our collection is designed for beginner-friendly, DIY, removable styling.', 'orders']
   ];
 
   // ======================= THEME =======================
@@ -81,7 +81,7 @@
 
   // ======================= INTRO =======================
   (function intro() {
-    var el = $('#intro');
+    var el = $('#intro'); if (!el) return;
     var seen = false;
     try { seen = sessionStorage.getItem('zante-intro') === '1'; sessionStorage.setItem('zante-intro', '1'); } catch (e) { /* private mode */ }
     setTimeout(function () { el.classList.add('is-done'); }, seen || reduce ? 0 : 1400);
@@ -131,7 +131,7 @@
     $$('[data-drop-name]').forEach(function (el) { el.textContent = current.name; });
     $$('[data-drop-date]').forEach(function (el) { el.textContent = sastDate(current.close); });
     $$('[data-drop-close]').forEach(function (el) { el.textContent = sastDate(current.close) + ' at 18:00 SAST'; });
-    $('#dropDates').innerHTML = list.map(function (d) {
+    var dd = $('#dropDates'); if (dd) dd.innerHTML = list.map(function (d) {
       return '<li><span>' + esc(d.name) + '</span><span>' + esc(sastDate(d.close)) + '</span></li>';
     }).join('');
   }
@@ -140,15 +140,14 @@
     var left = current.close - new Date();
     if (left <= 0) { renderDrops(); left = current.close - new Date(); } // never count down to a past date
     var s = Math.floor(left / 1000);
-    $('#cdD').textContent = pad(Math.floor(s / 86400));
-    $('#cdH').textContent = pad(Math.floor(s % 86400 / 3600));
-    $('#cdM').textContent = pad(Math.floor(s % 3600 / 60));
-    $('#cdS').textContent = pad(s % 60);
+    var v = { d: pad(Math.floor(s / 86400)), h: pad(Math.floor(s % 86400 / 3600)), m: pad(Math.floor(s % 3600 / 60)), s: pad(s % 60) };
+    $$('[data-cd]').forEach(function (el) { el.textContent = v[el.dataset.cd]; });
   }
   renderDrops(); tick(); setInterval(tick, 1000);
 
   // ======================= PRODUCTS =======================
-  $('#products').innerHTML = PRODUCTS.map(function (p) {
+  var productsEl = $('#products'), FULL = !!productsEl && productsEl.hasAttribute('data-full');
+  if (productsEl) productsEl.innerHTML = PRODUCTS.map(function (p) {
     return '<article class="product reveal" id="p-' + p.id + '" data-id="' + p.id + '">' +
       '<div class="product-media">' +
         '<span class="tag ' + p.tagClass + '">' + esc(p.tag) + '</span>' +
@@ -164,12 +163,13 @@
       '</div></div>' +
       '<div class="buy"><p class="price"><b>' + fmt(p.prices[DEFAULT_LEN]) + '</b><span>or 3 × ' + fmt(p.prices[DEFAULT_LEN] / 3) + ' with PayJustNow</span></p>' +
         '<button type="button" class="btn btn--solid" data-add>Add to bag</button></div>' +
-      '<details class="details"><summary>Details</summary><ul>' + p.details.map(function (d) { return '<li>' + esc(d) + '</li>'; }).join('') + '</ul><q>' + esc(p.quote) + '</q></details>' +
+      '<details class="details"' + (FULL ? ' open' : '') + '><summary>Details</summary><ul>' + p.details.map(function (d) { return '<li>' + esc(d) + '</li>'; }).join('') + '</ul><q>' + esc(p.quote) + '</q></details>' +
     '</article>';
   }).join('');
 
   PRODUCTS.forEach(function (p) {
     var card = $('#p-' + p.id); p.sel = DEFAULT_LEN;
+    if (!card) return;
     var media = $('.product-media', card), dots = $$('.thumbs button', card);
     dots.forEach(function (b, i) {
       b.addEventListener('click', function () {
@@ -274,6 +274,7 @@
   }
   function localPending() { try { return JSON.parse(store(PENDING_KEY) || '[]') || []; } catch (e) { return []; } }
   function renderReviews(approved) {
+    if (!$('#reviewRail')) return;
     var seed = REVIEWS.map(function (r) { return { body: r[0], rating: r[1] }; });
     var mine = localPending().map(function (r) { r.pending = true; return r; });
     $('#reviewRail').innerHTML = mine.concat(approved || [], seed).map(reviewCard).join('');
@@ -291,7 +292,7 @@
     modal.hidden = !open;
     if (open) { lastFocus = document.activeElement; $('textarea', form).focus(); } else if (lastFocus) lastFocus.focus();
   }
-  $('#reviewOpen').addEventListener('click', function () { openModal(true); });
+  $$('#reviewOpen, [data-review-open]').forEach(function (b) { b.addEventListener('click', function () { openModal(true); }); });
   $('[data-close]', modal).addEventListener('click', function () { openModal(false); });
   modal.addEventListener('click', function (e) { if (e.target === modal) openModal(false); });
   addEventListener('keydown', function (e) { if (e.key === 'Escape') { if (!modal.hidden) openModal(false); openBag(false); } });
@@ -331,12 +332,22 @@
   });
 
   // ======================= FAQ =======================
-  $('#faqList').innerHTML = FAQS.map(function (q) {
-    return '<details class="faq-item"><summary>' + esc(q[0]) + '</summary><p>' + esc(q[1]) + '</p></details>';
-  }).join('');
+  function faqItem(q) { return '<details class="faq-item"><summary>' + esc(q[0]) + '</summary><p>' + esc(q[1]) + '</p></details>'; }
+  var faqList = $('#faqList');
+  if (faqList) faqList.innerHTML = FAQS.slice(0, +faqList.dataset.limit || FAQS.length).map(faqItem).join('');
+  var faqGroups = $('#faqGroups');
+  if (faqGroups) {
+    var GROUPS = [['hair', 'Our hair'], ['styling', 'Styling and wear'], ['orders', 'Orders and the Hair Drop']];
+    faqGroups.innerHTML = GROUPS.map(function (g) {
+      return '<div class="faq-group" id="faq-' + g[0] + '"><h2 class="h3">' + g[1] + '</h2><div class="faq-list">' +
+        FAQS.filter(function (q) { return q[2] === g[0]; }).map(faqItem).join('') + '</div></div>';
+    }).join('');
+    $('#faqJump').innerHTML = GROUPS.map(function (g) { return '<a class="chip" href="#faq-' + g[0] + '">' + g[1] + '</a>'; }).join('') + '<a class="chip" href="#returns">Returns</a>';
+  }
 
   // ======================= CLUB =======================
-  $('#clubForm').addEventListener('submit', function (e) {
+  var club = $('#clubForm');
+  if (club) club.addEventListener('submit', function (e) {
     e.preventDefault();
     var inp = $('#clubEmail'), msg = $('#clubMsg');
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(inp.value.trim())) { msg.textContent = 'Enter an email address like name@example.co.za.'; inp.focus(); return; }
