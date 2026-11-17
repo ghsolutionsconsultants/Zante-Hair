@@ -1,4 +1,4 @@
-/* Zante Beauty · draft homepage behaviour */
+/* Zante Beauty · site behaviour */
 (function () {
   'use strict';
 
@@ -15,28 +15,63 @@
   function toast(msg) { var t = $('#toast'); t.textContent = msg; t.classList.add('is-on'); clearTimeout(toastT); toastT = setTimeout(function () { t.classList.remove('is-on'); }, 3200); }
 
   // ======================= PRODUCTS (real prices from Zante's price list) =======================
-  var LENGTHS = [10, 12, 14, 16, 18, 20, 22];
+  // Prices marked est: true are estimates, to be finalised with Zante's price list.
+  var L = [10, 12, 14, 16, 18, 20, 22];
+  function lens(ls, prices) { return ls.map(function (l, i) { return { label: l + '"', price: prices[i] }; }); }
+  var HAIR = ['100% virgin human hair', 'Signature kinky straight texture', '180% density', 'Pre-washed by Zante Beauty before dispatch'];
   var PRODUCTS = [
-    {
-      id: 'halfwig', name: 'The Zante Half Wig', short: 'Half Wig', tag: 'Everyday versatility', tagClass: 'tag--half',
-      line: 'Your everyday style, without the effort.',
-      img: 'z-halfwig', alt: 'z-halfwig-2',
-      prices: [2350, 2450, 2600, 2700, 2800, 3050, 3300],
-      desc: 'Meet the half wig that makes switching up your look easier. It adds natural-looking length, fullness and movement while letting you include your own hair in the style. Wear it with a little leave-out, style it with a headband or try different finishes.',
-      details: ['100% virgin human hair', 'Signature kinky straight texture', '180% density', 'Your choice of length, 10" to 22"', 'Pre-washed by Zante Beauty before dispatch', 'Made for versatile, removable styling'],
-      quote: 'Your hair doesn’t have to be complicated to look beautiful.'
-    },
-    {
-      id: 'upart', name: 'The Zante U-Part Wig', short: 'U-Part Wig', tag: 'Natural blend', tagClass: 'tag--upart',
-      line: 'The blend you love. The freedom you need.',
-      img: 'z-upart', alt: 'z-upart-2',
-      prices: [2400, 2500, 2650, 2750, 2850, 3100, 3350],
-      desc: 'If you love the full, blended look of a traditional sew-in but want something you can remove and wear again, meet the Zante U-Part. The U-shaped opening lets you include your own hair for a seamless finish. Wear it sleek, add curls or create your own signature look.',
-      details: ['100% virgin human hair', 'Signature kinky straight texture', '180% density', 'Your choice of length, 10" to 22"', 'U-shaped leave-out opening', 'Pre-washed by Zante Beauty before dispatch', 'Removable and reusable'],
-      quote: 'Think sew-in-inspired styling, with the freedom to take it off.'
-    }
+    { id: 'halfwig', type: 'Half wig', cat: 'wigs', name: 'The Zante Half Wig', short: 'Half Wig', tag: 'Bestseller', line: 'Your everyday style, without the effort.',
+      img: 'z-halfwig.jpg', alt: 'z-halfwig-2.jpg', optLabel: 'Length', def: 3,
+      opts: lens(L, [2350, 2450, 2600, 2700, 2800, 3050, 3300]),
+      details: HAIR.concat(['Wear it with leave-out or a headband', 'Removable, grab-and-go styling']) },
+    { id: 'upart', type: 'U-part wig', cat: 'wigs', name: 'The Zante U-Part Wig', short: 'U-Part Wig', tag: 'Natural blend', line: 'The blend you love. The freedom you need.',
+      img: 'z-upart.jpg', alt: 'z-upart-2.jpg', optLabel: 'Length', def: 3,
+      opts: lens(L, [2400, 2500, 2650, 2750, 2850, 3100, 3350]),
+      details: HAIR.concat(['U-shaped leave-out opening', 'Middle or side part', 'Removable and reusable']) },
+    { id: 'sleek', type: 'U-part wig', cat: 'wigs', est: true, name: 'Silk Press U-Part Wig', short: 'Silk Press U-Part', tag: 'New', line: 'Sleek and pressed, ready on day one.',
+      img: 'z-sleek.jpg', alt: 'z-sleek-2.jpg', optLabel: 'Length', def: 3,
+      opts: lens(L, [2700, 2800, 2950, 3050, 3150, 3400, 3650]),
+      details: HAIR.concat(['Silk pressed by us before dispatch', 'Returns to its blow-out texture after washing']) },
+    { id: 'duo', type: 'Wig set', cat: 'wigs', est: true, name: 'The Zante Duo', short: 'Duo: Half Wig + U-Part', tag: 'Save R400', line: 'Both units, one length. Switch styles all week.',
+      img: 'z-upart-front.jpg', alt: 'z-halfwig-side.jpg', optLabel: 'Length', def: 3,
+      opts: lens(L, [4350, 4550, 4850, 5050, 5250, 5750, 6250]),
+      details: ['One Half Wig and one U-Part Wig in the same length'].concat(HAIR) },
+    { id: 'clipins', type: 'Clip-ins', cat: 'extensions', est: true, name: 'Kinky Straight Clip-Ins', short: 'Clip-Ins', tag: 'New', line: 'Seven pieces. Instant length and fullness.',
+      img: 'z-clip.jpg', alt: 'z-halfwig-back.jpg', optLabel: 'Length', def: 1,
+      opts: lens([14, 16, 18, 20, 22], [1650, 1750, 1850, 1990, 2150]),
+      details: ['7 pieces, about 120 g', 'Silicone-lined clips'].concat(HAIR) },
+    { id: 'bundles', type: 'Bundles', cat: 'extensions', est: true, name: 'Kinky Straight Bundles', short: 'Bundles (set of 3)', tag: 'Set of 3', line: 'For sew-ins and custom units.',
+      img: 'z-texture.jpg', alt: 'z-halfwig-back.jpg', optLabel: 'Length', def: 3,
+      opts: lens(L, [1650, 1800, 1950, 2100, 2250, 2450, 2650]),
+      details: ['3 bundles, about 100 g each'].concat(HAIR) },
+    { id: 'carekit', type: 'Hair care', cat: 'care', est: true, name: 'Zante Care Kit', short: 'Care Kit', tag: 'Care', line: 'Everything your unit needs between wears.',
+      img: 'care-tools.jpg', optLabel: 'Kit', def: 0, opts: [{ label: 'Full kit', price: 650 }],
+      details: ['Sulphate-free shampoo', 'Moisture conditioner', 'Heat protectant spray', 'Wide-tooth comb'] },
+    { id: 'bonnet', type: 'Accessories', cat: 'care', est: true, name: 'Satin Bonnet', short: 'Satin Bonnet', line: 'Protect your hair and your unit overnight.',
+      img: 'prod-bonnet.svg', optLabel: 'Colour', def: 0, opts: [{ label: 'Blush', price: 180 }, { label: 'Plum', price: 180 }],
+      details: ['Double-layer satin', 'Wide, soft elastic band', 'Fits long units'] },
+    { id: 'headbands', type: 'Accessories', cat: 'care', est: true, name: 'Satin Headband Set', short: 'Headband Set', tag: 'Half wig essential', line: 'Three headbands to finish your half wig.',
+      img: 'prod-headband.svg', optLabel: 'Set', def: 0, opts: [{ label: 'Set of 3', price: 220 }],
+      details: ['Plum, blush and champagne', 'Padded satin, gentle on edges'] },
+    { id: 'stand', type: 'Tools', cat: 'care', est: true, name: 'Mannequin Head and Stand', short: 'Mannequin and Stand', line: 'Store, style and wash your unit with ease.',
+      img: 'prod-stand.svg', optLabel: 'Set', def: 0, opts: [{ label: 'Head + tripod', price: 450 }],
+      details: ['Canvas head with pin-friendly surface', 'Adjustable tripod stand'] },
+    { id: 'heat', type: 'Hair care', cat: 'care', est: true, name: 'Zante Heat Shield', short: 'Heat Shield', line: 'Heat protection for silk presses and curls.',
+      img: 'prod-spray.svg', optLabel: 'Size', def: 0, opts: [{ label: '200 ml', price: 220 }],
+      details: ['Protects up to 230°C', 'Light, non-greasy finish', 'Safe for virgin human hair'] },
+    { id: 'grip', type: 'Accessories', cat: 'care', est: true, name: 'Velvet Wig Grip', short: 'Wig Grip', line: 'Keeps your unit secure, no glue needed.',
+      img: 'prod-grip.svg', optLabel: 'Colour', def: 0, opts: [{ label: 'Plum', price: 150 }, { label: 'Black', price: 150 }],
+      details: ['Soft velvet band', 'Adjustable fastening', 'Gentle on edges'] },
+    { id: 'comb', type: 'Tools', cat: 'care', est: true, name: 'Wide-Tooth Detangling Comb', short: 'Detangling Comb', line: 'Detangle gently without pulling.',
+      img: 'prod-comb.svg', optLabel: 'Size', def: 0, opts: [{ label: 'One size', price: 90 }],
+      details: ['Seamless teeth', 'For wet or dry hair'] },
+    { id: 'wigbag', type: 'Accessories', cat: 'care', est: true, name: 'Satin Wig Bag', short: 'Wig Bag', line: 'Store and travel with your unit tangle-free.',
+      img: 'prod-bag.svg', optLabel: 'Size', def: 0, opts: [{ label: 'Fits up to 22"', price: 250 }],
+      details: ['Satin lined', 'Drawstring close', 'Fits up to 22" units'] },
+    { id: 'giftcard', type: 'Gift card', cat: 'gifts', est: true, name: 'Zante Gift Card', short: 'Gift Card', tag: 'Gift', line: 'Give her styling freedom.',
+      img: 'prod-giftcard.svg', optLabel: 'Amount', def: 1, opts: [500, 1000, 2500, 3000].map(function (v) { return { label: fmt(v), price: v }; }),
+      details: ['Sent by email', 'Use on any drop', 'Valid for 3 years'] }
   ];
-  var DEFAULT_LEN = 3; // 16"
 
   var REVIEWS = [
     ['People literally thought it’s my natural hair. I fooled a few people and I was complimented on the hair.', 5],
@@ -131,8 +166,11 @@
     $$('[data-drop-name]').forEach(function (el) { el.textContent = current.name; });
     $$('[data-drop-date]').forEach(function (el) { el.textContent = sastDate(current.close); });
     $$('[data-drop-close]').forEach(function (el) { el.textContent = sastDate(current.close) + ' at 18:00 SAST'; });
-    var dd = $('#dropDates'); if (dd) dd.innerHTML = list.map(function (d) {
-      return '<li><span>' + esc(d.name) + '</span><span>' + esc(sastDate(d.close)) + '</span></li>';
+    var dd = $('#dropDates'); if (dd) dd.innerHTML = list.map(function (d, i) {
+      var s = new Date(d.close.getTime() + 2 * 3600e3);
+      return '<li class="' + (i ? '' : 'is-next') + '"><span class="cal-date"><small>Mon</small><b>' + s.getUTCDate() + '</b><small>' + MONTHS[s.getUTCMonth()].slice(0, 3) + '</small></span>' +
+        '<span class="cal-info"><b>' + esc(d.name.split(' – ')[0]) + '</b><small>' + esc(MONTHS[s.getUTCMonth()] + ' ' + s.getUTCFullYear()) + ' · closes 18:00 SAST</small></span>' +
+        (i ? '' : '<span class="cal-tag">Open now</span>') + '</li>';
     }).join('');
   }
   function pad(n) { return String(n).padStart(2, '0'); }
@@ -145,52 +183,8 @@
   }
   renderDrops(); tick(); setInterval(tick, 1000);
 
-  // ======================= PRODUCTS =======================
-  var productsEl = $('#products'), FULL = !!productsEl && productsEl.hasAttribute('data-full');
-  if (productsEl) productsEl.innerHTML = PRODUCTS.map(function (p) {
-    return '<article class="product reveal" id="p-' + p.id + '" data-id="' + p.id + '">' +
-      '<div class="product-media">' +
-        '<span class="tag ' + p.tagClass + '">' + esc(p.tag) + '</span>' +
-        '<img src="assets/img/' + p.img + '.jpg" alt="' + esc(p.name) + ', worn" loading="lazy" width="900" height="1200">' +
-        '<img class="alt" src="assets/img/' + p.alt + '.jpg" alt="' + esc(p.name) + ' on a mannequin" loading="lazy" width="900" height="1200">' +
-        '<div class="thumbs"><button type="button" class="is-on" aria-label="Show worn photo"></button><button type="button" aria-label="Show mannequin photo"></button></div>' +
-      '</div>' +
-      '<div><h3 class="product-name">' + esc(p.name) + '</h3><p class="product-line">' + esc(p.line) + '</p></div>' +
-      '<p class="product-spec">100% virgin human hair · Kinky straight · 180% density · Pre-washed</p>' +
-      '<p class="product-desc">' + esc(p.desc) + '</p>' +
-      '<div><p class="lens-label">Length</p><div class="lens" role="group" aria-label="Length">' +
-        LENGTHS.map(function (l, i) { return '<button type="button" data-i="' + i + '" class="' + (i === DEFAULT_LEN ? 'is-on' : '') + '" aria-pressed="' + (i === DEFAULT_LEN) + '">' + l + '"</button>'; }).join('') +
-      '</div></div>' +
-      '<div class="buy"><p class="price"><b>' + fmt(p.prices[DEFAULT_LEN]) + '</b><span>or 3 × ' + fmt(p.prices[DEFAULT_LEN] / 3) + ' with PayJustNow</span></p>' +
-        '<button type="button" class="btn btn--solid" data-add>Add to bag</button></div>' +
-      '<details class="details"' + (FULL ? ' open' : '') + '><summary>Details</summary><ul>' + p.details.map(function (d) { return '<li>' + esc(d) + '</li>'; }).join('') + '</ul><q>' + esc(p.quote) + '</q></details>' +
-    '</article>';
-  }).join('');
-
-  PRODUCTS.forEach(function (p) {
-    var card = $('#p-' + p.id); p.sel = DEFAULT_LEN;
-    if (!card) return;
-    var media = $('.product-media', card), dots = $$('.thumbs button', card);
-    dots.forEach(function (b, i) {
-      b.addEventListener('click', function () {
-        media.classList.toggle('show-alt', i === 1);
-        dots.forEach(function (x, j) { x.classList.toggle('is-on', i === j); });
-      });
-    });
-    $('.lens', card).addEventListener('click', function (e) {
-      var b = e.target.closest('button'); if (!b) return;
-      p.sel = +b.dataset.i;
-      $$('.lens button', card).forEach(function (x) { var on = x === b; x.classList.toggle('is-on', on); x.setAttribute('aria-pressed', on); });
-      $('.price b', card).textContent = fmt(p.prices[p.sel]);
-      $('.price span', card).textContent = 'or 3 × ' + fmt(p.prices[p.sel] / 3) + ' with PayJustNow';
-    });
-    $('[data-add]', card).addEventListener('click', function () {
-      addToBag({ key: p.id + '-' + LENGTHS[p.sel], name: p.short, variant: 'Kinky straight, ' + LENGTHS[p.sel] + '"', price: p.prices[p.sel], img: p.img });
-    });
-  });
-
   // ======================= BAG =======================
-  var BAG_KEY = 'zante-bag3', bag = [];
+  var BAG_KEY = 'zante-bag4', bag = [];
   try { bag = JSON.parse(store(BAG_KEY) || '[]') || []; } catch (e) { bag = []; }
   var drawer = $('#bag'), scrim = $('#scrim');
   function saveBag() { store(BAG_KEY, JSON.stringify(bag)); renderBag(); }
@@ -199,8 +193,17 @@
     $('#bagCount').textContent = n;
     $('#bagBtn').setAttribute('aria-label', 'Open bag, ' + n + ' item' + (n === 1 ? '' : 's'));
     $('#bagList').innerHTML = bag.length ? bag.map(function (b, i) {
-      return '<li class="bag-item"><img src="assets/img/' + b.img + '.jpg" alt=""><div><p>' + esc(b.name) + (b.qty > 1 ? ' × ' + b.qty : '') + '</p><small>' + esc(b.variant) + '</small><br><button type="button" data-rm="' + i + '">Remove</button></div><b>' + fmt(b.price * b.qty) + '</b></li>';
+      return '<li class="bag-item"><img src="assets/img/' + b.img + '" alt=""><div><p>' + esc(b.name) + (b.qty > 1 ? ' × ' + b.qty : '') + '</p><small>' + esc(b.variant) + '</small><br><button type="button" data-rm="' + i + '">Remove</button></div><b>' + fmt(b.price * b.qty) + '</b></li>';
     }).join('') : '<li class="bag-empty">Your bag is empty.</li>';
+    var up = $('#bagUpsell');
+    if (up) {
+      var inBag = bag.map(function (b) { return b.key.split('-')[0]; });
+      var picks = ['headbands', 'bonnet', 'heat', 'grip', 'carekit'].filter(function (id) { return inBag.indexOf(id) < 0; }).slice(0, 3);
+      up.innerHTML = bag.length && picks.length ? '<p class="small">Complete your look</p><div class="upsell">' + picks.map(function (id) {
+        var p = PRODUCTS.filter(function (x) { return x.id === id; })[0];
+        return '<button type="button" class="up-item" data-up="' + id + '"><img src="assets/img/' + p.img + '" alt=""><span>' + esc(p.short) + '<b>' + fmt(p.opts[0].price) + '</b></span><i aria-hidden="true">+</i></button>';
+      }).join('') + '</div>' : '';
+    }
     $('#bagTotal').textContent = fmt(total);
     $('#bagPjn').textContent = total ? 'Or 3 × ' + fmt(total / 3) + ' with PayJustNow. Delivery is calculated at checkout.' : 'Delivery is calculated at checkout.';
   }
@@ -218,9 +221,285 @@
   $('#bagBtn').addEventListener('click', function () { openBag(true); });
   $('#bagClose').addEventListener('click', function () { openBag(false); });
   scrim.addEventListener('click', function () { openBag(false); });
+  var upEl = $('#bagUpsell');
+  if (upEl) upEl.addEventListener('click', function (e) {
+    var u = e.target.closest('[data-up]'); if (!u) return;
+    var p = PRODUCTS.filter(function (x) { return x.id === u.dataset.up; })[0], o = p.opts[p.def];
+    addToBag({ key: p.id + '-' + p.def, name: p.short, variant: p.optLabel + ': ' + o.label, price: o.price, img: p.img });
+  });
   $('#bagList').addEventListener('click', function (e) { var b = e.target.closest('[data-rm]'); if (!b) return; bag.splice(+b.dataset.rm, 1); saveBag(); });
-  $('#checkoutBtn').addEventListener('click', function () { toast('Checkout is not live in this draft.'); });
+  $('#checkoutBtn').addEventListener('click', function () { toast('Checkout opens with our launch. Message us on WhatsApp to order now.'); });
   renderBag();
+
+  // ======================= LIVE HERO =======================
+  (function liveHero() {
+    var hero = $('#hero.hero--live'); if (!hero) return;
+    // 1. rotating word
+    var words = ['Your way.', 'Your texture.', 'Your freedom.', 'Your rules.', 'Your style.'], wi = 0;
+    var rot = $('.rot-word', hero);
+    // 2. slideshows with story bars, the two sides offset so something always changes
+    var DUR = 4800;
+    var shows = $$('.split-panel', hero).map(function (panel, k) {
+      var slides = $$('.slide', panel), bars = $('.bars', panel);
+      bars.innerHTML = slides.map(function () { return '<i><b></b></i>'; }).join('');
+      return { panel: panel, slides: slides, bars: $$('i', bars), i: 0, offset: k * (DUR / 2) };
+    });
+    function show(s, i) {
+      s.slides.forEach(function (el, j) {
+        var on = j === i;
+        el.classList.toggle('is-on', on);
+        if (el.tagName === 'VIDEO') {
+          if (on) { if (!el.src) el.src = el.dataset.src; el.currentTime = 0; el.play().catch(function () {}); } else el.pause();
+        }
+      });
+      s.bars.forEach(function (b, j) { b.className = j < i ? 'done' : j === i ? 'run' : ''; });
+      s.i = i;
+    }
+    var running = false, timers = [];
+    function start() {
+      if (running || reduce) return; running = true;
+      shows.forEach(function (s) {
+        show(s, s.i);
+        timers.push(setTimeout(function step() {
+          show(s, (s.i + 1) % s.slides.length);
+          timers.push(setTimeout(step, DUR));
+        }, DUR - s.offset));
+      });
+      timers.push(setInterval(function () {
+        wi = (wi + 1) % words.length;
+        rot.classList.add('out');
+        setTimeout(function () { rot.textContent = words[wi]; rot.classList.remove('out'); rot.classList.add('in'); setTimeout(function () { rot.classList.remove('in'); }, 450); }, 280);
+      }, 2600));
+    }
+    function stop() { running = false; timers.forEach(function (t) { clearTimeout(t); clearInterval(t); }); timers = []; shows.forEach(function (s) { s.bars.forEach(function (b) { if (b.className === 'run') b.className = 'paused'; }); }); }
+    if (reduce) { shows.forEach(function (s) { show(s, 0); }); return; }
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (en) { en[0].isIntersecting ? start() : stop(); }, { threshold: 0.15 }).observe(hero);
+    else start();
+    document.addEventListener('visibilitychange', function () { document.hidden ? stop() : start(); });
+    // 3. pointer parallax
+    var split = $('#split');
+    split.addEventListener('pointermove', function (e) {
+      if (e.pointerType !== 'mouse') return;
+      var r = split.getBoundingClientRect();
+      split.style.setProperty('--px', ((e.clientX - r.left) / r.width - 0.5).toFixed(3));
+      split.style.setProperty('--py', ((e.clientY - r.top) / r.height - 0.5).toFixed(3));
+    });
+    split.addEventListener('pointerleave', function () { split.style.setProperty('--px', 0); split.style.setProperty('--py', 0); });
+  })();
+
+  // ======================= PRODUCTS =======================
+  // <div id="products" data-limit="4" data-cat="wigs"> renders a grid; #shopFilters adds category chips.
+  function card(p) {
+    var o = p.opts[p.def];
+    return '<article class="pcard" id="p-' + p.id + '" data-id="' + p.id + '" data-cat="' + p.cat + '">' +
+      '<div class="pcard-media" data-quick="' + p.id + '" role="button" tabindex="0" aria-label="Quick view: ' + esc(p.name) + '">' +
+        (p.tag ? '<span class="tag">' + esc(p.tag) + '</span>' : '') +
+        '<img src="assets/img/' + p.img + '" alt="' + esc(p.name) + '" loading="lazy" width="400" height="500">' +
+        (p.alt ? '<img class="alt" src="assets/img/' + p.alt + '" alt="" loading="lazy" width="400" height="500">' : '') +
+      '<span class="qv-hint">Quick view</span></div>' +
+      '<div class="pcard-body">' +
+        '<h3 class="pcard-name"><button type="button" data-quick="' + p.id + '">' + esc(p.name) + '</button></h3>' +
+        '<p class="pcard-line">' + esc(p.line) + '</p>' +
+        '<div class="pcard-row">' +
+          (p.opts.length > 1 ? '<label class="pcard-opt"><span class="sr">' + p.optLabel + '</span><select data-opt>' +
+            p.opts.map(function (x, i) { return '<option value="' + i + '"' + (i === p.def ? ' selected' : '') + '>' + esc(x.label) + '</option>'; }).join('') +
+          '</select></label>' : '<span class="pcard-single">' + esc(o.label) + '</span>') +
+          '<p class="pcard-price"><b>' + fmt(o.price) + '</b></p>' +
+        '</div>' +
+        '<p class="pcard-pjn">or 3 × <span>' + fmt(o.price / 3) + '</span> PayJustNow</p>' +
+        '<button type="button" class="btn btn--solid btn--sm" data-add>Add to bag</button>' +
+        '<details class="pcard-more"><summary>Details</summary><ul>' + p.details.map(function (d) { return '<li>' + esc(d) + '</li>'; }).join('') + '</ul></details>' +
+      '</div></article>';
+  }
+  $$('[data-products]').forEach(function (grid) {
+    var lim = +grid.dataset.limit || PRODUCTS.length, cat = grid.dataset.cat;
+    grid.innerHTML = PRODUCTS.filter(function (p) { return !cat || p.cat === cat; }).slice(0, lim).map(card).join('');
+  });
+  $$('.pcard').forEach(function (el) {
+    var p = PRODUCTS.filter(function (x) { return x.id === el.dataset.id; })[0], sel = p.def;
+    var s = $('[data-opt]', el);
+    if (s) s.addEventListener('change', function () {
+      sel = +s.value;
+      $('.pcard-price b', el).textContent = fmt(p.opts[sel].price);
+      $('.pcard-pjn span', el).textContent = fmt(p.opts[sel].price / 3);
+    });
+    $('[data-add]', el).addEventListener('click', function () {
+      var o = p.opts[sel];
+      addToBag({ key: p.id + '-' + sel, name: p.short, variant: p.optLabel + ': ' + o.label, price: o.price, img: p.img });
+    });
+  });
+  // ======================= SHOP FILTERS =======================
+  var CATS = { all: 'All', wigs: 'Wigs', extensions: 'Extensions', care: 'Care and accessories', gifts: 'Gifts' };
+  var catTabs = $('#catTabs');
+  if (catTabs) (function shopFilters() {
+    var state = { cat: 'all', lengths: [], price: '', types: [], flags: [], sort: 'featured' };
+    var grid = $('#products'), fpanel = $('#fpanel');
+    var allLens = [10, 12, 14, 16, 18, 20, 22];
+    var types = PRODUCTS.map(function (p) { return p.type; }).filter(function (t, i, a) { return a.indexOf(t) === i; });
+    $('#fLength').innerHTML = allLens.map(function (l) { return '<label class="fchip"><input type="checkbox" value="' + l + '"><span>' + l + '"</span></label>'; }).join('');
+    $('#fType').innerHTML = types.map(function (t) { return '<label class="fcheck"><input type="checkbox" value="' + esc(t) + '" data-type> ' + esc(t) + '</label>'; }).join('');
+
+    function flagsOf(p) { var t = (p.tag || '').toLowerCase(), f = []; if (t === 'new') f.push('new'); if (t === 'bestseller') f.push('best'); if (/save/.test(t)) f.push('deal'); return f; }
+    function minPrice(p) { return Math.min.apply(null, p.opts.map(function (o) { return o.price; })); }
+    function match(p, ignoreCat) {
+      if (!ignoreCat && state.cat !== 'all' && p.cat !== state.cat) return false;
+      if (state.lengths.length && !p.opts.some(function (o) { return state.lengths.indexOf(parseInt(o.label, 10)) > -1; })) return false;
+      if (state.price) {
+        var r = state.price.split('-'), cand = p.opts.filter(function (o) { return !state.lengths.length || state.lengths.indexOf(parseInt(o.label, 10)) > -1; });
+        if (!cand.some(function (o) { return o.price >= +r[0] && o.price < +r[1]; })) return false;
+      }
+      if (state.types.length && state.types.indexOf(p.type) < 0) return false;
+      if (state.flags.length && !state.flags.some(function (f) { return flagsOf(p).indexOf(f) > -1; })) return false;
+      return true;
+    }
+    function apply() {
+      var list = PRODUCTS.filter(function (p) { return match(p); });
+      if (state.sort === 'price-asc') list.sort(function (a, b) { return minPrice(a) - minPrice(b); });
+      if (state.sort === 'price-desc') list.sort(function (a, b) { return minPrice(b) - minPrice(a); });
+      if (state.sort === 'name') list.sort(function (a, b) { return a.name.localeCompare(b.name); });
+      var cards = {};
+      $$('.pcard', grid).forEach(function (c) { cards[c.dataset.id] = c; c.hidden = true; });
+      list.forEach(function (p) { var c = cards[p.id]; c.hidden = false; grid.appendChild(c); });
+      var n = list.length;
+      $('#shopCount').textContent = n + ' product' + (n === 1 ? '' : 's') + (state.cat !== 'all' ? ' in ' + CATS[state.cat] : '');
+      $('#fCount').textContent = n;
+      $('#shopEmpty').hidden = n > 0;
+      // category counts honour the other filters
+      $$('.cat-tab', catTabs).forEach(function (b) {
+        var c = b.dataset.cat, k = PRODUCTS.filter(function (p) { return match(p, true) && (c === 'all' || p.cat === c); }).length;
+        b.innerHTML = CATS[c] + ' <span>' + k + '</span>';
+      });
+      // active filter pills
+      var pills = [];
+      state.lengths.forEach(function (l) { pills.push(['len', l, l + '"']); });
+      if (state.price) pills.push(['price', state.price, $('input[name="fprice"][value="' + state.price + '"]').parentNode.textContent.trim()]);
+      state.types.forEach(function (t) { pills.push(['type', t, t]); });
+      state.flags.forEach(function (f) { pills.push(['flag', f, { new: 'New in', best: 'Bestsellers', deal: 'Deals' }[f]]); });
+      $('#activeFilters').innerHTML = pills.map(function (x) { return '<button type="button" class="pill" data-k="' + x[0] + '" data-v="' + esc(x[1]) + '">' + esc(x[2]) + ' <span aria-hidden="true">×</span><span class="sr"> remove filter</span></button>'; }).join('') +
+        (pills.length ? '<button type="button" class="pill pill--clear" data-clear>Clear all</button>' : '');
+      var b = $('#fBadge'); b.hidden = !pills.length; b.textContent = pills.length;
+      try { history.replaceState(null, '', state.cat === 'all' ? location.pathname : '#cat-' + state.cat); } catch (e) { /* file:// */ }
+    }
+    function readInputs() {
+      state.lengths = $$('#fLength input:checked').map(function (i) { return +i.value; });
+      state.price = ($('input[name="fprice"]:checked') || {}).value || '';
+      state.types = $$('[data-type]:checked').map(function (i) { return i.value; });
+      state.flags = $$('[data-flag]:checked').map(function (i) { return i.value; });
+      apply();
+    }
+    function clearAll() {
+      $$('input[type="checkbox"]', fpanel).forEach(function (i) { i.checked = false; });
+      $('input[name="fprice"][value=""]').checked = true;
+      readInputs();
+    }
+    fpanel.addEventListener('change', readInputs);
+    $('#fClear').addEventListener('click', clearAll);
+    document.addEventListener('click', function (e) {
+      if (e.target.closest('[data-clear]')) { clearAll(); return; }
+      var pill = e.target.closest('.pill[data-k]'); if (!pill) return;
+      var k = pill.dataset.k, v = pill.dataset.v;
+      if (k === 'len') $('#fLength input[value="' + v + '"]').checked = false;
+      if (k === 'price') $('input[name="fprice"][value=""]').checked = true;
+      if (k === 'type') $$('[data-type]').forEach(function (i) { if (i.value === v) i.checked = false; });
+      if (k === 'flag') $('[data-flag][value="' + v + '"]').checked = false;
+      readInputs();
+    });
+    catTabs.addEventListener('click', function (e) {
+      var b = e.target.closest('.cat-tab'); if (!b) return;
+      state.cat = b.dataset.cat;
+      $$('.cat-tab', catTabs).forEach(function (x) { var on = x === b; x.classList.toggle('is-on', on); x.setAttribute('aria-pressed', on); });
+      apply();
+    });
+    $('#fSort').addEventListener('change', function () { state.sort = this.value; apply(); });
+    // mobile sheet
+    function sheet(open) { fpanel.classList.toggle('is-open', open); document.body.classList.toggle('no-scroll', open); if (open) $('#fClose').focus(); }
+    $('#fOpen').addEventListener('click', function () { sheet(true); });
+    $('#fClose').addEventListener('click', function () { sheet(false); });
+    $('#fApply').addEventListener('click', function () { sheet(false); grid.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }); });
+    addEventListener('keydown', function (e) { if (e.key === 'Escape') sheet(false); });
+
+    var want = (location.hash.match(/^#cat-(\w+)/) || [])[1];
+    var wb = want && $('.cat-tab[data-cat="' + want + '"]', catTabs);
+    if (wb) wb.click(); else apply();
+  })();
+
+  // ======================= QUICK VIEW =======================
+  var qv = $('#quickView');
+  function bodyAt(len) { // where a length falls on a 165 cm frame (inches from the crown, roughly)
+    var m = { 10: ['Chin to shoulder', 30], 12: ['Shoulder', 36], 14: ['Below the shoulder', 42], 16: ['Collarbone to chest', 49], 18: ['Mid-chest', 56], 20: ['Bra strap', 63], 22: ['Mid-back', 70] };
+    return m[len] || null;
+  }
+  function openQuick(id) {
+    var p = PRODUCTS.filter(function (x) { return x.id === id; })[0]; if (!p || !qv) return;
+    var sel = p.def, imgs = [p.img].concat(p.alt ? [p.alt] : []);
+    function lensRow() {
+      var l = parseInt(p.opts[sel].label, 10), at = bodyAt(l);
+      return at ? '<div class="lv"><svg viewBox="0 0 120 100" aria-hidden="true"><circle cx="60" cy="18" r="11" fill="currentColor" opacity=".18"/><path d="M38 100 C38 60 44 40 60 36 C76 40 82 60 82 100" fill="currentColor" opacity=".12"/>' +
+        '<path d="M49 12 C40 30 42 ' + (at[1]) + ' 44 ' + (at[1] + 6) + ' M71 12 C80 30 78 ' + at[1] + ' 76 ' + (at[1] + 6) + '" stroke="var(--pink-ink)" stroke-width="5" fill="none" stroke-linecap="round"/>' +
+        '<line x1="20" x2="100" y1="' + (at[1] + 6) + '" y2="' + (at[1] + 6) + '" stroke="var(--purple)" stroke-dasharray="3 3"/></svg><p><b>' + l + '" length</b><span>Falls about at: ' + at[0] + '</span><small>Based on an average height. Kinky straight hair is true to length.</small></p></div>' : '';
+    }
+    function render() {
+      var o = p.opts[sel];
+      qv.querySelector('.qv-box').innerHTML =
+        '<button class="icon-btn qv-close" type="button" aria-label="Close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>' +
+        '<div class="qv-media"><img class="qv-main" src="assets/img/' + imgs[0] + '" alt="' + esc(p.name) + '">' +
+          (imgs.length > 1 ? '<div class="qv-thumbs">' + imgs.map(function (s, i) { return '<button type="button" data-img="' + s + '" class="' + (i ? '' : 'is-on') + '"><img src="assets/img/' + s + '" alt="View ' + (i + 1) + '"></button>'; }).join('') + '</div>' : '') + '</div>' +
+        '<div class="qv-info">' + (p.tag ? '<span class="tag tag--inline">' + esc(p.tag) + '</span>' : '') +
+          '<h2 class="qv-name" id="qvTitle">' + esc(p.name) + '</h2><p class="product-line">' + esc(p.line) + '</p>' +
+          '<p class="qv-price"><b>' + fmt(o.price) + '</b> <span>or 3 × ' + fmt(o.price / 3) + ' with PayJustNow</span></p>' +
+          (p.opts.length > 1 ? '<p class="lens-label">' + p.optLabel + '</p><div class="lens" role="group" aria-label="' + p.optLabel + '">' + p.opts.map(function (x, i) { return '<button type="button" data-i="' + i + '" class="' + (i === sel ? 'is-on' : '') + '" aria-pressed="' + (i === sel) + '">' + esc(x.label) + '</button>'; }).join('') + '</div>' : '') +
+          lensRow() +
+          '<button type="button" class="btn btn--solid btn--full" data-qadd>Add to bag</button>' +
+          '<p class="small qv-drop">Ships with <b>' + esc(current.name) + '</b>. Pre-washed before dispatch.</p>' +
+          '<ul class="ticks">' + p.details.map(function (d) { return '<li>' + esc(d) + '</li>'; }).join('') + '</ul>' +
+        '</div>';
+    }
+    render();
+    qv.hidden = false; document.body.classList.add('no-scroll');
+    qv.onclick = function (e) {
+      if (e.target === qv || e.target.closest('.qv-close')) { closeQuick(); return; }
+      var t = e.target.closest('[data-img]');
+      if (t) { $('.qv-main', qv).src = 'assets/img/' + t.dataset.img; $$('.qv-thumbs button', qv).forEach(function (x) { x.classList.toggle('is-on', x === t); }); return; }
+      var l = e.target.closest('.lens button'); if (l) { sel = +l.dataset.i; render(); return; }
+      if (e.target.closest('[data-qadd]')) { var o = p.opts[sel]; addToBag({ key: p.id + '-' + sel, name: p.short, variant: p.optLabel + ': ' + o.label, price: o.price, img: p.img }); closeQuick(); }
+    };
+    $('.qv-close', qv).focus();
+  }
+  document.addEventListener('keydown', function (e) { if ((e.key === 'Enter' || e.key === ' ') && e.target.matches && e.target.matches('.pcard-media[data-quick]')) { e.preventDefault(); openQuick(e.target.dataset.quick); } });
+  function closeQuick() { if (!qv || qv.hidden) return; qv.hidden = true; document.body.classList.remove('no-scroll'); }
+  addEventListener('keydown', function (e) { if (e.key === 'Escape') closeQuick(); });
+  document.addEventListener('click', function (e) {
+    var q = e.target.closest('[data-quick]'); if (!q) return;
+    e.preventDefault(); openQuick(q.dataset.quick);
+  });
+
+  // ======================= SEARCH =======================
+  var so = $('#searchOverlay'), si = $('#searchInput'), sr = $('#searchResults');
+  function openSearch(open) {
+    if (!so) return;
+    so.hidden = !open; document.body.classList.toggle('no-scroll', open);
+    if (open) { si.value = ''; renderSearch(''); setTimeout(function () { si.focus(); }, 30); }
+  }
+  function renderSearch(q) {
+    var t = q.trim().toLowerCase().split(/\s+/).filter(Boolean);
+    var hits = PRODUCTS.filter(function (p) {
+      var hay = (p.name + ' ' + p.type + ' ' + p.line + ' ' + CATS[p.cat] + ' ' + p.details.join(' ')).toLowerCase();
+      return t.every(function (w) { return hay.indexOf(w) > -1; });
+    });
+    sr.innerHTML = (t.length ? '' : '<p class="small">Popular</p>') + (hits.length ? hits.slice(0, t.length ? 8 : 4).map(function (p) {
+      return '<button type="button" class="sr-item" data-quick="' + p.id + '"><img src="assets/img/' + p.img + '" alt=""><span><b>' + esc(p.name) + '</b><small>' + esc(p.type) + ' · from ' + fmt(Math.min.apply(null, p.opts.map(function (o) { return o.price; }))) + '</small></span></button>';
+    }).join('') : '<p class="small">No products found. Try "half wig", "U-part" or "bonnet".</p>');
+  }
+  if (so) {
+    $$('[data-search-open]').forEach(function (b) { b.addEventListener('click', function () { openSearch(true); }); });
+    $('[data-search-close]', so).addEventListener('click', function () { openSearch(false); });
+    so.addEventListener('click', function (e) { if (e.target === so) openSearch(false); if (e.target.closest('[data-quick]')) openSearch(false); });
+    si.addEventListener('input', function () { renderSearch(si.value); });
+    addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') openSearch(false);
+      if (e.key === '/' && so.hidden && !/input|textarea|select/i.test(document.activeElement.tagName)) { e.preventDefault(); openSearch(true); }
+    });
+  }
 
   // ======================= RAILS (drag on desktop) =======================
   $$('.rail').forEach(function (rail) {
@@ -351,11 +630,11 @@
     e.preventDefault();
     var inp = $('#clubEmail'), msg = $('#clubMsg');
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(inp.value.trim())) { msg.textContent = 'Enter an email address like name@example.co.za.'; inp.focus(); return; }
-    msg.textContent = 'You are on the list. This is a draft, so no email was sent.'; inp.value = '';
+    msg.textContent = 'You are on the list. We will remind you before each cut-off.'; inp.value = '';
   });
 
-  // ======================= DRAFT LINKS, REVEAL, YEAR =======================
-  $$('[data-draft]').forEach(function (a) { a.addEventListener('click', function (e) { e.preventDefault(); toast('This page is coming soon. Only the homepage works in this draft.'); }); });
+  // ======================= COMING-SOON LINKS, REVEAL, YEAR =======================
+  $$('[data-soon]').forEach(function (a) { a.addEventListener('click', function (e) { e.preventDefault(); toast('This page is coming soon.'); }); });
   if ('IntersectionObserver' in window && !reduce) {
     var ro = new IntersectionObserver(function (en) { en.forEach(function (x) { if (x.isIntersecting) { x.target.classList.add('is-in'); ro.unobserve(x.target); } }); }, { threshold: 0.12 });
     $$('.reveal, .why-card, .vs-card, .steps li, .panel, .facts article').forEach(function (el) { el.classList.add('reveal'); ro.observe(el); });

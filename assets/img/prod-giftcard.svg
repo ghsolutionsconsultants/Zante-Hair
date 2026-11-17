@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" width="800" height="1000">
+<rect width="400" height="500" fill="#FFE3EE"/>
+<ellipse cx="200" cy="430" rx="120" ry="14" fill="#2D1240" opacity=".08"/>
+
+<g transform="rotate(-8 200 250)">
+<rect x="60" y="150" width="280" height="176" rx="18" fill="#2D1240"/>
+<text x="200" y="240" text-anchor="middle" font-family="Didot, 'Bodoni Moda', Georgia, serif" font-size="46" font-weight="600" fill="#FFF8FB" letter-spacing="2">Zante</text>
+<text x="202" y="266" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="700" fill="#F6A5C5" letter-spacing="7">BEAUTY</text>
+<text x="84" y="306" font-family="Arial, sans-serif" font-size="12" font-weight="700" fill="#F6A5C5" letter-spacing="3">GIFT CARD</text>
+<path d="M300 150 V326" stroke="#F6A5C5" stroke-width="10"/>
+</g>
+
+</svg>

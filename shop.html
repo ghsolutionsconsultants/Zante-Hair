@@ -5,24 +5,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Shop · Zante Beauty</title>
 <meta name="robots" content="noindex, nofollow">
-<meta name="description" content="Shop the Zante Half Wig and U-Part Wig: 100% virgin human hair, kinky straight, 180% density, 10 to 22 inches. Draft site.">
+<meta name="description" content="Shop the Zante Half Wig and U-Part Wig: 100% virgin human hair, kinky straight, 180% density, 10 to 22 inches.">
 <meta name="theme-color" content="#FFFFFF">
 <link rel="icon" type="image/svg+xml" href="assets/brand/zante-app-icon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Bodoni+Moda:opsz,wght@6..96,500..700&family=Outfit:wght@300..700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Bodoni+Moda:opsz,wght@6..96,500..700&family=Fraunces:ital,opsz,wght@1,9..144,300..500&family=Manrope:wght@400..700&display=swap">
 <link rel="stylesheet" href="assets/css/zante.css">
 <script>
-  /* Supabase keys go here once the project exists. Empty = draft mode (reviews stay on this device). */
+  /* Supabase keys go here once the project exists. Empty = reviews are kept on this device only. */
   window.ZANTE_CONFIG = { supabaseUrl: '', supabaseAnonKey: '' };
 </script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 
-<!-- draft marks -->
-<div class="watermark" aria-hidden="true"></div>
-<p class="draft-tab" aria-hidden="true">Draft, not live</p>
 
 <!-- announcement: always the real next drop -->
 <div class="announce">
@@ -35,6 +32,9 @@
     <a class="logo" href="index.html" aria-label="Zante Beauty, home"><span class="logo-z">Zante</span><span class="logo-b">Beauty</span></a>
     <nav class="nav" aria-label="Main"><a href="shop.html" aria-current="page">Shop</a><a href="hair-drop.html">The Hair Drop</a><a href="hair-guide.html">Hair guide</a><a href="our-story.html">Our story</a><a href="faqs.html">FAQs</a></nav>
     <div class="header-actions">
+      <button class="icon-btn" type="button" data-search-open aria-label="Search products">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </button>
       <button class="icon-btn hide-sm" id="themeBtn" type="button" aria-label="Switch to dark mode">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
       </button>
@@ -55,9 +55,9 @@
 <!-- ============ PAGE HEADER ============ -->
 <section class="page-hero">
   <div class="wrap">
-    <p class="eyebrow">Shop the Drop</p>
-    <h1 class="page-title">Two units. One signature texture.</h1>
-    <p class="lede">The Zante Half Wig and U-Part Wig, in 100% virgin human hair with our signature kinky straight texture. Choose your length from 10" to 22".</p>
+    <p class="eyebrow">Zante Beauty</p>
+    <h1 class="page-title">Shop the Drop</h1>
+    <p class="lede">Half wigs, U-part wigs, extensions and care. 100% virgin human hair in our signature kinky straight texture, 10" to 22".</p>
     <a class="drop-strip" href="hair-drop.html">
       <span class="dot" aria-hidden="true"></span>
       <span><b data-drop-name>The next drop</b> closes <span data-drop-date>Monday</span>, 18:00 SAST</span>
@@ -69,7 +69,56 @@
 <!-- ============ PRODUCTS ============ -->
 <section class="section section--tight shop" id="shop" aria-label="Products">
   <div class="wrap">
-    <div class="products" id="products" data-full></div>
+    <nav class="cat-tabs" id="catTabs" aria-label="Categories">
+      <button type="button" class="cat-tab is-on" data-cat="all" aria-pressed="true">All</button>
+      <button type="button" class="cat-tab" data-cat="wigs" aria-pressed="false">Wigs</button>
+      <button type="button" class="cat-tab" data-cat="extensions" aria-pressed="false">Extensions</button>
+      <button type="button" class="cat-tab" data-cat="care" aria-pressed="false">Care and accessories</button>
+      <button type="button" class="cat-tab" data-cat="gifts" aria-pressed="false">Gifts</button>
+    </nav>
+    <div class="shop-layout">
+      <aside class="fpanel" id="fpanel" aria-label="Filters">
+        <div class="fpanel-head"><h2>Filter</h2><button type="button" class="icon-btn" id="fClose" aria-label="Close filters"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button></div>
+        <fieldset class="fgroup"><legend>Length</legend><div class="fchips" id="fLength"></div></fieldset>
+        <fieldset class="fgroup"><legend>Price</legend>
+          <label class="fcheck"><input type="radio" name="fprice" value="" checked> Any price</label>
+          <label class="fcheck"><input type="radio" name="fprice" value="0-500"> Under R500</label>
+          <label class="fcheck"><input type="radio" name="fprice" value="500-2500"> R500 to R2 500</label>
+          <label class="fcheck"><input type="radio" name="fprice" value="2500-3500"> R2 500 to R3 500</label>
+          <label class="fcheck"><input type="radio" name="fprice" value="3500-99999"> Over R3 500</label>
+        </fieldset>
+        <fieldset class="fgroup"><legend>Type</legend><div id="fType"></div></fieldset>
+        <fieldset class="fgroup"><legend>Highlights</legend>
+          <label class="fcheck"><input type="checkbox" value="new" data-flag> New in</label>
+          <label class="fcheck"><input type="checkbox" value="best" data-flag> Bestsellers</label>
+          <label class="fcheck"><input type="checkbox" value="deal" data-flag> Deals</label>
+        </fieldset>
+        <div class="fpanel-foot">
+          <button type="button" class="btn" id="fClear">Clear all</button>
+          <button type="button" class="btn btn--solid" id="fApply">Show <span id="fCount">0</span> products</button>
+        </div>
+      </aside>
+      <div class="shop-main">
+        <div class="toolbar">
+          <button type="button" class="btn btn--sm ftoggle" id="fOpen"><svg viewBox="0 0 24 24" aria-hidden="true" width="16" height="16"><path d="M4 7h16M7 12h10M10 17h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>Filter <span class="fbadge" id="fBadge" hidden>0</span></button>
+          <p class="small" id="shopCount" aria-live="polite"></p>
+          <label class="sort"><span>Sort</span>
+            <select id="fSort">
+              <option value="featured">Featured</option>
+              <option value="price-asc">Price: low to high</option>
+              <option value="price-desc">Price: high to low</option>
+              <option value="name">Name A to Z</option>
+            </select>
+          </label>
+        </div>
+        <div class="active-filters" id="activeFilters"></div>
+        <div class="pgrid pgrid--shop" id="products" data-products></div>
+        <div class="empty" id="shopEmpty" hidden>
+          <p>No products match these filters.</p>
+          <button type="button" class="btn" data-clear>Clear filters</button>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -123,13 +172,13 @@
       <a class="logo logo--light" href="index.html" aria-label="Zante Beauty, home"><span class="logo-z">Zante</span><span class="logo-b">Beauty</span></a>
       <p>Your styling freedom. Wear it your way.</p>
     </div>
-    <nav aria-label="Shop links"><p class="foot-h">Shop</p><a href="shop.html#p-halfwig">Half Wigs</a><a href="shop.html#p-upart">U-Part Wigs</a><a href="hair-drop.html">The Zante Hair Drop</a><a href="hair-guide.html">Hair guide</a></nav>
-    <nav aria-label="Help links"><p class="foot-h">Help</p><a href="faqs.html">FAQs</a><a href="hair-drop.html#delivery">Shipping and delivery</a><a href="faqs.html#returns">Returns and refunds</a><a href="#contact" data-draft>Contact us</a></nav>
-    <nav aria-label="Legal links"><p class="foot-h">Legal</p><a href="#privacy" data-draft>Privacy policy</a><a href="#terms" data-draft>Terms and conditions</a><a href="#payments" data-draft>Payment methods</a></nav>
+    <nav aria-label="Shop links"><p class="foot-h">Shop</p><a href="shop.html#p-halfwig">Half Wigs</a><a href="shop.html#p-upart">U-Part Wigs</a><a href="shop.html#cat-extensions">Extensions</a><a href="shop.html#cat-care">Care and accessories</a><a href="hair-drop.html">The Zante Hair Drop</a><a href="hair-guide.html">Hair guide</a></nav>
+    <nav aria-label="Help links"><p class="foot-h">Help</p><a href="faqs.html">FAQs</a><a href="hair-drop.html#delivery">Shipping and delivery</a><a href="faqs.html#returns">Returns and refunds</a><a href="#contact" data-soon>Contact us</a></nav>
+    <nav aria-label="Legal links"><p class="foot-h">Legal</p><a href="#privacy" data-soon>Privacy policy</a><a href="#terms" data-soon>Terms and conditions</a><a href="#payments" data-soon>Payment methods</a></nav>
   </div>
   <div class="wrap footer-base">
-    <p>© <span id="year">2026</span> Zante Beauty. Draft site, not a live shop.</p>
-    <p>All photos, videos and client messages are real Zante content. Contact, legal pages and checkout are not live yet.</p>
+    <p>© <span id="year">2026</span> Zante Beauty. All rights reserved.</p>
+    <p>Proudly South African. Pay in full or in 3 with PayJustNow.</p>
   </div>
 </footer>
 
@@ -139,6 +188,7 @@
   <div class="drawer-head"><h2>Your bag</h2><button class="icon-btn" id="bagClose" type="button" aria-label="Close bag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button></div>
   <p class="bag-drop">Allocated to <b data-drop-name>the next drop</b></p>
   <ul class="bag-list" id="bagList"></ul>
+  <div class="bag-upsell" id="bagUpsell"></div>
   <div class="drawer-foot">
     <p class="bag-total"><span>Subtotal</span><b id="bagTotal">R0</b></p>
     <p class="small" id="bagPjn">Delivery is calculated at checkout.</p>
@@ -178,6 +228,22 @@
     <p class="form-msg" id="reviewMsg" role="status"></p>
     <button class="btn btn--solid btn--full" type="submit">Submit review</button>
   </form>
+</div>
+
+<!-- quick view -->
+<div class="qv" id="quickView" role="dialog" aria-modal="true" aria-labelledby="qvTitle" hidden><div class="qv-box"></div></div>
+
+<!-- search -->
+<div class="search" id="searchOverlay" role="dialog" aria-modal="true" aria-label="Search products" hidden>
+  <div class="search-box">
+    <div class="search-row">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      <label class="sr" for="searchInput">Search products</label>
+      <input id="searchInput" type="search" placeholder="Search half wigs, U-parts, bonnets…" autocomplete="off">
+      <button class="icon-btn" type="button" data-search-close aria-label="Close search"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+    </div>
+    <div class="search-results" id="searchResults"></div>
+  </div>
 </div>
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>

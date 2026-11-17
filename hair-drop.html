@@ -5,24 +5,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>The Zante Hair Drop · Zante Beauty</title>
 <meta name="robots" content="noindex, nofollow">
-<meta name="description" content="How the Zante Hair Drop works: two preorder drops a month, cut-off dates, waiting times, delivery and tracking. Draft site.">
+<meta name="description" content="How the Zante Hair Drop works: two preorder drops a month, cut-off dates, waiting times, delivery and tracking.">
 <meta name="theme-color" content="#FFFFFF">
 <link rel="icon" type="image/svg+xml" href="assets/brand/zante-app-icon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Bodoni+Moda:opsz,wght@6..96,500..700&family=Outfit:wght@300..700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Bodoni+Moda:opsz,wght@6..96,500..700&family=Fraunces:ital,opsz,wght@1,9..144,300..500&family=Manrope:wght@400..700&display=swap">
 <link rel="stylesheet" href="assets/css/zante.css">
 <script>
-  /* Supabase keys go here once the project exists. Empty = draft mode (reviews stay on this device). */
+  /* Supabase keys go here once the project exists. Empty = reviews are kept on this device only. */
   window.ZANTE_CONFIG = { supabaseUrl: '', supabaseAnonKey: '' };
 </script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 
-<!-- draft marks -->
-<div class="watermark" aria-hidden="true"></div>
-<p class="draft-tab" aria-hidden="true">Draft, not live</p>
 
 <!-- announcement: always the real next drop -->
 <div class="announce">
@@ -35,6 +32,9 @@
     <a class="logo" href="index.html" aria-label="Zante Beauty, home"><span class="logo-z">Zante</span><span class="logo-b">Beauty</span></a>
     <nav class="nav" aria-label="Main"><a href="shop.html">Shop</a><a href="hair-drop.html" aria-current="page">The Hair Drop</a><a href="hair-guide.html">Hair guide</a><a href="our-story.html">Our story</a><a href="faqs.html">FAQs</a></nav>
     <div class="header-actions">
+      <button class="icon-btn" type="button" data-search-open aria-label="Search products">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </button>
       <button class="icon-btn hide-sm" id="themeBtn" type="button" aria-label="Switch to dark mode">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
       </button>
@@ -78,55 +78,79 @@
   <div class="wrap">
     <h2 class="h2" id="howTitle">How it works</h2>
     <div class="spacer"></div>
-    <ol class="steps">
-      <li><b>Choose your look</b><span>Pick the Half Wig or U-Part Wig, choose your length and pay in full at checkout.</span></li>
-      <li><b>Secure your order</b><span>Your order joins the next available drop.</span></li>
-      <li><b>Production begins</b><span>When the drop closes on Monday, your order goes to our factory.</span></li>
-      <li><b>Your hair travels to us</b><span>Allow about two weeks for international shipping after production.</span></li>
-      <li><b>The Zante finish</b><span>We receive, inspect and pre-wash every unit, then pack it for the next Monday dispatch.</span></li>
-      <li><b>Delivery to you</b><span>We dispatch on Mondays and send your tracking details.</span></li>
+    <div class="drop-facts">
+      <div><b>2</b><span>drops every month</span></div>
+      <div><b>18:00</b><span>cut-off on the first and third Monday (SAST)</span></div>
+      <div><b>3–4 weeks</b><span>from cut-off until your unit is ready</span></div>
+      <div><b>Mondays</b><span>local dispatch, with tracking</span></div>
+    </div>
+    <ol class="timeline">
+      <li><span class="tl-num" aria-hidden="true">01</span><div class="tl-body"><h3>Choose your look</h3><p>Pick the Half Wig or U-Part Wig and your length. Pay in full at checkout or in 3 with PayJustNow.</p></div></li>
+      <li><span class="tl-num" aria-hidden="true">02</span><div class="tl-body"><h3>Secure your order</h3><p>Your order joins the next open drop. You get a confirmation with your drop name.</p></div></li>
+      <li><span class="tl-num" aria-hidden="true">03</span><div class="tl-body"><h3>Production begins</h3><p>When the drop closes on Monday at 18:00, your order goes to our factory.</p></div></li>
+      <li><span class="tl-num" aria-hidden="true">04</span><div class="tl-body"><h3>Your hair travels to us</h3><p>Allow about two weeks for international shipping after production.</p></div></li>
+      <li><span class="tl-num" aria-hidden="true">05</span><div class="tl-body"><h3>The Zante finish</h3><p>We receive, inspect and pre-wash every unit, then pack it for the next Monday.</p></div></li>
+      <li><span class="tl-num" aria-hidden="true">06</span><div class="tl-body"><h3>Delivery to you</h3><p>We dispatch on Mondays and send your tracking details.</p></div></li>
     </ol>
+  </div>
+</section>
 
-    <div class="drop-grid">
-      <article class="panel">
-        <h3>Our cut-off dates</h3>
-        <p>Two drops every month. Orders close at <b>18:00 SAST</b> on:</p>
-        <ul class="plain"><li>The <b>first Monday</b> of the month</li><li>The <b>third Monday</b> of the month</li></ul>
-        <p class="small">Coming up:</p>
-        <ul class="dates" id="dropDates"></ul>
+<!-- ============ DATES AND WAITING ============ -->
+<section class="section" aria-labelledby="datesTitle">
+  <div class="wrap drop-cols">
+    <article class="panel panel--line">
+      <h2 class="h3" id="datesTitle">Upcoming drops</h2>
+      <p class="small">Orders close at 18:00 SAST on the first and third Monday of each month.</p>
+      <ul class="cal" id="dropDates"></ul>
+    </article>
+    <article class="panel panel--line">
+      <h2 class="h3">How long will I wait?</h2>
+      <p class="big-num">3 to 4 weeks</p>
+      <p>From your drop's cut-off until your unit is ready for local dispatch. This covers production, international shipping and our Ready Ritual.</p>
+      <p class="small">Local courier time comes after dispatch. International shipping and clearance can vary, so delays are sometimes possible. We keep you updated at every step.</p>
+    </article>
+  </div>
+</section>
+
+<!-- ============ DELIVERY ============ -->
+<section class="section section--soft" id="delivery" aria-labelledby="delTitle">
+  <div class="wrap">
+    <h2 class="h2" id="delTitle">Delivery options</h2>
+    <div class="ship-opts">
+      <article class="ship">
+        <h3>PostNet to PostNet</h3>
+        <p class="ship-price">R109</p>
+        <p>About 2 to 3 working days to main centres. Collect from the PostNet branch you choose.</p>
       </article>
-      <article class="panel">
-        <h3>How long will I wait?</h3>
-        <p>Allow about <b>3 to 4 weeks</b> from your drop's cut-off for production, international shipping and our Ready Ritual. Local courier time comes after dispatch.</p>
-        <p class="small">International shipping and clearance can vary, so delays are sometimes possible. We keep you updated at every step.</p>
-      </article>
-      <article class="panel" id="delivery">
-        <h3>Delivery</h3>
-        <ul class="plain">
-          <li><b>PostNet to PostNet</b>: R109, about 2 to 3 working days to main centres.</li>
-          <li><b>Aramex store-to-door</b>: price shown at checkout, about 24 to 72 hours to main centres.</li>
-        </ul>
-        <p class="small">Remote and regional areas can take longer.</p>
+      <article class="ship">
+        <h3>Aramex to your door</h3>
+        <p class="ship-price">Price at checkout</p>
+        <p>About 24 to 72 hours to main centres. Delivered to your physical address.</p>
       </article>
     </div>
+    <p class="small center">Remote and regional areas can take longer.</p>
+  </div>
+</section>
 
-    <div class="tracker" aria-labelledby="trackTitle">
+<!-- ============ TRACKER ============ -->
+<section class="section" aria-labelledby="trackTitle">
+  <div class="wrap">
+    <div class="tracker">
       <div class="tracker-head">
-        <h3 id="trackTitle">You will always know where your hair is</h3>
-        <p class="small">You get a WhatsApp or email update only when each step really happens. Example:</p>
+        <h2 class="h3" id="trackTitle">You will always know where your hair is</h2>
+        <p class="small">You get a WhatsApp or email update only when each step really happens. Here is an example order:</p>
       </div>
       <ol class="milestones" id="milestones">
-        <li class="done"><b>Order secured</b><span>Your payment is in and your order is in <i data-drop-name>the next drop</i>.</span></li>
-        <li class="done"><b>Production underway</b><span>Your order has gone to our factory.</span></li>
-        <li class="now"><b>On its way to Zante</b><span>Your unit is travelling to South Africa.</span></li>
-        <li><b>Arrived at Zante</b><span>Inspection and the Ready Ritual.</span></li>
-        <li><b>Ready for dispatch</b><span>Inspected, pre-washed and packed.</span></li>
-        <li><b>Dispatched</b><span>Handed to the courier, with tracking.</span></li>
+        <li class="done"><h3>Order secured</h3><p>Payment received. Your order is in <span data-drop-name>the next drop</span>.</p></li>
+        <li class="done"><h3>Production underway</h3><p>Your order has gone to our factory.</p></li>
+        <li class="now"><h3>On its way to Zante</h3><p>Your unit is travelling to South Africa.</p></li>
+        <li><h3>Arrived at Zante</h3><p>Inspection and the Ready Ritual.</p></li>
+        <li><h3>Ready for dispatch</h3><p>Inspected, pre-washed and packed.</p></li>
+        <li><h3>Dispatched</h3><p>Handed to the courier, with tracking.</p></li>
       </ol>
     </div>
   </div>
 </section>
-
 
 <!-- ============ SHIPPING DETAIL ============ -->
 <section class="section" aria-labelledby="shipTitle">
@@ -176,13 +200,13 @@
       <a class="logo logo--light" href="index.html" aria-label="Zante Beauty, home"><span class="logo-z">Zante</span><span class="logo-b">Beauty</span></a>
       <p>Your styling freedom. Wear it your way.</p>
     </div>
-    <nav aria-label="Shop links"><p class="foot-h">Shop</p><a href="shop.html#p-halfwig">Half Wigs</a><a href="shop.html#p-upart">U-Part Wigs</a><a href="hair-drop.html">The Zante Hair Drop</a><a href="hair-guide.html">Hair guide</a></nav>
-    <nav aria-label="Help links"><p class="foot-h">Help</p><a href="faqs.html">FAQs</a><a href="hair-drop.html#delivery">Shipping and delivery</a><a href="faqs.html#returns">Returns and refunds</a><a href="#contact" data-draft>Contact us</a></nav>
-    <nav aria-label="Legal links"><p class="foot-h">Legal</p><a href="#privacy" data-draft>Privacy policy</a><a href="#terms" data-draft>Terms and conditions</a><a href="#payments" data-draft>Payment methods</a></nav>
+    <nav aria-label="Shop links"><p class="foot-h">Shop</p><a href="shop.html#p-halfwig">Half Wigs</a><a href="shop.html#p-upart">U-Part Wigs</a><a href="shop.html#cat-extensions">Extensions</a><a href="shop.html#cat-care">Care and accessories</a><a href="hair-drop.html">The Zante Hair Drop</a><a href="hair-guide.html">Hair guide</a></nav>
+    <nav aria-label="Help links"><p class="foot-h">Help</p><a href="faqs.html">FAQs</a><a href="hair-drop.html#delivery">Shipping and delivery</a><a href="faqs.html#returns">Returns and refunds</a><a href="#contact" data-soon>Contact us</a></nav>
+    <nav aria-label="Legal links"><p class="foot-h">Legal</p><a href="#privacy" data-soon>Privacy policy</a><a href="#terms" data-soon>Terms and conditions</a><a href="#payments" data-soon>Payment methods</a></nav>
   </div>
   <div class="wrap footer-base">
-    <p>© <span id="year">2026</span> Zante Beauty. Draft site, not a live shop.</p>
-    <p>All photos, videos and client messages are real Zante content. Contact, legal pages and checkout are not live yet.</p>
+    <p>© <span id="year">2026</span> Zante Beauty. All rights reserved.</p>
+    <p>Proudly South African. Pay in full or in 3 with PayJustNow.</p>
   </div>
 </footer>
 
@@ -192,6 +216,7 @@
   <div class="drawer-head"><h2>Your bag</h2><button class="icon-btn" id="bagClose" type="button" aria-label="Close bag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button></div>
   <p class="bag-drop">Allocated to <b data-drop-name>the next drop</b></p>
   <ul class="bag-list" id="bagList"></ul>
+  <div class="bag-upsell" id="bagUpsell"></div>
   <div class="drawer-foot">
     <p class="bag-total"><span>Subtotal</span><b id="bagTotal">R0</b></p>
     <p class="small" id="bagPjn">Delivery is calculated at checkout.</p>
@@ -231,6 +256,22 @@
     <p class="form-msg" id="reviewMsg" role="status"></p>
     <button class="btn btn--solid btn--full" type="submit">Submit review</button>
   </form>
+</div>
+
+<!-- quick view -->
+<div class="qv" id="quickView" role="dialog" aria-modal="true" aria-labelledby="qvTitle" hidden><div class="qv-box"></div></div>
+
+<!-- search -->
+<div class="search" id="searchOverlay" role="dialog" aria-modal="true" aria-label="Search products" hidden>
+  <div class="search-box">
+    <div class="search-row">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      <label class="sr" for="searchInput">Search products</label>
+      <input id="searchInput" type="search" placeholder="Search half wigs, U-parts, bonnets…" autocomplete="off">
+      <button class="icon-btn" type="button" data-search-close aria-label="Close search"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+    </div>
+    <div class="search-results" id="searchResults"></div>
+  </div>
 </div>
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
