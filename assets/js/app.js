@@ -36,37 +36,37 @@
       img: 'z-upart-front.jpg', alt: 'z-halfwig-side.jpg', optLabel: 'Length', def: 3,
       opts: lens(L, [4350, 4550, 4850, 5050, 5250, 5750, 6250]),
       details: ['One Half Wig and one U-Part Wig in the same length'].concat(HAIR) },
-    { id: 'clipins', type: 'Clip-ins', cat: 'extensions', est: true, name: 'Kinky Straight Clip-Ins', short: 'Clip-Ins', tag: 'New', line: 'Seven pieces. Instant length and fullness.',
-      img: 'z-clip.jpg', alt: 'z-halfwig-back.jpg', optLabel: 'Length', def: 1,
+    { id: 'clipins', type: 'Clip-ins', cat: 'extensions', est: true, name: 'Kinky Straight Clip-Ins', short: 'Clip-Ins', line: 'Seven pieces. Instant length and fullness.',
+      img: null, soon: true, optLabel: 'Length', def: 1,
       opts: lens([14, 16, 18, 20, 22], [1650, 1750, 1850, 1990, 2150]),
       details: ['7 pieces, about 120 g', 'Silicone-lined clips'].concat(HAIR) },
-    { id: 'bundles', type: 'Bundles', cat: 'extensions', est: true, name: 'Kinky Straight Bundles', short: 'Bundles (set of 3)', tag: 'Set of 3', line: 'For sew-ins and custom units.',
-      img: 'z-texture.jpg', alt: 'z-halfwig-back.jpg', optLabel: 'Length', def: 3,
+    { id: 'bundles', type: 'Bundles', cat: 'extensions', est: true, name: 'Kinky Straight Bundles', short: 'Bundles (set of 3)', line: 'For sew-ins and custom units.',
+      img: null, soon: true, optLabel: 'Length', def: 3,
       opts: lens(L, [1650, 1800, 1950, 2100, 2250, 2450, 2650]),
       details: ['3 bundles, about 100 g each'].concat(HAIR) },
-    { id: 'carekit', type: 'Hair care', cat: 'care', est: true, name: 'Zante Care Kit', short: 'Care Kit', tag: 'Care', line: 'Everything your unit needs between wears.',
-      img: 'care-tools.jpg', optLabel: 'Kit', def: 0, opts: [{ label: 'Full kit', price: 650 }],
+    { id: 'carekit', type: 'Hair care', cat: 'care', est: true, name: 'Zante Care Kit', short: 'Care Kit', line: 'Everything your unit needs between wears.',
+      img: null, soon: true, optLabel: 'Kit', def: 0, opts: [{ label: 'Full kit', price: 650 }],
       details: ['Sulphate-free shampoo', 'Moisture conditioner', 'Heat protectant spray', 'Wide-tooth comb'] },
     { id: 'bonnet', type: 'Accessories', cat: 'care', est: true, name: 'Satin Bonnet', short: 'Satin Bonnet', line: 'Protect your hair and your unit overnight.',
-      img: 'prod-bonnet.svg', optLabel: 'Colour', def: 0, opts: [{ label: 'Blush', price: 180 }, { label: 'Plum', price: 180 }],
+      img: null, soon: true, optLabel: 'Colour', def: 0, opts: [{ label: 'Blush', price: 180 }, { label: 'Plum', price: 180 }],
       details: ['Double-layer satin', 'Wide, soft elastic band', 'Fits long units'] },
-    { id: 'headbands', type: 'Accessories', cat: 'care', est: true, name: 'Satin Headband Set', short: 'Headband Set', tag: 'Half wig essential', line: 'Three headbands to finish your half wig.',
-      img: 'prod-headband.svg', optLabel: 'Set', def: 0, opts: [{ label: 'Set of 3', price: 220 }],
+    { id: 'headbands', type: 'Accessories', cat: 'care', est: true, name: 'Satin Headband Set', short: 'Headband Set', line: 'Three headbands to finish your half wig.',
+      img: null, soon: true, optLabel: 'Set', def: 0, opts: [{ label: 'Set of 3', price: 220 }],
       details: ['Plum, blush and champagne', 'Padded satin, gentle on edges'] },
     { id: 'stand', type: 'Tools', cat: 'care', est: true, name: 'Mannequin Head and Stand', short: 'Mannequin and Stand', line: 'Store, style and wash your unit with ease.',
-      img: 'prod-stand.svg', optLabel: 'Set', def: 0, opts: [{ label: 'Head + tripod', price: 450 }],
+      img: null, soon: true, optLabel: 'Set', def: 0, opts: [{ label: 'Head + tripod', price: 450 }],
       details: ['Canvas head with pin-friendly surface', 'Adjustable tripod stand'] },
     { id: 'heat', type: 'Hair care', cat: 'care', est: true, name: 'Zante Heat Shield', short: 'Heat Shield', line: 'Heat protection for silk presses and curls.',
-      img: 'prod-spray.svg', optLabel: 'Size', def: 0, opts: [{ label: '200 ml', price: 220 }],
+      img: null, soon: true, optLabel: 'Size', def: 0, opts: [{ label: '200 ml', price: 220 }],
       details: ['Protects up to 230°C', 'Light, non-greasy finish', 'Safe for virgin human hair'] },
     { id: 'grip', type: 'Accessories', cat: 'care', est: true, name: 'Velvet Wig Grip', short: 'Wig Grip', line: 'Keeps your unit secure, no glue needed.',
-      img: 'prod-grip.svg', optLabel: 'Colour', def: 0, opts: [{ label: 'Plum', price: 150 }, { label: 'Black', price: 150 }],
+      img: null, soon: true, optLabel: 'Colour', def: 0, opts: [{ label: 'Plum', price: 150 }, { label: 'Black', price: 150 }],
       details: ['Soft velvet band', 'Adjustable fastening', 'Gentle on edges'] },
     { id: 'comb', type: 'Tools', cat: 'care', est: true, name: 'Wide-Tooth Detangling Comb', short: 'Detangling Comb', line: 'Detangle gently without pulling.',
-      img: 'prod-comb.svg', optLabel: 'Size', def: 0, opts: [{ label: 'One size', price: 90 }],
+      img: null, soon: true, optLabel: 'Size', def: 0, opts: [{ label: 'One size', price: 90 }],
       details: ['Seamless teeth', 'For wet or dry hair'] },
     { id: 'wigbag', type: 'Accessories', cat: 'care', est: true, name: 'Satin Wig Bag', short: 'Wig Bag', line: 'Store and travel with your unit tangle-free.',
-      img: 'prod-bag.svg', optLabel: 'Size', def: 0, opts: [{ label: 'Fits up to 22"', price: 250 }],
+      img: null, soon: true, optLabel: 'Size', def: 0, opts: [{ label: 'Fits up to 22"', price: 250 }],
       details: ['Satin lined', 'Drawstring close', 'Fits up to 22" units'] },
     { id: 'giftcard', type: 'Gift card', cat: 'gifts', est: true, name: 'Zante Gift Card', short: 'Gift Card', tag: 'Gift', line: 'Give her styling freedom.',
       img: 'prod-giftcard.svg', optLabel: 'Amount', def: 1, opts: [500, 1000, 2500, 3000].map(function (v) { return { label: fmt(v), price: v }; }),
@@ -198,7 +198,7 @@
     var up = $('#bagUpsell');
     if (up) {
       var inBag = bag.map(function (b) { return b.key.split('-')[0]; });
-      var picks = ['headbands', 'bonnet', 'heat', 'grip', 'carekit'].filter(function (id) { return inBag.indexOf(id) < 0; }).slice(0, 3);
+      var picks = PRODUCTS.filter(function (p) { return !p.soon && p.img && inBag.indexOf(p.id) < 0; }).map(function (p) { return p.id; }).slice(0, 3);
       up.innerHTML = bag.length && picks.length ? '<p class="small">Complete your look</p><div class="upsell">' + picks.map(function (id) {
         var p = PRODUCTS.filter(function (x) { return x.id === id; })[0];
         return '<button type="button" class="up-item" data-up="' + id + '"><img src="assets/img/' + p.img + '" alt=""><span>' + esc(p.short) + '<b>' + fmt(p.opts[0].price) + '</b></span><i aria-hidden="true">+</i></button>';
@@ -289,12 +289,15 @@
 
   // ======================= PRODUCTS =======================
   // <div id="products" data-limit="4" data-cat="wigs"> renders a grid; #shopFilters adds category chips.
+  var SOON_TILE = '<div class="soon-tile" aria-hidden="true"><span class="soon-z">Zante</span><span class="soon-t">Photo coming soon</span></div>';
+  function pimg(p, cls) { return p.img ? '<img' + (cls ? ' class="' + cls + '"' : '') + ' src="assets/img/' + p.img + '" alt="' + esc(p.name) + '" loading="lazy" width="400" height="500">' : SOON_TILE; }
+  function thumb(p) { return p.img ? '<img src="assets/img/' + p.img + '" alt="">' : '<span class="soon-mini" aria-hidden="true">Z</span>'; }
   function card(p) {
     var o = p.opts[p.def];
     return '<article class="pcard" id="p-' + p.id + '" data-id="' + p.id + '" data-cat="' + p.cat + '">' +
       '<div class="pcard-media" data-quick="' + p.id + '" role="button" tabindex="0" aria-label="Quick view: ' + esc(p.name) + '">' +
-        (p.tag ? '<span class="tag">' + esc(p.tag) + '</span>' : '') +
-        '<img src="assets/img/' + p.img + '" alt="' + esc(p.name) + '" loading="lazy" width="400" height="500">' +
+        (p.soon ? '<span class="tag tag--soon">Coming soon</span>' : p.tag ? '<span class="tag">' + esc(p.tag) + '</span>' : '') +
+        pimg(p) +
         (p.alt ? '<img class="alt" src="assets/img/' + p.alt + '" alt="" loading="lazy" width="400" height="500">' : '') +
       '<span class="qv-hint">Quick view</span></div>' +
       '<div class="pcard-body">' +
@@ -307,7 +310,7 @@
           '<p class="pcard-price"><b>' + fmt(o.price) + '</b></p>' +
         '</div>' +
         '<p class="pcard-pjn">or 3 × <span>' + fmt(o.price / 3) + '</span> PayJustNow</p>' +
-        '<button type="button" class="btn btn--solid btn--sm" data-add>Add to bag</button>' +
+        (p.soon ? '<button type="button" class="btn btn--sm" data-notify>Notify me</button>' : '<button type="button" class="btn btn--solid btn--sm" data-add>Add to bag</button>') +
         '<details class="pcard-more"><summary>Details</summary><ul>' + p.details.map(function (d) { return '<li>' + esc(d) + '</li>'; }).join('') + '</ul></details>' +
       '</div></article>';
   }
@@ -323,7 +326,10 @@
       $('.pcard-price b', el).textContent = fmt(p.opts[sel].price);
       $('.pcard-pjn span', el).textContent = fmt(p.opts[sel].price / 3);
     });
-    $('[data-add]', el).addEventListener('click', function () {
+    var nb = $('[data-notify]', el);
+    if (nb) nb.addEventListener('click', function () { toast('We will let you know when ' + p.short + ' is available. Join the list below for drop reminders.'); });
+    var ab = $('[data-add]', el);
+    if (ab) ab.addEventListener('click', function () {
       var o = p.opts[sel];
       addToBag({ key: p.id + '-' + sel, name: p.short, variant: p.optLabel + ': ' + o.label, price: o.price, img: p.img });
     });
@@ -354,9 +360,11 @@
     }
     function apply() {
       var list = PRODUCTS.filter(function (p) { return match(p); });
-      if (state.sort === 'price-asc') list.sort(function (a, b) { return minPrice(a) - minPrice(b); });
-      if (state.sort === 'price-desc') list.sort(function (a, b) { return minPrice(b) - minPrice(a); });
-      if (state.sort === 'name') list.sort(function (a, b) { return a.name.localeCompare(b.name); });
+      list.sort(function (a, b) { return (a.soon ? 1 : 0) - (b.soon ? 1 : 0); });
+      var soonLast = function (a, b) { return (a.soon ? 1 : 0) - (b.soon ? 1 : 0); };
+      if (state.sort === 'price-asc') list.sort(function (a, b) { return soonLast(a, b) || minPrice(a) - minPrice(b); });
+      if (state.sort === 'price-desc') list.sort(function (a, b) { return soonLast(a, b) || minPrice(b) - minPrice(a); });
+      if (state.sort === 'name') list.sort(function (a, b) { return soonLast(a, b) || a.name.localeCompare(b.name); });
       var cards = {};
       $$('.pcard', grid).forEach(function (c) { cards[c.dataset.id] = c; c.hidden = true; });
       list.forEach(function (p) { var c = cards[p.id]; c.hidden = false; grid.appendChild(c); });
@@ -431,7 +439,7 @@
   }
   function openQuick(id) {
     var p = PRODUCTS.filter(function (x) { return x.id === id; })[0]; if (!p || !qv) return;
-    var sel = p.def, imgs = [p.img].concat(p.alt ? [p.alt] : []);
+    var sel = p.def, imgs = p.img ? [p.img].concat(p.alt ? [p.alt] : []) : [];
     function lensRow() {
       var l = parseInt(p.opts[sel].label, 10), at = bodyAt(l);
       return at ? '<div class="lv"><svg viewBox="0 0 120 100" aria-hidden="true"><circle cx="60" cy="18" r="11" fill="currentColor" opacity=".18"/><path d="M38 100 C38 60 44 40 60 36 C76 40 82 60 82 100" fill="currentColor" opacity=".12"/>' +
@@ -442,15 +450,15 @@
       var o = p.opts[sel];
       qv.querySelector('.qv-box').innerHTML =
         '<button class="icon-btn qv-close" type="button" aria-label="Close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>' +
-        '<div class="qv-media"><img class="qv-main" src="assets/img/' + imgs[0] + '" alt="' + esc(p.name) + '">' +
+        '<div class="qv-media">' + (imgs.length ? '<img class="qv-main" src="assets/img/' + imgs[0] + '" alt="' + esc(p.name) + '">' : '<div class="qv-main qv-soon">' + SOON_TILE + '</div>') +
           (imgs.length > 1 ? '<div class="qv-thumbs">' + imgs.map(function (s, i) { return '<button type="button" data-img="' + s + '" class="' + (i ? '' : 'is-on') + '"><img src="assets/img/' + s + '" alt="View ' + (i + 1) + '"></button>'; }).join('') + '</div>' : '') + '</div>' +
-        '<div class="qv-info">' + (p.tag ? '<span class="tag tag--inline">' + esc(p.tag) + '</span>' : '') +
+        '<div class="qv-info">' + (p.soon ? '<span class="tag tag--inline">Coming soon</span>' : p.tag ? '<span class="tag tag--inline">' + esc(p.tag) + '</span>' : '') +
           '<h2 class="qv-name" id="qvTitle">' + esc(p.name) + '</h2><p class="product-line">' + esc(p.line) + '</p>' +
           '<p class="qv-price"><b>' + fmt(o.price) + '</b> <span>or 3 × ' + fmt(o.price / 3) + ' with PayJustNow</span></p>' +
           (p.opts.length > 1 ? '<p class="lens-label">' + p.optLabel + '</p><div class="lens" role="group" aria-label="' + p.optLabel + '">' + p.opts.map(function (x, i) { return '<button type="button" data-i="' + i + '" class="' + (i === sel ? 'is-on' : '') + '" aria-pressed="' + (i === sel) + '">' + esc(x.label) + '</button>'; }).join('') + '</div>' : '') +
           lensRow() +
-          '<button type="button" class="btn btn--solid btn--full" data-qadd>Add to bag</button>' +
-          '<p class="small qv-drop">Ships with <b>' + esc(current.name) + '</b>. Pre-washed before dispatch.</p>' +
+          (p.soon ? '<button type="button" class="btn btn--full" data-qnotify>Notify me when available</button>' : '<button type="button" class="btn btn--solid btn--full" data-qadd>Add to bag</button>') +
+          (p.soon ? '<p class="small qv-drop">Coming soon. Prices are a guide and may change at launch.</p>' : '<p class="small qv-drop">Ships with <b>' + esc(current.name) + '</b>. Pre-washed before dispatch.</p>') +
           '<ul class="ticks">' + p.details.map(function (d) { return '<li>' + esc(d) + '</li>'; }).join('') + '</ul>' +
         '</div>';
     }
@@ -461,6 +469,7 @@
       var t = e.target.closest('[data-img]');
       if (t) { $('.qv-main', qv).src = 'assets/img/' + t.dataset.img; $$('.qv-thumbs button', qv).forEach(function (x) { x.classList.toggle('is-on', x === t); }); return; }
       var l = e.target.closest('.lens button'); if (l) { sel = +l.dataset.i; render(); return; }
+      if (e.target.closest('[data-qnotify]')) { toast('We will let you know when ' + p.short + ' is available.'); closeQuick(); return; }
       if (e.target.closest('[data-qadd]')) { var o = p.opts[sel]; addToBag({ key: p.id + '-' + sel, name: p.short, variant: p.optLabel + ': ' + o.label, price: o.price, img: p.img }); closeQuick(); }
     };
     $('.qv-close', qv).focus();
@@ -487,7 +496,7 @@
       return t.every(function (w) { return hay.indexOf(w) > -1; });
     });
     sr.innerHTML = (t.length ? '' : '<p class="small">Popular</p>') + (hits.length ? hits.slice(0, t.length ? 8 : 4).map(function (p) {
-      return '<button type="button" class="sr-item" data-quick="' + p.id + '"><img src="assets/img/' + p.img + '" alt=""><span><b>' + esc(p.name) + '</b><small>' + esc(p.type) + ' · from ' + fmt(Math.min.apply(null, p.opts.map(function (o) { return o.price; }))) + '</small></span></button>';
+      return '<button type="button" class="sr-item" data-quick="' + p.id + '">' + thumb(p) + '<span><b>' + esc(p.name) + '</b><small>' + esc(p.type) + (p.soon ? ' · coming soon' : '') + ' · from ' + fmt(Math.min.apply(null, p.opts.map(function (o) { return o.price; }))) + '</small></span></button>';
     }).join('') : '<p class="small">No products found. Try "half wig", "U-part" or "bonnet".</p>');
   }
   if (so) {
