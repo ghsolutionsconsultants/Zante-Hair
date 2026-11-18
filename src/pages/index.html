@@ -33,19 +33,6 @@
       </span>
     </a>
 
-    <div class="drop-card" id="dropCard" aria-live="off">
-      <p class="drop-status"><span class="dot" aria-hidden="true"></span>Preorders open</p>
-      <h2 class="drop-name" data-drop-name>The next Zante Hair Drop</h2>
-      <div class="count" role="timer" aria-label="Time left until this drop closes">
-        <p><b data-cd="d">00</b><span>Days</span></p>
-        <p><b data-cd="h">00</b><span>Hours</span></p>
-        <p><b data-cd="m">00</b><span>Min</span></p>
-        <p><b data-cd="s">00</b><span>Sec</span></p>
-      </div>
-      <p class="drop-when">Closes <b data-drop-date>Monday</b> at 18:00 SAST</p>
-      <a class="btn btn--solid" href="shop.html">Shop the Drop</a>
-      <p class="drop-note">Orders placed after the cut-off move into the next drop.</p>
-    </div>
 
     <a class="split-panel" href="shop.html#p-upart">
       <div class="bars" aria-hidden="true"></div>
@@ -71,6 +58,27 @@
     <span aria-hidden="true">100% virgin human hair</span><span aria-hidden="true">Signature kinky straight</span><span aria-hidden="true">180% density</span><span aria-hidden="true">True to length</span><span aria-hidden="true">Pre-washed before dispatch</span><span aria-hidden="true">Two drops a month</span><span aria-hidden="true">Pay in 3 with PayJustNow</span>
   </div>
 </div>
+
+<!-- ============ DROP COUNTDOWN BAND ============ -->
+<section class="drop-band" aria-labelledby="bandTitle">
+  <div class="wrap drop-band-in">
+    <div class="band-copy">
+      <p class="band-status"><span class="dot" aria-hidden="true"></span>Preorders open</p>
+      <h2 class="band-name" id="bandTitle" data-drop-name>The next Zante Hair Drop</h2>
+      <p class="band-when">Closes <b data-drop-date>Monday</b> at 18:00 SAST. Orders after the cut-off join the next drop.</p>
+    </div>
+    <div class="count count--band" role="timer" aria-label="Time left until this drop closes">
+      <p><b data-cd="d">00</b><span>Days</span></p>
+      <p><b data-cd="h">00</b><span>Hours</span></p>
+      <p><b data-cd="m">00</b><span>Min</span></p>
+      <p><b data-cd="s">00</b><span>Sec</span></p>
+    </div>
+    <div class="band-actions">
+      <a class="btn btn--solid" href="shop.html">Shop the Drop</a>
+      <a class="band-link" href="hair-drop.html">How the Drop works</a>
+    </div>
+  </div>
+</section>
 
 <!-- ============ 2. PROMISE ============ -->
 <section class="promise wrap" aria-labelledby="promiseTitle">
@@ -290,3 +298,32 @@
     </form>
   </div>
 </section>
+
+<!-- ============ PREORDER POP-UP ============ -->
+<div class="drop-pop" id="dropPop" role="dialog" aria-modal="true" aria-labelledby="popTitle" hidden>
+  <div class="drop-pop-box">
+    <button class="icon-btn pop-close" type="button" data-pop-close aria-label="Close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+    <div class="pop-media" aria-hidden="true">
+      <img src="assets/img/z-halfwig.jpg" alt="" width="900" height="1200">
+      <img src="assets/img/z-upart.jpg" alt="" width="900" height="1200">
+    </div>
+    <div class="pop-body">
+      <p class="drop-status"><span class="dot" aria-hidden="true"></span>Preorders open</p>
+      <h2 class="pop-title" id="popTitle" data-drop-name>The next Zante Hair Drop</h2>
+      <p class="pop-sub">Secure your Half Wig or U-Part before this drop closes.</p>
+      <div class="count" role="timer" aria-label="Time left until this drop closes">
+        <p><b data-cd="d">00</b><span>Days</span></p>
+        <p><b data-cd="h">00</b><span>Hours</span></p>
+        <p><b data-cd="m">00</b><span>Min</span></p>
+        <p><b data-cd="s">00</b><span>Sec</span></p>
+      </div>
+      <p class="drop-when">Closes <b data-drop-date>Monday</b> at 18:00 SAST</p>
+      <a class="btn btn--solid btn--full" href="shop.html">Shop the Drop</a>
+      <button type="button" class="pop-later" data-pop-close>Not now</button>
+    </div>
+  </div>
+</div>
+<button type="button" class="drop-chip" id="dropChip" hidden aria-label="Show the drop countdown">
+  <span class="dot" aria-hidden="true"></span>
+  <span>Drop closes in <b data-cd="d">00</b>d <b data-cd="h">00</b>h</span>
+</button>
