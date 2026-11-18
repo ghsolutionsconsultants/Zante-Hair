@@ -27,6 +27,7 @@ PAGES = {
     'hair-drop.html': ('hair-drop.html', 'The Zante Hair Drop · Zante Beauty', 'How the Zante Hair Drop works: two preorder drops a month, cut-off dates, waiting times, delivery and tracking.', 'hair-drop.html'),
     'hair-guide.html': ('hair-guide.html', 'Hair guide · Zante Beauty', 'Half wig or U-part? Understand our kinky straight texture, 180% density and true-to-length hair.', 'hair-guide.html'),
     'our-story.html': ('our-story.html', 'Our story · Zante Beauty', 'Born from a name, built around her. The story of Zante Beauty and why we love kinky straight hair.', 'our-story.html'),
+    'privacy.html': ('privacy.html', 'Privacy policy · Zante Beauty', 'How Zante Beauty collects, uses and protects your personal information under POPIA.', None),
     'terms.html': ('terms.html', 'Terms and conditions · Zante Beauty', 'Zante Beauty terms and conditions, in line with the South African Consumer Protection Act and ECTA: preorders, cancellations, the 7-day cooling-off period, defects, returns and refunds.', None),
     'faqs.html': ('faqs.html', 'FAQs · Zante Beauty', 'Answers about Zante hair, styling, preorders, delivery and returns.', 'faqs.html'),
 }
@@ -117,7 +118,7 @@ def footer():
     </div>
     <nav aria-label="Shop links"><p class="foot-h">Shop</p><a href="shop.html#p-halfwig">Half Wigs</a><a href="shop.html#p-upart">U-Part Wigs</a><a href="shop.html#cat-extensions">Extensions</a><a href="shop.html#cat-care">Care and accessories</a><a href="hair-drop.html">The Zante Hair Drop</a><a href="hair-guide.html">Hair guide</a></nav>
     <nav aria-label="Help links"><p class="foot-h">Help</p><a href="faqs.html">FAQs</a><a href="hair-drop.html#delivery">Shipping and delivery</a><a href="terms.html#t-returns">Returns and refunds</a><a href="#contact" data-soon>Contact us</a></nav>
-    <nav aria-label="Legal links"><p class="foot-h">Legal</p><a href="#privacy" data-soon>Privacy policy</a><a href="terms.html">Terms and conditions</a><a href="#payments" data-soon>Payment methods</a></nav>
+    <nav aria-label="Legal links"><p class="foot-h">Legal</p><a href="privacy.html">Privacy policy</a><a href="terms.html">Terms and conditions</a><a href="#payments" data-soon>Payment methods</a></nav>
   </div>
   <div class="wrap footer-base">
     <p>© <span id="year">2026</span> Zante Beauty. All rights reserved.</p>
@@ -143,7 +144,7 @@ def footer():
 <div class="modal" id="reviewModal" role="dialog" aria-modal="true" aria-labelledby="rvTitle" hidden>
   <form class="modal-box" id="reviewForm" novalidate>
     <div class="drawer-head"><h2 id="rvTitle">Write a review</h2><button class="icon-btn" type="button" data-close aria-label="Close">{ICON_CLOSE}</button></div>
-    <p class="small">Your name is never shown. We use your order number only to confirm you are a Zante client. Reviews appear after we approve them.</p>
+    <p class="small">Your name is never shown. We use your order number only to confirm you are a Zante client. Reviews appear after we approve them. <a href="privacy.html#p-collect">How we use your information</a>.</p>
     <fieldset class="stars-in"><legend>Your rating</legend><div class="stars-row">
       <input type="radio" name="rating" id="r5" value="5" checked><label for="r5" title="5 stars">★</label>
       <input type="radio" name="rating" id="r4" value="4"><label for="r4" title="4 stars">★</label>

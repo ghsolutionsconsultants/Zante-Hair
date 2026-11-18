@@ -1213,3 +1213,7 @@ body.no-scroll { overflow: hidden; }
   .acc summary { font-size: 1rem; padding: 14px 0; }
   .acc p, .acc li { font-size: .9rem; }
 }
+.club-legal { flex-basis: 100%; margin: 2px 0 0 !important; font-size: .8rem; color: var(--on-night-2); }
+.club-legal a { color: var(--pink); }
+.modal-box > .small a { color: var(--purple); }
+.terms-body h2:not(.h3) { scroll-margin-top: 0; }
