@@ -22,19 +22,19 @@
   var PRODUCTS = [
     { id: 'halfwig', type: 'Half wig', cat: 'wigs', name: 'The Zante Half Wig', short: 'Half Wig', tag: 'Bestseller', line: 'Your everyday style, without the effort.',
       img: 'z-halfwig.jpg', alt: 'z-halfwig-2.jpg', optLabel: 'Length', def: 3,
-      opts: lens(L, [2350, 2450, 2600, 2700, 2800, 3050, 3300]),
+      opts: lens(L, [2450, 2550, 2700, 2800, 2900, 3150, 3400]),
       details: HAIR.concat(['Wear it with leave-out or a headband', 'Removable, grab-and-go styling']) },
     { id: 'upart', type: 'U-part wig', cat: 'wigs', name: 'The Zante U-Part Wig', short: 'U-Part Wig', tag: 'Natural blend', line: 'The blend you love. The freedom you need.',
       img: 'z-upart.jpg', alt: 'z-upart-2.jpg', optLabel: 'Length', def: 3,
-      opts: lens(L, [2400, 2500, 2650, 2750, 2850, 3100, 3350]),
+      opts: lens(L, [2500, 2600, 2750, 2900, 3000, 3200, 3450]),
       details: HAIR.concat(['U-shaped leave-out opening', 'Middle or side part', 'Removable and reusable']) },
     { id: 'sleek', type: 'U-part wig', cat: 'wigs', est: true, name: 'Silk Press U-Part Wig', short: 'Silk Press U-Part', tag: 'New', line: 'Sleek and pressed, ready on day one.',
       img: 'z-sleek.jpg', alt: 'z-sleek-2.jpg', optLabel: 'Length', def: 3,
-      opts: lens(L, [2700, 2800, 2950, 3050, 3150, 3400, 3650]),
+      opts: lens(L, [2800, 2900, 3050, 3200, 3300, 3500, 3750]),
       details: HAIR.concat(['Silk pressed by us before dispatch', 'Returns to its blow-out texture after washing']) },
     { id: 'duo', type: 'Wig set', cat: 'wigs', est: true, name: 'The Zante Duo', short: 'Duo: Half Wig + U-Part', tag: 'Save R400', line: 'Both units, one length. Switch styles all week.',
       img: 'z-upart-front.jpg', alt: 'z-halfwig-side.jpg', optLabel: 'Length', def: 3,
-      opts: lens(L, [4350, 4550, 4850, 5050, 5250, 5750, 6250]),
+      opts: lens(L, [4550, 4750, 5050, 5300, 5500, 5950, 6450]),
       details: ['One Half Wig and one U-Part Wig in the same length'].concat(HAIR) },
     { id: 'clipins', type: 'Clip-ins', cat: 'extensions', est: true, name: 'Kinky Straight Clip-Ins', short: 'Clip-Ins', line: 'Seven pieces. Instant length and fullness.',
       img: 'z-clip.jpg', alt: 'z-halfwig-back.jpg', optLabel: 'Length', def: 1,
@@ -399,6 +399,54 @@
     if ('IntersectionObserver' in window) new IntersectionObserver(function (en) { en[0].isIntersecting ? play() : pause(); }, { threshold: 0.3 }).observe(tr);
     else play();
   });
+
+  // ======================= PREORDER POP-UP (homepage) =======================
+  (function dropPopup() {
+    var pop = $('#dropPop'), chip = $('#dropChip');
+    if (!pop) return;
+    var KEY = 'zante-drop-pop', lastFocus = null;
+    function seen() { try { return sessionStorage.getItem(KEY) === 'closed'; } catch (e) { return false; } }
+    function open() {
+      lastFocus = document.activeElement;
+      pop.hidden = false; chip.hidden = true;
+      requestAnimationFrame(function () { pop.classList.add('is-open'); });
+      document.body.classList.add('no-scroll');
+      setTimeout(function () { var c = $('.pop-close', pop); if (c) c.focus(); }, 60);
+    }
+    function close() {
+      if (pop.hidden) return;
+      pop.classList.remove('is-open');
+      document.body.classList.remove('no-scroll');
+      try { sessionStorage.setItem(KEY, 'closed'); } catch (e) { /* private mode */ }
+      setTimeout(function () { pop.hidden = true; chip.hidden = false; }, reduce ? 0 : 280);
+      if (lastFocus && lastFocus.focus) lastFocus.focus();
+    }
+    $$('[data-pop-close]', pop).forEach(function (b) { b.addEventListener('click', close); });
+    pop.addEventListener('click', function (e) { if (e.target === pop) close(); });
+    pop.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') { e.stopPropagation(); close(); }
+      if (e.key === 'Tab') { // keep focus inside the pop-up
+        var f = $$('a[href], button:not([hidden])', pop), first = f[0], last = f[f.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+    });
+    chip.addEventListener('click', open);
+    // the reopen chip only shows once the countdown band has scrolled out of view, so it never covers it or the hero
+    var band = $('.drop-band'), pastBand = !band;
+    function updateChip() { chip.classList.toggle('is-away', !pastBand); }
+    if (band) {
+      var raf = 0;
+      addEventListener('scroll', function () {
+        if (raf) return;
+        raf = requestAnimationFrame(function () { raf = 0; pastBand = band.getBoundingClientRect().bottom < 0; updateChip(); });
+      }, { passive: true });
+    }
+    updateChip();
+    if (seen()) { chip.hidden = false; return; }
+    var introOn = !!document.getElementById('intro') && !reduce;
+    setTimeout(open, introOn ? 2600 : 1200);
+  })();
 
   // ======================= PRODUCTS =======================
   // <div id="products" data-limit="4" data-cat="wigs"> renders a grid; #shopFilters adds category chips.
