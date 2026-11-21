@@ -462,6 +462,61 @@
     setTimeout(open, introOn ? 2600 : 1200);
   })();
 
+  // ======================= SOFT MOTION (whole site) =======================
+  (function softMotion() {
+    var root = document.documentElement;
+    root.classList.add('js-motion');
+
+    // 1. smooth page changes: fade out on internal links, fade in on arrival (also from the back button)
+    if (!reduce) {
+      document.addEventListener('click', function (e) {
+        var a = e.target.closest('a[href]');
+        if (!a || e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey || a.target === '_blank') return;
+        var href = a.getAttribute('href');
+        if (!/^[\w-]+\.html(#.*)?$/.test(href)) return;                 // only our own pages
+        if (href.split('#')[0] === location.pathname.split('/').pop()) return; // same-page anchors scroll as usual
+        e.preventDefault();
+        root.classList.add('is-leaving');
+        setTimeout(function () { location.href = href; }, 220);
+      });
+      addEventListener('pageshow', function () { root.classList.remove('is-leaving'); });
+    }
+
+    // 2. staggered reveals as things come into view
+    var groups = [
+      '.z-hero-head > *', '.z-pair > .z-choice', '.z-drop', '.z-head > *', '.z-why > article',
+      '.z-gallery > .z-tile', '.z-split-media', '.z-split-copy > *', '.review-rail > .review', '.z-news-in > *',
+      '.page-hero .wrap > *:not(.ph-in)', '.ph-copy > *', '.ph-media', '.section-head > *', '.pgrid > .pcard',
+      '.timeline > li', '.drop-facts > div', '.faq-group', '.acc-list > .acc', '.terms-body > *:nth-child(-n+4)'
+    ];
+    var items = [];
+    groups.forEach(function (sel) {
+      $$(sel).forEach(function (el, i) {
+        if (el.dataset.rv) return;
+        el.dataset.rv = '1';
+        el.style.setProperty('--rv-i', Math.min(i, 6));
+        items.push(el);
+      });
+    });
+    $$('.z-frame, .z-split-media, .z-tile').forEach(function (el) { el.classList.add('unveil'); });
+    if (reduce || !('IntersectionObserver' in window)) { items.forEach(function (el) { el.classList.add('is-in'); }); return; }
+    var io = new IntersectionObserver(function (en) {
+      en.forEach(function (x) { if (x.isIntersecting) { x.target.classList.add('is-in'); io.unobserve(x.target); } });
+    }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+    items.forEach(function (el) { io.observe(el); });
+
+    // 3. header slims down after the first scroll
+    var header = $('#header'), ticking = false;
+    function onScroll() {
+      ticking = false;
+      header.classList.toggle('is-scrolled', scrollY > 40);
+      var bar = $('#mobileBar'), hero = $('.z-drop');
+      if (bar && hero) bar.classList.toggle('is-on', hero.getBoundingClientRect().bottom < 0);
+    }
+    addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
+    onScroll();
+  })();
+
   // ======================= PRODUCTS =======================
   // <div id="products" data-limit="4" data-cat="wigs"> renders a grid; #shopFilters adds category chips.
   var SOON_TILE = '<div class="soon-tile" aria-hidden="true"><span class="soon-z">Zante</span><span class="soon-t">Photo coming soon</span></div>';

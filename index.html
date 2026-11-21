@@ -53,6 +53,10 @@
 <span id="top"></span>
 <!-- ============ 1. HERO: two products ============ -->
 <section class="z-hero" aria-labelledby="heroTitle">
+  <svg class="ribbon" viewBox="0 0 1200 260" preserveAspectRatio="none" aria-hidden="true">
+    <path class="ribbon-a" d="M-20 170 C 180 60, 330 230, 560 140 S 940 40, 1220 120"/>
+    <path class="ribbon-b" d="M-20 186 C 200 90, 360 250, 590 160 S 960 70, 1220 142"/>
+  </svg>
   <div class="wrap">
     <div class="z-hero-head">
       <p class="z-kicker"><span class="pearl" aria-hidden="true"></span>Your way. For every beautiful you.<span class="pearl" aria-hidden="true"></span></p>
@@ -62,13 +66,13 @@
 
     <div class="z-pair">
       <a class="z-choice" href="shop.html#p-halfwig">
-        <span class="z-frame"><img src="assets/img/hero-halfwig.jpg" alt="Woman wearing the Zante kinky straight half wig with a headband" width="900" height="1125" fetchpriority="high"></span>
+        <span class="z-frame"><picture><source type="image/webp" srcset="assets/img/hero-halfwig-600.webp 600w, assets/img/hero-halfwig-900.webp 900w" sizes="(max-width: 760px) 46vw, 460px"><img src="assets/img/hero-halfwig.jpg" alt="Woman wearing the Zante kinky straight half wig with a headband" width="900" height="1125" fetchpriority="high" decoding="async"></picture></span>
         <span class="z-choice-name">The Half Wig</span>
         <span class="z-choice-line">Your everyday style, without the effort.</span>
         <span class="z-choice-link">Shop Half Wigs <span aria-hidden="true">→</span></span>
       </a>
       <a class="z-choice" href="shop.html#p-upart">
-        <span class="z-frame"><img src="assets/img/hero-upart.jpg" alt="Woman wearing the Zante kinky straight U-part wig" width="900" height="1125" fetchpriority="high"></span>
+        <span class="z-frame"><picture><source type="image/webp" srcset="assets/img/hero-upart-600.webp 600w, assets/img/hero-upart-900.webp 900w" sizes="(max-width: 760px) 46vw, 460px"><img src="assets/img/hero-upart.jpg" alt="Woman wearing the Zante kinky straight U-part wig" width="900" height="1125" fetchpriority="high" decoding="async"></picture></span>
         <span class="z-choice-name">The U-Part Wig</span>
         <span class="z-choice-line">The blend you love. The freedom you need.</span>
         <span class="z-choice-link">Shop U-Part Wigs <span aria-hidden="true">→</span></span>
@@ -132,7 +136,7 @@
     </div>
   </div>
   <div class="rail z-gallery" id="reelRail" tabindex="0" aria-label="Gallery, scroll sideways on small screens">
-    <figure class="z-tile"><img src="assets/img/z-halfwig.jpg" alt="Half wig worn with a headband" loading="lazy"><figcaption><b>Everyday versatility</b><span>Work, errands, gym and weekend looks.</span></figcaption></figure>
+    <figure class="z-tile"><picture><source type="image/webp" srcset="assets/img/z-halfwig-600.webp 600w, assets/img/z-halfwig-900.webp 900w" sizes="(max-width: 760px) 64vw, 270px"><img src="assets/img/z-halfwig.jpg" alt="Half wig worn with a headband" width="900" height="1200" loading="lazy" decoding="async"></picture><figcaption><b>Everyday versatility</b><span>Work, errands, gym and weekend looks.</span></figcaption></figure>
     <figure class="z-tile reel"><video data-src="assets/video/v-blend.mp4" poster="assets/video/v-blend.jpg" muted loop playsinline preload="none"></video><figcaption><b>The seamless blend</b><span>Close-ups, leave-out and styling results.</span></figcaption></figure>
     <figure class="z-tile reel"><video data-src="assets/video/v-texture.mp4" poster="assets/video/v-texture.jpg" muted loop playsinline preload="none"></video><figcaption><b>Texture and transformation</b><span>Natural blow-out next to silk pressed.</span></figcaption></figure>
     <figure class="z-tile reel"><video data-src="assets/video/v-install.mp4" poster="assets/video/v-install.jpg" muted loop playsinline preload="none"></video><figcaption><b>On in seconds</b><span>The U-part, from start to finish.</span></figcaption></figure>
@@ -158,7 +162,7 @@
 <section class="z-section z-section--soft" id="story" aria-labelledby="storyTitle">
   <div class="wrap z-split z-split--flip">
     <div class="z-split-media">
-      <img src="assets/img/z-story.jpg" alt="Woman wearing a long kinky straight Zante unit" width="900" height="1200" loading="lazy">
+      <picture><source type="image/webp" srcset="assets/img/z-story-600.webp 600w, assets/img/z-story-900.webp 900w" sizes="(max-width: 860px) 92vw, 420px"><img src="assets/img/z-story.jpg" alt="Woman wearing a long kinky straight Zante unit" width="900" height="1200" loading="lazy" decoding="async"></picture>
     </div>
     <div class="z-split-copy">
       <p class="z-label">Our story</p>
@@ -199,6 +203,12 @@
     </div>
   </div>
 </section>
+
+<!-- phones: slim shop bar once the countdown has scrolled away -->
+<div class="mobile-bar" id="mobileBar">
+  <p><b>Shop the Drop</b><span>Closes <span data-drop-date>Monday</span>, 18:00</span></p>
+  <a class="btn btn--solid" href="shop.html">Shop now</a>
+</div>
 </main>
 
 <footer class="footer">
