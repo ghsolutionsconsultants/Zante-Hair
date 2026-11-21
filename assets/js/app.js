@@ -73,6 +73,11 @@
       details: ['Sent by email', 'Use on any drop', 'Valid for 3 years'] }
   ];
 
+  // Products not yet on sale stay in the list above but are switched off here.
+  // To launch one, add its id to ON_SALE.
+  var ON_SALE = ['halfwig', 'upart'];
+  PRODUCTS = PRODUCTS.filter(function (p) { return ON_SALE.indexOf(p.id) > -1; });
+
   var REVIEWS = [
     ['People literally thought it’s my natural hair. I fooled a few people and I was complimented on the hair.', 5],
     ['Your service was absolutely outstanding. I honestly felt like I matter. It never felt like just another purchase.', 5],
@@ -107,6 +112,7 @@
   function applyMode(m) {
     html.dataset.mode = m;
     $('#themeBtn').setAttribute('aria-label', m === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+    $('#themeBtn').textContent = m === 'dark' ? 'Light mode' : 'Dark mode';
     $('#themeBtnM').textContent = m === 'dark' ? 'Light mode' : 'Dark mode';
   }
   applyMode(store('zante-mode') === 'dark' ? 'dark' : 'light');
@@ -498,6 +504,10 @@
   // ======================= SHOP FILTERS =======================
   var CATS = { all: 'All', wigs: 'Wigs', extensions: 'Extensions', care: 'Care and accessories', gifts: 'Gifts' };
   var catTabs = $('#catTabs');
+  if (catTabs && PRODUCTS.length <= 3) {
+    document.body.classList.add('shop--simple');
+    catTabs = null;
+  }
   if (catTabs) (function shopFilters() {
     var state = { cat: 'all', lengths: [], price: '', types: [], flags: [], sort: 'featured' };
     var grid = $('#products'), fpanel = $('#fpanel');

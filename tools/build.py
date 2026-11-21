@@ -15,8 +15,8 @@ SRC = ROOT / 'src' / 'pages'
 NAV = [
     ('shop.html', 'Shop'),
     ('hair-drop.html', 'The Hair Drop'),
-    ('hair-guide.html', 'Hair guide'),
-    ('our-story.html', 'Our story'),
+    ('hair-guide.html', 'Hair Guide'),
+    ('our-story.html', 'Our Story'),
     ('faqs.html', 'FAQs'),
 ]
 
@@ -44,11 +44,11 @@ def head(title, desc):
 <title>{title}</title>
 <meta name="robots" content="noindex, nofollow">
 <meta name="description" content="{desc}">
-<meta name="theme-color" content="#FFFFFF">
+<meta name="theme-color" content="#FAF7F5">
 <link rel="icon" type="image/svg+xml" href="assets/brand/zante-app-icon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Bodoni+Moda:opsz,wght@6..96,500..700&family=Fraunces:ital,opsz,wght@1,9..144,300..500&family=Manrope:wght@400..700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=DM+Sans:opsz,wght@9..40,400..600&display=swap">
 <link rel="stylesheet" href="assets/css/zante.css">
 <script>
   /* Supabase keys go here once the project exists. Empty = reviews are kept on this device only. */
@@ -58,47 +58,40 @@ def head(title, desc):
 
 
 def header(active, is_home):
-    def links(cls=''):
+    def links(items):
         out = []
-        for href, label in NAV:
+        for href, label in items:
             cur = ' aria-current="page"' if href == active else ''
             out.append(f'<a href="{href}"{cur}>{label}</a>')
         return ''.join(out)
-    intro = '''
-<!-- intro (homepage only) -->
-<div class="intro" id="intro" aria-hidden="true">
-  <p class="intro-mark"><span class="intro-z">Zante</span><span class="intro-b">Beauty</span></p>
-</div>
-''' if is_home else ''
     return f'''<body>
 <a class="skip" href="#main">Skip to content</a>
 
-{intro}
-<!-- announcement: always the real next drop -->
+<!-- one slim announcement bar -->
 <div class="announce">
-  <p><span class="dot" aria-hidden="true"></span><b data-drop-name>The next Zante Hair Drop</b> closes <span data-drop-close>soon</span>. <a href="hair-drop.html">How the Drop works</a></p>
+  <p>Preorders open · <a href="hair-drop.html"><b data-drop-name>the next Zante Hair Drop</b></a></p>
 </div>
 
 <header class="header" id="header">
   <div class="wrap header-in">
     <button class="burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mnav"><span></span><span></span></button>
+    <nav class="nav nav--left" aria-label="Main">{links(NAV[:3])}</nav>
     <a class="logo" href="index.html" aria-label="Zante Beauty, home"><span class="logo-z">Zante</span><span class="logo-b">Beauty</span></a>
-    <nav class="nav" aria-label="Main">{links()}</nav>
-    <div class="header-actions">
-      <button class="icon-btn" type="button" data-search-open aria-label="Search products">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-      </button>
-      <button class="icon-btn hide-sm" id="themeBtn" type="button" aria-label="Switch to dark mode">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
-      </button>
-      <button class="icon-btn bag-btn" id="bagBtn" type="button" aria-label="Open bag, 0 items">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8Z M9 8V6a3 3 0 0 1 6 0v2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
-        <span class="bag-count" id="bagCount">0</span>
-      </button>
+    <div class="header-right">
+      <nav class="nav nav--right" aria-label="More">{links(NAV[3:])}</nav>
+      <div class="header-actions">
+        <button class="icon-btn" type="button" data-search-open aria-label="Search products">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+        </button>
+        <button class="icon-btn bag-btn" id="bagBtn" type="button" aria-label="Open bag, 0 items">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8Z M9 8V6a3 3 0 0 1 6 0v2" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+          <span class="bag-count" id="bagCount">0</span>
+        </button>
+      </div>
     </div>
   </div>
   <nav class="mnav" id="mnav" aria-label="Mobile">
-    <a href="index.html"{' aria-current="page"' if is_home else ''}>Home</a>{links()}
+    <a href="index.html"{' aria-current="page"' if is_home else ''}>Home</a>{links(NAV)}
     <button type="button" id="themeBtnM">Dark mode</button>
   </nav>
 </header>
@@ -113,16 +106,20 @@ def footer():
 <footer class="footer">
   <div class="wrap footer-in">
     <div class="footer-brand">
-      <a class="logo logo--light" href="index.html" aria-label="Zante Beauty, home"><span class="logo-z">Zante</span><span class="logo-b">Beauty</span></a>
+      <a class="logo" href="index.html" aria-label="Zante Beauty, home"><span class="logo-z">Zante</span><span class="logo-b">Beauty</span></a>
       <p>Your styling freedom. Wear it your way.</p>
     </div>
-    <nav aria-label="Shop links"><p class="foot-h">Shop</p><a href="shop.html#p-halfwig">Half Wigs</a><a href="shop.html#p-upart">U-Part Wigs</a><a href="shop.html#cat-extensions">Extensions</a><a href="shop.html#cat-care">Care and accessories</a><a href="hair-drop.html">The Zante Hair Drop</a><a href="hair-guide.html">Hair guide</a></nav>
-    <nav aria-label="Help links"><p class="foot-h">Help</p><a href="faqs.html">FAQs</a><a href="hair-drop.html#delivery">Shipping and delivery</a><a href="terms.html#t-returns">Returns and refunds</a><a href="#contact" data-soon>Contact us</a></nav>
-    <nav aria-label="Legal links"><p class="foot-h">Legal</p><a href="privacy.html">Privacy policy</a><a href="terms.html">Terms and conditions</a><a href="#payments" data-soon>Payment methods</a></nav>
+    <nav aria-label="Shop links"><p class="foot-h">Shop</p><a href="shop.html#p-halfwig">The Half Wig</a><a href="shop.html#p-upart">The U-Part Wig</a><a href="hair-drop.html">The Zante Hair Drop</a><a href="hair-guide.html">Hair Guide</a></nav>
+    <nav aria-label="Help links"><p class="foot-h">Help</p><a href="faqs.html">FAQs</a><a href="hair-drop.html#delivery">Shipping and delivery</a><a href="terms.html#t-returns">Returns and refunds</a><a href="privacy.html">Privacy policy</a><a href="terms.html">Terms and conditions</a></nav>
+    <div class="foot-contact"><p class="foot-h">Contact</p>
+      <p>WhatsApp: <span class="todo">number coming soon</span></p>
+      <p>Email: <span class="todo">address coming soon</span></p>
+      <p>Preorders close on the first and third Monday of each month at 18:00 SAST.</p>
+    </div>
   </div>
   <div class="wrap footer-base">
     <p>© <span id="year">2026</span> Zante Beauty. All rights reserved.</p>
-    <p>Proudly South African. Pay in full or in 3 with PayJustNow.</p>
+    <button type="button" class="link-btn" id="themeBtn" aria-label="Switch to dark mode">Dark mode</button>
   </div>
 </footer>
 
