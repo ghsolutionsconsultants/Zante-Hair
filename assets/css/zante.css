@@ -1766,3 +1766,42 @@ html.js-motion .unveil img, html.js-motion .unveil video, html.js-motion .z-hero
   .header-in, .header.is-scrolled .header-in { height: 64px; }
   .logo-z, .header.is-scrolled .logo-z { font-size: 1.6rem; }
 }
+
+/* ================= RIGHT-SIZED PHOTOS: scale with screen height so no photo dominates a laptop screen ================= */
+.z-split picture, .z-frame picture, .z-tile picture { display: block; width: 100%; height: 100%; }
+/* homepage hero pair: each photo at most about 58% of the screen height */
+.z-pair { max-width: min(900px, 92vh); }
+/* side-by-side photo + text sections */
+.z-split { grid-template-columns: minmax(0, min(400px, 42vh)) minmax(0, 1fr); justify-content: center; }
+.z-split--flip { grid-template-columns: minmax(0, 1fr) minmax(0, min(400px, 42vh)); }
+.z-split-media img, .z-split-media video { width: 100%; height: auto !important; aspect-ratio: 4 / 5; }
+.two-col, .ritual-in { grid-template-columns: minmax(0, min(400px, 42vh)) minmax(0, 1fr); }
+.story-in { grid-template-columns: minmax(0, min(380px, 40vh)) minmax(0, 1fr); }
+.tall-img img, .ritual-media, .story-in img { max-height: none; aspect-ratio: 4 / 5; height: auto; }
+/* shop: two products, sized to the screen */
+.shop--simple .pgrid--shop { max-width: min(820px, 88vh); }
+/* inner page photo pairs */
+.ph-media { max-width: min(560px, 62vh); justify-self: end; width: 100%; }
+/* hair guide comparison cards */
+.vs-card { grid-template-columns: minmax(0, 200px) 1fr; }
+.vs-card img { max-height: 360px; height: 100%; }
+/* videos */
+.reel, .z-tile, .z-tile.reel { width: clamp(200px, min(20vw, 30vh), 260px); }
+@media (max-width: 860px) {
+  .z-pair, .ph-media, .shop--simple .pgrid--shop { max-width: none; }
+  .z-split, .z-split--flip, .two-col, .ritual-in, .story-in { grid-template-columns: 1fr; }
+  .z-split-media, .ritual-media, .story-in img, .tall-img { max-width: 420px; width: 100%; margin: 0 auto; }
+  .z-split-media img, .z-split-media video, .ritual-media, .story-in img, .tall-img img { aspect-ratio: 4 / 3.6; max-height: 340px; }
+  .ph-media { justify-self: stretch; }
+}
+@media (max-width: 760px) {
+  .reel, .z-tile, .z-tile.reel { width: 58vw; }
+  .vs-card img { max-height: 220px; }
+}
+@media (max-width: 860px) {
+  .vs-card { grid-template-columns: 1fr; }
+  .vs-card img { width: 100%; height: 220px !important; max-height: 220px; aspect-ratio: auto; }
+}
+@media (max-width: 760px) { .reel, .z-tile.reel { width: 46vw; } .z-tile { width: 52vw; } }
+.z-tile picture { height: auto; }
+@media (max-width: 760px) { .z-tile, .z-tile.reel, .reel { width: 50vw; } }
