@@ -1592,3 +1592,4 @@ h1, h2, h3, .h2, .h3, .page-title, .z-h1, .z-h2, .z-h3, .product-name, .pcard-na
 /* shop hero with two tiles */
 .page-hero--rich .ph-media .t1:nth-last-child(2) { width: 48%; height: 88%; top: 6%; left: 0; }
 .drop-strip .dot { display: none; }
+.bag-note { margin: 0; text-align: center; } .foot-contact a, .info a { color: var(--pink-ink); }

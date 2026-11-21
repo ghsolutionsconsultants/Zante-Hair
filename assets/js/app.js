@@ -239,7 +239,15 @@
     addToBag({ key: p.id + '-' + p.def, name: p.short, variant: p.optLabel + ': ' + o.label, price: o.price, img: p.img });
   });
   $('#bagList').addEventListener('click', function (e) { var b = e.target.closest('[data-rm]'); if (!b) return; bag.splice(+b.dataset.rm, 1); saveBag(); });
-  $('#checkoutBtn').addEventListener('click', function () { toast('Checkout opens with our launch. Message us on WhatsApp to order now.'); });
+  // Until online payment is live, checkout sends the order to Zante on WhatsApp, written out in full.
+  var ZANTE_WHATSAPP = '27686954639';
+  $('#checkoutBtn').addEventListener('click', function () {
+    if (!bag.length) { toast('Your bag is empty. Add a wig first.'); return; }
+    var total = bag.reduce(function (a, b) { return a + b.qty * b.price; }, 0);
+    var lines = bag.map(function (b) { return '• ' + b.name + ', ' + b.variant + (b.qty > 1 ? ' × ' + b.qty : '') + ': ' + fmt(b.price * b.qty); });
+    var text = 'Hi Zante Beauty! I would like to order:\n' + lines.join('\n') + '\nTotal: ' + fmt(total) + ' (plus delivery)\nDrop: ' + current.name + '\n\nMy name:\nDelivery: PostNet branch or street address:';
+    window.open('https://wa.me/' + ZANTE_WHATSAPP + '?text=' + encodeURIComponent(text), '_blank', 'noopener');
+  });
   renderBag();
 
   // ======================= LIVE HERO =======================
