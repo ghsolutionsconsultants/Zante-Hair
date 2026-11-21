@@ -308,7 +308,7 @@
 
   // ======================= HERO MOTION DESIGN =======================
   (function heroMotion() {
-    var heroes = $$('.hero--live, .page-hero--rich');
+    var heroes = $$('.hero--live');
     if (!heroes.length) return;
     // 1. masked word reveal on the headline
     heroes.forEach(function (h) {
@@ -475,9 +475,7 @@
         var href = a.getAttribute('href');
         if (!/^[\w-]+\.html(#.*)?$/.test(href)) return;                 // only our own pages
         if (href.split('#')[0] === location.pathname.split('/').pop()) return; // same-page anchors scroll as usual
-        e.preventDefault();
-        root.classList.add('is-leaving');
-        setTimeout(function () { location.href = href; }, 220);
+        root.classList.add('is-leaving'); // navigation continues immediately; the fade is cosmetic
       });
       addEventListener('pageshow', function () { root.classList.remove('is-leaving'); });
     }
@@ -502,7 +500,7 @@
     if (reduce || !('IntersectionObserver' in window)) { items.forEach(function (el) { el.classList.add('is-in'); }); return; }
     var io = new IntersectionObserver(function (en) {
       en.forEach(function (x) { if (x.isIntersecting) { x.target.classList.add('is-in'); io.unobserve(x.target); } });
-    }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+    }, { threshold: 0, rootMargin: '0px 0px 15% 0px' }); // start just before items reach the screen
     items.forEach(function (el) { io.observe(el); });
 
     // 3. header slims down after the first scroll
