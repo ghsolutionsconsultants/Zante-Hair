@@ -1805,3 +1805,66 @@ html.js-motion .unveil img, html.js-motion .unveil video, html.js-motion .z-hero
 @media (max-width: 760px) { .reel, .z-tile.reel { width: 46vw; } .z-tile { width: 52vw; } }
 .z-tile picture { height: auto; }
 @media (max-width: 760px) { .z-tile, .z-tile.reel, .reel { width: 50vw; } }
+
+/* =====================================================================================
+   THANK-YOU CARD DETAILS · silk waves with pearls, the swish, bubble pearls, glossy logo
+   ===================================================================================== */
+/* logo: rounded glossy mauve wordmark, as on the card */
+.logo-z { font-family: "Fredoka", "Varela Round", "Nunito", system-ui, sans-serif !important; font-weight: 600 !important; letter-spacing: .06em !important; padding-left: .06em !important; font-size: 1.95rem !important;
+  background: linear-gradient(180deg, #CDA0BE 0%, #B47E9F 55%, #A06F8E 100%); -webkit-background-clip: text; background-clip: text; color: transparent;
+  filter: drop-shadow(0 1px 0 rgba(255, 255, 255, .9)) drop-shadow(0 2px 2px rgba(120, 70, 100, .18)); }
+.logo-b { font: 600 .66rem/1 var(--f-body) !important; letter-spacing: .32em !important; padding-left: .32em !important; color: #6E6A80 !important; margin-top: 3px; }
+.footer-brand .logo-z { padding-left: 0 !important; }
+.footer-brand .logo-b { padding-left: 0 !important; }
+@media (max-width: 860px) { .logo-z, .header.is-scrolled .logo-z { font-size: 1.6rem !important; } .logo-b { font-size: .58rem !important; } }
+
+/* silk waves */
+.silk { position: absolute; left: 0; right: 0; pointer-events: none; z-index: 0; }
+.silk svg { display: block; width: 100%; height: 100%; }
+.silk--hero { bottom: 0; height: clamp(150px, 22vw, 300px); }
+.z-hero { padding-bottom: clamp(70px, 9vw, 130px); }
+.z-hero .wrap { position: relative; z-index: 1; }
+.silk .w1, .silk .w2 { animation: silkDrift 14s ease-in-out infinite alternate; }
+.silk .w2 { animation-duration: 18s; animation-direction: alternate-reverse; }
+@keyframes silkDrift { from { transform: translateX(-14px); } to { transform: translateX(14px); } }
+.silk .sparkle circle { animation: twinkle 4s ease-in-out infinite; }
+.silk .sparkle circle:nth-child(2n) { animation-delay: 1.3s; }
+.silk .sparkle circle:nth-child(3n) { animation-delay: 2.6s; }
+@keyframes twinkle { 50% { opacity: .2; } }
+.footer { position: relative; padding-top: clamp(90px, 10vw, 140px) !important; overflow: hidden; }
+.footer::before { display: none !important; }
+.silk--foot { top: 0; height: clamp(80px, 9vw, 130px); transform: scaleY(-1); opacity: .85; }
+.footer > .wrap { position: relative; z-index: 1; }
+:root[data-mode="dark"] .silk { opacity: .35; }
+
+/* the swish: ──•✦•── */
+.swish { display: flex; align-items: center; justify-content: center; gap: 8px; margin: 18px auto 0; color: var(--pink); }
+.swish i { width: clamp(40px, 9vw, 90px); height: 1px; background: linear-gradient(90deg, transparent, var(--pink)); }
+.swish i:last-child { background: linear-gradient(90deg, var(--pink), transparent); }
+.swish b { width: 4px; height: 4px; border-radius: 50%; background: var(--pink); }
+.swish span { font-size: .8rem; line-height: 1; }
+.flourish { display: block; width: 200px; max-width: 70%; height: auto; margin: 0 auto 6px; }
+
+/* bubble pearls, like the card: glassy, a soft rim and a highlight */
+.bubble { position: absolute; z-index: 1; border-radius: 50%; pointer-events: none;
+  background: radial-gradient(circle at 32% 28%, rgba(255, 255, 255, .95) 0 12%, rgba(255, 255, 255, .25) 30%, rgba(236, 222, 232, .35) 62%, rgba(200, 175, 195, .55) 100%);
+  box-shadow: inset -3px -4px 8px rgba(184, 135, 167, .25), inset 2px 2px 6px rgba(255, 255, 255, .8), 0 6px 14px -8px rgba(120, 80, 110, .45);
+  animation: bob 9s ease-in-out infinite; }
+.bubble.b1 { width: 42px; height: 42px; left: max(4%, calc(50% - 420px)); top: 70px; }
+.bubble.b2 { width: 26px; height: 26px; right: max(6%, calc(50% - 400px)); top: 120px; animation-delay: -3s; }
+.bubble.b3 { width: 16px; height: 16px; right: max(12%, calc(50% - 330px)); top: 54px; animation-delay: -6s; }
+@keyframes bob { 50% { transform: translateY(-10px); } }
+
+@media (max-width: 760px) {
+  .silk--hero { height: 120px; }
+  .z-hero { padding-bottom: 64px; }
+  .bubble.b1 { width: 26px; height: 26px; left: 10px; top: 18px; }
+  .bubble.b2 { width: 18px; height: 18px; right: 14px; top: 64px; }
+  .bubble.b3 { display: none; }
+  .swish { margin-top: 12px; }
+  .footer { padding-top: 80px !important; }
+  .silk--foot { height: 70px; }
+}
+@media (prefers-reduced-motion: reduce) { .silk .w1, .silk .w2, .silk .sparkle circle, .bubble { animation: none; } }
+@media (max-width: 760px) { .silk--hero { height: 150px; } .z-hero { padding-bottom: 80px; } }
+.silk svg { filter: saturate(1.15) contrast(1.05); }
