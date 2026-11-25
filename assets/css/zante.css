@@ -2960,3 +2960,45 @@ html.js-motion .band3 { animation: band3In 1s var(--ease-soft) .3s both; }
   .s3-top .tile3-cap span { display: none; }
 }
 @media (max-width: 760px) { .panel3--drop .btn { min-height: 40px; padding: 0 14px; font-size: .84rem; white-space: nowrap; } }
+
+/* ---------- icons sit in the middle of their text ---------- */
+/* H and U dots inside a sentence */
+.l3 .hx-dot, p > .hx-dot--xs { vertical-align: middle; position: relative; top: -.1em; margin: 0 3px; }
+/* order steps: the number in the middle of its circle, the circle in the middle of its step */
+.ord3-steps li { align-items: center; }
+.ord3-steps .ord3-n { display: grid; place-items: center; padding: 0; line-height: 1; text-align: center; font: 600 .8rem/1 var(--f-body); color: var(--pink-ink); font-variant-numeric: tabular-nums; }
+.ord3-steps li.is-ritual .ord3-n { color: #fff; }
+@media (max-width: 760px) { .ord3-steps .ord3-n { font-size: .72rem; } }
+/* "Half Wig or U-Part?" strip: the dot in the middle of its text */
+.diff3-h { align-items: center; }
+
+/* ---------- graphic line icons ---------- */
+.ic { width: 18px; height: 18px; flex: none; display: block; }
+.footer nav a { display: flex; align-items: center; gap: 10px; }
+.footer nav a .ic { color: var(--pink-ink); }
+.footer nav a .hx-dot--xs { margin: 0; width: 18px; height: 18px; }
+.foot-contact .foot-row { display: flex; align-items: center; gap: 10px; }
+.foot-row .ic { color: var(--pink-ink); }
+.co-opt { grid-template-columns: auto auto 1fr auto; }
+.co-ic { width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center; background: var(--bg-2); color: var(--pink-ink); }
+.co-ic .ic { width: 20px; height: 20px; }
+.co-opt:has(input:checked) .co-ic { background: var(--purple); color: #fff; }
+.ship-h { display: flex; align-items: center; gap: 10px; }
+.ship-ic { width: 40px; height: 40px; flex: none; border-radius: 12px; display: grid; place-items: center; background: var(--pink-soft); color: var(--pink-ink); }
+.ship-ic .ic { width: 22px; height: 22px; }
+.sum-t { display: inline-flex; align-items: center; gap: 10px; }
+.sum-t .ic { color: var(--pink-ink); }
+.faq-gh { display: flex; align-items: center; gap: 12px; }
+.faq-gh .ic { width: 26px; height: 26px; padding: 6px; box-sizing: content-box; border-radius: 12px; background: var(--pink-soft); color: var(--pink-ink); }
+:root[data-mode="dark"] .co-ic, :root[data-mode="dark"] .ship-ic, :root[data-mode="dark"] .faq-gh .ic { background: rgba(142, 92, 127, .22); color: var(--pink); }
+/* icons on text that can wrap: centred on the first line */
+.ord3-steps li { align-items: baseline; }
+.diff3-h { align-items: baseline; }
+.footer nav a { align-items: flex-start; line-height: 22px; }
+.footer nav a .ic, .footer nav a .hx-dot--xs { margin-top: 2px; }
+.foot-contact p { line-height: 22px; }
+.foot-contact .foot-row { align-items: flex-start; }
+.foot-row .ic { margin-top: 2px; }
+/* phone menu: the H and U dots centred on their link text */
+.mnav a { display: flex; align-items: center; }
+.ord3-steps .ord3-n { position: relative; top: -2px; }

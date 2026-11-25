@@ -266,6 +266,7 @@
     paxi: ['PAXI point to collect from', 'Search for a PEP store near you', 'PAXI points are inside PEP and Tekkie Town stores. You get an SMS when your parcel is ready.', 'PAXI point'],
     postnet: ['PostNet branch to collect from', 'Search for a PostNet branch near you', 'You collect your parcel from the branch you choose.', 'PostNet branch']
   };
+  var SHIP_ICON = {"door": "<svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M2.8 6.5h10.4v9H2.8z\"/><path d=\"M13.2 9.5h4l3 3.2v2.8h-7\"/><circle cx=\"7\" cy=\"17\" r=\"1.9\"/><circle cx=\"17\" cy=\"17\" r=\"1.9\"/></svg>", "paxi": "<svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3.5 9.5 5.5 5h13l2 4.5\"/><path d=\"M3.5 9.5h17\"/><path d=\"M5 9.5V19h14V9.5\"/><path d=\"M10 19v-5h4v5\"/></svg>", "postnet": "<svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m12 3.5 8 4v9l-8 4-8-4v-9z\"/><path d=\"m4 7.5 8 4 8-4M12 11.5v9\"/></svg>"};
   var ship = null, place = null, lastKind = null, mapsState = 0;   // mapsState: 0 not loaded, 1 Google finder on, -1 plain field
   var MAPS_KEY = (window.ZANTE_CONFIG || {}).googleMapsKey || '';
   function bagSum() { return bag.reduce(function (a, b) { return a + b.qty * b.price; }, 0); }
@@ -318,7 +319,7 @@
     document.head.appendChild(s);
   }
   $('#coOpts').innerHTML = SHIP.map(function (s) {
-    return '<label class="co-opt"><input type="radio" name="ship" value="' + s.id + '"><span class="co-opt-t"><b>' + esc(s.name) + '</b><small>' + esc(s.time) + '</small></span>' +
+    return '<label class="co-opt"><input type="radio" name="ship" value="' + s.id + '"><span class="co-ic">' + SHIP_ICON[s.kind] + '</span><span class="co-opt-t"><b>' + esc(s.name) + '</b><small>' + esc(s.time) + '</small></span>' +
       '<span class="co-opt-p">' + (s.price === null ? 'Quote' : fmt(s.price)) + '</span></label>';
   }).join('');
   $('#coOpts').addEventListener('change', function (e) {
@@ -967,9 +968,10 @@
   if (faqList) faqList.innerHTML = FAQS.slice(0, +faqList.dataset.limit || FAQS.length).map(faqItem).join('');
   var faqGroups = $('#faqGroups');
   if (faqGroups) {
+    var FAQ_ICON = {"hair": "<svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m12 3.5 1.9 5.1 5.1 1.9-5.1 1.9L12 17.5l-1.9-5.1L5 10.5l5.1-1.9z\"/><path d=\"m18.5 15.5.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7z\"/></svg>", "styling": "<svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 8.5h16v3.5H4z\"/><path d=\"M6.5 12v6M9.5 12v6M12.5 12v6M15.5 12v6M18 12v6\"/></svg>", "orders": "<svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m12 3.5 8 4v9l-8 4-8-4v-9z\"/><path d=\"m4 7.5 8 4 8-4M12 11.5v9\"/></svg>"};
     var GROUPS = [['hair', 'Our hair'], ['styling', 'Styling and wear'], ['orders', 'Orders and seasonal drops']];
     faqGroups.innerHTML = GROUPS.map(function (g) {
-      return '<div class="faq-group" id="faq-' + g[0] + '"><h2 class="h3">' + g[1] + '</h2><div class="faq-list">' +
+      return '<div class="faq-group" id="faq-' + g[0] + '"><h2 class="h3 faq-gh">' + (FAQ_ICON[g[0]] || '') + g[1] + '</h2><div class="faq-list">' +
         FAQS.filter(function (q) { return q[2] === g[0]; }).map(faqItem).join('') + '</div></div>';
     }).join('');
     $('#faqJump').innerHTML = GROUPS.map(function (g) { return '<a class="chip" href="#faq-' + g[0] + '">' + g[1] + '</a>'; }).join('') + '<a class="chip" href="#returns">Returns</a>';
