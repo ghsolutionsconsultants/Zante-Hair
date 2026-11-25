@@ -868,7 +868,7 @@
   if (faqList) faqList.innerHTML = FAQS.slice(0, +faqList.dataset.limit || FAQS.length).map(faqItem).join('');
   var faqGroups = $('#faqGroups');
   if (faqGroups) {
-    var GROUPS = [['hair', 'Our hair'], ['styling', 'Styling and wear'], ['orders', 'Orders and the Hair Drop']];
+    var GROUPS = [['hair', 'Our hair'], ['styling', 'Styling and wear'], ['orders', 'Orders and seasonal drops']];
     faqGroups.innerHTML = GROUPS.map(function (g) {
       return '<div class="faq-group" id="faq-' + g[0] + '"><h2 class="h3">' + g[1] + '</h2><div class="faq-list">' +
         FAQS.filter(function (q) { return q[2] === g[0]; }).map(faqItem).join('') + '</div></div>';
