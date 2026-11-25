@@ -103,7 +103,7 @@
     ['Can I colour a Zante unit?', 'Yes, human hair can be coloured, but results vary and colour can affect the condition of the hair. We recommend a professional colourist and a strand test first.', 'styling'],
     ['Can I sew in my Zante unit?', 'Yes. Remove the clips and combs first so they do not rub against and damage your natural hair.', 'styling'],
     ['Are the wigs ready to wear?', 'Yes. We inspect and pre-wash every unit before dispatch at no extra cost. If you may want to return it, please do not wear it, so it stays eligible for a refund.', 'orders'],
-    ['Why do preorders take longer?', 'We group orders into a production drop before the hair is made and shipped to South Africa. This lets us source and prepare every unit properly. Allow 3 to 4 weeks from your drop’s cut-off.', 'orders'],
+    ['Why does delivery take 3 to 4 weeks?', 'We group orders into a production drop before the hair is made and shipped to South Africa. This lets us source and prepare every unit properly. Allow 3 to 4 weeks from your drop’s cut-off.', 'orders'],
     ['Can I change my order after payment?', 'Contact us as soon as possible. Changes may be possible before your drop closes, but we cannot guarantee them once the drop has gone to production.', 'orders'],
     ['Do you offer installation?', 'Not at the moment. Our collection is designed for beginner-friendly, DIY, removable styling.', 'orders']
   ];
@@ -138,6 +138,21 @@
 
   // ======================= THE ZANTE HAIR DROP =======================
   // Cut-offs: first and third Monday of each month, 18:00 SAST (UTC+2, no daylight saving).
+  // Each month's drops carry a seasonal name. The second drop of the month adds "II".
+  var SEASONS = [
+    { key: 'newyear', label: 'New Year', icon: '✦', name: 'The New Year Drop' },
+    { key: 'valentine', label: 'Valentine’s', icon: '♡', name: 'The Valentine’s Drop' },
+    { key: 'autumn', label: 'Autumn', icon: '✦', name: 'The Autumn Drop' },
+    { key: 'easter', label: 'Easter', icon: '✦', name: 'The Easter Drop' },
+    { key: 'mothers', label: 'Mother’s Day', icon: '♡', name: 'The Mother’s Day Drop' },
+    { key: 'winter', label: 'Winter', icon: '❄', name: 'The Winter Drop' },
+    { key: 'winter', label: 'Winter', icon: '❄', name: 'The Mid-Winter Drop' },
+    { key: 'women', label: 'Women’s Month', icon: '✦', name: 'The Women’s Month Drop' },
+    { key: 'spring', label: 'Spring', icon: '✿', name: 'The Spring Drop' },
+    { key: 'pink', label: 'Pink October', icon: '♡', name: 'The Pink October Drop' },
+    { key: 'blackfriday', label: 'Black Friday', icon: '✦', name: 'The Black Friday Drop' },
+    { key: 'christmas', label: 'Christmas', icon: '✶', name: 'The Christmas Drop' }
+  ];
   var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   function nthMonday(y, m, n) {
     var first = new Date(Date.UTC(y, m, 1)).getUTCDay();         // 0 Sunday … 6 Saturday
@@ -152,7 +167,7 @@
         if (d > now && out.length < count) {
           out.push({
             close: d, first: n === 1,
-            name: (n === 1 ? 'The First Drop' : 'The Second Drop') + ' – ' + MONTHS[m] + ' ' + y,
+            name: SEASONS[m].name + (n === 1 ? '' : ' II'),
             ref: 'ZB-' + y + '-' + String(m + 1).padStart(2, '0') + '-0' + (n === 1 ? 1 : 2)
           });
         }
@@ -175,7 +190,7 @@
     var dd = $('#dropDates'); if (dd) dd.innerHTML = list.map(function (d, i) {
       var s = new Date(d.close.getTime() + 2 * 3600e3);
       return '<li class="' + (i ? '' : 'is-next') + '"><span class="cal-date"><small>Mon</small><b>' + s.getUTCDate() + '</b><small>' + MONTHS[s.getUTCMonth()].slice(0, 3) + '</small></span>' +
-        '<span class="cal-info"><b>' + esc(d.name.split(' – ')[0]) + '</b><small>' + esc(MONTHS[s.getUTCMonth()] + ' ' + s.getUTCFullYear()) + ' · closes 18:00 SAST</small></span>' +
+        '<span class="cal-info"><b>' + esc(d.name) + '</b><small>' + esc(MONTHS[s.getUTCMonth()] + ' ' + s.getUTCFullYear()) + ' · closes 18:00 SAST</small></span>' +
         (i ? '' : '<span class="cal-tag">Open now</span>') + '</li>';
     }).join('');
   }
@@ -414,7 +429,7 @@
     else play();
   });
 
-  // ======================= PREORDER POP-UP (homepage) =======================
+  // ======================= DROP POP-UP (homepage, not used) =======================
   (function dropPopup() {
     var pop = $('#dropPop'), chip = $('#dropChip');
     if (!pop) return;
@@ -485,7 +500,7 @@
       '.z-hero-head > *', '.z-pair > .z-choice', '.z-drop', '.z-head > *', '.z-why > article',
       '.z-gallery > .z-tile', '.z-split-media', '.z-split-copy > *', '.review-rail > .review', '.z-news-in > *',
       '.page-hero .wrap > *:not(.ph-in)', '.ph-copy > *', '.ph-media', '.section-head > *', '.pgrid > .pcard',
-      '.timeline > li', '.drop-facts > div', '.faq-group', '.acc-list > .acc', '.terms-body > *:nth-child(-n+4)'
+      '.timeline > li', '.drop-facts > div', '.faq-group', '.acc-list > .acc', '.terms-body > *:nth-child(-n+4)', '.hg > .hg-card', '.sn > .sn-card', '.ba-grid > .ba', '.db-copy', '.db-count', '.db-actions', '.pp-gallery', '.pp-info > *', '.hmc fieldset', '.hmc-len'
     ];
     var items = [];
     groups.forEach(function (sel) {
@@ -881,6 +896,144 @@
     $$('.reveal, .why-card, .vs-card, .steps li, .panel, .facts article').forEach(function (el) { el.classList.add('reveal'); ro.observe(el); });
   } else { $$('.reveal').forEach(function (el) { el.classList.add('is-in'); }); }
   $('#year').textContent = new Date().getFullYear();
+
+  // ======================= ANIMATED INTRO (homepage, once per visit) =======================
+  (function zIntro() {
+    var el = $('#zIntro'); if (!el) return;
+    var seen = false;
+    try { seen = sessionStorage.getItem('zante-zi') === '1'; sessionStorage.setItem('zante-zi', '1'); } catch (e) { /* private mode */ }
+    if (seen || reduce) { el.remove(); return; }
+    document.documentElement.classList.add('zi-on');
+    var done = function () {
+      if (!el.isConnected || el.classList.contains('is-out')) return;
+      el.classList.add('is-out');
+      document.documentElement.classList.remove('zi-on');
+      setTimeout(function () { el.remove(); }, 900);
+    };
+    $('.zi-skip', el).addEventListener('click', done);
+    el.addEventListener('click', done);
+    setTimeout(done, 3100);
+  })();
+
+  // ======================= HERO: H / U info badges =======================
+  $$('.hx-badge').forEach(function (b) {
+    var panel = b.closest('.hx-panel');
+    function set(open) {
+      $$('.hx-panel.tip-open').forEach(function (p) { if (p !== panel) { p.classList.remove('tip-open'); $('.hx-badge', p).setAttribute('aria-expanded', 'false'); } });
+      panel.classList.toggle('tip-open', open); b.setAttribute('aria-expanded', open);
+    }
+    b.addEventListener('click', function (e) { e.preventDefault(); e.stopPropagation(); set(matchMedia('(hover: hover)').matches ? true : !panel.classList.contains('tip-open')); });
+    b.addEventListener('mouseenter', function () { if (matchMedia('(hover: hover)').matches) set(true); });
+    panel.addEventListener('mouseleave', function () { if (matchMedia('(hover: hover)').matches) set(false); });
+  });
+  document.addEventListener('click', function (e) { if (!e.target.closest('.hx-info')) $$('.hx-panel.tip-open').forEach(function (p) { p.classList.remove('tip-open'); $('.hx-badge', p).setAttribute('aria-expanded', 'false'); }); });
+  addEventListener('keydown', function (e) { if (e.key === 'Escape') $$('.hx-panel.tip-open').forEach(function (p) { p.classList.remove('tip-open'); }); });
+
+  // ======================= SEASONAL DROP THEME =======================
+  (function season() {
+    var m = new Date(current.close.getTime() + 2 * 3600e3).getUTCMonth();
+    document.documentElement.dataset.season = SEASONS[m].key;
+    $$('[data-drop-season-label]').forEach(function (el) { el.textContent = SEASONS[m].label + ' · ' + MONTHS[m] + ' ' + new Date(current.close.getTime() + 2 * 3600e3).getUTCFullYear(); });
+    $$('[data-drop-icon]').forEach(function (el) { el.textContent = SEASONS[m].icon + ' '; });
+    var fx = $('.season-fx');
+    if (fx && SEASONS[m].key === 'christmas' && !reduce) {
+      fx.innerHTML = Array.apply(null, Array(18)).map(function (_, i) {
+        return '<i style="--x:' + ((i * 53) % 100) + '%;--d:' + (6 + (i % 5) * 1.4) + 's;--t:' + (-(i * 0.9)) + 's;--s:' + (0.6 + (i % 3) * 0.35) + '"></i>';
+      }).join('');
+    }
+  })();
+
+  // ======================= FROM-PRICES on the homepage =======================
+  $$('[data-from]').forEach(function (el) {
+    var p = PRODUCTS.filter(function (x) { return x.id === el.dataset.from; })[0];
+    if (p) el.textContent = fmt(Math.min.apply(null, p.opts.map(function (o) { return o.price; })));
+  });
+
+  // ======================= BEFORE / AFTER sliders =======================
+  $$('[data-ba]').forEach(function (ba) {
+    var r = $('.ba-range', ba), stage = $('.ba-stage', ba);
+    function set(v) { stage.style.setProperty('--pos', v + '%'); }
+    r.addEventListener('input', function () { set(r.value); });
+    set(r.value);
+    if (!reduce && 'IntersectionObserver' in window) {   // a gentle demo sweep the first time it is seen
+      var io = new IntersectionObserver(function (en) {
+        if (!en[0].isIntersecting) return; io.disconnect();
+        var t0 = null;
+        (function step(t) { if (!t0) t0 = t; var k = Math.min(1, (t - t0) / 1600); var v = 50 + Math.sin(k * Math.PI * 2) * 22 * (1 - k); r.value = v; set(v); if (k < 1) requestAnimationFrame(step); })(performance.now());
+      }, { threshold: 0.5 });
+      io.observe(ba);
+    }
+  });
+
+  // ======================= PRODUCT PAGES =======================
+  var pp = $('[data-product-page]');
+  if (pp) (function productPage() {
+    var p = PRODUCTS.filter(function (x) { return x.id === pp.dataset.productPage; })[0];
+    var MARK = { 10: 'Chin', 12: 'Shoulder', 14: 'Collarbone', 16: 'Armpit', 18: 'Bust', 20: 'Below bust', 22: 'Mid-back' };
+    var sel = p.def;
+    // gallery
+    var main = $('.pp-main-img', pp), src = $('.pp-main source', pp);
+    $$('.pp-thumb', pp).forEach(function (t) {
+      t.addEventListener('click', function () {
+        var g = t.dataset.img;
+        main.classList.add('is-swap');
+        setTimeout(function () {
+          src.srcset = 'assets/img/' + g + '-600.webp 600w, assets/img/' + g + '-900.webp 900w';
+          main.src = 'assets/img/' + g + '.jpg'; main.alt = t.dataset.alt;
+          main.classList.remove('is-swap');
+        }, 160);
+        $$('.pp-thumb', pp).forEach(function (x) { var on = x === t; x.classList.toggle('is-on', on); x.setAttribute('aria-pressed', on); });
+      });
+    });
+    // length chart
+    var chips = $('[data-lc-chips]', pp);
+    chips.innerHTML = p.opts.map(function (o, i) {
+      var l = parseInt(o.label, 10);
+      return '<button type="button" role="radio" class="lc-chip" data-i="' + i + '" data-len="' + l + '" aria-checked="false"><b>' + l + '"</b><span>' + fmt(o.price) + '</span></button>';
+    }).join('');
+    function choose(i) {
+      sel = i;
+      var o = p.opts[i], l = parseInt(o.label, 10);
+      $$('.lc-chip', pp).forEach(function (c) { var on = +c.dataset.i === i; c.classList.toggle('is-on', on); c.setAttribute('aria-checked', on); });
+      $$('.lc-line', pp).forEach(function (ln) { ln.classList.toggle('is-on', +ln.dataset.len === l); ln.classList.toggle('is-under', +ln.dataset.len < l); });
+      $('[data-lc-len]', pp).textContent = l + '"';
+      $('[data-lc-mark]', pp).textContent = MARK[l] || '';
+      $('[data-pp-price]', pp).textContent = fmt(o.price);
+      $('[data-pp-pjn]', pp).textContent = 'or 3 × ' + fmt(o.price / 3) + ' with PayJustNow';
+    }
+    chips.addEventListener('click', function (e) { var c = e.target.closest('.lc-chip'); if (c) choose(+c.dataset.i); });
+    chips.addEventListener('keydown', function (e) {
+      if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+      e.preventDefault(); var n = (sel + (e.key === 'ArrowRight' ? 1 : -1) + p.opts.length) % p.opts.length; choose(n); $$('.lc-chip', pp)[n].focus();
+    });
+    $$('.lc-line', pp).forEach(function (ln) { ln.addEventListener('click', function () { var i = p.opts.map(function (o) { return parseInt(o.label, 10); }).indexOf(+ln.dataset.len); if (i > -1) choose(i); }); });
+    choose(sel);
+    $('[data-pp-add]', pp).addEventListener('click', function () {
+      var o = p.opts[sel];
+      addToBag({ key: p.id + '-' + sel, name: p.short, variant: 'Length: ' + o.label, price: o.price, img: p.img });
+    });
+    // help me choose: length shortcuts
+    $$('[data-pick-len]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var i = p.opts.map(function (o) { return parseInt(o.label, 10); }).indexOf(+b.dataset.pickLen);
+        if (i > -1) { choose(i); $('.lc', pp).scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' }); }
+      });
+    });
+  })();
+
+  // ======================= HELP ME CHOOSE =======================
+  $$('[data-hmc]').forEach(function (f) {
+    var here = f.dataset.hmc, out = $('[data-hmc-result]', f);
+    f.addEventListener('change', function () {
+      var vals = ['q1', 'q2', 'q3'].map(function (q) { var c = $('input[name="' + q + '"]:checked', f); return c ? c.value : null; });
+      if (vals.indexOf(null) > -1) return;
+      var u = vals.filter(function (v) { return v === 'u'; }).length, pick = u >= 2 ? 'upart' : 'halfwig';
+      var name = pick === 'upart' ? 'The U-Part Wig' : 'The Half Wig', letter = pick === 'upart' ? 'U' : 'H';
+      var why = pick === 'upart' ? 'You want a natural parting and are happy to blend a small leave-out.' : 'You want a quick, no-parting look finished with a headband.';
+      out.innerHTML = '<div class="hmc-pick"><span class="hx-dot hx-dot--lg">' + letter + '</span><div><p class="z-label">Our suggestion</p><h3>' + name + '</h3><p>' + why + '</p></div>' +
+        (pick === here ? '<a class="btn btn--solid" href="#ppTitle">You are on the right page</a>' : '<a class="btn btn--solid" href="' + (pick === 'upart' ? 'u-part-wig.html' : 'half-wig.html') + '">See ' + name + '</a>') + '</div>';
+    });
+  });
 
   // exposed for checks
   window.__zanteDrops = upcomingDrops;

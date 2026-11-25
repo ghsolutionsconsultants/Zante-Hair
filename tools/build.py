@@ -13,23 +13,26 @@ ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / 'src' / 'pages'
 
 NAV = [
-    ('shop.html', 'Shop'),
-    ('hair-drop.html', 'The Hair Drop'),
+    ('half-wig.html', 'Half Wig'),
+    ('u-part-wig.html', 'U-Part Wig'),
     ('hair-guide.html', 'Hair Guide'),
+    ('hair-drop.html', 'The Hair Drop'),
     ('our-story.html', 'Our Story'),
     ('faqs.html', 'FAQs'),
 ]
 
 PAGES = {
     # file: (body source, <title>, meta description, active nav file)
-    'index.html': ('index.html', 'Zante Beauty', 'Zante Beauty: kinky straight half wigs and U-part wigs in 100% virgin human hair, pre-washed before dispatch. Ordered in two Zante Hair Drops a month.', None),
+    'index.html': ('index.html', 'Zante Beauty', 'Zante Beauty: kinky straight half wigs and U-part wigs in 100% virgin human hair, pre-washed before dispatch. New Zante Hair Drop twice a month, delivered in 3 to 4 weeks.', None),
+    'half-wig.html': ('half-wig.html', 'The Half Wig · Zante Beauty', 'The Zante Half Wig: covers the back of your head while your own front hair blends in. 100% virgin human hair, kinky straight, 10 to 22 inches.', 'half-wig.html'),
+    'u-part-wig.html': ('u-part-wig.html', 'The U-Part Wig · Zante Beauty', 'The Zante U-Part Wig: a full wig with a U-shaped opening for your own leave-out and a natural parting. 100% virgin human hair, kinky straight (not silk pressed), 10 to 22 inches.', 'u-part-wig.html'),
     'shop.html': ('shop.html', 'Shop · Zante Beauty', 'Shop the Zante Half Wig and U-Part Wig: 100% virgin human hair, kinky straight, 180% density, 10 to 22 inches.', 'shop.html'),
-    'hair-drop.html': ('hair-drop.html', 'The Zante Hair Drop · Zante Beauty', 'How the Zante Hair Drop works: two preorder drops a month, cut-off dates, waiting times, delivery and tracking.', 'hair-drop.html'),
+    'hair-drop.html': ('hair-drop.html', 'The Zante Hair Drop · Zante Beauty', 'How the Zante Hair Drop works: two drops a month, cut-off dates, waiting times, delivery and tracking.', 'hair-drop.html'),
     'hair-guide.html': ('hair-guide.html', 'Hair guide · Zante Beauty', 'Half wig or U-part? Understand our kinky straight texture, 180% density and true-to-length hair.', 'hair-guide.html'),
     'our-story.html': ('our-story.html', 'Our story · Zante Beauty', 'Born from a name, built around her. The story of Zante Beauty and why we love kinky straight hair.', 'our-story.html'),
     'privacy.html': ('privacy.html', 'Privacy policy · Zante Beauty', 'How Zante Beauty collects, uses and protects your personal information under POPIA.', None),
-    'terms.html': ('terms.html', 'Terms and conditions · Zante Beauty', 'Zante Beauty terms and conditions, in line with the South African Consumer Protection Act and ECTA: preorders, cancellations, the 7-day cooling-off period, defects, returns and refunds.', None),
-    'faqs.html': ('faqs.html', 'FAQs · Zante Beauty', 'Answers about Zante hair, styling, preorders, delivery and returns.', 'faqs.html'),
+    'terms.html': ('terms.html', 'Terms and conditions · Zante Beauty', 'Zante Beauty terms and conditions, in line with the South African Consumer Protection Act and ECTA: orders, cancellations, the 7-day cooling-off period, defects, returns and refunds.', None),
+    'faqs.html': ('faqs.html', 'FAQs · Zante Beauty', 'Answers about Zante hair, styling, orders, delivery and returns.', 'faqs.html'),
 }
 
 ICON_CLOSE = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>'
@@ -64,12 +67,29 @@ def header(active, is_home):
             cur = ' aria-current="page"' if href == active else ''
             out.append(f'<a href="{href}"{cur}>{label}</a>')
         return ''.join(out)
+    intro = '''
+<!-- animated intro (homepage, once per visit) -->
+<div class="zi" id="zIntro" aria-hidden="true">
+  <svg class="zi-silk" viewBox="0 0 1440 400" preserveAspectRatio="none">
+    <defs><linearGradient id="zig" x1="0" x2="1"><stop offset="0" stop-color="#C79BB8" stop-opacity="0"/><stop offset=".4" stop-color="#C79BB8" stop-opacity=".7"/><stop offset="1" stop-color="#C9CFE0" stop-opacity=".5"/></linearGradient></defs>
+    <path class="zi-r1" d="M-40 250 C 220 120, 460 330, 740 220 S 1200 100, 1480 200" stroke="url(#zig)"/>
+    <path class="zi-r2" d="M-40 280 C 240 170, 480 360, 760 250 S 1220 140, 1480 240" stroke="url(#zig)"/>
+  </svg>
+  <div class="zi-mark">
+    <span class="zi-pearls"><i></i><i></i><i></i><i></i><i></i></span>
+    <span class="zi-word">ZANTE</span>
+    <span class="zi-sub">Beauty</span>
+    <span class="zi-tag">Your way. For every beautiful you.</span>
+  </div>
+  <button class="zi-skip" type="button" tabindex="-1">Skip</button>
+</div>
+''' if is_home else ''
     return f'''<body>
 <a class="skip" href="#main">Skip to content</a>
-
+{intro}
 <!-- one slim announcement bar -->
 <div class="announce">
-  <p>Preorders open · <a href="hair-drop.html"><b data-drop-name>the next Zante Hair Drop</b></a></p>
+  <p><span data-drop-icon></span><a href="hair-drop.html"><b data-drop-name>The next Zante Hair Drop</b></a> · order by <span data-drop-date>Monday</span>, 18:00</p>
 </div>
 
 <header class="header" id="header">
@@ -78,7 +98,7 @@ def header(active, is_home):
     <nav class="nav nav--left" aria-label="Main">{links(NAV[:3])}</nav>
     <a class="logo" href="index.html" aria-label="Zante Beauty, home"><span class="logo-z">Zante</span><span class="logo-b">Beauty</span></a>
     <div class="header-right">
-      <nav class="nav nav--right" aria-label="More">{links(NAV[3:])}</nav>
+      <nav class="nav nav--right" aria-label="More">{links(NAV[3:5])}</nav>
       <div class="header-actions">
         <button class="icon-btn" type="button" data-search-open aria-label="Search products">
           <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
@@ -127,12 +147,12 @@ def footer():
       <a class="logo" href="index.html" aria-label="Zante Beauty, home"><span class="logo-z">Zante</span><span class="logo-b">Beauty</span></a>
       <p>Your styling freedom. Wear it your way.</p>
     </div>
-    <nav aria-label="Shop links"><p class="foot-h">Shop</p><a href="shop.html#p-halfwig">The Half Wig</a><a href="shop.html#p-upart">The U-Part Wig</a><a href="hair-drop.html">The Zante Hair Drop</a><a href="hair-guide.html">Hair Guide</a></nav>
+    <nav aria-label="Shop links"><p class="foot-h">Shop</p><a href="half-wig.html">The Half Wig</a><a href="u-part-wig.html">The U-Part Wig</a><a href="hair-drop.html">The Zante Hair Drop</a><a href="hair-guide.html">Hair Guide</a></nav>
     <nav aria-label="Help links"><p class="foot-h">Help</p><a href="faqs.html">FAQs</a><a href="hair-drop.html#delivery">Shipping and delivery</a><a href="terms.html#t-returns">Returns and refunds</a><a href="privacy.html">Privacy policy</a><a href="terms.html">Terms and conditions</a></nav>
     <div class="foot-contact"><p class="foot-h">Contact</p>
       <p>WhatsApp: <a href="https://wa.me/27686954639" target="_blank" rel="noopener">+27 68 695 4639</a></p>
       <p>Email: <a href="mailto:zantebeauty@outlook.com">zantebeauty@outlook.com</a></p>
-      <p>Preorders close on the first and third Monday of each month at 18:00 SAST.</p>
+      <p>Each drop closes on the first or third Monday of the month at 18:00 SAST. Delivery takes 3 to 4 weeks.</p>
     </div>
   </div>
   <div class="wrap footer-base">
