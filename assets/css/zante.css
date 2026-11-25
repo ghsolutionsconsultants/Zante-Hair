@@ -2903,3 +2903,60 @@ html.js-motion .band3 { animation: band3In 1s var(--ease-soft) .3s both; }
   .ord3-steps span { font-size: .8rem; line-height: 1.35; }
 }
 @media (min-width: 761px) and (max-height: 700px) { .cmp3-row--opt { display: none; } }
+
+/* ---------- checkout in the bag: delivery options, details, Google Maps address ---------- */
+.drawer-body { min-height: 0; overflow-y: auto; overscroll-behavior: contain; }
+.drawer-body .bag-list { overflow: visible; }
+.co { padding: 8px 20px 18px; display: grid; gap: 16px; }
+.co[hidden] { display: none; }
+.co-set { margin: 0; padding: 0; border: 0; min-width: 0; display: grid; gap: 10px; }
+.co-h { padding: 0; margin-bottom: 2px; display: flex; align-items: center; gap: 8px; font: 600 1.2rem/1.2 var(--f-head); color: var(--ink); }
+.co-h span { width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; background: var(--purple); color: #fff; font: 600 .78rem/1 var(--f-body); }
+.co-opts { display: grid; gap: 8px; border-radius: 14px; }
+.co-opt { display: grid; grid-template-columns: auto 1fr auto; gap: 10px; align-items: center; min-height: 52px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); cursor: pointer; transition: border-color .2s, background-color .2s; }
+.co-opt:hover { border-color: var(--pink); }
+.co-opt:has(input:checked) { border-color: var(--purple); background: #F6EDF3; box-shadow: inset 0 0 0 1px var(--purple); }
+:root[data-mode="dark"] .co-opt:has(input:checked) { background: rgba(142, 92, 127, .2); }
+.co-opt input { margin: 0; width: 18px; height: 18px; accent-color: var(--purple); }
+.co-opt-t b { display: block; font-size: .92rem; font-weight: 600; line-height: 1.3; }
+.co-opt-t small { display: block; font-size: .78rem; color: var(--mute); line-height: 1.35; }
+.co-opt-p { font-weight: 600; font-size: .95rem; white-space: nowrap; }
+.co-f { display: grid; gap: 6px; font-size: .86rem; font-weight: 600; color: var(--ink); }
+.co-f input { width: 100%; height: 48px; padding: 0 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg); color: var(--ink); font: 400 1rem var(--f-body); }
+.co-f input:focus { outline: 2px solid var(--purple); outline-offset: 1px; }
+.co-addr { min-height: 48px; border-radius: 10px; }
+.co-addr .co-finder { display: block; width: 100%; color-scheme: light; }
+.co-hint { font-weight: 400; font-size: .78rem; color: var(--mute); line-height: 1.4; }
+.co-picked { margin: 0; padding: 8px 10px; border-radius: 10px; background: var(--bg-2); font-weight: 500; font-size: .84rem; line-height: 1.4; }
+.co-map { justify-self: start; font-weight: 500; font-size: .84rem; color: var(--pink-ink); }
+.co-manual { justify-self: start; padding: 4px 0; border: 0; background: none; color: var(--pink-ink); font: 500 .8rem var(--f-body); text-decoration: underline; cursor: pointer; }
+.co-flash { animation: coFlash 1.1s ease; }
+@keyframes coFlash { 25%, 60% { box-shadow: 0 0 0 3px rgba(142, 92, 127, .5); } }
+.bag-total--sub { font-size: .92rem; color: var(--ink-2); }
+.bag-total--grand { padding-top: 8px; border-top: 1px dashed var(--line); font-size: 1.15rem; font-weight: 600; }
+.ship-opts--5 { grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); }
+
+@media (max-width: 760px) {
+  /* bag on phones: a compact totals area so the checkout form has room */
+  .drawer-foot { gap: 6px; padding: 12px 18px calc(14px + env(safe-area-inset-bottom, 0px)); }
+  .drawer-foot .bag-total { font-size: .95rem; }
+  .drawer-foot .bag-total--grand { font-size: 1.05rem; padding-top: 6px; }
+  .drawer-foot .bag-note { font-size: .72rem; line-height: 1.35; }
+  .co { padding: 6px 18px 16px; }
+}
+
+/* phones: photos show in full (4:5), never squeezed into short strips */
+@media (max-width: 760px) {
+  .story3 .tile3, .kink3 .tile3, .gd3 .tile3 { height: auto !important; aspect-ratio: 4 / 5; }
+  .story-in img, .tall-img img, .ritual-media, .ritual-media img { height: auto !important; max-height: none !important; aspect-ratio: 4 / 5 !important; object-position: 50% 0% !important; }
+}
+@media (max-width: 760px) {
+  /* Seasonal Drops top on phones: the countdown fits its small panel, captions stay short over small photos */
+  .panel3--drop { padding: 12px 10px; gap: 8px; }
+  .panel3--drop .count { grid-template-columns: repeat(3, 1fr); gap: 4px; }
+  .panel3--drop .count p:nth-child(4) { display: none; }
+  .panel3--drop .drop-name { font-size: 1.1rem; }
+  .panel3--drop .drop-when { font-size: .74rem; }
+  .s3-top .tile3-cap span { display: none; }
+}
+@media (max-width: 760px) { .panel3--drop .btn { min-height: 40px; padding: 0 14px; font-size: .84rem; white-space: nowrap; } }
