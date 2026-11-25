@@ -13,8 +13,8 @@ ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / 'src' / 'pages'
 
 NAV = [
-    ('half-wig.html', 'Half Wig'),
-    ('u-part-wig.html', 'U-Part Wig'),
+    ('half-wig.html', '<span class="hx-dot hx-dot--xs" aria-hidden="true">H</span>Half Wig'),
+    ('u-part-wig.html', '<span class="hx-dot hx-dot--xs" aria-hidden="true">U</span>U-Part Wig'),
     ('hair-guide.html', 'Hair Guide'),
     ('hair-drop.html', 'The Hair Drop'),
     ('our-story.html', 'Our Story'),
@@ -92,22 +92,23 @@ def header(active, is_home):
   <p><span data-drop-icon></span><a href="hair-drop.html"><b data-drop-name>The next Zante Hair Drop</b></a> · order by <span data-drop-date>Monday</span>, 18:00</p>
 </div>
 
-<header class="header" id="header">
-  <div class="wrap header-in">
-    <button class="burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mnav"><span></span><span></span></button>
-    <nav class="nav nav--left" aria-label="Main">{links(NAV[:3])}</nav>
+<header class="header hdr3" id="header">
+  <div class="hdr3-in">
     <a class="logo" href="index.html" aria-label="Zante Beauty, home"><span class="logo-z">Zante</span><span class="logo-b">Beauty</span></a>
-    <div class="header-right">
-      <nav class="nav nav--right" aria-label="More">{links(NAV[3:5])}</nav>
-      <div class="header-actions">
-        <button class="icon-btn" type="button" data-search-open aria-label="Search products">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-        </button>
-        <button class="icon-btn bag-btn" id="bagBtn" type="button" aria-label="Open bag, 0 items">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8Z M9 8V6a3 3 0 0 1 6 0v2" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
-          <span class="bag-count" id="bagCount">0</span>
-        </button>
-      </div>
+    <nav class="hdr3-nav" aria-label="Main">{links(NAV)}</nav>
+    <div class="hdr3-actions">
+      <button class="icon-btn" type="button" data-search-open aria-label="Search">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+      </button>
+      <button class="icon-btn theme-btn" id="themeBtn" type="button" aria-label="Switch to dark mode">
+        <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+        <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+      </button>
+      <button class="icon-btn bag-btn" id="bagBtn" type="button" aria-label="Open bag, 0 items">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8Z M9 8V6a3 3 0 0 1 6 0v2" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+        <span class="bag-count" id="bagCount">0</span>
+      </button>
+      <button class="burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mnav"><span></span><span></span></button>
     </div>
   </div>
   <nav class="mnav" id="mnav" aria-label="Mobile">
@@ -120,8 +121,43 @@ def header(active, is_home):
 '''
 
 
-def footer():
-    return f'''</main>
+DIFF = '''
+<!-- the difference, on every page -->
+<section class="diff3" aria-labelledby="diffTitle">
+  <div class="diff3-in">
+    <h2 class="diff3-t" id="diffTitle">Half Wig or U-Part?</h2>
+    <p class="diff3-h"><span class="hx-dot" aria-hidden="true">H</span><span><b>Half Wig:</b> covers the back of your head. Your front hairline blends in, usually with a headband. No parting.</span></p>
+    <p class="diff3-h"><span class="hx-dot" aria-hidden="true">U</span><span><b>U-Part Wig:</b> a full wig with a U-shaped opening. A little of your own hair makes a natural parting.</span></p>
+    <a class="z-link" href="index.html#guide">Compare them <span aria-hidden="true">→</span></a>
+  </div>
+</section>
+'''
+
+FAB = '''
+<!-- floating buttons -->
+<div class="fab3">
+  <div class="fab3-more" id="fabMore">
+  <a class="fab3-btn fab3-wa" href="https://wa.me/27686954639" target="_blank" rel="noopener" aria-label="Chat to Zante Beauty on WhatsApp">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.2a8.8 8.8 0 0 0-7.6 13.2L3.3 20.7l4.4-1.1A8.8 8.8 0 1 0 12 3.2Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 8.3c.3-.6.6-.6.9-.6h.5c.2 0 .4 0 .6.5l.7 1.6c.1.2.1.4 0 .6l-.5.6c-.1.2-.2.3 0 .6.4.7 1.4 1.8 2.6 2.3.3.1.4.1.6-.1l.6-.7c.2-.2.4-.2.6-.1l1.5.7c.2.1.4.2.4.4 0 .3 0 1-.4 1.4-.4.4-1.2.9-2.2.8-1-.1-2.8-.7-4.3-2.2S8.6 11.2 8.4 10.3c-.2-.9.3-1.6.6-2Z" fill="currentColor"/></svg>
+  </a>
+  <a class="fab3-btn fab3-mail" href="mailto:zantebeauty@outlook.com" aria-label="Email Zante Beauty">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5.5" width="17" height="13" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M4.5 7.5l7.5 6 7.5-6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+  </a>
+  </div>
+  <button class="fab3-btn fab3-toggle" type="button" aria-expanded="false" aria-controls="fabMore" aria-label="Contact us: WhatsApp or email">
+    <svg class="i-chat" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5h16v10H9l-4.5 3.5v-3.5H4z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+    <svg class="i-close" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+  </button>
+  <button class="fab3-btn fab3-top" type="button" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+</div>
+'''
+
+
+def footer(page='index.html'):
+    diff = '' if page in ('index.html', 'hair-guide.html', 'shop.html') else DIFF
+    return diff + f'''</main>
 
 <footer class="footer">
 <div class="silk silk--foot" aria-hidden="true">
@@ -157,7 +193,6 @@ def footer():
   </div>
   <div class="wrap footer-base">
     <p>© <span id="year">2026</span> Zante Beauty, a trading name of Zamasante Suppliers (Pty) Ltd. Reg. 2021/430581/07.</p>
-    <button type="button" class="link-btn" id="themeBtn" aria-label="Switch to dark mode">Dark mode</button>
   </div>
 </footer>
 
@@ -228,6 +263,7 @@ def footer():
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
+''' + FAB + '''
 <script src="assets/js/app.js"></script>
 </body>
 </html>
@@ -237,7 +273,7 @@ def footer():
 def build():
     for out, (src, title, desc, active) in PAGES.items():
         body = (SRC / src).read_text()
-        html = head(title, desc) + '\n' + header(active, out == 'index.html') + '<span id="top"></span>\n' + body + footer()
+        html = head(title, desc) + '\n' + header(active, out == 'index.html') + '<span id="top"></span>\n' + body + footer(out)
         (ROOT / out).write_text(html)
         print('wrote', out)
 
