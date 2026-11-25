@@ -2771,3 +2771,91 @@ html.js-motion .band3 { animation: band3In 1s var(--ease-soft) .3s both; }
   .s3-top .h3-actions { margin-top: 10px; }
   .s3-top .h3-actions .btn { min-height: 40px; }
 }
+
+/* ================= v4: calmer, aligned, fills wide screens ================= */
+
+/* hero headline: "Your hair." stays, the second line changes */
+.t3.rot3 { display: grid; justify-items: center; row-gap: .04em; }
+.rot3-box { display: grid; justify-items: inherit; perspective: 600px; }
+.rot3-w { grid-area: 1 / 1; white-space: nowrap; font-style: italic; color: var(--pink-ink); }
+.rot3-w i { display: inline-block; font-style: inherit; opacity: 0; transform: translateY(.5em) rotateX(-80deg); transform-origin: 50% 100%; filter: blur(6px);
+  transition: opacity .45s ease, transform .7s var(--ease-soft), filter .5s ease; transition-delay: calc(var(--i) * 32ms); }
+.rot3-w.is-on i { opacity: 1; transform: none; filter: none; }
+.rot3-w.is-out i { opacity: 0; transform: translateY(-.4em) rotateX(80deg); transform-origin: 50% 0; filter: blur(6px); transition-delay: calc(var(--i) * 18ms); }
+:root[data-mode="dark"] .rot3-w { color: var(--pink); }
+@media (prefers-reduced-motion: reduce) { .rot3-w i { transition: none; } }
+
+/* less busy: no floating bubbles; WhatsApp and email sit behind one chat button on every screen */
+.s3-hero .bubble { display: none; }
+.fab3-more { display: none; }
+.fab3-more.is-open { display: grid; animation: rise .25s var(--ease-soft); }
+.fab3-toggle { display: grid; }
+
+/* buttons in line: hero banner buttons and shop preview buttons sit on the same line */
+.band3-half { display: flex; flex-direction: column; align-items: center; }
+.band3-half .hx-btn { margin-top: auto; }
+.pv3 { grid-template-rows: auto 1fr; }
+.pv3-body { grid-template-rows: auto 1fr auto auto; align-content: stretch; }
+.pv3-diff { align-self: start; }
+
+/* shop preview on phones: one wig at a time, chosen with the switch */
+.sw3.pv3-sw { display: none; }
+@media (max-width: 760px) {
+  .sw3.pv3-sw { display: flex; }
+  .s3 .pair3:has(> .pv3) { grid-template-columns: 1fr; }
+  .pv3.is-off { display: none; }
+  .pv3.is-in { animation: hmcIn .35s var(--ease-soft); }
+  .pv3 { grid-template-columns: minmax(0, 46%) minmax(0, 1fr); grid-template-rows: none; gap: 12px; align-items: stretch; }
+  .pv3 > .tile3 { height: auto !important; aspect-ratio: 4 / 5; }
+  .pv3-body { grid-template-rows: auto 1fr auto auto; gap: 8px; }
+  .pv3-name { font-size: 1.3rem !important; }
+  .pv3-diff { font-size: .84rem; }
+}
+
+/* product buy box: text and buying blocks */
+.pp4-text, .pp4-side { display: grid; gap: 9px; align-content: start; }
+@media (min-width: 761px) and (max-height: 820px) {
+  .pp4-text > .k3 { display: none; }
+  .pp4-text, .pp4-side { gap: 7px; }
+}
+
+/* ---------- wide screens: heading on the left, photos on the right, same photo sizes everywhere ---------- */
+@media (min-width: 1200px) {
+  :root {
+    --side: clamp(280px, 22vw, 400px);
+    --sgap: clamp(28px, 3vw, 56px);
+    --col: min(1320px, calc(100vw - 2 * var(--gutter) - var(--side) - var(--sgap)), 102svh);
+    --wide: calc(var(--col) + var(--side) + var(--sgap));
+  }
+  .c3, .hdr3-in, .diff3-in { width: var(--wide); }
+  .footer .wrap { width: var(--wide); max-width: none; padding-inline: 0; }
+  .c3:has(> .h3-head:not(.h3-head--row)) { display: grid; grid-template-columns: var(--side) var(--col); column-gap: var(--sgap); align-items: center; }
+  .c3:has(> .h3-head:not(.h3-head--row)) > * { grid-column: 2; }
+  .c3:has(> .h3-head:not(.h3-head--row)) > .h3-head { grid-column: 1; grid-row: 1 / span 8; align-self: center; margin: 0; max-width: none; text-align: left; justify-items: start; }
+  .c3 > .h3-head:not(.h3-head--row) .k3 { justify-content: flex-start; }
+  .c3 > .h3-head:not(.h3-head--row) .l3 { margin-inline: 0; max-width: 38ch; }
+  .c3 > .h3-head:not(.h3-head--row) .h3-actions, .c3 > .h3-head .ph-names { justify-content: flex-start; }
+  .c3 > .h3-head:not(.h3-head--row) .t3 { font-size: clamp(2.4rem, 1.2rem + 2.2vw, 3.6rem) !important; }
+  .c3 > .h3-head .t3.rot3, .c3 > .h3-head .rot3-box { justify-items: start; }
+  .c3:has(> .h3-head:not(.h3-head--row)) > .sw3 { margin-left: 0; }
+  /* sections without a side heading: the photo keeps its size, the text beside it takes the rest */
+  .c3:not(:has(> .h3-head)) > .pair3 { grid-template-columns: var(--tile-w) minmax(0, 1fr); }
+  .pp3-info { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: clamp(18px, 2vw, 32px); align-items: start; }
+  .story3 .panel3--text > * { max-width: 60ch; }
+}
+@media (min-width: 1200px) {
+  .s3 .rail { padding-inline: calc((100% - var(--wide)) / 2); scroll-padding-inline: calc((100% - var(--wide)) / 2); }
+}
+
+/* photo + text sections with longer text: the text panel can grow, the photo keeps the shared size */
+.kink3 .panel3 { height: auto; min-height: var(--tile-h); overflow: visible; }
+.kink3 .ticks { margin: 4px 0 0; display: grid; gap: 6px; font-size: .92rem; }
+.sign3 { margin: 6px 0 0; font: italic 500 1.2rem/1.3 var(--f-head); color: var(--pink-ink); }
+:root[data-mode="dark"] .sign3 { color: var(--pink); }
+@media (min-width: 1200px) {
+  .pp4-more { grid-template-columns: 1fr; }
+  .kink3 .panel3 > * { max-width: 64ch; }
+}
+@media (max-width: 760px) { .lc4 { padding-block: 27px; } .kink3 .panel3 { min-height: 0; } }
+/* keep the banner shine inside the banner (it showed as a grey patch beside the hero in dark mode) */
+.band3 { overflow: hidden; }
