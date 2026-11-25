@@ -16,18 +16,18 @@ NAV = [
     ('half-wig.html', '<span class="hx-dot hx-dot--xs" aria-hidden="true">H</span>Half Wig'),
     ('u-part-wig.html', '<span class="hx-dot hx-dot--xs" aria-hidden="true">U</span>U-Part Wig'),
     ('hair-guide.html', 'Hair Guide'),
-    ('hair-drop.html', 'The Hair Drop'),
+    ('hair-drop.html', 'Seasonal Drops'),
     ('our-story.html', 'Our Story'),
     ('faqs.html', 'FAQs'),
 ]
 
 PAGES = {
     # file: (body source, <title>, meta description, active nav file)
-    'index.html': ('index.html', 'Zante Beauty', 'Zante Beauty: kinky straight half wigs and U-part wigs in 100% virgin human hair, pre-washed before dispatch. New Zante Hair Drop twice a month, delivered in 3 to 4 weeks.', None),
+    'index.html': ('index.html', 'Zante Beauty', 'Zante Beauty: kinky straight half wigs and U-part wigs in 100% virgin human hair, pre-washed before dispatch. New seasonal drops twice a month, delivered in 3 to 4 weeks.', None),
     'half-wig.html': ('half-wig.html', 'The Half Wig · Zante Beauty', 'The Zante Half Wig: covers the back of your head while your own front hair blends in. 100% virgin human hair, kinky straight, 10 to 22 inches.', 'half-wig.html'),
     'u-part-wig.html': ('u-part-wig.html', 'The U-Part Wig · Zante Beauty', 'The Zante U-Part Wig: a full wig with a U-shaped opening for your own leave-out and a natural parting. 100% virgin human hair, kinky straight (not silk pressed), 10 to 22 inches.', 'u-part-wig.html'),
     'shop.html': ('shop.html', 'Shop · Zante Beauty', 'Shop the Zante Half Wig and U-Part Wig: 100% virgin human hair, kinky straight, 180% density, 10 to 22 inches.', 'shop.html'),
-    'hair-drop.html': ('hair-drop.html', 'The Zante Hair Drop · Zante Beauty', 'How the Zante Hair Drop works: two drops a month, cut-off dates, waiting times, delivery and tracking.', 'hair-drop.html'),
+    'hair-drop.html': ('hair-drop.html', 'Seasonal Drops · Zante Beauty', 'How Zante seasonal drops work: two drops a month, cut-off dates, waiting times, delivery and tracking.', 'hair-drop.html'),
     'hair-guide.html': ('hair-guide.html', 'Hair guide · Zante Beauty', 'Half wig or U-part? Understand our kinky straight texture, 180% density and true-to-length hair.', 'hair-guide.html'),
     'our-story.html': ('our-story.html', 'Our story · Zante Beauty', 'Born from a name, built around her. The story of Zante Beauty and why we love kinky straight hair.', 'our-story.html'),
     'privacy.html': ('privacy.html', 'Privacy policy · Zante Beauty', 'How Zante Beauty collects, uses and protects your personal information under POPIA.', None),
@@ -89,7 +89,7 @@ def header(active, is_home):
 {intro}
 <!-- one slim announcement bar -->
 <div class="announce">
-  <p><span data-drop-icon></span><a href="hair-drop.html"><b data-drop-name>The next Zante Hair Drop</b></a> · order by <span data-drop-date>Monday</span>, 18:00</p>
+  <p><span data-drop-icon></span><a href="hair-drop.html"><b data-drop-name>The next seasonal drop</b></a> · order by <span data-drop-date>Monday</span>, 18:00</p>
 </div>
 
 <header class="header hdr3" id="header">
@@ -183,7 +183,7 @@ def footer(page='index.html'):
       <a class="logo" href="index.html" aria-label="Zante Beauty, home"><span class="logo-z">Zante</span><span class="logo-b">Beauty</span></a>
       <p>Your styling freedom. Wear it your way.</p>
     </div>
-    <nav aria-label="Shop links"><p class="foot-h">Shop</p><a href="half-wig.html">The Half Wig</a><a href="u-part-wig.html">The U-Part Wig</a><a href="hair-drop.html">The Zante Hair Drop</a><a href="hair-guide.html">Hair Guide</a></nav>
+    <nav aria-label="Shop links"><p class="foot-h">Shop</p><a href="half-wig.html">The Half Wig</a><a href="u-part-wig.html">The U-Part Wig</a><a href="hair-drop.html">Seasonal Drops</a><a href="hair-guide.html">Hair Guide</a></nav>
     <nav aria-label="Help links"><p class="foot-h">Help</p><a href="faqs.html">FAQs</a><a href="hair-drop.html#delivery">Shipping and delivery</a><a href="terms.html#t-returns">Returns and refunds</a><a href="privacy.html">Privacy policy</a><a href="terms.html">Terms and conditions</a></nav>
     <div class="foot-contact"><p class="foot-h">Contact</p>
       <p>WhatsApp: <a href="https://wa.me/27686954639" target="_blank" rel="noopener">+27 68 695 4639</a></p>

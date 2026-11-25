@@ -2859,3 +2859,47 @@ html.js-motion .band3 { animation: band3In 1s var(--ease-soft) .3s both; }
 @media (max-width: 760px) { .lc4 { padding-block: 27px; } .kink3 .panel3 { min-height: 0; } }
 /* keep the banner shine inside the banner (it showed as a grey patch beside the hero in dark mode) */
 .band3 { overflow: hidden; }
+
+/* ---------- product pages: the approved layout, with the back-view length chart ---------- */
+.lc-model.lc-model--back { aspect-ratio: 1000 / 1346; }
+.lc-model--back img { object-fit: cover; object-position: 50% 0%; }
+.pp-info .pp3-vs { margin: 0 0 14px; }
+@media (min-width: 1200px) {
+  /* older full-width blocks line up with the header and the other sections */
+  main .wrap { width: var(--wide); max-width: none; padding-inline: 0; }
+}
+
+/* H/U info boxes always open on top of the photos and the banner */
+.hero3 .hx-panel .hx-info { z-index: 7; }
+@media (min-width: 861px) { .pp .lc-chips { grid-template-columns: repeat(7, minmax(0, 1fr)) !important; gap: 6px; } .pp .lc-chip { padding: 8px 2px !important; } .pp .lc-chip span { font-size: .74rem; } }
+
+/* hero tiles share one layer with the banner, so an open info box sits above the banner and the other photo */
+.hero3 .hx-panel { isolation: auto; }
+
+/* chat bubbles in the order milestones phone: undo the decorative pearl-bubble style that shares the class name */
+.phone-chat .bubble { position: static; z-index: auto; pointer-events: auto; animation: none; border-radius: 4px 14px 14px 14px;
+  background: #fff; box-shadow: 0 1px 1px rgba(0, 0, 0, .08); width: auto; height: auto; overflow-wrap: anywhere; }
+.phone-chat .bubble.pop { animation: pop .45s var(--ease); }
+:root[data-mode="dark"] .phone-chat .bubble { background: #fff; color: #241128; }
+
+/* order steps: the list is never cut off; the photo beside it grows with it */
+.ord3 .panel3 { height: auto; min-height: var(--tile-h); overflow: visible; }
+@media (min-width: 761px) { .ord3 > .tile3 { height: auto; min-height: var(--tile-h); } }
+
+/* wide screens: the heading sits beside the shop cards, so the photos can use the full shared size */
+@media (min-width: 1200px) {
+  .pv3 .tile3 { height: min(var(--tile-h), calc(100svh - 330px)) !important; }
+}
+@media (min-width: 1200px) { .pv3 .tile3 { height: min(var(--tile-h), calc(100svh - 390px)) !important; } }
+/* short laptop screens (about 650px tall): tighter table and order steps so each still fits */
+@media (min-width: 761px) and (max-height: 700px) {
+  .cmp3-head p { padding: 9px; font-size: 1.15rem; }
+  .cmp3-row dt { padding-top: 6px; }
+  .cmp3-row dd { padding-bottom: 7px; font-size: .88rem; line-height: 1.35; }
+  .cmp3-foot .btn { margin: 9px; }
+  .ord3-steps { gap: 2px; }
+  .ord3-steps li { padding: 3px 8px; }
+  .ord3-steps b { font-size: .98rem; }
+  .ord3-steps span { font-size: .8rem; line-height: 1.35; }
+}
+@media (min-width: 761px) and (max-height: 700px) { .cmp3-row--opt { display: none; } }
