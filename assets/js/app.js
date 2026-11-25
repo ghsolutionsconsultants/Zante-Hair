@@ -101,6 +101,7 @@
     ['Can I sew in my Zante unit?', 'Yes. Remove the clips and combs first so they do not rub against and damage your natural hair.', 'styling'],
     ['Are the wigs ready to wear?', 'Yes. We inspect and pre-wash every unit before dispatch at no extra cost. If you may want to return it, please do not wear it, so it stays eligible for a refund.', 'orders'],
     ['Why does delivery take 3 to 4 weeks?', 'We group orders into a production drop before the hair is made and shipped to South Africa. This lets us source and prepare every unit properly. Allow 3 to 4 weeks from your drop’s cut-off.', 'orders'],
+    ['What delivery options do you offer?', 'Pick n Pay store to door: R90, 24 to 72 hours. PAXI store to store: R60 for 7 to 9 days, or R110 for 3 to 5 days. PostNet to PostNet: R109, about 2 to 3 working days to main centres. Aramex to your door: we quote on WhatsApp. These times start when we dispatch your unit, after your drop arrives.', 'orders'],
     ['Can I change my order after payment?', 'Contact us as soon as possible. Changes may be possible before your drop closes, but we cannot guarantee them once the drop has gone to production.', 'orders'],
     ['Do you offer installation?', 'Not at the moment. Our collection is designed for beginner-friendly, DIY, removable styling.', 'orders']
   ];
@@ -227,7 +228,7 @@
       }).join('') + '</div>' : '';
     }
     $('#bagTotal').textContent = fmt(total);
-    $('#bagPjn').textContent = total ? 'Or 3 × ' + fmt(total / 3) + ' with PayJustNow. Delivery is calculated at checkout.' : 'Delivery is calculated at checkout.';
+    updateTotals(); var cf = $('#checkoutForm'); if (cf) cf.hidden = !bag.length;
   }
   function addToBag(item) {
     var found = bag.filter(function (b) { return b.key === item.key; })[0];
@@ -250,13 +251,111 @@
     addToBag({ key: p.id + '-' + p.def, name: p.short, variant: p.optLabel + ': ' + o.label, price: o.price, img: p.img });
   });
   $('#bagList').addEventListener('click', function (e) { var b = e.target.closest('[data-rm]'); if (!b) return; bag.splice(+b.dataset.rm, 1); saveBag(); });
-  // Until online payment is live, checkout sends the order to Zante on WhatsApp, written out in full.
+  // ======================= CHECKOUT: delivery option, Google Maps address, WhatsApp order =======================
+  // Until online payment is live, the order goes to Zante on WhatsApp, written out in full.
   var ZANTE_WHATSAPP = '27686954639';
+  var SHIP = [
+    { id: 'pnp', name: 'Pick n Pay store to door', price: 90, time: '24 to 72 hours', kind: 'door' },
+    { id: 'paxi', name: 'PAXI store to store', price: 60, time: '7 to 9 days', kind: 'paxi' },
+    { id: 'paxi-fast', name: 'PAXI store to store, faster', price: 110, time: '3 to 5 days', kind: 'paxi' },
+    { id: 'postnet', name: 'PostNet to PostNet', price: 109, time: '2 to 3 working days to main centres', kind: 'postnet' },
+    { id: 'aramex', name: 'Aramex to your door', price: null, time: '24 to 72 hours, we quote on WhatsApp', kind: 'door' }
+  ];
+  var ADDR = {
+    door: ['Delivery address', 'Start typing your street address', 'Choose your address from the list, so the courier gets the exact place.', 'address'],
+    paxi: ['PAXI point to collect from', 'Search for a PEP store near you', 'PAXI points are inside PEP and Tekkie Town stores. You get an SMS when your parcel is ready.', 'PAXI point'],
+    postnet: ['PostNet branch to collect from', 'Search for a PostNet branch near you', 'You collect your parcel from the branch you choose.', 'PostNet branch']
+  };
+  var ship = null, place = null, lastKind = null, mapsState = 0;   // mapsState: 0 not loaded, 1 Google finder on, -1 plain field
+  var MAPS_KEY = (window.ZANTE_CONFIG || {}).googleMapsKey || '';
+  function bagSum() { return bag.reduce(function (a, b) { return a + b.qty * b.price; }, 0); }
+  function updateTotals() {
+    var sub = bagSum(), quote = ship && ship.price === null, fee = ship && !quote ? ship.price : 0;
+    $('#bagShip').textContent = !ship ? 'Choose an option' : (quote ? 'Quoted on WhatsApp' : fmt(ship.price));
+    $('#bagGrand').textContent = fmt(sub + fee) + (quote ? ' + delivery' : '');
+    $('#bagPjn').textContent = sub ? 'Or 3 × ' + fmt((sub + fee) / 3) + ' with PayJustNow.' : '';
+  }
+  function mapUrl(p) {
+    return p.lat !== undefined
+      ? 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(p.lat + ',' + p.lng) + '&query_place_id=' + encodeURIComponent(p.id)
+      : 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(p.address);
+  }
+  function showPlace() {
+    var pk = $('#coPicked'), mp = $('#coMap');
+    if (place) { pk.textContent = '✓ ' + place.address; mp.href = mapUrl(place); }
+    pk.hidden = mp.hidden = !place;
+  }
+  function plainField(ph) {
+    var box = $('#coAddrBox');
+    box.innerHTML = '<input id="coAddr" name="address" autocomplete="street-address" placeholder="' + esc(ph || 'Type your address') + '">';
+    $('#coAddr').addEventListener('input', function () { place = null; showPlace(); });
+    $('#coManual').hidden = true;
+  }
+  function useFinder(lib) {
+    var el = new lib.PlaceAutocompleteElement({ includedRegionCodes: ['za'] });
+    el.className = 'co-finder';
+    try { el.placeholder = ship ? ADDR[ship.kind][1] : ''; } catch (e) {}
+    var box = $('#coAddrBox'); box.innerHTML = ''; box.appendChild(el);
+    function take(pl) {
+      pl.fetchFields({ fields: ['displayName', 'formattedAddress', 'location', 'id'] }).then(function () {
+        var name = pl.displayName || '', fa = pl.formattedAddress || name;
+        place = { address: name && fa.indexOf(name) !== 0 ? name + ', ' + fa : fa, id: pl.id, lat: pl.location.lat(), lng: pl.location.lng() };
+        showPlace();
+      }).catch(function () {});
+    }
+    el.addEventListener('gmp-select', function (e) { if (e.placePrediction) take(e.placePrediction.toPlace()); });
+    el.addEventListener('gmp-placeselect', function (e) { if (e.place) take(e.place); });   // older versions of the element
+    mapsState = 1; $('#coManual').hidden = false;
+  }
+  function loadMaps() {
+    if (!MAPS_KEY || mapsState) return;
+    mapsState = -1;   // stays on the plain field if Google cannot load
+    window.gm_authFailure = function () { mapsState = -1; place = null; plainField(ship ? ADDR[ship.kind][1] : ''); showPlace(); };
+    window.__zanteMaps = function () { google.maps.importLibrary('places').then(useFinder).catch(function () {}); };
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://maps.googleapis.com/maps/api/js?key=' + encodeURIComponent(MAPS_KEY) + '&libraries=places&loading=async&region=ZA&language=en&callback=__zanteMaps';
+    document.head.appendChild(s);
+  }
+  $('#coOpts').innerHTML = SHIP.map(function (s) {
+    return '<label class="co-opt"><input type="radio" name="ship" value="' + s.id + '"><span class="co-opt-t"><b>' + esc(s.name) + '</b><small>' + esc(s.time) + '</small></span>' +
+      '<span class="co-opt-p">' + (s.price === null ? 'Quote' : fmt(s.price)) + '</span></label>';
+  }).join('');
+  $('#coOpts').addEventListener('change', function (e) {
+    ship = SHIP.filter(function (s) { return s.id === e.target.value; })[0] || null;
+    if (!ship) return;
+    var k = ADDR[ship.kind];
+    $('#coAddrLabel').textContent = k[0];
+    $('#coAddrHint').textContent = k[2];
+    var f = $('.co-finder'); if (f) { try { f.placeholder = k[1]; } catch (err) {} }
+    var inp = $('#coAddr'); if (inp) inp.placeholder = k[1];
+    if (lastKind && lastKind !== ship.kind && place) { place = null; showPlace(); }   // a door address is not a collection point
+    lastKind = ship.kind;
+    updateTotals();
+    loadMaps();
+  });
+  $('#coManual').addEventListener('click', function () { mapsState = -1; place = null; plainField(ship ? ADDR[ship.kind][1] : ''); showPlace(); $('#coAddr').focus(); });
+  $('#coAddr').addEventListener('input', function () { place = null; showPlace(); });
+  function flash(el) { el.classList.remove('co-flash'); void el.offsetWidth; el.classList.add('co-flash'); el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' }); }
   $('#checkoutBtn').addEventListener('click', function () {
     if (!bag.length) { toast('Your bag is empty. Add a wig first.'); return; }
-    var total = bag.reduce(function (a, b) { return a + b.qty * b.price; }, 0);
+    if (!ship) { toast('Choose a delivery option.'); flash($('#coOpts')); return; }
+    var name = $('#coName').value.trim(), phone = $('#coPhone').value.trim();
+    if (!name) { toast('Add your full name.'); flash($('#coName')); $('#coName').focus(); return; }
+    if (phone.replace(/\D/g, '').length < 9) { toast('Add a cellphone number for the courier SMS.'); flash($('#coPhone')); $('#coPhone').focus(); return; }
+    var typed = $('#coAddr') ? $('#coAddr').value.trim() : '';
+    var where = place || (typed ? { address: typed } : null);
+    if (!where) { toast(mapsState === 1 ? 'Choose your ' + ADDR[ship.kind][3] + ' from the Google list.' : 'Add your ' + ADDR[ship.kind][3] + '.'); flash($('#coAddrBox')); return; }
+    var sub = bagSum(), quote = ship.price === null;
     var lines = bag.map(function (b) { return '• ' + b.name + ', ' + b.variant + (b.qty > 1 ? ' × ' + b.qty : '') + ': ' + fmt(b.price * b.qty); });
-    var text = 'Hi Zante Beauty! I would like to order:\n' + lines.join('\n') + '\nTotal: ' + fmt(total) + ' (plus delivery)\nDrop: ' + current.name + '\n\nMy name:\nDelivery: PostNet branch or street address:';
+    var text = 'Hi Zante Beauty! I would like to order:\n' + lines.join('\n') +
+      '\nSubtotal: ' + fmt(sub) +
+      '\nDelivery: ' + ship.name + ' (' + ship.time + '): ' + (quote ? 'please quote' : fmt(ship.price)) +
+      '\nTotal: ' + fmt(sub + (quote ? 0 : ship.price)) + (quote ? ' plus delivery' : '') +
+      '\nDrop: ' + current.name +
+      '\n\nName: ' + name + '\nCellphone: ' + phone +
+      '\n' + ADDR[ship.kind][0] + ': ' + where.address +
+      '\nGoogle Maps: ' + mapUrl(where);
     window.open('https://wa.me/' + ZANTE_WHATSAPP + '?text=' + encodeURIComponent(text), '_blank', 'noopener');
   });
   renderBag();

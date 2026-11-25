@@ -14,7 +14,8 @@
 <link rel="stylesheet" href="assets/css/zante.css">
 <script>
   /* Supabase keys go here once the project exists. Empty = reviews are kept on this device only. */
-  window.ZANTE_CONFIG = { supabaseUrl: '', supabaseAnonKey: '' };
+  /* Google Maps address finder: paste a browser key (Maps JavaScript API + Places API (New), limited to zantebeauty.co.za). Empty = a plain address field. */
+  window.ZANTE_CONFIG = { supabaseUrl: '', supabaseAnonKey: '', googleMapsKey: '' };
 </script>
 </head>
 <body>
@@ -202,12 +203,34 @@
 <aside class="drawer" id="bag" aria-label="Your bag" aria-hidden="true">
   <div class="drawer-head"><h2>Your bag</h2><button class="icon-btn" id="bagClose" type="button" aria-label="Close bag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button></div>
   <p class="bag-drop">Allocated to <b data-drop-name>the next drop</b></p>
+  <div class="drawer-body">
   <ul class="bag-list" id="bagList"></ul>
   <div class="bag-upsell" id="bagUpsell"></div>
+  <form class="co" id="checkoutForm" novalidate hidden>
+    <fieldset class="co-set">
+      <legend class="co-h"><span>1</span>Delivery</legend>
+      <div class="co-opts" id="coOpts"></div>
+    </fieldset>
+    <fieldset class="co-set">
+      <legend class="co-h"><span>2</span>Your details</legend>
+      <label class="co-f"><span>Full name</span><input id="coName" name="name" autocomplete="name" required></label>
+      <label class="co-f"><span>Cellphone, for the courier SMS</span><input id="coPhone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="e.g. 082 123 4567" required></label>
+      <div class="co-f"><span id="coAddrLabel">Delivery address</span>
+        <div class="co-addr" id="coAddrBox"><input id="coAddr" name="address" autocomplete="street-address" placeholder="Choose a delivery option first"></div>
+        <small class="co-hint" id="coAddrHint">Choose a delivery option above.</small>
+        <p class="co-picked" id="coPicked" hidden></p>
+        <a class="co-map" id="coMap" href="https://www.google.com/maps" target="_blank" rel="noopener" hidden>Check it on Google Maps ↗</a>
+        <button class="co-manual" id="coManual" type="button" hidden>Cannot find it? Type it in instead</button>
+      </div>
+    </fieldset>
+  </form>
+  </div>
   <div class="drawer-foot">
     <p class="bag-total"><span>Subtotal</span><b id="bagTotal">R0</b></p>
-    <p class="small" id="bagPjn">Delivery is calculated at checkout.</p>
-    <button class="btn btn--solid btn--full" type="button" id="checkoutBtn">Order on WhatsApp</button>
+    <p class="bag-total bag-total--sub"><span>Delivery</span><b id="bagShip">Choose an option</b></p>
+    <p class="bag-total bag-total--grand"><span>Total</span><b id="bagGrand">R0</b></p>
+    <p class="small" id="bagPjn"></p>
+    <button class="btn btn--solid btn--full" type="button" id="checkoutBtn">Send my order on WhatsApp</button>
     <p class="small bag-note">Online card payment is coming soon. Your order is sent to us on WhatsApp and we confirm payment details with you.</p>
   </div>
 </aside>
