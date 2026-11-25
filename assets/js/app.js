@@ -21,20 +21,16 @@
   var HAIR = ['100% virgin human hair', 'Signature kinky straight texture', '180% density', 'Pre-washed by Zante Beauty before dispatch'];
   var PRODUCTS = [
     { id: 'halfwig', type: 'Half wig', cat: 'wigs', name: 'The Zante Half Wig', short: 'Half Wig', tag: 'Bestseller', line: 'Your everyday style, without the effort.',
-      img: 'z-halfwig.jpg', alt: 'z-halfwig-2.jpg', optLabel: 'Length', def: 3,
-      opts: lens(L, [2450, 2550, 2700, 2800, 2900, 3150, 3400]),
+      img: 'n-ph-1.jpg', alt: 'n-ph-2.jpg', optLabel: 'Length', def: 3,
+      opts: lens(L, [2900, 3000, 3150, 3250, 3350, 3600, 3900]),
       details: HAIR.concat(['Wear it with leave-out or a headband', 'Removable, grab-and-go styling']) },
     { id: 'upart', type: 'U-part wig', cat: 'wigs', name: 'The Zante U-Part Wig', short: 'U-Part Wig', tag: 'Natural blend', line: 'The blend you love. The freedom you need.',
-      img: 'z-upart.jpg', alt: 'z-upart-2.jpg', optLabel: 'Length', def: 3,
-      opts: lens(L, [2500, 2600, 2750, 2900, 3000, 3200, 3450]),
+      img: 'n-pu-1.jpg', alt: 'n-pu-2.jpg', optLabel: 'Length', def: 3,
+      opts: lens(L, [3000, 3100, 3250, 3350, 3450, 3700, 4000]),
       details: HAIR.concat(['U-shaped leave-out opening', 'Middle or side part', 'Removable and reusable']) },
-    { id: 'sleek', type: 'U-part wig', cat: 'wigs', est: true, name: 'Silk Press U-Part Wig', short: 'Silk Press U-Part', tag: 'New', line: 'Sleek and pressed, ready on day one.',
-      img: 'z-sleek.jpg', alt: 'z-sleek-2.jpg', optLabel: 'Length', def: 3,
-      opts: lens(L, [2800, 2900, 3050, 3200, 3300, 3500, 3750]),
-      details: HAIR.concat(['Silk pressed by us before dispatch', 'Returns to its blow-out texture after washing']) },
     { id: 'duo', type: 'Wig set', cat: 'wigs', est: true, name: 'The Zante Duo', short: 'Duo: Half Wig + U-Part', tag: 'Save R400', line: 'Both units, one length. Switch styles all week.',
       img: 'z-upart-front.jpg', alt: 'z-halfwig-side.jpg', optLabel: 'Length', def: 3,
-      opts: lens(L, [4550, 4750, 5050, 5300, 5500, 5950, 6450]),
+      opts: lens(L, [5500, 5700, 6000, 6200, 6400, 6900, 7500]),
       details: ['One Half Wig and one U-Part Wig in the same length'].concat(HAIR) },
     { id: 'clipins', type: 'Clip-ins', cat: 'extensions', est: true, name: 'Kinky Straight Clip-Ins', short: 'Clip-Ins', line: 'Seven pieces. Instant length and fullness.',
       img: 'z-clip.jpg', alt: 'z-halfwig-back.jpg', optLabel: 'Length', def: 1,
@@ -91,6 +87,7 @@
   ];
 
   var FAQS = [
+    ['What is the difference between a Half Wig and a U-Part Wig?', 'A Half Wig covers the back of your head. You leave out your front hairline and blend it in, usually with a headband, so there is no parting. A U-Part Wig is a full wig with a U-shaped opening on top. You leave out a small section of your own hair to cover the opening, which gives you a natural middle or side parting. Both are removable and arrive in our kinky straight texture.', 'hair'],
     ['Is your hair 100% human hair?', 'Yes. Our units are made from 100% virgin human hair in our signature kinky straight texture.', 'hair'],
     ['What does 180% density mean?', 'Density describes how full your wig is. All our standard units are 180% density. It is about fullness, not length.', 'hair'],
     ['Why do your units look longer than most?', 'Our hair is true to length, so you get the full inches you pay for.', 'hair'],
@@ -112,7 +109,6 @@
   function applyMode(m) {
     html.dataset.mode = m;
     $('#themeBtn').setAttribute('aria-label', m === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
-    $('#themeBtn').textContent = m === 'dark' ? 'Light mode' : 'Dark mode';
     $('#themeBtnM').textContent = m === 'dark' ? 'Light mode' : 'Dark mode';
   }
   applyMode(store('zante-mode') === 'dark' ? 'dark' : 'light');
@@ -500,7 +496,7 @@
       '.z-hero-head > *', '.z-pair > .z-choice', '.z-drop', '.z-head > *', '.z-why > article',
       '.z-gallery > .z-tile', '.z-split-media', '.z-split-copy > *', '.review-rail > .review', '.z-news-in > *',
       '.page-hero .wrap > *:not(.ph-in)', '.ph-copy > *', '.ph-media', '.section-head > *', '.pgrid > .pcard',
-      '.timeline > li', '.drop-facts > div', '.faq-group', '.acc-list > .acc', '.terms-body > *:nth-child(-n+4)', '.hg > .hg-card', '.sn > .sn-card', '.ba-grid > .ba', '.db-copy', '.db-count', '.db-actions', '.pp-gallery', '.pp-info > *', '.hmc fieldset', '.hmc-len'
+      '.timeline > li', '.drop-facts > div', '.faq-group', '.acc-list > .acc', '.terms-body > *:nth-child(-n+4)', '.hg > .hg-card', '.sn > .sn-card', '.ba-grid > .ba', '.db-copy', '.db-count', '.db-actions', '.pp-gallery', '.pp-info > *', '.hmc fieldset', '.hmc-len', '.h3-head > *', '.pair3 > .tile3', '.pair3 > .pv3', '.pair3 > .panel3', '.cmp3', '.diff3-in > *', '.ord3-steps > li'
     ];
     var items = [];
     groups.forEach(function (sel) {
@@ -969,7 +965,7 @@
   var pp = $('[data-product-page]');
   if (pp) (function productPage() {
     var p = PRODUCTS.filter(function (x) { return x.id === pp.dataset.productPage; })[0];
-    var MARK = { 10: 'Chin', 12: 'Shoulder', 14: 'Collarbone', 16: 'Armpit', 18: 'Bust', 20: 'Below bust', 22: 'Mid-back' };
+    var MARK = { 10: 'Shoulders', 12: 'Upper back', 14: 'Shoulder blades', 16: 'Mid-back', 18: 'Lower back', 20: 'Waist', 22: 'Below the waist' };
     var sel = p.def;
     // gallery
     var main = $('.pp-main-img', pp), src = $('.pp-main source', pp);
@@ -978,45 +974,52 @@
         var g = t.dataset.img;
         main.classList.add('is-swap');
         setTimeout(function () {
-          src.srcset = 'assets/img/' + g + '-600.webp 600w, assets/img/' + g + '-900.webp 900w';
+          src.srcset = 'assets/img/' + g + '-600.webp 600w, assets/img/' + g + '-1000.webp 1000w';
           main.src = 'assets/img/' + g + '.jpg'; main.alt = t.dataset.alt;
           main.classList.remove('is-swap');
         }, 160);
         $$('.pp-thumb', pp).forEach(function (x) { var on = x === t; x.classList.toggle('is-on', on); x.setAttribute('aria-pressed', on); });
       });
     });
-    // length chart
-    var chips = $('[data-lc-chips]', pp);
-    chips.innerHTML = p.opts.map(function (o, i) {
-      var l = parseInt(o.label, 10);
-      return '<button type="button" role="radio" class="lc-chip" data-i="' + i + '" data-len="' + l + '" aria-checked="false"><b>' + l + '"</b><span>' + fmt(o.price) + '</span></button>';
-    }).join('');
+    // length: a compact row in the buy box and a list beside the chart, always in step
+    var lens = p.opts.map(function (o) { return parseInt(o.label, 10); });
     function choose(i) {
       sel = i;
-      var o = p.opts[i], l = parseInt(o.label, 10);
-      $$('.lc-chip', pp).forEach(function (c) { var on = +c.dataset.i === i; c.classList.toggle('is-on', on); c.setAttribute('aria-checked', on); });
-      $$('.lc-line', pp).forEach(function (ln) { ln.classList.toggle('is-on', +ln.dataset.len === l); ln.classList.toggle('is-under', +ln.dataset.len < l); });
-      $('[data-lc-len]', pp).textContent = l + '"';
-      $('[data-lc-mark]', pp).textContent = MARK[l] || '';
-      $('[data-pp-price]', pp).textContent = fmt(o.price);
-      $('[data-pp-pjn]', pp).textContent = 'or 3 × ' + fmt(o.price / 3) + ' with PayJustNow';
+      var o = p.opts[i], l = lens[i];
+      $$('.lc-chip').forEach(function (c) { var on = +c.dataset.i === i; c.classList.toggle('is-on', on); c.setAttribute('aria-checked', on); c.tabIndex = on ? 0 : -1; });
+      $$('.lc-line').forEach(function (ln) { ln.classList.toggle('is-on', +ln.dataset.len === l); ln.classList.toggle('is-under', +ln.dataset.len < l); });
+      $$('[data-lc-len]').forEach(function (x) { x.textContent = l + '"'; });
+      $$('[data-lc-mark]').forEach(function (x) { x.textContent = MARK[l] || ''; });
+      $$('[data-pp-price]').forEach(function (x) { x.textContent = fmt(o.price); });
+      $$('[data-pp-pjn]').forEach(function (x) { x.textContent = 'or 3 × ' + fmt(o.price / 3) + ' with PayJustNow'; });
     }
-    chips.addEventListener('click', function (e) { var c = e.target.closest('.lc-chip'); if (c) choose(+c.dataset.i); });
-    chips.addEventListener('keydown', function (e) {
-      if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
-      e.preventDefault(); var n = (sel + (e.key === 'ArrowRight' ? 1 : -1) + p.opts.length) % p.opts.length; choose(n); $$('.lc-chip', pp)[n].focus();
+    $$('[data-lc-chips]').forEach(function (box) {
+      var list = box.dataset.lcChips === 'list';
+      box.innerHTML = p.opts.map(function (o, i) {
+        var l = lens[i];
+        return '<button type="button" role="radio" class="lc-chip" data-i="' + i + '" aria-checked="false"><b>' + l + '"</b>' +
+          (list ? '<span class="lc-chip-m">' + (MARK[l] || '') + '</span>' : '') + '<span class="lc-chip-p">' + fmt(o.price) + '</span></button>';
+      }).join('');
+      box.addEventListener('click', function (e) { var c = e.target.closest('.lc-chip'); if (c) choose(+c.dataset.i); });
+      box.addEventListener('keydown', function (e) {
+        var fw = e.key === 'ArrowRight' || e.key === 'ArrowDown', bw = e.key === 'ArrowLeft' || e.key === 'ArrowUp';
+        if (!fw && !bw) return;
+        e.preventDefault(); var n = (sel + (fw ? 1 : -1) + p.opts.length) % p.opts.length; choose(n); $$('.lc-chip', box)[n].focus();
+      });
     });
-    $$('.lc-line', pp).forEach(function (ln) { ln.addEventListener('click', function () { var i = p.opts.map(function (o) { return parseInt(o.label, 10); }).indexOf(+ln.dataset.len); if (i > -1) choose(i); }); });
+    $$('.lc-line').forEach(function (ln) { ln.addEventListener('click', function () { var i = lens.indexOf(+ln.dataset.len); if (i > -1) choose(i); }); });
     choose(sel);
-    $('[data-pp-add]', pp).addEventListener('click', function () {
-      var o = p.opts[sel];
-      addToBag({ key: p.id + '-' + sel, name: p.short, variant: 'Length: ' + o.label, price: o.price, img: p.img });
+    $$('[data-pp-add]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var o = p.opts[sel];
+        addToBag({ key: p.id + '-' + sel, name: p.short, variant: 'Length: ' + o.label, price: o.price, img: p.img });
+      });
     });
-    // help me choose: length shortcuts
+    // help me choose: length shortcuts select the length and show it on the chart
     $$('[data-pick-len]').forEach(function (b) {
       b.addEventListener('click', function () {
-        var i = p.opts.map(function (o) { return parseInt(o.label, 10); }).indexOf(+b.dataset.pickLen);
-        if (i > -1) { choose(i); $('.lc', pp).scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' }); }
+        var i = lens.indexOf(+b.dataset.pickLen);
+        if (i > -1) { choose(i); ($('#length') || pp).scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }); }
       });
     });
   })();
@@ -1034,6 +1037,113 @@
         (pick === here ? '<a class="btn btn--solid" href="#ppTitle">You are on the right page</a>' : '<a class="btn btn--solid" href="' + (pick === 'upart' ? 'u-part-wig.html' : 'half-wig.html') + '">See ' + name + '</a>') + '</div>';
     });
   });
+
+  // phones: the three questions one at a time with progress dots; the suggestion then takes their place
+  $$('.hmc3').forEach(function (f) {
+    var sets = $$('fieldset', f); if (sets.length < 2) return;
+    var bar = document.createElement('div'); bar.className = 'hmc-steps';
+    bar.innerHTML = '<span class="hmc-step-n" aria-live="polite"></span><span class="hmc-dots">' +
+      sets.map(function (s, i) { return '<button type="button" data-step="' + i + '" aria-label="Question ' + (i + 1) + '"><i></i></button>'; }).join('') +
+      '</span><button type="button" class="hmc-redo">Change answers</button>';
+    f.insertBefore(bar, sets[0]);
+    function show(i, done) {
+      f.classList.toggle('is-done', !!done);
+      sets.forEach(function (s, k) { s.classList.toggle('is-cur', k === i); });
+      $$('[data-step]', bar).forEach(function (b, k) { b.classList.toggle('is-on', !done && k === i); b.classList.toggle('is-ans', !!$('input:checked', sets[k])); });
+      $('.hmc-step-n', bar).textContent = done ? 'Your answers' : 'Question ' + (i + 1) + ' of ' + sets.length;
+    }
+    bar.addEventListener('click', function (e) {
+      var b = e.target.closest('[data-step]'); if (b) show(+b.dataset.step);
+      if (e.target.closest('.hmc-redo')) show(0);
+    });
+    f.addEventListener('change', function (e) {
+      var i = sets.indexOf(e.target.closest('fieldset'));
+      setTimeout(function () {
+        for (var k = 1; k <= sets.length; k++) { var n = (i + k) % sets.length; if (!$('input:checked', sets[n])) { show(n); return; } }
+        show(i, true);
+      }, 260);
+    });
+    f.classList.add('is-steps');
+    show(0);
+  });
+
+  // ======================= V3: SHOPPING PREVIEW (homepage) =======================
+  $$('[data-pv]').forEach(function (card) {
+    var p = PRODUCTS.filter(function (x) { return x.id === card.dataset.pv; })[0]; if (!p) return;
+    var sel = p.def, lens = $('[data-pv-lens]', card);
+    lens.innerHTML = p.opts.map(function (o, i) {
+      return '<button type="button" role="radio" class="pv3-chip" data-i="' + i + '" aria-checked="false">' + parseInt(o.label, 10) + '"</button>';
+    }).join('');
+    function choose(i) {
+      sel = i; var o = p.opts[i];
+      $$('.pv3-chip', card).forEach(function (c) { var on = +c.dataset.i === i; c.classList.toggle('is-on', on); c.setAttribute('aria-checked', on); });
+      $('[data-pv-price]', card).textContent = fmt(o.price);
+      $('[data-pv-pjn]', card).textContent = 'or 3 × ' + fmt(o.price / 3) + ' PayJustNow';
+      var mn = $('[data-pv-select]', card); if (mn) mn.value = i;
+    }
+    lens.addEventListener('click', function (e) { var c = e.target.closest('.pv3-chip'); if (c) choose(+c.dataset.i); });
+    var menu = $('[data-pv-select]', card);
+    if (menu) {
+      menu.innerHTML = p.opts.map(function (o, i) { return '<option value="' + i + '">' + parseInt(o.label, 10) + '" · ' + fmt(o.price) + '</option>'; }).join('');
+      menu.addEventListener('change', function () { choose(+menu.value); });
+    }
+    $('[data-pv-add]', card).addEventListener('click', function () {
+      var o = p.opts[sel];
+      addToBag({ key: p.id + '-' + sel, name: p.short, variant: 'Length: ' + o.label, price: o.price, img: p.img });
+    });
+    choose(sel);
+  });
+
+  // ======================= V3: PHOTO SLIDES inside a tile (hair guide) =======================
+  $$('[data-slides]').forEach(function (tile, k) {
+    var slides = $$('.g3-slide', tile), cap = $('[data-g3-cap]', tile), dots = $('.g3-dots', tile), i = 0, timer = null;
+    dots.innerHTML = slides.map(function (s, n) { return '<button type="button" aria-label="Photo ' + (n + 1) + ': ' + esc(s.dataset.cap) + '"' + (n ? '' : ' class="is-on"') + '><i></i></button>'; }).join('');
+    function show(n) {
+      i = n;
+      slides.forEach(function (s, j) { s.classList.toggle('is-on', j === n); });
+      $$('button', dots).forEach(function (d, j) { d.classList.toggle('is-on', j === n); });
+      cap.textContent = slides[n].dataset.cap;
+    }
+    function play() { if (reduce || timer) return; timer = setInterval(function () { show((i + 1) % slides.length); }, 4200 + k * 600); }
+    function stop() { clearInterval(timer); timer = null; }
+    dots.addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b) return; stop(); show($$('button', dots).indexOf(b)); setTimeout(play, 9000); });
+    tile.addEventListener('mouseenter', stop); tile.addEventListener('mouseleave', play);
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (en) { en[0].isIntersecting ? play() : stop(); }, { threshold: 0.3 }).observe(tile);
+    show(0);
+  });
+
+  // ======================= V3: HALF WIG / U-PART SWITCH (before and after) =======================
+  $$('[data-switch]').forEach(function (sw) {
+    var group = sw.dataset.switch;
+    sw.addEventListener('click', function (e) {
+      var b = e.target.closest('[data-sw]'); if (!b) return;
+      $$('[data-sw]', sw).forEach(function (x) { var on = x === b; x.classList.toggle('is-on', on); x.setAttribute('aria-selected', on); });
+      $$('[data-sw-panel="' + group + '"]').forEach(function (pnl) { pnl.hidden = pnl.dataset.swKey !== b.dataset.sw; });
+    });
+  });
+
+  // ======================= V3: GALLERY arrows =======================
+  $$('[data-gal]').forEach(function (g) {
+    var track = $('.gal3', g);
+    $$('[data-gal-dir]', g).forEach(function (b) {
+      b.addEventListener('click', function () {
+        var step = track.clientWidth + parseFloat(getComputedStyle(track).columnGap || 0);
+        track.scrollBy({ left: (+b.dataset.galDir) * step, behavior: reduce ? 'auto' : 'smooth' });
+      });
+    });
+  });
+
+  // ======================= V3: FLOATING BUTTONS (WhatsApp, email, back to top) =======================
+  (function fab() {
+    var top = $('.fab3-top'); if (!top) return;
+    var tg = $('.fab3-toggle'), more = $('#fabMore');
+    if (tg) tg.addEventListener('click', function () { var open = tg.getAttribute('aria-expanded') !== 'true'; tg.setAttribute('aria-expanded', open); more.classList.toggle('is-open', open); });
+    var ticking = false;
+    function check() { ticking = false; top.classList.toggle('is-on', scrollY > 700); }
+    addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(check); } }, { passive: true });
+    top.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' }); var s = $('.skip'); if (s) s.focus({ preventScroll: true }); });
+    check();
+  })();
 
   // exposed for checks
   window.__zanteDrops = upcomingDrops;

@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 370 240" >
+  <defs>
+  <linearGradient id="zs-g1" x1="20" y1="20" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+    <stop offset="0" stop-color="#7B3FA6"/><stop offset=".55" stop-color="#E06AA0"/><stop offset="1" stop-color="#FAC4DA"/>
+  </linearGradient>
+  <linearGradient id="zs-g2" x1="20" y1="20" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+    <stop offset="0" stop-color="#2B1433"/><stop offset=".6" stop-color="#7B3FA6"/><stop offset="1" stop-color="#E06AA0"/>
+  </linearGradient>
+  <linearGradient id="zs-g3" x1="20" y1="20" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+    <stop offset="0" stop-color="#CDB0E8"/><stop offset="1" stop-color="#FAC4DA"/>
+  </linearGradient>
+  <radialGradient id="zs-pearl" cx=".36" cy=".32" r=".75">
+    <stop offset="0" stop-color="#FFFFFF"/><stop offset=".45" stop-color="#FAC4DA"/><stop offset="1" stop-color="#7B3FA6"/>
+  </radialGradient>
+  <linearGradient id="zs-w" x1="0" y1="20" x2="0" y2="80" gradientUnits="userSpaceOnUse">
+    <stop offset="0" stop-color="#2B1433"/><stop offset="1" stop-color="#7B3FA6"/>
+  </linearGradient></defs>
+  <g transform="translate(125 0)">
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M31 32 H85 Q90 32 87 36 C76 50 58 52 56 60 C54 68 44 74 36 83 Q33 87 40 87 H90" stroke="url(#zs-g2)" stroke-width="2.8" transform="translate(0 -4.2)"/>
+    <path d="M31 32 H85 Q90 32 87 36 C76 50 58 52 56 60 C54 68 44 74 36 83 Q33 87 40 87 H90" stroke="url(#zs-g1)" stroke-width="4"/>
+    <path d="M31 32 H85 Q90 32 87 36 C76 50 58 52 56 60 C54 68 44 74 36 83 Q33 87 40 87 H90" stroke="url(#zs-g3)" stroke-width="2.3" transform="translate(0 4.2)" />
+  </g>
+  <circle cx="23" cy="28" r="7.2" fill="url(#zs-pearl)"/>
+  <circle cx="20.8" cy="25.5" r="2.1" fill="#fff" opacity=".9"/></g>
+  <g transform="translate(0 110)">
+    <path d="M20 20 H64 L20 80 H66 M92 80 L113.6 28.4 M142 80 L120.4 28.4 M101.6 59 C109 49 125 69 132.4 59 M168 80 V20 L212 80 V20 M238 20 H284 M261 20 V80 M350 20 H310 V80 H350 M310 50 H342" fill="none" stroke="url(#zs-w)" stroke-width="5.6" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="117" cy="21" r="6.2" fill="url(#zs-pearl)"/>
+    <circle cx="115.1" cy="18.9" r="1.8" fill="#fff" opacity=".9"/>
+  </g>
+  <path d="M156 212 V226 M167 212 V226 M156 219 H167 M176 226 L182 212 L188 226 M178.4 221.4 H185.6 M197 212 V226 M206 226 V212 H212 C218 212 218 219.4 212 219.4 H206 M211 219.4 L216 226" transform="translate(0 0)" fill="none" stroke="#E06AA0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M127 219 H145 M225 219 H243" stroke="#E06AA0" stroke-width="1.4" stroke-linecap="round"/></svg>
