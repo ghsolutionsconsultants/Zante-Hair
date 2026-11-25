@@ -1067,6 +1067,36 @@
     show(0);
   });
 
+  // hero: "Your hair." stays and the second line changes, letter by letter
+  (function heroRotate() {
+    var box = $('[data-rot]'); if (!box) return;
+    var words = box.dataset.rot.split('|');
+    box.innerHTML = words.map(function (w, k) {
+      return '<span class="rot3-w' + (k ? '' : ' is-on') + '">' + w.split('').map(function (ch, n) {
+        return '<i style="--i:' + n + '">' + (ch === ' ' ? '&nbsp;' : esc(ch)) + '</i>';
+      }).join('') + '</span>';
+    }).join('');
+    if (reduce || words.length < 2) return;
+    var spans = $$('.rot3-w', box), i = 0;
+    setInterval(function () {
+      if (document.hidden) return;
+      var cur = spans[i]; i = (i + 1) % spans.length; var nx = spans[i];
+      cur.classList.remove('is-on'); cur.classList.add('is-out');
+      nx.classList.remove('is-out'); nx.classList.add('is-on');
+      setTimeout(function () { cur.classList.remove('is-out'); }, 1000);
+    }, 3400);
+  })();
+
+  // phones: the shop preview shows one wig at a time, chosen with the switch at the top
+  $$('[data-pvsw]').forEach(function (sw) {
+    var sec = sw.closest('section');
+    sw.addEventListener('click', function (e) {
+      var b = e.target.closest('[data-pvk]'); if (!b) return;
+      $$('[data-pvk]', sw).forEach(function (x) { var on = x === b; x.classList.toggle('is-on', on); x.setAttribute('aria-selected', on); });
+      $$('.pv3', sec).forEach(function (c) { var on = c.dataset.pv === b.dataset.pvk; c.classList.toggle('is-off', !on); c.classList.toggle('is-in', on); });
+    });
+  });
+
   // ======================= V3: SHOPPING PREVIEW (homepage) =======================
   $$('[data-pv]').forEach(function (card) {
     var p = PRODUCTS.filter(function (x) { return x.id === card.dataset.pv; })[0]; if (!p) return;
