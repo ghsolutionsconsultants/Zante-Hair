@@ -32,6 +32,8 @@ PAGES = {
     'our-story.html': ('our-story.html', 'Our story · Zante Beauty', 'Born from a name, built around her. The story of Zante Beauty and why we love kinky straight hair.', 'our-story.html'),
     'privacy.html': ('privacy.html', 'Privacy policy · Zante Beauty', 'How Zante Beauty collects, uses and protects your personal information under POPIA.', None),
     'terms.html': ('terms.html', 'Terms and conditions · Zante Beauty', 'Zante Beauty terms and conditions, in line with the South African Consumer Protection Act and ECTA: orders, cancellations, the 7-day cooling-off period, defects, returns and refunds.', None),
+    'order.html': ('order.html', 'Your order · Zante Beauty', 'Your Zante Beauty order and payment.', None),
+    'pay.html': ('pay.html', 'Secure payment · Zante Beauty', 'Taking you to the secure Yoco payment page.', None),
     'faqs.html': ('faqs.html', 'FAQs · Zante Beauty', 'Answers about Zante hair, styling, orders, delivery and returns.', 'faqs.html'),
 }
 
@@ -46,6 +48,7 @@ def head(title, desc):
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>{title}</title>
 <meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="description" content="{desc}">
 <meta name="theme-color" content="#FAF7F5">
 <link rel="icon" type="image/svg+xml" href="assets/brand/zante-app-icon.svg">
@@ -56,7 +59,8 @@ def head(title, desc):
 <script>
   /* Supabase keys go here once the project exists. Empty = reviews are kept on this device only. */
   /* Google Maps address finder: paste a browser key (Maps JavaScript API + Places API (New), limited to zantebeauty.co.za). Empty = a plain address field. */
-  window.ZANTE_CONFIG = {{ supabaseUrl: '', supabaseAnonKey: '', googleMapsKey: '' }};
+  window.ZANTE_CONFIG = {{ supabaseUrl: '', supabaseAnonKey: '', googleMapsKey: '', paymentsUrl: '' }};
+  /* Card payments: paymentsUrl = https://<project>.supabase.co/functions/v1/yoco (see supabase/README.md). Empty = WhatsApp ordering only. */
 </script>
 </head>'''
 
@@ -157,7 +161,7 @@ FAB = '''
 
 
 def footer(page='index.html'):
-    diff = '' if page in ('index.html', 'hair-guide.html', 'shop.html') else DIFF
+    diff = '' if page in ('index.html', 'hair-guide.html', 'shop.html', 'order.html', 'pay.html') else DIFF
     return diff + f'''</main>
 
 <footer class="footer">
@@ -212,8 +216,16 @@ def footer(page='index.html'):
     </fieldset>
     <fieldset class="co-set">
       <legend class="co-h"><span>2</span>Your details</legend>
-      <label class="co-f"><span>Full name</span><input id="coName" name="name" autocomplete="name" required></label>
-      <label class="co-f"><span>Cellphone, for the courier SMS</span><input id="coPhone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="e.g. 082 123 4567" required></label>
+      <div class="co-row">
+        <label class="co-f"><span>First name</span><input id="coFirst" name="given-name" autocomplete="given-name" required></label>
+        <label class="co-f"><span>Surname</span><input id="coLast" name="family-name" autocomplete="family-name" required></label>
+      </div>
+      <label class="co-f"><span>Email</span><input id="coEmail" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required></label>
+      <label class="co-f"><span>Cellphone (WhatsApp and courier SMS)</span><input id="coPhone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="e.g. 082 123 4567" required></label>
+      <fieldset class="co-rc" id="coReceipt"><legend>Send my order receipt by</legend>
+        <label class="co-chk"><input type="checkbox" name="receipt" value="email" checked><span>Email</span></label>
+        <label class="co-chk"><input type="checkbox" name="receipt" value="whatsapp" checked><span>WhatsApp</span></label>
+      </fieldset>
       <div class="co-f"><span id="coAddrLabel">Delivery address</span>
         <div class="co-addr" id="coAddrBox"><input id="coAddr" name="address" autocomplete="street-address" placeholder="Choose a delivery option first"></div>
         <small class="co-hint" id="coAddrHint">Choose a delivery option above.</small>
@@ -229,6 +241,7 @@ def footer(page='index.html'):
     <p class="bag-total bag-total--sub"><span>Delivery</span><b id="bagShip">Choose an option</b></p>
     <p class="bag-total bag-total--grand"><span>Total</span><b id="bagGrand">R0</b></p>
     <p class="small" id="bagPjn"></p>
+    <button class="btn btn--solid btn--full" type="button" id="payCardBtn" hidden><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/></svg>Pay now by card</button>
     <button class="btn btn--solid btn--full" type="button" id="checkoutBtn">Send my order on WhatsApp</button>
     <p class="small bag-note">Online card payment is coming soon. Your order is sent to us on WhatsApp and we confirm payment details with you.</p>
   </div>

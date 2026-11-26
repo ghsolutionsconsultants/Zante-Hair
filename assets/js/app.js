@@ -274,7 +274,7 @@
     var sub = bagSum(), quote = ship && ship.price === null, fee = ship && !quote ? ship.price : 0;
     $('#bagShip').textContent = !ship ? 'Choose an option' : (quote ? 'Quoted on WhatsApp' : fmt(ship.price));
     $('#bagGrand').textContent = fmt(sub + fee) + (quote ? ' + delivery' : '');
-    $('#bagPjn').textContent = sub ? 'Or 3 × ' + fmt((sub + fee) / 3) + ' with PayJustNow.' : '';
+    $('#bagPjn').textContent = '';
   }
   function mapUrl(p) {
     return p.lat !== undefined
@@ -338,27 +338,141 @@
   $('#coManual').addEventListener('click', function () { mapsState = -1; place = null; plainField(ship ? ADDR[ship.kind][1] : ''); showPlace(); $('#coAddr').focus(); });
   $('#coAddr').addEventListener('input', function () { place = null; showPlace(); });
   function flash(el) { el.classList.remove('co-flash'); void el.offsetWidth; el.classList.add('co-flash'); el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' }); }
-  $('#checkoutBtn').addEventListener('click', function () {
-    if (!bag.length) { toast('Your bag is empty. Add a wig first.'); return; }
-    if (!ship) { toast('Choose a delivery option.'); flash($('#coOpts')); return; }
-    var name = $('#coName').value.trim(), phone = $('#coPhone').value.trim();
-    if (!name) { toast('Add your full name.'); flash($('#coName')); $('#coName').focus(); return; }
-    if (phone.replace(/\D/g, '').length < 9) { toast('Add a cellphone number for the courier SMS.'); flash($('#coPhone')); $('#coPhone').focus(); return; }
+  // the customer's checked details, or null (with a message) when something is missing
+  function collect() {
+    if (!bag.length) { toast('Your bag is empty. Add a wig first.'); return null; }
+    if (!ship) { toast('Choose a delivery option.'); flash($('#coOpts')); return null; }
+    var first = $('#coFirst').value.trim(), last = $('#coLast').value.trim(), email = $('#coEmail').value.trim(), phone = $('#coPhone').value.trim();
+    var receipt = $$('#coReceipt input:checked').map(function (x) { return x.value; });
+    if (!first) { toast('Add your first name.'); flash($('#coFirst')); $('#coFirst').focus(); return null; }
+    if (!last) { toast('Add your surname.'); flash($('#coLast')); $('#coLast').focus(); return null; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { toast('Add a valid email address.'); flash($('#coEmail')); $('#coEmail').focus(); return null; }
+    if (phone.replace(/\D/g, '').length < 9) { toast('Add a valid cellphone number.'); flash($('#coPhone')); $('#coPhone').focus(); return null; }
+    if (!receipt.length) { toast('Choose how we send your receipt: email, WhatsApp or both.'); flash($('#coReceipt')); return null; }
+    var name = first + ' ' + last;
     var typed = $('#coAddr') ? $('#coAddr').value.trim() : '';
     var where = place || (typed ? { address: typed } : null);
-    if (!where) { toast(mapsState === 1 ? 'Choose your ' + ADDR[ship.kind][3] + ' from the Google list.' : 'Add your ' + ADDR[ship.kind][3] + '.'); flash($('#coAddrBox')); return; }
+    if (!where) { toast(mapsState === 1 ? 'Choose your ' + ADDR[ship.kind][3] + ' from the Google list.' : 'Add your ' + ADDR[ship.kind][3] + '.'); flash($('#coAddrBox')); return null; }
+    return { first: first, last: last, name: name, email: email, phone: phone, receipt: receipt, where: where };
+  }
+  function orderText(d) {
     var sub = bagSum(), quote = ship.price === null;
     var lines = bag.map(function (b) { return '• ' + b.name + ', ' + b.variant + (b.qty > 1 ? ' × ' + b.qty : '') + ': ' + fmt(b.price * b.qty); });
-    var text = 'Hi Zante Beauty! I would like to order:\n' + lines.join('\n') +
+    return 'Hi Zante Beauty! I would like to order:\n' + lines.join('\n') +
       '\nSubtotal: ' + fmt(sub) +
       '\nDelivery: ' + ship.name + ' (' + ship.time + '): ' + (quote ? 'please quote' : fmt(ship.price)) +
       '\nTotal: ' + fmt(sub + (quote ? 0 : ship.price)) + (quote ? ' plus delivery' : '') +
       '\nDrop: ' + current.name +
-      '\n\nName: ' + name + '\nCellphone: ' + phone +
-      '\n' + ADDR[ship.kind][0] + ': ' + where.address +
-      '\nGoogle Maps: ' + mapUrl(where);
-    window.open('https://wa.me/' + ZANTE_WHATSAPP + '?text=' + encodeURIComponent(text), '_blank', 'noopener');
+      '\n\nName: ' + d.name + '\nEmail: ' + d.email + '\nCellphone: ' + d.phone +
+      '\nSend my receipt by: ' + d.receipt.map(function (r) { return r === 'email' ? 'email' : 'WhatsApp'; }).join(' and ') +
+      '\n' + ADDR[ship.kind][0] + ': ' + d.where.address +
+      '\nGoogle Maps: ' + mapUrl(d.where);
+  }
+  $('#checkoutBtn').addEventListener('click', function () {
+    var d = collect(); if (!d) return;
+    window.open('https://wa.me/' + ZANTE_WHATSAPP + '?text=' + encodeURIComponent(orderText(d)), '_blank', 'noopener');
   });
+
+  // ======================= CARD PAYMENT WITH YOCO =======================
+  // The browser never holds the Yoco secret key. It asks our server function (ZANTE_CONFIG.paymentsUrl)
+  // to create the checkout, then goes to Yoco's payment page from this page on zantebeauty.co.za.
+  var PAY_URL = ((window.ZANTE_CONFIG || {}).paymentsUrl || '').replace(/\/+$/, '');
+  function payHeaders() {
+    var k = (window.ZANTE_CONFIG || {}).supabaseAnonKey || '', h = { 'Content-Type': 'application/json' };
+    if (k) { h.apikey = k; if (k.indexOf('eyJ') === 0) h.Authorization = 'Bearer ' + k; }
+    return h;
+  }
+  function waLink(text) { return 'https://wa.me/' + ZANTE_WHATSAPP + '?text=' + encodeURIComponent(text); }
+  var cardBtn = $('#payCardBtn');
+  if (cardBtn && PAY_URL) {
+    cardBtn.hidden = false;
+    $('#checkoutBtn').classList.remove('btn--solid');
+    $('#checkoutBtn').textContent = 'Or send my order on WhatsApp';
+    var bagNote = $('.bag-note'); if (bagNote) bagNote.textContent = 'Card payments happen on Yoco’s secure payment page. We never see your card details.';
+    cardBtn.addEventListener('click', function () {
+      var d = collect(); if (!d) return;
+      if (ship.price === null) { toast('Aramex delivery is quoted on WhatsApp. Choose another delivery option to pay by card now.'); flash($('#coOpts')); return; }
+      var label = cardBtn.innerHTML; cardBtn.disabled = true; cardBtn.textContent = 'Opening the secure payment page…';
+      fetch(PAY_URL + '/checkout', {
+        method: 'POST', headers: payHeaders(),
+        body: JSON.stringify({
+          items: bag.map(function (b) { return { id: b.key.split('-')[0], len: parseInt(String(b.variant).replace(/^\D+/, ''), 10), qty: b.qty }; }),
+          ship: ship.id, customer: { firstName: d.first, surname: d.last, email: d.email, phone: d.phone, receipt: d.receipt, address: d.where.address, mapUrl: mapUrl(d.where) }, drop: current.name
+        })
+      }).then(function (r) {
+        return r.json().catch(function () { return {}; }).then(function (j) { if (!r.ok || !j.redirectUrl) throw new Error(j.error || ''); return j; });
+      }).then(function (j) {
+        store('zante-last-order', j.ref);
+        window.location.assign(j.redirectUrl);
+      }).catch(function (e) {
+        cardBtn.disabled = false; cardBtn.innerHTML = label;
+        toast(e.message || 'Card payment is not available right now. Please try again, or send your order on WhatsApp.');
+      });
+    });
+  }
+
+  // order.html: the result when the customer comes back from Yoco
+  (function orderPage() {
+    var box = $('#orderBox'); if (!box) return;
+    var q = new URLSearchParams(location.search), ref = q.get('ref') || '', back = q.get('r') || '', tries = 0;
+    var ok = '<span class="ob-mark is-ok" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span>';
+    var info = '<span class="ob-mark" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 8v5M12 16.2h.01"/></svg></span>';
+    function receiptLine(o) {
+      var via = o.receipt || [], parts = [];
+      if (via.indexOf('email') > -1) parts.push(o.receiptSent ? 'We emailed your receipt to ' + esc(o.emailMasked || 'your email address') + '.' : 'Your receipt goes to ' + esc(o.emailMasked || 'your email address') + '.');
+      if (via.indexOf('whatsapp') > -1) parts.push('We also send it on WhatsApp.');
+      return parts.join(' ') || 'Keep your order reference for your records.';
+    }
+    function render(state, o) {
+      o = o || {};
+      var shop = '<a class="btn" href="index.html#shop">Back to the shop</a>';
+      var again = '<a class="btn btn--solid" href="pay.html?ref=' + esc(ref) + '">Try the payment again</a>';
+      var help = '<a class="btn" href="' + waLink('Hi Zante Beauty! I need help with my card payment. My order reference is ' + ref + '.') + '" target="_blank" rel="noopener">Ask us on WhatsApp</a>';
+      var html;
+      if (state === 'checking') html = '<span class="ob-spin" aria-hidden="true"></span><h1 class="t3s">Checking your payment…</h1><p>This takes a few seconds.</p>';
+      else if (state === 'paid') {
+        var items = (o.items || []).map(function (l) { return '<li><span>' + esc(l.name) + ', ' + l.len + '"' + (l.qty > 1 ? ' × ' + l.qty : '') + '</span><b>' + fmt(l.price * l.qty) + '</b></li>'; }).join('');
+        html = ok + '<h1 class="t3s">Thank you' + (o.firstName ? ', ' + esc(o.firstName) : '') + '! Your payment is received.</h1>' +
+          '<p class="ob-ref">Order reference <b>' + esc(o.ref) + '</b></p>' +
+          '<ul class="ob-items">' + items + (o.delivery && o.delivery.name ? '<li><span>' + esc(o.delivery.name) + ' (' + esc(o.delivery.time) + ')</span><b>' + fmt(o.delivery.fee) + '</b></li>' : '') + '</ul>' +
+          '<p class="ob-total">Total paid: ' + fmt(o.amount) + '</p>' +
+          '<p>Your order is part of <b>' + esc(o.drop || 'the next drop') + '</b>. We confirm on WhatsApp and send tracking when it ships.</p>' +
+          '<p class="ob-rc">' + receiptLine(o) + '</p>' +
+          '<div class="ob-actions"><button class="btn btn--solid" type="button" onclick="window.print()">Print or save receipt</button>' +
+          '<a class="btn" href="' + waLink('Hi Zante Beauty! I paid by card. My order reference is ' + o.ref + '.') + '" target="_blank" rel="noopener">Message us on WhatsApp</a>' + shop + '</div>';
+      } else if (state === 'cancel') html = info + '<h1 class="t3s">Payment not finished</h1><p>No payment was taken. Your bag is still saved.</p><div class="ob-actions">' + again + help + '</div>';
+      else if (state === 'failed') html = info + '<h1 class="t3s">Your payment did not go through</h1><p>Please try again, or use another card.</p><div class="ob-actions">' + again + help + '</div>';
+      else if (state === 'pending') html = info + '<h1 class="t3s">We are confirming your payment</h1><p>If you paid, you do not need to pay again. We confirm every order on WhatsApp.</p><p class="ob-ref">Order reference <b>' + esc(ref) + '</b></p><div class="ob-actions">' + help + shop + '</div>';
+      else html = info + '<h1 class="t3s">We could not find this order</h1><p>If you paid, send us your payment confirmation on WhatsApp and we will help.</p><div class="ob-actions">' + help + shop + '</div>';
+      box.innerHTML = html;
+    }
+    if (!PAY_URL || !/^ZB-[A-Z0-9]{10}$/.test(ref)) { render('unknown'); return; }
+    render(back === 'cancel' ? 'cancel' : back === 'failed' ? 'failed' : 'checking');
+    (function check() {
+      fetch(PAY_URL + '/status?ref=' + encodeURIComponent(ref), { headers: payHeaders() }).then(function (x) {
+        return x.json().then(function (o) { if (!x.ok) throw new Error(o.error || ''); return o; });
+      }).then(function (o) {
+        if (o.status === 'paid') { render('paid', o); bag.length = 0; saveBag(); return; }
+        if (back === 'success' && tries++ < 6) { setTimeout(check, 2500); return; }
+        render(back === 'cancel' || o.status === 'cancelled' || o.status === 'canceled' || o.status === 'expired' ? 'cancel' : (back === 'failed' || o.status === 'failed' ? 'failed' : 'pending'), o);
+      }).catch(function () { render(back === 'success' ? 'pending' : 'unknown'); });
+    })();
+  })();
+
+  // pay.html: a payment link on our own domain that forwards to Yoco's payment page (Yoco checks where customers come from)
+  (function payPage() {
+    var box = $('#payBox'); if (!box) return;
+    var ref = new URLSearchParams(location.search).get('ref') || '';
+    function stop(title, text) { box.innerHTML = '<h1 class="t3s">' + title + '</h1><p>' + text + '</p><div class="ob-actions"><a class="btn btn--solid" href="' + waLink('Hi Zante Beauty! I need help with a payment link' + (ref ? ' (' + ref + ')' : '') + '.') + '" target="_blank" rel="noopener">Ask us on WhatsApp</a><a class="btn" href="index.html">Go to the shop</a></div>'; }
+    if (!PAY_URL || !/^ZB-[A-Z0-9]{10}$/.test(ref)) { stop('This payment link is not valid', 'Please check the link, or ask us for a new one.'); return; }
+    fetch(PAY_URL + '/link?ref=' + encodeURIComponent(ref), { headers: payHeaders() }).then(function (x) {
+      return x.json().then(function (j) { return { ok: x.ok, j: j }; });
+    }).then(function (o) {
+      if (o.ok && o.j.redirectUrl) { window.location.replace(o.j.redirectUrl); return; }
+      if (o.j.paid) stop('This order is already paid', 'Thank you! We confirm every order on WhatsApp.');
+      else stop('This payment link is not valid', 'Please ask us for a new link.');
+    }).catch(function () { stop('We could not open the payment page', 'Please try again in a moment, or ask us on WhatsApp.'); });
+  })();
   renderBag();
 
   // ======================= LIVE HERO =======================
@@ -648,7 +762,6 @@
           '</select></label>' : '<span class="pcard-single">' + esc(o.label) + '</span>') +
           '<p class="pcard-price"><b>' + fmt(o.price) + '</b></p>' +
         '</div>' +
-        '<p class="pcard-pjn">or 3 × <span>' + fmt(o.price / 3) + '</span> PayJustNow</p>' +
         (p.soon ? '<button type="button" class="btn btn--sm" data-notify>Notify me</button>' : '<button type="button" class="btn btn--solid btn--sm" data-add>Add to bag</button>') +
         '<details class="pcard-more"><summary>Details</summary><ul>' + p.details.map(function (d) { return '<li>' + esc(d) + '</li>'; }).join('') + '</ul></details>' +
       '</div></article>';
@@ -797,7 +910,7 @@
           (imgs.length > 1 ? '<div class="qv-thumbs">' + imgs.map(function (s, i) { return '<button type="button" data-img="' + s + '" class="' + (i ? '' : 'is-on') + '"><img src="assets/img/' + s + '" alt="View ' + (i + 1) + '"></button>'; }).join('') + '</div>' : '') + '</div>' +
         '<div class="qv-info">' + (p.soon ? '<span class="tag tag--inline">Coming soon</span>' : p.tag ? '<span class="tag tag--inline">' + esc(p.tag) + '</span>' : '') +
           '<h2 class="qv-name" id="qvTitle">' + esc(p.name) + '</h2><p class="product-line">' + esc(p.line) + '</p>' +
-          '<p class="qv-price"><b>' + fmt(o.price) + '</b> <span>or 3 × ' + fmt(o.price / 3) + ' with PayJustNow</span></p>' +
+          '<p class="qv-price"><b>' + fmt(o.price) + '</b></p>' +
           (p.opts.length > 1 ? '<p class="lens-label">' + p.optLabel + '</p><div class="lens" role="group" aria-label="' + p.optLabel + '">' + p.opts.map(function (x, i) { return '<button type="button" data-i="' + i + '" class="' + (i === sel ? 'is-on' : '') + '" aria-pressed="' + (i === sel) + '">' + esc(x.label) + '</button>'; }).join('') + '</div>' : '') +
           lensRow() +
           (p.soon ? '<button type="button" class="btn btn--full" data-qnotify>Notify me when available</button>' : '<button type="button" class="btn btn--solid btn--full" data-qadd>Add to bag</button>') +
@@ -1092,7 +1205,7 @@
       $$('[data-lc-len]').forEach(function (x) { x.textContent = l + '"'; });
       $$('[data-lc-mark]').forEach(function (x) { x.textContent = MARK[l] || ''; });
       $$('[data-pp-price]').forEach(function (x) { x.textContent = fmt(o.price); });
-      $$('[data-pp-pjn]').forEach(function (x) { x.textContent = 'or 3 × ' + fmt(o.price / 3) + ' with PayJustNow'; });
+      $$('[data-pp-pjn]').forEach(function (x) { x.textContent = ''; });
     }
     $$('[data-lc-chips]').forEach(function (box) {
       var list = box.dataset.lcChips === 'list';
@@ -1209,7 +1322,7 @@
       sel = i; var o = p.opts[i];
       $$('.pv3-chip', card).forEach(function (c) { var on = +c.dataset.i === i; c.classList.toggle('is-on', on); c.setAttribute('aria-checked', on); });
       $('[data-pv-price]', card).textContent = fmt(o.price);
-      $('[data-pv-pjn]', card).textContent = 'or 3 × ' + fmt(o.price / 3) + ' PayJustNow';
+      $('[data-pv-pjn]', card).textContent = '';
       var mn = $('[data-pv-select]', card); if (mn) mn.value = i;
     }
     lens.addEventListener('click', function (e) { var c = e.target.closest('.pv3-chip'); if (c) choose(+c.dataset.i); });
