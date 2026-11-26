@@ -253,7 +253,7 @@
     addToBag({ key: p.id + '-' + p.def, name: p.short, variant: p.optLabel + ': ' + o.label, price: o.price, img: p.img });
   });
   $('#bagList').addEventListener('click', function (e) { var b = e.target.closest('[data-rm]'); if (!b) return; bag.splice(+b.dataset.rm, 1); saveBag(); });
-  // ======================= CHECKOUT: delivery option, Google Maps address, WhatsApp order =======================
+  // ======================= CHECKOUT: delivery option, address, WhatsApp order =======================
   // Until online payment is live, the order goes to Zante on WhatsApp, written out in full.
   var ZANTE_WHATSAPP = '27686954639';
   var SHIP = [
@@ -265,13 +265,12 @@
     { id: 'test', name: 'No delivery (test order)', price: 0, time: 'Test only', kind: 'door' }   // TEST PRODUCT
   ];
   var ADDR = {
-    door: ['Delivery address', 'Start typing your street address', 'Choose your address from the list, so the courier gets the exact place.', 'address'],
-    paxi: ['PAXI point to collect from', 'Search for a PEP store near you', 'PAXI points are inside PEP and Tekkie Town stores. You get an SMS when your parcel is ready.', 'PAXI point'],
-    postnet: ['PostNet branch to collect from', 'Search for a PostNet branch near you', 'You collect your parcel from the branch you choose.', 'PostNet branch']
+    door: { label: 'Delivery address', hint: 'Where the courier delivers your parcel.', noun: 'delivery address' },
+    paxi: { label: 'PAXI point to collect from', hint: 'PAXI points are inside PEP and Tekkie Town stores. You get an SMS when your parcel is ready.', noun: 'PAXI point', store: 'PAXI point (store name)', storePh: 'e.g. PEP Menlyn Maine' },
+    postnet: { label: 'PostNet branch to collect from', hint: 'You collect your parcel from the branch you choose.', noun: 'PostNet branch', store: 'PostNet branch name', storePh: 'e.g. PostNet Menlyn' }
   };
   var SHIP_ICON = {"door": "<svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M2.8 6.5h10.4v9H2.8z\"/><path d=\"M13.2 9.5h4l3 3.2v2.8h-7\"/><circle cx=\"7\" cy=\"17\" r=\"1.9\"/><circle cx=\"17\" cy=\"17\" r=\"1.9\"/></svg>", "paxi": "<svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3.5 9.5 5.5 5h13l2 4.5\"/><path d=\"M3.5 9.5h17\"/><path d=\"M5 9.5V19h14V9.5\"/><path d=\"M10 19v-5h4v5\"/></svg>", "postnet": "<svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m12 3.5 8 4v9l-8 4-8-4v-9z\"/><path d=\"m4 7.5 8 4 8-4M12 11.5v9\"/></svg>"};
-  var ship = null, place = null, lastKind = null, mapsState = 0;   // mapsState: 0 not loaded, 1 Google finder on, -1 plain field
-  var MAPS_KEY = (window.ZANTE_CONFIG || {}).googleMapsKey || '';
+  var ship = null;
   function bagSum() { return bag.reduce(function (a, b) { return a + b.qty * b.price; }, 0); }
   function updateTotals() {
     // TEST PRODUCT: a bag with only the test item shows only the R0 test delivery option, and no other bag shows it
@@ -283,54 +282,17 @@
     $('#bagGrand').textContent = fmt(sub + fee) + (quote ? ' + delivery' : '');
     $('#bagPjn').textContent = '';
   }
-  function mapUrl(p) {
-    return p.lat !== undefined
-      ? 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(p.lat + ',' + p.lng) + '&query_place_id=' + encodeURIComponent(p.id)
-      : 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(p.address);
+  function addressText(a) {
+    return [a.store, a.line1, a.line2, [a.suburb, a.city].filter(Boolean).join(', '), [a.province, a.postal].filter(Boolean).join(', ')]
+      .filter(Boolean).join('\n') + (a.notes ? '\nNotes: ' + a.notes : '');
   }
-  function showPlace() {
-    var pk = $('#coPicked'), mp = $('#coMap');
-    if (place) { pk.textContent = '✓ ' + place.address; mp.href = mapUrl(place); }
-    pk.hidden = mp.hidden = !place;
-    var mv = $('#coMapView');   // a small Google map of the chosen place (Maps Embed API, same key)
-    if (mv) {
-      if (place && place.id && MAPS_KEY) {
-        mv.innerHTML = '<iframe title="Map of your chosen address" src="https://www.google.com/maps/embed/v1/place?key=' + encodeURIComponent(MAPS_KEY) + '&q=place_id:' + encodeURIComponent(place.id) + '&zoom=16" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>';
-        mv.hidden = false;
-      } else { mv.innerHTML = ''; mv.hidden = true; }
-    }
-  }
-  function plainField(ph) {
-    var box = $('#coAddrBox');
-    box.innerHTML = '<input id="coAddr" name="address" autocomplete="street-address" placeholder="' + esc(ph || 'Type your address') + '">';
-    $('#coAddr').addEventListener('input', function () { place = null; showPlace(); });
-    $('#coManual').hidden = true;
-  }
-  function useFinder(lib) {
-    var el = new lib.PlaceAutocompleteElement({ includedRegionCodes: ['za'] });
-    el.className = 'co-finder';
-    try { el.placeholder = ship ? ADDR[ship.kind][1] : ''; } catch (e) {}
-    var box = $('#coAddrBox'); box.innerHTML = ''; box.appendChild(el);
-    function take(pl) {
-      pl.fetchFields({ fields: ['displayName', 'formattedAddress', 'location', 'id'] }).then(function () {
-        var name = pl.displayName || '', fa = pl.formattedAddress || name;
-        place = { address: name && fa.indexOf(name) !== 0 ? name + ', ' + fa : fa, id: pl.id, lat: pl.location.lat(), lng: pl.location.lng() };
-        showPlace();
-      }).catch(function () {});
-    }
-    el.addEventListener('gmp-select', function (e) { if (e.placePrediction) take(e.placePrediction.toPlace()); });
-    el.addEventListener('gmp-placeselect', function (e) { if (e.place) take(e.place); });   // older versions of the element
-    mapsState = 1; $('#coManual').hidden = false;
-  }
-  function loadMaps() {
-    if (!MAPS_KEY || mapsState) return;
-    mapsState = -1;   // stays on the plain field if Google cannot load
-    window.gm_authFailure = function () { mapsState = -1; place = null; plainField(ship ? ADDR[ship.kind][1] : ''); showPlace(); };
-    window.__zanteMaps = function () { google.maps.importLibrary('places').then(useFinder).catch(function () {}); };
-    var s = document.createElement('script');
-    s.async = true;
-    s.src = 'https://maps.googleapis.com/maps/api/js?key=' + encodeURIComponent(MAPS_KEY) + '&libraries=places&loading=async&region=ZA&language=en&callback=__zanteMaps';
-    document.head.appendChild(s);
+  function setAddressKind(kind) {
+    var k = ADDR[kind], store = kind !== 'door';
+    $('#coAddrLabel').textContent = k.label;
+    $('#coAddrHint').textContent = k.hint;
+    $('#coDoor').hidden = store; $('#coStoreRow').hidden = !store;
+    $('#coSuburbOpt').hidden = !store; $('#coPostalOpt').hidden = !store;
+    if (store) { $('#coStoreLabel').textContent = k.store; $('#coStoreName').placeholder = k.storePh; }
   }
   $('#coOpts').innerHTML = SHIP.map(function (s) {
     return '<label class="co-opt"><input type="radio" name="ship" value="' + s.id + '"><span class="co-ic">' + SHIP_ICON[s.kind] + '</span><span class="co-opt-t"><b>' + esc(s.name) + '</b><small>' + esc(s.time) + '</small></span>' +
@@ -339,18 +301,9 @@
   $('#coOpts').addEventListener('change', function (e) {
     ship = SHIP.filter(function (s) { return s.id === e.target.value; })[0] || null;
     if (!ship) return;
-    var k = ADDR[ship.kind];
-    $('#coAddrLabel').textContent = k[0];
-    $('#coAddrHint').textContent = k[2];
-    var f = $('.co-finder'); if (f) { try { f.placeholder = k[1]; } catch (err) {} }
-    var inp = $('#coAddr'); if (inp) inp.placeholder = k[1];
-    if (lastKind && lastKind !== ship.kind && place) { place = null; showPlace(); }   // a door address is not a collection point
-    lastKind = ship.kind;
+    setAddressKind(ship.kind);
     updateTotals();
-    loadMaps();
   });
-  $('#coManual').addEventListener('click', function () { mapsState = -1; place = null; plainField(ship ? ADDR[ship.kind][1] : ''); showPlace(); $('#coAddr').focus(); });
-  $('#coAddr').addEventListener('input', function () { place = null; showPlace(); });
   function flash(el) { el.classList.remove('co-flash'); void el.offsetWidth; el.classList.add('co-flash'); el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' }); }
   // the customer's checked details, or null (with a message) when something is missing
   function collect() {
@@ -364,9 +317,16 @@
     if (phone.replace(/\D/g, '').length < 9) { toast('Add a valid cellphone number.'); flash($('#coPhone')); $('#coPhone').focus(); return null; }
     if (!receipt.length) { toast('Choose how we send your receipt: email, WhatsApp or both.'); flash($('#coReceipt')); return null; }
     var name = first + ' ' + last;
-    var typed = $('#coAddr') ? $('#coAddr').value.trim() : '';
-    var where = place || (typed ? { address: typed } : null);
-    if (!where) { toast(mapsState === 1 ? 'Choose your ' + ADDR[ship.kind][3] + ' from the Google list.' : 'Add your ' + ADDR[ship.kind][3] + '.'); flash($('#coAddrBox')); return null; }
+    var k = ADDR[ship.kind], store = ship.kind !== 'door';
+    var v = function (id) { var el = $('#' + id); return el ? el.value.trim() : ''; };
+    var parts = { store: store ? v('coStoreName') : '', line1: store ? '' : v('coLine1'), line2: store ? '' : v('coLine2'), suburb: v('coSuburb'),
+      city: v('coCity'), province: v('coProv'), postal: v('coPostal'), notes: v('coNotes') };
+    var need = store ? [['coStoreName', parts.store.length >= 3, 'Add the ' + k.noun + ' name.']]
+      : [['coLine1', parts.line1.length >= 4, 'Add your street address.'], ['coSuburb', parts.suburb.length >= 2, 'Add your suburb.']];
+    need.push(['coCity', parts.city.length >= 2, 'Add your city or town.'], ['coProv', !!parts.province, 'Choose your province.']);
+    if (!store || parts.postal) need.push(['coPostal', /^\d{4}$/.test(parts.postal), 'Add your 4-digit postal code.']);
+    for (var i = 0; i < need.length; i++) if (!need[i][1]) { toast(need[i][2]); flash($('#' + need[i][0])); $('#' + need[i][0]).focus(); return null; }
+    var where = { kind: ship.kind, parts: parts, text: addressText(parts) };
     return { first: first, last: last, name: name, email: email, phone: phone, receipt: receipt, where: where };
   }
   function orderText(d) {
@@ -379,8 +339,7 @@
       '\nDrop: ' + current.name +
       '\n\nName: ' + d.name + '\nEmail: ' + d.email + '\nCellphone: ' + d.phone +
       '\nSend my receipt by: ' + d.receipt.map(function (r) { return r === 'email' ? 'email' : 'WhatsApp'; }).join(' and ') +
-      '\n' + ADDR[ship.kind][0] + ': ' + d.where.address +
-      '\nGoogle Maps: ' + mapUrl(d.where);
+      '\n' + ADDR[ship.kind].label + ':\n' + d.where.text;
   }
   $('#checkoutBtn').addEventListener('click', function () {
     var d = collect(); if (!d) return;
@@ -413,7 +372,7 @@
         method: 'POST', headers: payHeaders(),
         body: JSON.stringify({
           items: bag.map(function (b) { return b.key.indexOf('test-') === 0 ? { id: 'test', qty: b.qty } : { id: b.key.split('-')[0], len: parseInt(String(b.variant).replace(/^\D+/, ''), 10), qty: b.qty }; }),
-          ship: ship.id, customer: { firstName: d.first, surname: d.last, email: d.email, phone: d.phone, receipt: d.receipt, address: d.where.address, mapUrl: mapUrl(d.where) }, drop: current.name
+          ship: ship.id, customer: { firstName: d.first, surname: d.last, email: d.email, phone: d.phone, receipt: d.receipt, address: d.where.parts }, drop: current.name
         })
       }).then(function (r) {
         return r.json().catch(function () { return {}; }).then(function (j) { if (!r.ok || !j.redirectUrl) throw new Error(j.error || ''); return j; });

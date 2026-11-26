@@ -16,8 +16,7 @@
 <link rel="stylesheet" href="assets/css/zante.css">
 <script>
   /* Supabase keys go here once the project exists. Empty = reviews are kept on this device only. */
-  /* Google Maps address finder: paste a browser key (Maps JavaScript API + Places API (New), limited to zantebeauty.co.za). Empty = a plain address field. */
-  window.ZANTE_CONFIG = { supabaseUrl: '', supabaseAnonKey: '', googleMapsKey: '', paymentsUrl: '' };
+  window.ZANTE_CONFIG = { supabaseUrl: '', supabaseAnonKey: '', paymentsUrl: '' };
   /* Card payments: paymentsUrl = https://<project>.supabase.co/functions/v1/yoco (see supabase/README.md). Empty = WhatsApp ordering only. */
 </script>
 </head>
@@ -130,14 +129,24 @@
         <label class="co-chk"><input type="checkbox" name="receipt" value="email" checked><span>Email</span></label>
         <label class="co-chk"><input type="checkbox" name="receipt" value="whatsapp" checked><span>WhatsApp</span></label>
       </fieldset>
-      <div class="co-f"><span id="coAddrLabel">Delivery address</span>
-        <div class="co-addr" id="coAddrBox"><input id="coAddr" name="address" autocomplete="street-address" placeholder="Choose a delivery option first"></div>
-        <small class="co-hint" id="coAddrHint">Choose a delivery option above.</small>
-        <p class="co-picked" id="coPicked" hidden></p>
-        <a class="co-map" id="coMap" href="https://www.google.com/maps" target="_blank" rel="noopener" hidden>Check it on Google Maps ↗</a>
-        <div class="co-mapview" id="coMapView" hidden></div>
-        <button class="co-manual" id="coManual" type="button" hidden>Cannot find it? Type it in instead</button>
+    </fieldset>
+    <fieldset class="co-set" id="coAddrSet">
+      <legend class="co-h"><span>3</span><b id="coAddrLabel">Delivery address</b></legend>
+      <small class="co-hint" id="coAddrHint">Choose a delivery option above first.</small>
+      <div class="co-door" id="coDoor">
+        <label class="co-f"><span>Street address</span><input id="coLine1" name="address-line1" autocomplete="address-line1" placeholder="e.g. 12 Jacaranda Street"></label>
+        <label class="co-f"><span>Complex, building or unit <em>optional</em></span><input id="coLine2" name="address-line2" autocomplete="address-line2" placeholder="e.g. Unit 4, Rose Court"></label>
       </div>
+      <label class="co-f" id="coStoreRow" hidden><span id="coStoreLabel">PAXI point (store name)</span><input id="coStoreName" name="store" placeholder="e.g. PEP Menlyn Maine"></label>
+      <div class="co-row">
+        <label class="co-f"><span>Suburb <em id="coSuburbOpt" hidden>optional</em></span><input id="coSuburb" name="suburb" autocomplete="address-level3"></label>
+        <label class="co-f"><span>City or town</span><input id="coCity" name="city" autocomplete="address-level2"></label>
+      </div>
+      <div class="co-row">
+        <label class="co-f"><span>Province</span><select id="coProv" name="province" autocomplete="address-level1"><option value="">Choose</option><option>Eastern Cape</option><option>Free State</option><option>Gauteng</option><option>KwaZulu-Natal</option><option>Limpopo</option><option>Mpumalanga</option><option>Northern Cape</option><option>North West</option><option>Western Cape</option></select></label>
+        <label class="co-f"><span>Postal code <em id="coPostalOpt" hidden>optional</em></span><input id="coPostal" name="postal-code" inputmode="numeric" autocomplete="postal-code" maxlength="4" placeholder="e.g. 0181"></label>
+      </div>
+      <label class="co-f"><span>Delivery notes <em>optional</em></span><input id="coNotes" name="notes" maxlength="160" placeholder="e.g. gate code or a landmark"></label>
     </fieldset>
   </form>
   </div>
