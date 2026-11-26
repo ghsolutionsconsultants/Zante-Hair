@@ -331,15 +331,39 @@
   }
   function orderText(d) {
     var sub = bagSum(), quote = ship.price === null;
-    var lines = bag.map(function (b) { return '• ' + b.name + ', ' + b.variant + (b.qty > 1 ? ' × ' + b.qty : '') + ': ' + fmt(b.price * b.qty); });
-    return 'Hi Zante Beauty! I would like to order:\n' + lines.join('\n') +
-      '\nSubtotal: ' + fmt(sub) +
-      '\nDelivery: ' + ship.name + ' (' + ship.time + '): ' + (quote ? 'please quote' : fmt(ship.price)) +
-      '\nTotal: ' + fmt(sub + (quote ? 0 : ship.price)) + (quote ? ' plus delivery' : '') +
-      '\nDrop: ' + current.name +
-      '\n\nName: ' + d.name + '\nEmail: ' + d.email + '\nCellphone: ' + d.phone +
-      '\nSend my receipt by: ' + d.receipt.map(function (r) { return r === 'email' ? 'email' : 'WhatsApp'; }).join(' and ') +
-      '\n' + ADDR[ship.kind].label + ':\n' + d.where.text;
+    var items = bag.map(function (b) {
+      return '• ' + b.name + ', ' + String(b.variant).replace(/^Length: /, '') + (b.qty > 1 ? ' × ' + b.qty : '') + ': ' + fmt(b.price * b.qty);
+    });
+    var via = d.receipt.map(function (r) { return r === 'email' ? 'Email' : 'WhatsApp'; }).join(' and ');
+    return [
+      'Hi Zante Beauty! 💜',
+      'I would like to place an order.',
+      '',
+      '*MY ORDER*',
+      items.join('\n'),
+      '',
+      '*TOTAL*',
+      'Subtotal: ' + fmt(sub),
+      'Delivery: ' + (quote ? 'please quote' : fmt(ship.price)),
+      '*Total to pay: ' + fmt(sub + (quote ? 0 : ship.price)) + (quote ? ' plus delivery' : '') + '*',
+      '',
+      '*DELIVERY*',
+      ship.name + ' (' + ship.time + ')',
+      '',
+      '*' + ADDR[ship.kind].label.toUpperCase() + '*',
+      d.where.text,
+      '',
+      '*MY DETAILS*',
+      'Name: ' + d.name,
+      'Email: ' + d.email,
+      'Cellphone: ' + d.phone,
+      'Send my receipt by: ' + via,
+      '',
+      '*DROP*',
+      current.name + ', order by ' + sastDate(current.close) + ' at 18:00',
+      '',
+      'Please confirm my order and send me the payment details. Thank you!'
+    ].join('\n');
   }
   $('#checkoutBtn').addEventListener('click', function () {
     var d = collect(); if (!d) return;
@@ -397,6 +421,32 @@
     var q = new URLSearchParams(location.search), ref = q.get('ref') || '', back = q.get('r') || '', tries = 0;
     var ok = '<span class="ob-mark is-ok" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span>';
     var info = '<span class="ob-mark" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 8v5M12 16.2h.01"/></svg></span>';
+    function when(iso) {
+      try { return new Date(iso || Date.now()).toLocaleString('en-ZA', { timeZone: 'Africa/Johannesburg', day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' }); } catch (e) { return ''; }
+    }
+    function receiptView(o) {
+      var d = o.delivery || {}, cu = o.customer || {}, items = o.items || [];
+      var sub = o.subtotal || items.reduce(function (a, l) { return a + l.price * l.qty; }, 0);
+      var rows = items.map(function (l) {
+        return '<tr><td>' + esc(l.name) + (l.len ? ', ' + l.len + '"' : '') + '</td><td class="num">' + l.qty + '</td><td class="num">' + fmt(l.price) + '</td><td class="num">' + fmt(l.price * l.qty) + '</td></tr>';
+      }).join('');
+      var who = [cu.name, cu.emailMasked || o.emailMasked, cu.phoneMasked].filter(Boolean).map(esc).join('\n');
+      return '<div class="rc">' +
+        '<div class="rc-head"><div><p class="rc-brand">Zante Beauty</p><p class="rc-co">Zamasante Suppliers (Pty) Ltd · Reg. 2021/430581/07<br>zantebeauty@outlook.com · WhatsApp +27 68 695 4639<br>zantebeauty.co.za</p></div><span class="rc-tag">Paid</span></div>' +
+        '<h2 class="rc-t">Receipt</h2>' +
+        '<dl class="rc-meta"><dt>Order number</dt><dd>' + esc(o.ref) + '</dd><dt>Date paid</dt><dd>' + esc(when(o.paidAt)) + '</dd>' +
+        '<dt>Payment</dt><dd>Card, through Yoco</dd>' + (o.paymentRef ? '<dt>Payment reference</dt><dd>' + esc(o.paymentRef) + '</dd>' : '') +
+        '<dt>Drop</dt><dd>' + esc(o.drop || 'The next drop') + '</dd></dl>' +
+        (who || cu.address ? '<div class="rc-cols">' + (who ? '<div><h3>Customer</h3><p>' + who + '</p></div>' : '') +
+          (cu.address ? '<div><h3>' + (d.kind && d.kind !== 'door' ? 'Collect from' : 'Deliver to') + '</h3><p>' + esc(cu.address) + '</p></div>' : '') + '</div>' : '') +
+        '<table class="rc-items"><thead><tr><th>Item</th><th class="num">Qty</th><th class="num">Price</th><th class="num">Total</th></tr></thead><tbody>' + rows + '</tbody></table>' +
+        '<dl class="rc-sum"><dt>Subtotal</dt><dd>' + fmt(sub) + '</dd>' +
+        (d.name ? '<dt>Delivery: ' + esc(d.name) + (d.time ? ' (' + esc(d.time) + ')' : '') + '</dt><dd>' + fmt(d.fee || 0) + '</dd>' : '') +
+        '<dt class="rc-total">Total paid</dt><dd class="rc-total">' + fmt(o.amount) + '</dd></dl>' +
+        '<p class="rc-note"><b>What happens next:</b> your order is part of ' + esc(o.drop || 'the next drop') + '. It is made, checked and pre-washed by us, then delivered within 3 to 4 weeks after the drop closes. We send tracking when it ships.</p>' +
+        '<p class="rc-note"><b>Returns:</b> 7-day cooling-off period on unworn units with seals intact, and a 6-month guarantee on defects. Full terms at zantebeauty.co.za/terms.</p>' +
+        '</div>';
+    }
     function receiptLine(o) {
       var via = o.receipt || [], parts = [];
       if (via.indexOf('email') > -1) parts.push(o.receiptSent ? 'We emailed your receipt to ' + esc(o.emailMasked || 'your email address') + '.' : 'Your receipt goes to ' + esc(o.emailMasked || 'your email address') + '.');
@@ -407,19 +457,16 @@
       o = o || {};
       var shop = '<a class="btn" href="/#shop">Back to the shop</a>';
       var again = '<a class="btn btn--solid" href="/pay?ref=' + esc(ref) + '">Try the payment again</a>';
-      var help = '<a class="btn" href="' + waLink('Hi Zante Beauty! I need help with my card payment. My order reference is ' + ref + '.') + '" target="_blank" rel="noopener">Ask us on WhatsApp</a>';
+      var help = '<a class="btn" href="' + waLink(['Hi Zante Beauty! 💜', 'I need help with my card payment.', '', '*Order number:* ' + ref].join('\n')) + '" target="_blank" rel="noopener">Ask us on WhatsApp</a>';
       var html;
       if (state === 'checking') html = '<span class="ob-spin" aria-hidden="true"></span><h1 class="t3s">Checking your payment…</h1><p>This takes a few seconds.</p>';
       else if (state === 'paid') {
-        var items = (o.items || []).map(function (l) { return '<li><span>' + esc(l.name) + ', ' + l.len + '"' + (l.qty > 1 ? ' × ' + l.qty : '') + '</span><b>' + fmt(l.price * l.qty) + '</b></li>'; }).join('');
+        var paidMsg = ['Hi Zante Beauty! 💜', 'I have paid for my order by card.', '', '*Order number:* ' + o.ref, '*Total paid:* ' + fmt(o.amount), '*Paid on:* ' + when(o.paidAt), '',
+          (o.receipt || []).indexOf('whatsapp') > -1 ? 'Please send my receipt on WhatsApp. Thank you!' : 'Thank you!'].join('\n');
         html = ok + '<h1 class="t3s">Thank you' + (o.firstName ? ', ' + esc(o.firstName) : '') + '! Your payment is received.</h1>' +
-          '<p class="ob-ref">Order reference <b>' + esc(o.ref) + '</b></p>' +
-          '<ul class="ob-items">' + items + (o.delivery && o.delivery.name ? '<li><span>' + esc(o.delivery.name) + ' (' + esc(o.delivery.time) + ')</span><b>' + fmt(o.delivery.fee) + '</b></li>' : '') + '</ul>' +
-          '<p class="ob-total">Total paid: ' + fmt(o.amount) + '</p>' +
-          '<p>Your order is part of <b>' + esc(o.drop || 'the next drop') + '</b>. We confirm on WhatsApp and send tracking when it ships.</p>' +
-          '<p class="ob-rc">' + receiptLine(o) + '</p>' +
+          '<p class="ob-rc">' + receiptLine(o) + '</p>' + receiptView(o) +
           '<div class="ob-actions"><button class="btn btn--solid" type="button" onclick="window.print()">Print or save receipt</button>' +
-          '<a class="btn" href="' + waLink('Hi Zante Beauty! I paid by card. My order reference is ' + o.ref + '.') + '" target="_blank" rel="noopener">Message us on WhatsApp</a>' + shop + '</div>';
+          '<a class="btn" href="' + waLink(paidMsg) + '" target="_blank" rel="noopener">Message us on WhatsApp</a>' + shop + '</div>';
       } else if (state === 'cancel') html = info + '<h1 class="t3s">Payment not finished</h1><p>No payment was taken. Your bag is still saved.</p><div class="ob-actions">' + again + help + '</div>';
       else if (state === 'failed') html = info + '<h1 class="t3s">Your payment did not go through</h1><p>Please try again, or use another card.</p><div class="ob-actions">' + again + help + '</div>';
       else if (state === 'pending') html = info + '<h1 class="t3s">We are confirming your payment</h1><p>If you paid, you do not need to pay again. We confirm every order on WhatsApp.</p><p class="ob-ref">Order reference <b>' + esc(ref) + '</b></p><div class="ob-actions">' + help + shop + '</div>';
@@ -443,7 +490,7 @@
   (function payPage() {
     var box = $('#payBox'); if (!box) return;
     var ref = new URLSearchParams(location.search).get('ref') || '';
-    function stop(title, text) { box.innerHTML = '<h1 class="t3s">' + title + '</h1><p>' + text + '</p><div class="ob-actions"><a class="btn btn--solid" href="' + waLink('Hi Zante Beauty! I need help with a payment link' + (ref ? ' (' + ref + ')' : '') + '.') + '" target="_blank" rel="noopener">Ask us on WhatsApp</a><a class="btn" href="/">Go to the shop</a></div>'; }
+    function stop(title, text) { box.innerHTML = '<h1 class="t3s">' + title + '</h1><p>' + text + '</p><div class="ob-actions"><a class="btn btn--solid" href="' + waLink(['Hi Zante Beauty! 💜', 'I need help with a payment link.'].concat(ref ? ['', '*Order number:* ' + ref] : []).join('\n')) + '" target="_blank" rel="noopener">Ask us on WhatsApp</a><a class="btn" href="/">Go to the shop</a></div>'; }
     if (!PAY_URL || !/^ZB-[A-Z0-9]{10}$/.test(ref)) { stop('This payment link is not valid', 'Please check the link, or ask us for a new one.'); return; }
     fetch(PAY_URL + '/link?ref=' + encodeURIComponent(ref), { headers: payHeaders() }).then(function (x) {
       return x.json().then(function (j) { return { ok: x.ok, j: j }; });

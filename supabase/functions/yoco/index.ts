@@ -153,23 +153,40 @@ async function status(url, ENV, json) {
       const ys = String(c.status || '').toLowerCase();
       const next = PAID.includes(ys) ? 'paid' : (['expired', 'cancelled', 'canceled', 'failed'].includes(ys) ? ys : o.status);
       if (next !== o.status || ys !== o.yoco_status) {
-        await db(ENV, 'PATCH', `orders?ref=eq.${o.ref}`, { status: next, yoco_status: ys || null, yoco_payment_id: c.paymentId || null, updated_at: new Date().toISOString() });
-        o.status = next;
+        const now = new Date().toISOString();
+        await db(ENV, 'PATCH', `orders?ref=eq.${o.ref}`, { status: next, yoco_status: ys || null, yoco_payment_id: c.paymentId || null, updated_at: now });
+        Object.assign(o, { status: next, yoco_status: ys || null, yoco_payment_id: c.paymentId || null, updated_at: now });
       }
       if (o.status === 'paid' && !o.receipt_sent_at) await sendReceipts(ENV, o);
     } else {
       console.error('yoco get checkout failed', res.status);
     }
   }
-  return json({
+  const cu = o.customer || {}, d = o.delivery || {};
+  const out = {
     ref: o.ref, status: o.status, amount: o.amount_cents / 100, drop: o.drop_name || '',
+    subtotal: (o.items || []).reduce((sum, l) => sum + l.price * l.qty, 0),
     items: (o.items || []).map((l) => ({ name: l.name, len: l.len, qty: l.qty, price: l.price })),
-    delivery: { name: o.delivery && o.delivery.name, fee: o.delivery && o.delivery.fee, time: o.delivery && o.delivery.time },
-    firstName: (o.customer && (o.customer.firstName || (o.customer.name || '').split(' ')[0])) || '',
-    receipt: (o.customer && o.customer.receipt) || [],
-    emailMasked: maskEmail(o.customer && o.customer.email),
+    delivery: { name: d.name, fee: d.fee, time: d.time, kind: d.kind || 'door' },
+    firstName: cu.firstName || (cu.name || '').split(' ')[0] || '',
+    receipt: cu.receipt || [],
+    emailMasked: maskEmail(cu.email),
     receiptSent: !!o.receipt_sent_at,
-  });
+    createdAt: o.created_at || null,
+  };
+  // the full receipt only once the order is paid (the reference is long and random, and contact details stay masked)
+  if (o.status === 'paid') {
+    Object.assign(out, {
+      paidAt: o.updated_at || null, paymentRef: o.yoco_payment_id || '', mode: o.processing_mode || '',
+      customer: { name: cu.name || '', emailMasked: maskEmail(cu.email), phoneMasked: maskPhone(cu.phone), address: cu.address || '' },
+    });
+  }
+  return json(out);
+}
+
+function maskPhone(p) {
+  const n = String(p || '').replace(/\D/g, '');
+  return n.length >= 6 ? n.slice(0, 3) + ' ••• ' + n.slice(-3) : '';
 }
 
 function maskEmail(e) {
@@ -181,18 +198,41 @@ const esc = (v) => String(v == null ? '' : v).replace(/[&<>"']/g, (ch) => ({ '&'
 const rand = (n) => 'R' + Number(n).toLocaleString('en-ZA').replace(/,/g, ' ');
 
 function receiptHtml(o) {
-  const cu = o.customer || {}, d = o.delivery || {};
-  const rows = (o.items || []).map((l) => `<tr><td>${esc(l.name)}, ${l.len}"${l.qty > 1 ? ' × ' + l.qty : ''}</td><td align="right">${rand(l.price * l.qty)}</td></tr>`).join('');
-  return `<div style="font-family:Arial,sans-serif;max-width:560px;margin:auto;color:#39343D">
-  <h2 style="margin:0 0 4px">Zante Beauty: order receipt</h2>
+  const cu = o.customer || {}, d = o.delivery || {}, items = o.items || [];
+  const sub = items.reduce((sum, l) => sum + l.price * l.qty, 0);
+  const when = new Date().toLocaleString('en-ZA', { timeZone: 'Africa/Johannesburg', day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+  const td = 'padding:8px 6px;border-bottom:1px solid #eee;', th = 'padding:6px;border-bottom:1px solid #ccc;font-size:12px;color:#777;text-transform:uppercase;';
+  const rows = items.map((l) => `<tr><td style="${td}">${esc(l.name)}${l.len ? ', ' + l.len + '"' : ''}</td><td style="${td}text-align:center">${l.qty}</td>` +
+    `<td style="${td}text-align:right">${rand(l.price)}</td><td style="${td}text-align:right">${rand(l.price * l.qty)}</td></tr>`).join('');
+  const atStore = d.kind && d.kind !== 'door';
+  return `<div style="font-family:Arial,Helvetica,sans-serif;max-width:600px;margin:0 auto;color:#39343D;font-size:14px;line-height:1.5">
+  <table width="100%" style="border-collapse:collapse"><tr>
+    <td><div style="font-size:22px;font-weight:bold;color:#8E5C7F;letter-spacing:1px">ZANTE BEAUTY</div>
+    <div style="font-size:12px;color:#777">Zamasante Suppliers (Pty) Ltd · Reg. 2021/430581/07<br>zantebeauty@outlook.com · WhatsApp +27 68 695 4639 · zantebeauty.co.za</div></td>
+    <td style="text-align:right;vertical-align:top"><span style="display:inline-block;padding:4px 12px;border-radius:999px;background:#E3F3E8;color:#2E7D4F;font-weight:bold">PAID</span></td>
+  </tr></table>
+  <h2 style="margin:20px 0 4px">Receipt</h2>
   <p style="margin:0 0 16px">Thank you, ${esc(cu.firstName || '')}. Your payment is received.</p>
-  <p><b>Order reference:</b> ${esc(o.ref)}<br><b>Date:</b> ${new Date().toLocaleDateString('en-ZA')}<br><b>Drop:</b> ${esc(o.drop_name || '')}</p>
-  <table width="100%" cellpadding="6" style="border-collapse:collapse;border-top:1px solid #ddd;border-bottom:1px solid #ddd">${rows}
-  <tr><td>${esc(d.name || 'Delivery')} (${esc(d.time || '')})</td><td align="right">${rand(d.fee || 0)}</td></tr>
-  <tr><td><b>Total paid by card</b></td><td align="right"><b>${rand(o.amount_cents / 100)}</b></td></tr></table>
-  <p><b>Deliver to:</b> ${esc(cu.name || '')}, ${esc(cu.phone || '')}<br>${esc(cu.address || '').replace(/\n/g, '<br>')}</p>
-  <p style="font-size:12px;color:#777">Questions? WhatsApp +27 68 695 4639 or reply to this email.<br>
-  Zante Beauty, a trading name of Zamasante Suppliers (Pty) Ltd. Reg. 2021/430581/07.</p></div>`;
+  <table width="100%" style="border-collapse:collapse;font-size:13px;margin-bottom:16px">
+    <tr><td style="color:#777;width:38%">Order number</td><td><b>${esc(o.ref)}</b></td></tr>
+    <tr><td style="color:#777">Date paid</td><td>${when}</td></tr>
+    <tr><td style="color:#777">Payment</td><td>Card, through Yoco${o.yoco_payment_id ? ' (reference ' + esc(o.yoco_payment_id) + ')' : ''}</td></tr>
+    <tr><td style="color:#777">Drop</td><td>${esc(o.drop_name || 'The next drop')}</td></tr>
+  </table>
+  <table width="100%" style="border-collapse:collapse;margin-bottom:16px"><tr>
+    <td style="vertical-align:top;width:50%;padding-right:10px"><b>Customer</b><br>${esc(cu.name || '')}<br>${esc(cu.email || '')}<br>${esc(cu.phone || '')}</td>
+    <td style="vertical-align:top;width:50%"><b>${atStore ? 'Collect from' : 'Deliver to'}</b><br>${esc(cu.address || '').replace(/\n/g, '<br>')}</td>
+  </tr></table>
+  <table width="100%" style="border-collapse:collapse">
+    <tr><th align="left" style="${th}">Item</th><th style="${th}">Qty</th><th align="right" style="${th}">Price</th><th align="right" style="${th}">Total</th></tr>${rows}
+    <tr><td colspan="3" style="padding:8px 6px;text-align:right">Subtotal</td><td style="padding:8px 6px;text-align:right">${rand(sub)}</td></tr>
+    <tr><td colspan="3" style="padding:8px 6px;text-align:right">Delivery: ${esc(d.name || '')} (${esc(d.time || '')})</td><td style="padding:8px 6px;text-align:right">${rand(d.fee || 0)}</td></tr>
+    <tr><td colspan="3" style="padding:10px 6px;text-align:right;font-weight:bold;border-top:2px solid #39343D">Total paid</td><td style="padding:10px 6px;text-align:right;font-weight:bold;border-top:2px solid #39343D">${rand(o.amount_cents / 100)}</td></tr>
+  </table>
+  <p style="margin:18px 0 6px"><b>What happens next</b><br>Your order is part of ${esc(o.drop_name || 'the next drop')}. It is made, checked and pre-washed by us, then delivered within 3 to 4 weeks after the drop closes. We send tracking when it ships.</p>
+  <p style="margin:0 0 6px"><b>Returns</b><br>7-day cooling-off period on unworn units with seals intact, and a 6-month guarantee on defects. Full terms: zantebeauty.co.za/terms</p>
+  <p style="font-size:12px;color:#777;margin-top:18px">Questions? WhatsApp +27 68 695 4639 or reply to this email.</p>
+</div>`;
 }
 
 async function sendEmail(ENV, to, subject, html) {
