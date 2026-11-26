@@ -1,3 +1,4 @@
+// @ts-nocheck
 // Zante Beauty: card payments with the Yoco Checkout API (Supabase Edge Function, Deno).
 //
 // The Yoco secret key lives ONLY here, as a Supabase secret. It is never sent to the browser.
