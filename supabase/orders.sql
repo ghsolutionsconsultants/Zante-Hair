@@ -10,7 +10,7 @@ create table if not exists public.orders (
   status           text not null default 'new',     -- new, pending, paid, cancelled, expired, failed, not_started
   items            jsonb not null,                  -- [{ id, name, len, qty, price }]
   delivery         jsonb not null,                  -- { id, name, fee, time }
-  customer         jsonb not null,                  -- { name, phone, address, mapUrl }
+  customer         jsonb not null,                  -- { firstName, surname, name, email, phone, receipt, address, addressParts }
   amount_cents     integer not null check (amount_cents >= 200),
   drop_name        text,
   yoco_checkout_id text unique,

@@ -29,17 +29,18 @@ const PRODUCTS = {
   upart: { name: 'The U-Part Wig', prices: [3000, 3100, 3250, 3350, 3450, 3700, 4000] },
 };
 const SHIP = {
-  pnp: { name: 'Pick n Pay store to door', fee: 90, time: '24 to 72 hours' },
-  paxi: { name: 'PAXI store to store', fee: 60, time: '7 to 9 days' },
-  'paxi-fast': { name: 'PAXI store to store, faster', fee: 110, time: '3 to 5 days' },
-  postnet: { name: 'PostNet to PostNet', fee: 109, time: '2 to 3 working days to main centres' },
+  pnp: { name: 'Pick n Pay store to door', fee: 90, time: '24 to 72 hours', kind: 'door' },
+  paxi: { name: 'PAXI store to store', fee: 60, time: '7 to 9 days', kind: 'paxi' },
+  'paxi-fast': { name: 'PAXI store to store, faster', fee: 110, time: '3 to 5 days', kind: 'paxi' },
+  postnet: { name: 'PostNet to PostNet', fee: 109, time: '2 to 3 working days to main centres', kind: 'postnet' },
 };
 // TEST PRODUCT (remove after testing): R2 item, Yoco's minimum, with a R0 delivery option for test-only orders.
 const TEST_ITEM = { name: 'Payment test item', price: 2 };
-const SHIP_TEST = { name: 'No delivery (test order)', fee: 0, time: 'Test only' };
+const SHIP_TEST = { name: 'No delivery (test order)', fee: 0, time: 'Test only', kind: 'door' };
 // Yoco checkout statuses that mean the customer has paid.
 const PAID = ['completed', 'succeeded', 'paid'];
 const REF = /^ZB-[A-HJ-NP-Z2-9]{10}$/;
+const PROVINCES = ['Eastern Cape', 'Free State', 'Gauteng', 'KwaZulu-Natal', 'Limpopo', 'Mpumalanga', 'Northern Cape', 'North West', 'Western Cape'];
 
 const clean = (v, max) => String(v == null ? '' : v).replace(/[\u0000-\u001f\u007f]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, max);
 
@@ -84,7 +85,7 @@ async function createCheckout(req, ENV, json) {
   const receipt = (Array.isArray(c.receipt) ? c.receipt : []).filter((r) => r === 'email' || r === 'whatsapp');
   const customer = {
     firstName: clean(c.firstName, 60), surname: clean(c.surname, 60), email: clean(c.email, 120).toLowerCase(),
-    phone: clean(c.phone, 20), address: clean(c.address, 300), mapUrl: clean(c.mapUrl, 600), receipt: [...new Set(receipt)],
+    phone: clean(c.phone, 20), receipt: [...new Set(receipt)],
   };
   customer.name = (customer.firstName + ' ' + customer.surname).trim();
   if (!customer.firstName) return json({ error: 'Add your first name.' }, 400);
@@ -92,8 +93,18 @@ async function createCheckout(req, ENV, json) {
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(customer.email)) return json({ error: 'Add a valid email address.' }, 400);
   if (customer.phone.replace(/\D/g, '').length < 9) return json({ error: 'Add a valid cellphone number.' }, 400);
   if (!customer.receipt.length) return json({ error: 'Choose how we send your receipt: email, WhatsApp or both.' }, 400);
-  if (customer.address.length < 4) return json({ error: 'Add your address or collection point.' }, 400);
-  if (!/^https:\/\/www\.google\.com\/maps\//.test(customer.mapUrl)) customer.mapUrl = '';
+  const a = c.address && typeof c.address === 'object' ? c.address : {};
+  const parts = { store: clean(a.store, 80), line1: clean(a.line1, 120), line2: clean(a.line2, 120), suburb: clean(a.suburb, 60),
+    city: clean(a.city, 60), province: clean(a.province, 30), postal: clean(a.postal, 4), notes: clean(a.notes, 160) };
+  const atStore = ship.kind !== 'door';
+  if (atStore ? parts.store.length < 3 : parts.line1.length < 4) return json({ error: atStore ? 'Add the store or branch name.' : 'Add your street address.' }, 400);
+  if (!atStore && parts.suburb.length < 2) return json({ error: 'Add your suburb.' }, 400);
+  if (parts.city.length < 2) return json({ error: 'Add your city or town.' }, 400);
+  if (!PROVINCES.includes(parts.province)) return json({ error: 'Choose your province.' }, 400);
+  if ((!atStore || parts.postal) && !/^\d{4}$/.test(parts.postal)) return json({ error: 'Add your 4-digit postal code.' }, 400);
+  customer.addressParts = parts;
+  customer.address = [parts.store, parts.line1, parts.line2, [parts.suburb, parts.city].filter(Boolean).join(', '), [parts.province, parts.postal].filter(Boolean).join(', ')]
+    .filter(Boolean).join('\n') + (parts.notes ? '\nNotes: ' + parts.notes : '');
 
   const total = lines.reduce((a, l) => a + l.price * l.qty, 0) + ship.fee;   // rand
   const ref = newRef(), id = crypto.randomUUID(), drop = clean(body.drop, 60);
@@ -178,7 +189,7 @@ function receiptHtml(o) {
   <table width="100%" cellpadding="6" style="border-collapse:collapse;border-top:1px solid #ddd;border-bottom:1px solid #ddd">${rows}
   <tr><td>${esc(d.name || 'Delivery')} (${esc(d.time || '')})</td><td align="right">${rand(d.fee || 0)}</td></tr>
   <tr><td><b>Total paid by card</b></td><td align="right"><b>${rand(o.amount_cents / 100)}</b></td></tr></table>
-  <p><b>Deliver to:</b> ${esc(cu.name || '')}, ${esc(cu.phone || '')}<br>${esc(cu.address || '')}</p>
+  <p><b>Deliver to:</b> ${esc(cu.name || '')}, ${esc(cu.phone || '')}<br>${esc(cu.address || '').replace(/\n/g, '<br>')}</p>
   <p style="font-size:12px;color:#777">Questions? WhatsApp +27 68 695 4639 or reply to this email.<br>
   Zante Beauty, a trading name of Zamasante Suppliers (Pty) Ltd. Reg. 2021/430581/07.</p></div>`;
 }

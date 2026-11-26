@@ -3050,3 +3050,10 @@ html.js-motion .band3 { animation: band3In 1s var(--ease-soft) .3s both; }
 body:has(.drawer.is-open) .toast { top: calc(14px + env(safe-area-inset-top, 0px)); bottom: auto; transform: translate(-50%, -220%); }
 body:has(.drawer.is-open) .toast.is-on { transform: translate(-50%, 0); }
 .co-mapview iframe { display: block; width: 100%; height: 170px; border: 0; border-radius: 12px; background: var(--bg-2); }
+
+/* address fields */
+.co-f em { margin-left: 4px; font-style: normal; font-weight: 400; font-size: .78rem; color: var(--mute); }
+.co-f select { width: 100%; height: 48px; padding: 0 10px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg); color: var(--ink); font: 400 1rem var(--f-body); }
+.co-f select:focus { outline: 2px solid var(--purple); outline-offset: 1px; }
+.co-door { display: grid; gap: 10px; }
+.co-door[hidden], #coStoreRow[hidden], .co-f em[hidden] { display: none; }
