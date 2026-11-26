@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /order
+Disallow: /pay
+Disallow: /test-payment
+
+Sitemap: https://zantebeauty.co.za/sitemap.xml

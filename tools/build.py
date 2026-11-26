@@ -24,19 +24,20 @@ NAV = [
 
 PAGES = {
     # file: (body source, <title>, meta description, active nav file)
-    'index.html': ('index.html', 'Zante Beauty', 'Zante Beauty: kinky straight half wigs and U-part wigs in 100% virgin human hair, pre-washed before dispatch. New seasonal drops twice a month, delivered in 3 to 4 weeks.', None),
-    'half-wig.html': ('half-wig.html', 'The Half Wig · Zante Beauty', 'The Zante Half Wig: covers the back of your head while your own front hair blends in. 100% virgin human hair, kinky straight, 10 to 22 inches.', 'half-wig.html'),
-    'u-part-wig.html': ('u-part-wig.html', 'The U-Part Wig · Zante Beauty', 'The Zante U-Part Wig: a full wig with a U-shaped opening for your own leave-out and a natural parting. 100% virgin human hair, kinky straight (not silk pressed), 10 to 22 inches.', 'u-part-wig.html'),
-    'shop.html': ('shop.html', 'Shop · Zante Beauty', 'Shop the Zante Half Wig and U-Part Wig: 100% virgin human hair, kinky straight, 180% density, 10 to 22 inches.', 'shop.html'),
-    'hair-drop.html': ('hair-drop.html', 'Seasonal Drops · Zante Beauty', 'How Zante seasonal drops work: two drops a month, cut-off dates, waiting times, delivery and tracking.', 'hair-drop.html'),
-    'hair-guide.html': ('hair-guide.html', 'Hair guide · Zante Beauty', 'Half wig or U-part? Understand our kinky straight texture, 180% density and true-to-length hair.', 'hair-guide.html'),
-    'our-story.html': ('our-story.html', 'Our story · Zante Beauty', 'Born from a name, built around her. The story of Zante Beauty and why we love kinky straight hair.', 'our-story.html'),
-    'privacy.html': ('privacy.html', 'Privacy policy · Zante Beauty', 'How Zante Beauty collects, uses and protects your personal information under POPIA.', None),
-    'terms.html': ('terms.html', 'Terms and conditions · Zante Beauty', 'Zante Beauty terms and conditions, in line with the South African Consumer Protection Act and ECTA: orders, cancellations, the 7-day cooling-off period, defects, returns and refunds.', None),
+    'index.html': ('index.html', 'Zante Beauty | Kinky Straight Half Wigs and U-Part Wigs, South Africa', 'Kinky straight Half Wigs and U-Part Wigs in 100% virgin human hair. Removable, no glue or lace, pre-washed before dispatch. Delivered across South Africa.', None),
+    'half-wig.html': ('half-wig.html', 'The Half Wig | Kinky Straight Human Hair Half Wig | Zante Beauty', 'The Zante Half Wig: a kinky straight half wig in 100% virgin human hair that blends with your own hairline. 10 to 22 inches, from R2 900. Delivered in South Africa.', 'half-wig.html'),
+    'u-part-wig.html': ('u-part-wig.html', 'The U-Part Wig | Kinky Straight Human Hair U-Part Wig | Zante Beauty', 'The Zante U-Part Wig: a kinky straight U-part wig in 100% virgin human hair for a natural parting with your leave-out. 10 to 22 inches, from R3 000.', 'u-part-wig.html'),
+    'shop.html': ('shop.html', 'Shop Kinky Straight Wigs | Zante Beauty', 'Shop the Zante Half Wig and U-Part Wig: kinky straight, 100% virgin human hair, 180% density, 10 to 22 inches. Pay by card or order on WhatsApp.', 'shop.html'),
+    'hair-drop.html': ('hair-drop.html', 'Seasonal Drops: Order Dates and Delivery | Zante Beauty', 'How Zante Seasonal Drops work: order by the first or third Monday at 18:00 and get your wig in 3 to 4 weeks, with Pick n Pay, PAXI, PostNet or Aramex delivery.', 'hair-drop.html'),
+    'hair-guide.html': ('hair-guide.html', 'Half Wig or U-Part Wig? The Zante Hair Guide | Zante Beauty', 'Half Wig or U-Part Wig? Find your style and learn about our kinky straight texture, 180% density, true-to-length sizing and the Zante Ready Ritual.', 'hair-guide.html'),
+    'our-story.html': ('our-story.html', 'Our Story | Zante Beauty', 'Born from a name, built around her: how Zama and Asante became Zante, a South African brand of kinky straight wigs made to complement your natural hair.', 'our-story.html'),
+    'privacy.html': ('privacy.html', 'Privacy Policy | Zante Beauty', 'How Zante Beauty collects, uses and protects your personal information under POPIA.', None),
+    'terms.html': ('terms.html', 'Terms and Conditions | Zante Beauty', 'Zante Beauty terms and conditions, in line with the South African Consumer Protection Act and ECTA: orders, cancellations, the 7-day cooling-off period, defects, returns and refunds.', None),
     'order.html': ('order.html', 'Your order · Zante Beauty', 'Your Zante Beauty order and payment.', None),
     'pay.html': ('pay.html', 'Secure payment · Zante Beauty', 'Taking you to the secure Yoco payment page.', None),
     'test-payment.html': ('test-payment.html', 'Payment test · Zante Beauty', 'Test item for card payments.', None),   # TEST PRODUCT
-    'faqs.html': ('faqs.html', 'FAQs · Zante Beauty', 'Answers about Zante hair, styling, orders, delivery and returns.', 'faqs.html'),
+    '404.html': ('404.html', 'Page not found | Zante Beauty', 'This page could not be found.', None),
+    'faqs.html': ('faqs.html', 'FAQs: Wigs, Delivery and Returns | Zante Beauty', 'Answers about Zante kinky straight wigs: styling, care, ordering, Seasonal Drops, delivery options, card payments and returns.', 'faqs.html'),
 }
 
 ICON_CLOSE = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>'
@@ -332,14 +333,102 @@ def clean_links(html):
     return LINK_RE.sub(lambda m: f'href="{clean_path(m.group(1))}{m.group(2) or ""}"' if m.group(1) in names else m.group(0), html)
 
 
+NOINDEX = {'order.html', 'pay.html', 'test-payment.html', '404.html'}
+OG = {   # page: (share image, short title for previews)
+    'index.html': ('og-home.jpg', 'Zante Beauty: Your hair. Your way.'),
+    'half-wig.html': ('og-half-wig.jpg', 'The Half Wig by Zante Beauty, from R2 900'),
+    'u-part-wig.html': ('og-u-part-wig.jpg', 'The U-Part Wig by Zante Beauty, from R3 000'),
+}
+OG_ALT = {
+    'og-home.jpg': 'Zante Beauty: the Half Wig and the U-Part Wig, kinky straight human hair',
+    'og-half-wig.jpg': 'The Zante Half Wig, kinky straight human hair, from R2 900',
+    'og-u-part-wig.jpg': 'The Zante U-Part Wig, kinky straight human hair, from R3 000',
+}
+PRODUCT_LD = {   # page: (name, sku, low, high, photos)
+    'half-wig.html': ('The Half Wig', 'ZB-HALF', 2900, 3900, ['n-ph-1', 'n-ph-2', 'n-ph-3']),
+    'u-part-wig.html': ('The U-Part Wig', 'ZB-UPART', 3000, 4000, ['n-pu-1', 'n-pu-2', 'n-pu-3']),
+}
+
+
+def esc_attr(v):
+    return str(v).replace('&', '&amp;').replace('"', '&quot;').replace('<', '&lt;')
+
+
+def seo_block(out, title, desc):
+    import json
+    url = SITE + clean_path(out[:-5])
+    img, og_title = OG.get(out, ('og-home.jpg', title))
+    img_url = f'{SITE}/assets/img/og/{img}'
+    is_product = out in PRODUCT_LD
+    tags = [
+        f'<meta property="og:type" content="{"product" if is_product else "website"}">',
+        '<meta property="og:site_name" content="Zante Beauty">',
+        '<meta property="og:locale" content="en_ZA">',
+        f'<meta property="og:title" content="{esc_attr(og_title)}">',
+        f'<meta property="og:description" content="{esc_attr(desc)}">',
+        f'<meta property="og:url" content="{url}">',
+        f'<meta property="og:image" content="{img_url}">',
+        f'<meta property="og:image:secure_url" content="{img_url}">',
+        '<meta property="og:image:type" content="image/jpeg">',
+        '<meta property="og:image:width" content="1200">',
+        '<meta property="og:image:height" content="630">',
+        f'<meta property="og:image:alt" content="{esc_attr(OG_ALT[img])}">',
+        '<meta name="twitter:card" content="summary_large_image">',
+        f'<meta name="twitter:title" content="{esc_attr(og_title)}">',
+        f'<meta name="twitter:description" content="{esc_attr(desc)}">',
+        f'<meta name="twitter:image" content="{img_url}">',
+        '<link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png">',
+    ]
+    graph = [
+        {'@type': 'Organization', '@id': SITE + '/#org', 'name': 'Zante Beauty', 'legalName': 'Zamasante Suppliers (Pty) Ltd',
+         'url': SITE + '/', 'logo': SITE + '/assets/brand/png/zante-logo-primary.png', 'image': SITE + '/assets/img/og/og-home.jpg',
+         'email': 'zantebeauty@outlook.com', 'telephone': '+27686954639', 'areaServed': 'ZA',
+         'contactPoint': {'@type': 'ContactPoint', 'contactType': 'customer service', 'telephone': '+27686954639',
+                          'email': 'zantebeauty@outlook.com', 'areaServed': 'ZA', 'availableLanguage': ['English']}},
+        {'@type': 'WebSite', '@id': SITE + '/#website', 'url': SITE + '/', 'name': 'Zante Beauty', 'inLanguage': 'en-ZA',
+         'publisher': {'@id': SITE + '/#org'}},
+    ]
+    if is_product:
+        name, sku, low, high, photos = PRODUCT_LD[out]
+        tags += [f'<meta property="product:price:amount" content="{low}">', '<meta property="product:price:currency" content="ZAR">']
+        graph += [
+            {'@type': 'Product', 'name': name, 'sku': sku, 'description': desc, 'brand': {'@type': 'Brand', 'name': 'Zante Beauty'},
+             'image': [f'{SITE}/assets/img/{ph}.jpg' for ph in photos], 'material': '100% virgin human hair', 'category': 'Wigs',
+             'offers': {'@type': 'AggregateOffer', 'priceCurrency': 'ZAR', 'lowPrice': str(low), 'highPrice': str(high), 'offerCount': '7',
+                        'availability': 'https://schema.org/InStock', 'url': url, 'seller': {'@id': SITE + '/#org'}}},
+            {'@type': 'BreadcrumbList', 'itemListElement': [
+                {'@type': 'ListItem', 'position': 1, 'name': 'Home', 'item': SITE + '/'},
+                {'@type': 'ListItem', 'position': 2, 'name': name, 'item': url}]},
+        ]
+    ld = json.dumps({'@context': 'https://schema.org', '@graph': graph}, ensure_ascii=False).replace('</', '<\\/')
+    tags.append(f'<script type="application/ld+json">{ld}</script>')
+    return '\n'.join(tags)
+
+
+def write_sitemap():
+    from datetime import date
+    today = date.today().isoformat()
+    urls = [k for k in PAGES if k not in NOINDEX]
+    prio = {'index.html': '1.0', 'half-wig.html': '0.9', 'u-part-wig.html': '0.9', 'shop.html': '0.8'}
+    body = ''.join(f'  <url><loc>{SITE}{clean_path(u[:-5])}</loc><lastmod>{today}</lastmod><priority>{prio.get(u, "0.6")}</priority></url>\n' for u in urls)
+    (ROOT / 'sitemap.xml').write_text(f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{body}</urlset>\n')
+    (ROOT / 'robots.txt').write_text(f'User-agent: *\nAllow: /\nDisallow: /order\nDisallow: /pay\nDisallow: /test-payment\n\nSitemap: {SITE}/sitemap.xml\n')
+
+
 def build():
     for out, (src, title, desc, active) in PAGES.items():
         body = (SRC / src).read_text()
         html = head(title, desc) + '\n' + header(active, out == 'index.html') + '<span id="top"></span>\n' + body + footer(out)
         html = html.replace('</title>', f'</title>\n<link rel="canonical" href="{SITE}{clean_path(out[:-5])}">', 1)
+        html = html.replace('<meta name="robots" content="noindex, nofollow">',
+                            '<meta name="robots" content="' + ('noindex, nofollow' if out in NOINDEX else 'index, follow, max-image-preview:large') + '">', 1)
+        html = html.replace('\n<link rel="canonical"', '\n' + seo_block(out, title, desc) + '\n<link rel="canonical"', 1)
         html = clean_links(html)
+        if out == '404.html':   # shown for any missing address, so it needs paths from the site root
+            html = re.sub(r'(?<=["\s,(])assets/', '/assets/', html)
         (ROOT / out).write_text(html)
         print('wrote', out)
+    write_sitemap()
 
 
 if __name__ == '__main__':
