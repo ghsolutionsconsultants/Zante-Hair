@@ -3002,3 +3002,43 @@ html.js-motion .band3 { animation: band3In 1s var(--ease-soft) .3s both; }
 /* phone menu: the H and U dots centred on their link text */
 .mnav a { display: flex; align-items: center; }
 .ord3-steps .ord3-n { position: relative; top: -2px; }
+
+/* ---------- card payment: bag button, order result and payment link pages ---------- */
+#payCardBtn[hidden] { display: none !important; }
+#payCardBtn { gap: 8px; }
+#payCardBtn .ic { width: 18px; height: 18px; }
+#payCardBtn:disabled { opacity: .75; cursor: progress; }
+.ob3 { padding-block: clamp(36px, 8svh, 96px); }
+.ob-in { display: grid; justify-items: center; }
+.ob-card { width: min(580px, 100%); padding: clamp(22px, 4vw, 38px); border: 1px solid var(--line); border-radius: var(--r3); background: var(--panel);
+  display: grid; gap: 12px; justify-items: center; text-align: center; }
+.ob-card h1 { margin: 0; }
+.ob-card p { margin: 0; color: var(--ink-2); }
+.ob-mark { width: 58px; height: 58px; border-radius: 50%; display: grid; place-items: center; background: var(--pink-soft); color: var(--pink-ink); }
+.ob-mark.is-ok { background: #E3F3E8; color: #2E7D4F; }
+.ob-mark .ic { width: 28px; height: 28px; }
+.ob-ref b { letter-spacing: .04em; color: var(--ink); }
+.ob-items { list-style: none; margin: 4px 0 0; padding: 0; width: 100%; display: grid; text-align: left; }
+.ob-items li { display: flex; justify-content: space-between; gap: 12px; padding: 9px 0; border-bottom: 1px dashed var(--line); font-size: .92rem; }
+.ob-total { font-weight: 600; font-size: 1.1rem; color: var(--ink) !important; }
+.ob-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 6px; }
+.ob-spin { width: 34px; height: 34px; border-radius: 50%; border: 3px solid var(--bg-3); border-top-color: var(--purple); animation: obSpin .9s linear infinite; }
+@keyframes obSpin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .ob-spin { animation-duration: 2.4s; } }
+
+/* checkout details: name and surname side by side, receipt choice; no instalment lines */
+.co-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.co-rc { margin: 0; padding: 0; border: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; }
+.co-rc legend { width: 100%; margin-bottom: 6px; padding: 0; font-size: .86rem; font-weight: 600; color: var(--ink); }
+.co-chk { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 14px; border: 1px solid var(--line); border-radius: 999px; background: var(--panel); font-size: .9rem; cursor: pointer; }
+.co-chk:has(input:checked) { border-color: var(--purple); background: #F6EDF3; }
+:root[data-mode="dark"] .co-chk:has(input:checked) { background: rgba(142, 92, 127, .2); }
+.co-chk input { width: 18px; height: 18px; margin: 0; accent-color: var(--purple); }
+#bagPjn:empty, [data-pp-pjn]:empty, [data-pv-pjn]:empty { display: none; }
+.ob-rc { font-size: .9rem; }
+@media print {
+  body * { visibility: hidden; }
+  #orderBox, #orderBox * { visibility: visible; }
+  #orderBox { position: absolute; left: 0; top: 0; width: 100%; border: 0; }
+  #orderBox .ob-actions { display: none; }
+}
