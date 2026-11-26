@@ -60,7 +60,7 @@ def head(title, desc):
 <link rel="stylesheet" href="assets/css/zante.css">
 <script>
   /* Supabase keys go here once the project exists. Empty = reviews are kept on this device only. */
-  window.ZANTE_CONFIG = {{ supabaseUrl: '', supabaseAnonKey: '', paymentsUrl: '' }};
+  window.ZANTE_CONFIG = {{ supabaseUrl: '', supabaseAnonKey: '', paymentsUrl: 'https://xkflopzzkxwaubkeryni.supabase.co/functions/v1/Yoco' }};
   /* Card payments: paymentsUrl = https://<project>.supabase.co/functions/v1/yoco (see supabase/README.md). Empty = WhatsApp ordering only. */
 </script>
 </head>'''
