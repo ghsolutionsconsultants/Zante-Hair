@@ -292,6 +292,13 @@
     var pk = $('#coPicked'), mp = $('#coMap');
     if (place) { pk.textContent = '✓ ' + place.address; mp.href = mapUrl(place); }
     pk.hidden = mp.hidden = !place;
+    var mv = $('#coMapView');   // a small Google map of the chosen place (Maps Embed API, same key)
+    if (mv) {
+      if (place && place.id && MAPS_KEY) {
+        mv.innerHTML = '<iframe title="Map of your chosen address" src="https://www.google.com/maps/embed/v1/place?key=' + encodeURIComponent(MAPS_KEY) + '&q=place_id:' + encodeURIComponent(place.id) + '&zoom=16" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>';
+        mv.hidden = false;
+      } else { mv.innerHTML = ''; mv.hidden = true; }
+    }
   }
   function plainField(ph) {
     var box = $('#coAddrBox');
@@ -377,7 +384,9 @@
   }
   $('#checkoutBtn').addEventListener('click', function () {
     var d = collect(); if (!d) return;
-    window.open('https://wa.me/' + ZANTE_WHATSAPP + '?text=' + encodeURIComponent(orderText(d)), '_blank', 'noopener');
+    var url = 'https://wa.me/' + ZANTE_WHATSAPP + '?text=' + encodeURIComponent(orderText(d));
+    var w = null; try { w = window.open(url, '_blank'); } catch (e) {}
+    if (w) { try { w.opener = null; } catch (e) {} } else { window.location.href = url; }   // phones that block new windows: open WhatsApp in this tab
   });
 
   // ======================= CARD PAYMENT WITH YOCO =======================
