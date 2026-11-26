@@ -3165,3 +3165,40 @@ html .announce [data-drop-icon] { color: #E7C9DA; }
 }
 @keyframes heroBreathe { from { transform: scale(1); } to { transform: scale(1.05); } }
 @media (prefers-reduced-motion: reduce) { .hero3 .tile3-media img { animation: none !important; } }
+
+/* ---------- phones: "How ordering works" as a clean vertical timeline (like the desktop list) ---------- */
+@media (max-width: 760px) {
+  .ord3 { grid-template-columns: 1fr !important; }
+  .ord3 > .tile3 { display: none !important; }
+  .ord3 .panel3 { height: auto !important; min-height: 0 !important; padding: 18px 14px 10px !important; border: 1px solid var(--line) !important; background: var(--panel) !important; border-radius: var(--r3) !important; }
+  .ord3-steps { grid-template-columns: 1fr !important; gap: 0 !important; }
+  .ord3-steps li {
+    position: relative; display: grid !important; grid-template-columns: 38px minmax(0, 1fr) !important; column-gap: 14px !important; align-items: start !important;
+    padding: 0 6px 16px 0 !important; border: 0 !important; background: none !important; border-radius: 12px; }
+  .ord3-steps li::before { content: ""; position: absolute; left: 18px; top: 38px; bottom: 0; width: 2px; border-radius: 2px; background: linear-gradient(var(--pink), rgba(166, 126, 153, .25)); }
+  .ord3-steps li:last-child { padding-bottom: 4px !important; }
+  .ord3-steps li:last-child::before { display: none; }
+  .ord3-steps .ord3-n { position: relative; top: 0 !important; z-index: 1; width: 38px !important; height: 38px !important; border: 1.5px solid var(--pink) !important; background: var(--panel) !important; font-size: .78rem !important; }
+  .ord3-steps li > div { padding-top: 8px; }
+  .ord3-steps b { display: block; margin: 0 0 3px; font: 600 1.1rem/1.2 var(--f-head) !important; color: var(--ink); }
+  .ord3-steps li > div > span { display: block; font-size: .86rem !important; line-height: 1.45 !important; color: var(--ink-2); }
+  /* the Zante Ready Ritual step stands out, with its photo */
+  .ord3-steps li.is-ritual { margin: 0 -6px 0 -6px; padding: 10px 84px 14px 6px !important; background: var(--pink-soft) !important; }
+  .ord3-steps li.is-ritual::before { left: 24px; top: 48px; }
+  .ord3-steps li.is-ritual .ord3-n { background: var(--purple) !important; border-color: var(--purple) !important; color: #fff !important; }
+  .ord3-steps li.is-ritual::after { content: ""; position: absolute; right: 10px; top: 50%; width: 60px; height: 75px; transform: translateY(-50%); border-radius: 10px;
+    background: url(../img/n-ritual-600.webp) 50% 0 / cover; outline: 1px solid rgba(110, 69, 98, .25); outline-offset: 2px; }
+  .ord3-thumb { display: none !important; }
+}
+
+/* ---------- phones: the Seasonal Drops countdown panel gets the full width, above the photo ---------- */
+@media (max-width: 760px) {
+  .pair3:has(> .panel3--drop) { grid-template-columns: 1fr !important; }
+  .pair3 > .panel3--drop { order: -1; height: auto !important; padding: 18px 16px !important; }
+  .pair3:has(> .panel3--drop) > .tile3 { height: auto !important; aspect-ratio: 4 / 5; }
+  .panel3--drop .count { grid-template-columns: repeat(4, 1fr) !important; max-width: 320px; }
+  .panel3--drop .count p:nth-child(4) { display: grid !important; }
+  .panel3--drop .drop-when { white-space: normal; font-size: .86rem !important; }
+  .panel3--drop .drop-name { font-size: 1.4rem !important; }
+  .panel3--drop .btn { font-size: .92rem !important; }
+}
