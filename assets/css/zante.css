@@ -3044,3 +3044,9 @@ html.js-motion .band3 { animation: band3In 1s var(--ease-soft) .3s both; }
 }
 
 .co-opt[hidden] { display: none; }
+
+/* messages never block taps, and while the bag is open they show at the top, clear of the checkout buttons */
+.toast { pointer-events: none; }
+body:has(.drawer.is-open) .toast { top: calc(14px + env(safe-area-inset-top, 0px)); bottom: auto; transform: translate(-50%, -220%); }
+body:has(.drawer.is-open) .toast.is-on { transform: translate(-50%, 0); }
+.co-mapview iframe { display: block; width: 100%; height: 170px; border: 0; border-radius: 12px; background: var(--bg-2); }
