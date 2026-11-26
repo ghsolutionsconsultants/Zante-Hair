@@ -3131,3 +3131,15 @@ html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; 
 html[data-season] .announce, html .announce { background: linear-gradient(90deg, #2E2430, #3D2C39 50%, #2E2430); color: #EFE7EC; }
 html .announce a { color: #F3DDEA; }
 html .announce [data-drop-icon] { color: #E7C9DA; }
+
+/* logo: the same letters, in a flat deep plum instead of glossy candy pink (more grown-up, same identity) */
+.logo-z { background: none !important; color: #5F3A55 !important; -webkit-text-fill-color: #5F3A55 !important; filter: none !important; text-shadow: none !important; letter-spacing: .1em !important; }
+.logo-b { color: #5F3A55 !important; letter-spacing: .42em !important; font-weight: 500 !important; }
+:root[data-mode="dark"] .logo-z, :root[data-mode="dark"] .logo-b { color: #E9CFE0 !important; -webkit-text-fill-color: #E9CFE0 !important; }
+.zi-word { background: none !important; color: #5F3A55 !important; -webkit-text-fill-color: #5F3A55 !important; filter: none !important; letter-spacing: .1em; }
+/* phones: the "Tap H or U" hint sits under the hero photos instead of above them */
+.hero3-tip { display: none; }
+@media (max-width: 760px) {
+  .s3-hero .h3-head .l3 { display: none; }
+  .hero3-tip { display: block; margin: 14px 0 0; text-align: center; font-size: .92rem; color: var(--ink-2); }
+}
