@@ -3089,3 +3089,45 @@ body:has(.drawer.is-open) .toast.is-on { transform: translate(-50%, 0); }
 .rc-cols h3 { font: 700 .7rem/1.2 var(--f-body) !important; letter-spacing: .1em !important; text-transform: uppercase !important; color: var(--mute) !important; }
 .rc-sum { column-gap: 0; }
 .rc-sum dt { padding-right: 16px; }
+
+/* ================= a more grown-up, crisper finish (light touch: same layout, photos and logo) ================= */
+:root {
+  --bg: #FAF8F6;          /* softer, neutral ivory */
+  --bg-2: #F4F0EE;        /* warm stone instead of blush */
+  --bg-3: #E8E0E2;
+  --ink: #2B2630;         /* deeper charcoal: crisper text */
+  --ink-2: #4D4752;
+  --mute: #6B6570;
+  --line: #E3DADD;
+  --pink: #A67E99;        /* mauve, a shade deeper and less candy */
+  --pink-soft: #F1EAEE;
+  --pink-ink: #7B4F6D;
+  --purple: #6E4562;      /* deep plum for buttons and marks */
+  --purple-ink: #5A3850;
+  --r3: 14px;
+  --radius: 12px;
+}
+html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; }
+/* tailored buttons instead of bubbly pills */
+.btn, .hx-btn { border-radius: 10px; letter-spacing: .03em; }
+.btn--sm { border-radius: 9px; }
+/* headings a touch tighter; small labels quieter and more spaced */
+.t3, .t3s { letter-spacing: -.005em; }
+.k3 { letter-spacing: .24em; color: var(--pink-ink); }
+/* H and U marks: flat plum, no gloss */
+.hx-dot { background: var(--purple); box-shadow: none; }
+.hx-badge { background: var(--purple); box-shadow: 0 6px 16px -8px rgba(43, 38, 48, .55); }
+.hx-badge::before { border-color: rgba(255, 255, 255, .55); }
+/* finer edges and quieter shadows */
+.tile3, .panel3, .ob-card, .co-opt, .pp4-buy, .cmp3 { box-shadow: none; }
+.tile3 { border-color: var(--line); }
+/* quieter decoration */
+.silk { opacity: .7; }
+.k3 .pearl { opacity: .6; }
+/* the top banner: a deep plum ribbon */
+.announce { background: #2E2430; color: #EFE7EC; }
+.announce a { color: #F3DDEA; }
+:root[data-mode="dark"] .announce { background: #141016; color: #EFE7EC; }
+html[data-season] .announce, html .announce { background: linear-gradient(90deg, #2E2430, #3D2C39 50%, #2E2430); color: #EFE7EC; }
+html .announce a { color: #F3DDEA; }
+html .announce [data-drop-icon] { color: #E7C9DA; }
