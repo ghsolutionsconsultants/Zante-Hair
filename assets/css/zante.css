@@ -3143,3 +3143,25 @@ html .announce [data-drop-icon] { color: #E7C9DA; }
   .s3-hero .h3-head .l3 { display: none; }
   .hero3-tip { display: block; margin: 14px 0 0; text-align: center; font-size: .92rem; color: var(--ink-2); }
 }
+
+/* ---------- phones: a few quiet, editorial touches ---------- */
+@media (max-width: 760px) {
+  /* 1. a fine line with a pearl between sections */
+  main > section.s3 { position: relative; }
+  main > section.s3 + section.s3::before {
+    content: ""; position: absolute; top: 0; left: 50%; z-index: 2; width: 84px; height: 10px; transform: translate(-50%, -50%); pointer-events: none;
+    background:
+      radial-gradient(circle at 50% 50%, #fff 0 1.6px, #D9C3D2 2.2px 3.6px, transparent 4.2px) center / 10px 10px no-repeat,
+      linear-gradient(90deg, transparent, rgba(110, 69, 98, .35) 30%, rgba(110, 69, 98, .35) 70%, transparent) center / 100% 1px no-repeat;
+  }
+  /* 2. a thin plum frame just outside the photos, like a framed print */
+  .pair3 > .tile3:not(.panel3), .gal3 .tile3, .story3 > .tile3, .pp-main, .lc-model { outline: 1px solid rgba(110, 69, 98, .2); outline-offset: 3px; }
+  /* 3. the hero photos breathe slowly */
+  html.js-motion .hero3 .tile3-media img { animation: heroBreathe 16s ease-in-out infinite alternate; transform-origin: 50% 0; }
+  /* 4. swipe rows fade at the edge, so it is clear there is more */
+  .gal3, .s3 .rail { -webkit-mask-image: linear-gradient(90deg, #000 82%, transparent); mask-image: linear-gradient(90deg, #000 82%, transparent); }
+  /* 5. small labels get fine lines on each side */
+  .s3:not(.s3-hero) .h3-head .k3::before, .s3:not(.s3-hero) .h3-head .k3::after { content: ""; width: 16px; height: 1px; background: currentColor; opacity: .55; }
+}
+@keyframes heroBreathe { from { transform: scale(1); } to { transform: scale(1.05); } }
+@media (prefers-reduced-motion: reduce) { .hero3 .tile3-media img { animation: none !important; } }
