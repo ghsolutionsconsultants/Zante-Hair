@@ -1,3 +1,4 @@
+import re
 """Build the Zante Beauty pages.
 
 Every page shares one head, header, footer, bag and review form. Only the page body differs.
@@ -34,6 +35,7 @@ PAGES = {
     'terms.html': ('terms.html', 'Terms and conditions · Zante Beauty', 'Zante Beauty terms and conditions, in line with the South African Consumer Protection Act and ECTA: orders, cancellations, the 7-day cooling-off period, defects, returns and refunds.', None),
     'order.html': ('order.html', 'Your order · Zante Beauty', 'Your Zante Beauty order and payment.', None),
     'pay.html': ('pay.html', 'Secure payment · Zante Beauty', 'Taking you to the secure Yoco payment page.', None),
+    'test-payment.html': ('test-payment.html', 'Payment test · Zante Beauty', 'Test item for card payments.', None),   # TEST PRODUCT
     'faqs.html': ('faqs.html', 'FAQs · Zante Beauty', 'Answers about Zante hair, styling, orders, delivery and returns.', 'faqs.html'),
 }
 
@@ -161,7 +163,7 @@ FAB = '''
 
 
 def footer(page='index.html'):
-    diff = '' if page in ('index.html', 'hair-guide.html', 'shop.html', 'order.html', 'pay.html') else DIFF
+    diff = '' if page in ('index.html', 'hair-guide.html', 'shop.html', 'order.html', 'pay.html', 'test-payment.html') else DIFF
     return diff + f'''</main>
 
 <footer class="footer">
@@ -306,10 +308,26 @@ def footer(page='index.html'):
 '''
 
 
+SITE = 'https://zantebeauty.co.za'
+LINK_RE = re.compile(r'href="(?:\./)?([a-z0-9-]+)\.html([?#][^"]*)?"')
+
+
+def clean_path(name):
+    return '/' if name == 'index' else '/' + name
+
+
+def clean_links(html):
+    """Internal links without .html: half-wig.html#help -> /half-wig#help, index.html -> /"""
+    names = {k[:-5] for k in PAGES}
+    return LINK_RE.sub(lambda m: f'href="{clean_path(m.group(1))}{m.group(2) or ""}"' if m.group(1) in names else m.group(0), html)
+
+
 def build():
     for out, (src, title, desc, active) in PAGES.items():
         body = (SRC / src).read_text()
         html = head(title, desc) + '\n' + header(active, out == 'index.html') + '<span id="top"></span>\n' + body + footer(out)
+        html = html.replace('</title>', f'</title>\n<link rel="canonical" href="{SITE}{clean_path(out[:-5])}">', 1)
+        html = clean_links(html)
         (ROOT / out).write_text(html)
         print('wrote', out)
 

@@ -1,6 +1,8 @@
 /* Zante Beauty · site behaviour */
 (function () {
   'use strict';
+  // clean addresses: /half-wig rather than /half-wig.html (old .html links keep working)
+  try { if (location.protocol !== 'file:' && /\.html$/.test(location.pathname)) history.replaceState(history.state, '', location.pathname.replace(/(^|\/)index\.html$/, '$1').replace(/\.html$/, '') + location.search + location.hash); } catch (e) {}
 
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
@@ -259,7 +261,8 @@
     { id: 'paxi', name: 'PAXI store to store', price: 60, time: '7 to 9 days', kind: 'paxi' },
     { id: 'paxi-fast', name: 'PAXI store to store, faster', price: 110, time: '3 to 5 days', kind: 'paxi' },
     { id: 'postnet', name: 'PostNet to PostNet', price: 109, time: '2 to 3 working days to main centres', kind: 'postnet' },
-    { id: 'aramex', name: 'Aramex to your door', price: null, time: '24 to 72 hours, we quote on WhatsApp', kind: 'door' }
+    { id: 'aramex', name: 'Aramex to your door', price: null, time: '24 to 72 hours, we quote on WhatsApp', kind: 'door' },
+    { id: 'test', name: 'No delivery (test order)', price: 0, time: 'Test only', kind: 'door' }   // TEST PRODUCT
   ];
   var ADDR = {
     door: ['Delivery address', 'Start typing your street address', 'Choose your address from the list, so the courier gets the exact place.', 'address'],
@@ -271,6 +274,10 @@
   var MAPS_KEY = (window.ZANTE_CONFIG || {}).googleMapsKey || '';
   function bagSum() { return bag.reduce(function (a, b) { return a + b.qty * b.price; }, 0); }
   function updateTotals() {
+    // TEST PRODUCT: a bag with only the test item shows only the R0 test delivery option, and no other bag shows it
+    var testOnly = bag.length > 0 && bag.every(function (b) { return b.key.indexOf('test-') === 0; });
+    $$('.co-opt').forEach(function (l) { var isTest = $('input', l).value === 'test'; l.hidden = testOnly ? !isTest : isTest; });
+    if (ship && (ship.id === 'test') !== testOnly) { ship = null; $$('.co-opt input').forEach(function (x) { x.checked = false; }); }
     var sub = bagSum(), quote = ship && ship.price === null, fee = ship && !quote ? ship.price : 0;
     $('#bagShip').textContent = !ship ? 'Choose an option' : (quote ? 'Quoted on WhatsApp' : fmt(ship.price));
     $('#bagGrand').textContent = fmt(sub + fee) + (quote ? ' + delivery' : '');
@@ -396,7 +403,7 @@
       fetch(PAY_URL + '/checkout', {
         method: 'POST', headers: payHeaders(),
         body: JSON.stringify({
-          items: bag.map(function (b) { return { id: b.key.split('-')[0], len: parseInt(String(b.variant).replace(/^\D+/, ''), 10), qty: b.qty }; }),
+          items: bag.map(function (b) { return b.key.indexOf('test-') === 0 ? { id: 'test', qty: b.qty } : { id: b.key.split('-')[0], len: parseInt(String(b.variant).replace(/^\D+/, ''), 10), qty: b.qty }; }),
           ship: ship.id, customer: { firstName: d.first, surname: d.last, email: d.email, phone: d.phone, receipt: d.receipt, address: d.where.address, mapUrl: mapUrl(d.where) }, drop: current.name
         })
       }).then(function (r) {
@@ -410,6 +417,11 @@
       });
     });
   }
+
+  // TEST PRODUCT (remove after testing the payment gateway): the hidden /test-payment page adds a R2 item
+  $$('[data-add-test]').forEach(function (b) {
+    b.addEventListener('click', function () { addToBag({ key: 'test-0', name: 'Payment test item', variant: 'Test only', price: 2, img: 'n-ph-1-600.webp' }); openBag(true); });
+  });
 
   // order.html: the result when the customer comes back from Yoco
   (function orderPage() {
@@ -425,8 +437,8 @@
     }
     function render(state, o) {
       o = o || {};
-      var shop = '<a class="btn" href="index.html#shop">Back to the shop</a>';
-      var again = '<a class="btn btn--solid" href="pay.html?ref=' + esc(ref) + '">Try the payment again</a>';
+      var shop = '<a class="btn" href="/#shop">Back to the shop</a>';
+      var again = '<a class="btn btn--solid" href="/pay?ref=' + esc(ref) + '">Try the payment again</a>';
       var help = '<a class="btn" href="' + waLink('Hi Zante Beauty! I need help with my card payment. My order reference is ' + ref + '.') + '" target="_blank" rel="noopener">Ask us on WhatsApp</a>';
       var html;
       if (state === 'checking') html = '<span class="ob-spin" aria-hidden="true"></span><h1 class="t3s">Checking your payment…</h1><p>This takes a few seconds.</p>';
@@ -463,7 +475,7 @@
   (function payPage() {
     var box = $('#payBox'); if (!box) return;
     var ref = new URLSearchParams(location.search).get('ref') || '';
-    function stop(title, text) { box.innerHTML = '<h1 class="t3s">' + title + '</h1><p>' + text + '</p><div class="ob-actions"><a class="btn btn--solid" href="' + waLink('Hi Zante Beauty! I need help with a payment link' + (ref ? ' (' + ref + ')' : '') + '.') + '" target="_blank" rel="noopener">Ask us on WhatsApp</a><a class="btn" href="index.html">Go to the shop</a></div>'; }
+    function stop(title, text) { box.innerHTML = '<h1 class="t3s">' + title + '</h1><p>' + text + '</p><div class="ob-actions"><a class="btn btn--solid" href="' + waLink('Hi Zante Beauty! I need help with a payment link' + (ref ? ' (' + ref + ')' : '') + '.') + '" target="_blank" rel="noopener">Ask us on WhatsApp</a><a class="btn" href="/">Go to the shop</a></div>'; }
     if (!PAY_URL || !/^ZB-[A-Z0-9]{10}$/.test(ref)) { stop('This payment link is not valid', 'Please check the link, or ask us for a new one.'); return; }
     fetch(PAY_URL + '/link?ref=' + encodeURIComponent(ref), { headers: payHeaders() }).then(function (x) {
       return x.json().then(function (j) { return { ok: x.ok, j: j }; });
@@ -698,8 +710,9 @@
         var a = e.target.closest('a[href]');
         if (!a || e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey || a.target === '_blank') return;
         var href = a.getAttribute('href');
-        if (!/^[\w-]+\.html(#.*)?$/.test(href)) return;                 // only our own pages
-        if (href.split('#')[0] === location.pathname.split('/').pop()) return; // same-page anchors scroll as usual
+        if (!/^\/[\w-]*(#.*)?$/.test(href) && !/^[\w-]+\.html(#.*)?$/.test(href)) return;   // only our own pages
+        var pg = function (x) { return x.replace(/^\//, '').replace(/\.html$/, '').replace(/^index$/, ''); };
+        if (pg(href.split('#')[0]) === pg(location.pathname.split('/').pop())) return;  // same-page anchors scroll as usual
         root.classList.add('is-leaving'); // navigation continues immediately; the fade is cosmetic
       });
       addEventListener('pageshow', function () { root.classList.remove('is-leaving'); });
@@ -1248,7 +1261,7 @@
       var name = pick === 'upart' ? 'The U-Part Wig' : 'The Half Wig', letter = pick === 'upart' ? 'U' : 'H';
       var why = pick === 'upart' ? 'You want a natural parting and are happy to blend a small leave-out.' : 'You want a quick, no-parting look finished with a headband.';
       out.innerHTML = '<div class="hmc-pick"><span class="hx-dot hx-dot--lg">' + letter + '</span><div><p class="z-label">Our suggestion</p><h3>' + name + '</h3><p>' + why + '</p></div>' +
-        (pick === here ? '<a class="btn btn--solid" href="#ppTitle">You are on the right page</a>' : '<a class="btn btn--solid" href="' + (pick === 'upart' ? 'u-part-wig.html' : 'half-wig.html') + '">See ' + name + '</a>') + '</div>';
+        (pick === here ? '<a class="btn btn--solid" href="#ppTitle">You are on the right page</a>' : '<a class="btn btn--solid" href="' + (pick === 'upart' ? '/u-part-wig' : '/half-wig') + '">See ' + name + '</a>') + '</div>';
     });
   });
 

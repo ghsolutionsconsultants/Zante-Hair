@@ -3042,3 +3042,5 @@ html.js-motion .band3 { animation: band3In 1s var(--ease-soft) .3s both; }
   #orderBox { position: absolute; left: 0; top: 0; width: 100%; border: 0; }
   #orderBox .ob-actions { display: none; }
 }
+
+.co-opt[hidden] { display: none; }

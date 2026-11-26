@@ -7,8 +7,8 @@
 //                           prices are never trusted), saves the order, creates a Yoco checkout and returns
 //                           { ref, redirectUrl }. The site then sends the customer to Yoco's payment page.
 //   GET  /status?ref=ZB-..  Asks Yoco whether the order is paid, updates the order and returns a summary
-//                           without personal details. Used by order.html after the customer comes back.
-//   GET  /link?ref=ZB-..    Returns the Yoco payment page for an unpaid order. Used by pay.html, so a
+//                           without personal details. Used by /order after the customer comes back.
+//   GET  /link?ref=ZB-..    Returns the Yoco payment page for an unpaid order. Used by /pay, so a
 //                           payment link sent on WhatsApp still starts on zantebeauty.co.za (Yoco checks this).
 //
 // Secrets (Supabase dashboard > Edge Functions > Secrets):
@@ -34,6 +34,9 @@ const SHIP = {
   'paxi-fast': { name: 'PAXI store to store, faster', fee: 110, time: '3 to 5 days' },
   postnet: { name: 'PostNet to PostNet', fee: 109, time: '2 to 3 working days to main centres' },
 };
+// TEST PRODUCT (remove after testing): R2 item, Yoco's minimum, with a R0 delivery option for test-only orders.
+const TEST_ITEM = { name: 'Payment test item', price: 2 };
+const SHIP_TEST = { name: 'No delivery (test order)', fee: 0, time: 'Test only' };
 // Yoco checkout statuses that mean the customer has paid.
 const PAID = ['completed', 'succeeded', 'paid'];
 const REF = /^ZB-[A-HJ-NP-Z2-9]{10}$/;
@@ -68,11 +71,13 @@ async function createCheckout(req, ENV, json) {
   const lines = [];
   for (const it of (Array.isArray(body.items) ? body.items : []).slice(0, 10)) {
     const p = PRODUCTS[it && it.id], i = LENGTHS.indexOf(Number(it && it.len)), qty = Math.floor(Number(it && it.qty) || 0);
+    if (it && it.id === 'test' && qty >= 1 && qty <= 5) { lines.push({ id: 'test', name: TEST_ITEM.name, len: 0, qty, price: TEST_ITEM.price }); continue; }   // TEST PRODUCT
     if (!p || i < 0 || qty < 1 || qty > 5) return json({ error: 'Something in your bag is no longer available. Please refresh the page and try again.' }, 400);
     lines.push({ id: it.id, name: p.name, len: LENGTHS[i], qty, price: p.prices[i] });
   }
   if (!lines.length) return json({ error: 'Your bag is empty.' }, 400);
-  const ship = SHIP[body.ship];
+  const testOnly = lines.every((l) => l.id === 'test');   // TEST PRODUCT
+  const ship = body.ship === 'test' ? (testOnly ? SHIP_TEST : null) : SHIP[body.ship];
   if (!ship) return json({ error: 'Choose a delivery option with a fixed price to pay by card.' }, 400);
 
   const c = body.customer || {};
@@ -93,7 +98,7 @@ async function createCheckout(req, ENV, json) {
   const total = lines.reduce((a, l) => a + l.price * l.qty, 0) + ship.fee;   // rand
   const ref = newRef(), id = crypto.randomUUID(), drop = clean(body.drop, 60);
   const site = (ENV.SITE_URL || 'https://zantebeauty.co.za').replace(/\/+$/, '');
-  const back = (r) => `${site}/order.html?ref=${ref}&r=${r}`;
+  const back = (r) => `${site}/order?ref=${ref}&r=${r}`;
 
   // 1. save the order first, so a payment can always be matched to it
   await db(ENV, 'POST', 'orders', {

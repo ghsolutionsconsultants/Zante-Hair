@@ -42,11 +42,11 @@ creates each Yoco checkout, keeps the order in the `orders` table and checks whe
    `paymentsUrl: 'https://<project-ref>.supabase.co/functions/v1/yoco'`. Rebuild and deploy the site.
    The bag then shows **Pay now by card**. With `paymentsUrl` empty, the shop stays on WhatsApp ordering.
 5. Test with Yoco's test cards (Yoco app → Checkout API → How to connect → Test card details).
-   After paying you land on `order.html`, which should say the payment is received. Check the `orders` table.
+   After paying you land on `/order`, which should say the payment is received. Check the `orders` table.
 6. Going live: in the Yoco app, make sure `zantebeauty.co.za` and `www.zantebeauty.co.za` are under
    **Verified Domains**. Then replace `YOCO_SECRET_KEY` with a **newly generated** live secret key.
    Live payments only work when the customer reaches Yoco from the shop's own domain.
-7. Payment links on WhatsApp: send `https://zantebeauty.co.za/pay.html?ref=<order ref>`, never the raw Yoco
+7. Payment links on WhatsApp: send `https://zantebeauty.co.za/pay?ref=<order ref>`, never the raw Yoco
    link. The page forwards the customer to Yoco from the shop's domain, which Yoco needs for live payments.
 
 Notes
