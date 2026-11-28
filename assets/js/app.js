@@ -89,21 +89,21 @@
   ];
 
   var FAQS = [
-    ['What is the difference between a Half Wig and a U-Part Wig?', 'A Half Wig covers the back of your head. You leave out your front hairline and blend it in, usually with a headband, so there is no parting. A U-Part Wig is a full wig with a U-shaped opening on top. You leave out a small section of your own hair to cover the opening, which gives you a natural middle or side parting. Both are removable and arrive in our kinky straight texture.', 'hair'],
-    ['Is your hair 100% human hair?', 'Yes. Our units are made from 100% virgin human hair in our signature kinky straight texture.', 'hair'],
+    ['What is the difference between a Half Wig and a U-Part Wig?', 'A Half Wig covers the back of your head. You leave out your front hairline and blend it in. It can be enjoyed as a push-back, flip-over or ponytail hairstyle. It does not allow for a defined parting. A U-Part Wig is a full wig with a U-shaped opening. You can leave out a small section of your own hair to cover the opening, which gives you a natural middle or side parting. Both are removable and arrive in our kinky straight texture.', 'hair'],
+    ['Is your hair 100% human hair?', 'Yes. Our units are made from 100% raw human hair. However, because the hair undergoes processing to become our kinky straight texture, it is labelled virgin human hair.', 'hair'],
     ['What does 180% density mean?', 'Density describes how full your wig is. All our standard units are 180% density. It is about fullness, not length.', 'hair'],
-    ['Why do your units look longer than most?', 'Our hair is true to length, so you get the full inches you pay for.', 'hair'],
+    ['Why do your units look longer?', 'Our hair is true length.', 'hair'],
     ['Half wig or U-part: which is more protective?', 'Both help you protect your natural hair. Choose the one that suits your lifestyle. Our hair guide above can help.', 'styling'],
     ['Can I wear a middle or side part with a half wig?', 'Not a defined part. You can wear a middle or side flip-over with no distinct parting. If you want a defined part, choose the U-part wig.', 'styling'],
     ['Can I straighten or curl my Zante unit?', 'Yes. It is human hair and can be heat styled. Always use heat protection and moderate temperatures. The natural texture can return after washing, moisture or high humidity.', 'styling'],
     ['Can kinky straight be bone straight?', 'It can be silk pressed for a straight finish, but it keeps a subtle texture. It gives a fuller, more natural-looking straight finish rather than bone straight.', 'styling'],
-    ['Once I silk press my unit, will it stay straight?', 'No. The hair goes back to its natural, full blow-out texture after washing, moisture or high humidity.', 'styling'],
+    ['Once I silk press my unit, will it stay straight forever?', 'No. The hair will gradually revert to its natural kinky straight state after washing, moisture or high humidity.', 'styling'],
     ['Do I need to straighten my natural hair?', 'Not always. It depends on your natural texture and the look you want. Avoid unnecessary heat or tension, and style the unit to match your hair.', 'styling'],
     ['Can I colour a Zante unit?', 'Yes, human hair can be coloured, but results vary and colour can affect the condition of the hair. We recommend a professional colourist and a strand test first.', 'styling'],
     ['Can I sew in my Zante unit?', 'Yes. Remove the clips and combs first so they do not rub against and damage your natural hair.', 'styling'],
     ['Are the wigs ready to wear?', 'Yes. We inspect and pre-wash every unit before dispatch at no extra cost. If you may want to return it, please do not wear it, so it stays eligible for a refund.', 'orders'],
     ['Why does delivery take 3 to 4 weeks?', 'We group orders into a production drop before the hair is made and shipped to South Africa. This lets us source and prepare every unit properly. Allow 3 to 4 weeks from your drop’s cut-off.', 'orders'],
-    ['What delivery options do you offer?', 'Pick n Pay store to door: R90, 24 to 72 hours. PAXI store to store: R60 for 7 to 9 days, or R110 for 3 to 5 days. PostNet to PostNet: R109, about 2 to 3 working days to main centres. Aramex to your door: we quote on WhatsApp. These times start when we dispatch your unit, after your drop arrives.', 'orders'],
+    ['What delivery options do you offer?', 'Aramex (store to your door), PAXI (store to store) and PostNet (store to store) options.', 'orders'],
     ['Can I change my order after payment?', 'Contact us as soon as possible. Changes may be possible before your drop closes, but we cannot guarantee them once the drop has gone to production.', 'orders'],
     ['Do you offer installation?', 'Not at the moment. Our collection is designed for beginner-friendly, DIY, removable styling.', 'orders']
   ];
@@ -150,8 +150,10 @@
     { key: 'spring', label: 'Spring', icon: '✿', name: 'The Spring Drop' },
     { key: 'pink', label: 'Pink October', icon: '♡', name: 'The Pink October Drop' },
     { key: 'blackfriday', label: 'Black Friday', icon: '✦', name: 'The Black Friday Drop' },
-    { key: 'christmas', label: 'Christmas', icon: '✶', name: 'The Christmas Drop' }
+    { key: 'christmas', label: 'Festive season', icon: '✶', name: 'The Christmas Drop' }
   ];
+  // Named drops (month index, 0 = January; 1 = first Monday, 2 = third Monday). Named for when the hair arrives.
+  var DROP_NAMES = { '11-1': 'The Year End Drop', '11-2': 'The New Year New Hair Drop', '0-1': 'The New Year’s Resolution Drop', '0-2': 'The Valentine’s Drop' };
   var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   function nthMonday(y, m, n) {
     var first = new Date(Date.UTC(y, m, 1)).getUTCDay();         // 0 Sunday … 6 Saturday
@@ -166,7 +168,7 @@
         if (d > now && out.length < count) {
           out.push({
             close: d, first: n === 1,
-            name: SEASONS[m].name + (n === 1 ? '' : ' II'),
+            name: DROP_NAMES[m + '-' + (n === 1 ? 1 : 2)] || (SEASONS[m].name + (n === 1 ? '' : ' II')),
             ref: 'ZB-' + y + '-' + String(m + 1).padStart(2, '0') + '-0' + (n === 1 ? 1 : 2)
           });
         }
@@ -257,11 +259,10 @@
   // Until online payment is live, the order goes to Zante on WhatsApp, written out in full.
   var ZANTE_WHATSAPP = '27686954639';
   var SHIP = [
-    { id: 'pnp', name: 'Pick n Pay store to door', price: 90, time: '24 to 72 hours', kind: 'door' },
+    { id: 'pnp', name: 'Aramex store to your door', price: 90, time: '24 to 72 hours', kind: 'door' },
     { id: 'paxi', name: 'PAXI store to store', price: 60, time: '7 to 9 days', kind: 'paxi' },
     { id: 'paxi-fast', name: 'PAXI store to store, faster', price: 110, time: '3 to 5 days', kind: 'paxi' },
     { id: 'postnet', name: 'PostNet to PostNet', price: 109, time: '2 to 3 working days to main centres', kind: 'postnet' },
-    { id: 'aramex', name: 'Aramex to your door', price: null, time: '24 to 72 hours, we quote on WhatsApp', kind: 'door' },
     { id: 'test', name: 'No delivery (test order)', price: 0, time: 'Test only', kind: 'door' }   // TEST PRODUCT
   ];
   var ADDR = {
@@ -444,7 +445,7 @@
         (d.name ? '<dt>Delivery: ' + esc(d.name) + (d.time ? ' (' + esc(d.time) + ')' : '') + '</dt><dd>' + fmt(d.fee || 0) + '</dd>' : '') +
         '<dt class="rc-total">Total paid</dt><dd class="rc-total">' + fmt(o.amount) + '</dd></dl>' +
         '<p class="rc-note"><b>What happens next:</b> your order is part of ' + esc(o.drop || 'the next drop') + '. It is made, checked and pre-washed by us, then delivered within 3 to 4 weeks after the drop closes. We send tracking when it ships.</p>' +
-        '<p class="rc-note"><b>Returns:</b> 7-day cooling-off period on unworn units with seals intact, and a 6-month guarantee on defects. Full terms at zantebeauty.co.za/terms.</p>' +
+        '<p class="rc-note"><b>Returns:</b> 7-day cooling-off period on unworn units with seals intact. Full terms at zantebeauty.co.za/terms.</p>' +
         '</div>';
     }
     function receiptLine(o) {
@@ -918,7 +919,7 @@
   // ======================= QUICK VIEW =======================
   var qv = $('#quickView');
   function bodyAt(len) { // where a length falls on a 165 cm frame (inches from the crown, roughly)
-    var m = { 10: ['Chin to shoulder', 30], 12: ['Shoulder', 36], 14: ['Below the shoulder', 42], 16: ['Collarbone to chest', 49], 18: ['Mid-chest', 56], 20: ['Bra strap', 63], 22: ['Mid-back', 70] };
+    var m = { 10: ['Lower neck', 30], 12: ['Upper back', 36], 14: ['Shoulder blades', 42], 16: ['Bra strap', 49], 18: ['Mid-back', 56], 20: ['', 63], 22: ['Lower back', 70] };
     return m[len] || null;
   }
   function openQuick(id) {
@@ -928,7 +929,7 @@
       var l = parseInt(p.opts[sel].label, 10), at = bodyAt(l);
       return at ? '<div class="lv"><svg viewBox="0 0 120 100" aria-hidden="true"><circle cx="60" cy="18" r="11" fill="currentColor" opacity=".18"/><path d="M38 100 C38 60 44 40 60 36 C76 40 82 60 82 100" fill="currentColor" opacity=".12"/>' +
         '<path d="M49 12 C40 30 42 ' + (at[1]) + ' 44 ' + (at[1] + 6) + ' M71 12 C80 30 78 ' + at[1] + ' 76 ' + (at[1] + 6) + '" stroke="var(--pink-ink)" stroke-width="5" fill="none" stroke-linecap="round"/>' +
-        '<line x1="20" x2="100" y1="' + (at[1] + 6) + '" y2="' + (at[1] + 6) + '" stroke="var(--purple)" stroke-dasharray="3 3"/></svg><p><b>' + l + '" length</b><span>Falls about at: ' + at[0] + '</span><small>Based on an average height. Kinky straight hair is true to length.</small></p></div>' : '';
+        '<line x1="20" x2="100" y1="' + (at[1] + 6) + '" y2="' + (at[1] + 6) + '" stroke="var(--purple)" stroke-dasharray="3 3"/></svg><p><b>' + l + '" length</b>' + (at[0] ? '<span>Falls about at: ' + at[0] + '</span>' : '') + '<small>Based on an average height. Kinky straight hair is true to length.</small></p></div>' : '';
     }
     function render() {
       var o = p.opts[sel];
@@ -1207,7 +1208,7 @@
   var pp = $('[data-product-page]');
   if (pp) (function productPage() {
     var p = PRODUCTS.filter(function (x) { return x.id === pp.dataset.productPage; })[0];
-    var MARK = { 10: 'Shoulders', 12: 'Upper back', 14: 'Shoulder blades', 16: 'Mid-back', 18: 'Lower back', 20: 'Waist', 22: 'Below the waist' };
+    var MARK = { 10: 'Lower neck', 12: 'Upper back', 14: 'Shoulder blades', 16: 'Bra strap', 18: 'Mid-back' };   // 20" and 22" show the length only
     var sel = p.def;
     // gallery
     var main = $('.pp-main-img', pp), src = $('.pp-main source', pp);
@@ -1232,6 +1233,7 @@
       $$('.lc-line').forEach(function (ln) { ln.classList.toggle('is-on', +ln.dataset.len === l); ln.classList.toggle('is-under', +ln.dataset.len < l); });
       $$('[data-lc-len]').forEach(function (x) { x.textContent = l + '"'; });
       $$('[data-lc-mark]').forEach(function (x) { x.textContent = MARK[l] || ''; });
+      $$('[data-lc-sep]').forEach(function (x) { x.hidden = !MARK[l]; });
       $$('[data-pp-price]').forEach(function (x) { x.textContent = fmt(o.price); });
       $$('[data-pp-pjn]').forEach(function (x) { x.textContent = ''; });
     }

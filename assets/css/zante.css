@@ -3202,3 +3202,22 @@ html .announce [data-drop-icon] { color: #E7C9DA; }
   .panel3--drop .drop-name { font-size: 1.4rem !important; }
   .panel3--drop .btn { font-size: .92rem !important; }
 }
+
+/* ===== Revision 2: small notes under the shop lines and the before/after captions ===== */
+.pv3-note { display: block; margin-top: 3px; font-size: .8em; color: var(--mute, #6B6370); }
+.cap3-note { display: block; margin-top: 4px; font-size: .86em; font-style: italic; color: var(--mute, #6B6370); }
+/* the "not silk pressed" note shows under both wigs on every screen */
+.band3 .band3-note { display: inline-block; }
+@media (max-width: 760px) { .band3 .band3-note { font-size: .6rem; padding: 2px 7px; line-height: 1.3; text-align: center; } }
+@media (min-width: 761px) and (max-height: 820px) { .band3 .band3-note { display: inline-block; } }
+/* Revision 2: four delivery cards in one row on wide screens; the silk press disclaimer */
+.ship-opts--4 { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+.silk3-note { margin-top: 10px; color: var(--mute, #6B6370); }
+/* Revision 2 fixes: wrapped ticks line up under the text; phone shop photo keeps its own column; lighter "not silk pressed" note on phones */
+.pp-points li { position: relative; padding-left: 20px; }
+.pp-points li::before { position: absolute; left: 0; top: 0; margin: 0; }
+@media (max-width: 760px) {
+  .pv3 > .tile3 { align-self: start; width: 100%; }
+  .band3 .band3-note { background: none; border: 0; padding: 0; font-style: italic; opacity: .92; }
+  .band3 .band3-line { line-height: 1.3; }
+}
