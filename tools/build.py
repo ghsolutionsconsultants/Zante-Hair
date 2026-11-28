@@ -28,11 +28,11 @@ PAGES = {
     'half-wig.html': ('half-wig.html', 'The Half Wig | Kinky Straight Human Hair Half Wig | Zante Beauty', 'The Zante Half Wig: a kinky straight half wig in 100% virgin human hair that blends with your own hairline. 10 to 22 inches, from R2 900. Delivered in South Africa.', 'half-wig.html'),
     'u-part-wig.html': ('u-part-wig.html', 'The U-Part Wig | Kinky Straight Human Hair U-Part Wig | Zante Beauty', 'The Zante U-Part Wig: a kinky straight U-part wig in 100% virgin human hair for a natural parting with your leave-out. 10 to 22 inches, from R3 000.', 'u-part-wig.html'),
     'shop.html': ('shop.html', 'Shop Kinky Straight Wigs | Zante Beauty', 'Shop the Zante Half Wig and U-Part Wig: kinky straight, 100% virgin human hair, 180% density, 10 to 22 inches. Pay by card or order on WhatsApp.', 'shop.html'),
-    'hair-drop.html': ('hair-drop.html', 'Seasonal Drops: Order Dates and Delivery | Zante Beauty', 'How Zante Seasonal Drops work: order by the first or third Monday at 18:00 and get your wig in 3 to 4 weeks, with Pick n Pay, PAXI, PostNet or Aramex delivery.', 'hair-drop.html'),
+    'hair-drop.html': ('hair-drop.html', 'Seasonal Drops: Order Dates and Delivery | Zante Beauty', 'How Zante Seasonal Drops work: order by the first or third Monday at 18:00 and get your wig in 3 to 4 weeks, with Aramex, PAXI or PostNet delivery.', 'hair-drop.html'),
     'hair-guide.html': ('hair-guide.html', 'Half Wig or U-Part Wig? The Zante Hair Guide | Zante Beauty', 'Half Wig or U-Part Wig? Find your style and learn about our kinky straight texture, 180% density, true-to-length sizing and the Zante Ready Ritual.', 'hair-guide.html'),
     'our-story.html': ('our-story.html', 'Our Story | Zante Beauty', 'Born from a name, built around her: how Zama and Asante became Zante, a South African brand of kinky straight wigs made to complement your natural hair.', 'our-story.html'),
     'privacy.html': ('privacy.html', 'Privacy Policy | Zante Beauty', 'How Zante Beauty collects, uses and protects your personal information under POPIA.', None),
-    'terms.html': ('terms.html', 'Terms and Conditions | Zante Beauty', 'Zante Beauty terms and conditions, in line with the South African Consumer Protection Act and ECTA: orders, cancellations, the 7-day cooling-off period, defects, returns and refunds.', None),
+    'terms.html': ('terms.html', 'Terms and Conditions | Zante Beauty', 'Zante Beauty terms and conditions, in line with the South African Consumer Protection Act and ECTA: orders, cancellations, the 7-day cooling-off period, returns and refunds.', None),
     'order.html': ('order.html', 'Your order · Zante Beauty', 'Your Zante Beauty order and payment.', None),
     'pay.html': ('pay.html', 'Secure payment · Zante Beauty', 'Taking you to the secure Yoco payment page.', None),
     'test-payment.html': ('test-payment.html', 'Payment test · Zante Beauty', 'Test item for card payments.', None),   # TEST PRODUCT
@@ -133,8 +133,8 @@ DIFF = '''
 <section class="diff3" aria-labelledby="diffTitle">
   <div class="diff3-in">
     <h2 class="diff3-t" id="diffTitle">Half Wig or U-Part?</h2>
-    <p class="diff3-h"><span class="hx-dot" aria-hidden="true">H</span><span><b>Half Wig:</b> covers the back of your head. Your front hairline blends in, usually with a headband. No parting.</span></p>
-    <p class="diff3-h"><span class="hx-dot" aria-hidden="true">U</span><span><b>U-Part Wig:</b> a full wig with a U-shaped opening. A little of your own hair makes a natural parting.</span></p>
+    <p class="diff3-h"><span class="hx-dot" aria-hidden="true">H</span><span><b>Half Wig:</b> Your everyday style, without the effort</span></p>
+    <p class="diff3-h"><span class="hx-dot" aria-hidden="true">U</span><span><b>U-Part Wig:</b> The blend you love, the freedom you need</span></p>
     <a class="z-link" href="index.html#guide">Compare them <span aria-hidden="true">→</span></a>
   </div>
 </section>

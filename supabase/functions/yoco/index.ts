@@ -30,7 +30,7 @@ const PRODUCTS = {
   upart: { name: 'The U-Part Wig', prices: [3000, 3100, 3250, 3350, 3450, 3700, 4000] },
 };
 const SHIP = {
-  pnp: { name: 'Pick n Pay store to door', fee: 90, time: '24 to 72 hours', kind: 'door' },
+  pnp: { name: 'Aramex store to your door', fee: 90, time: '24 to 72 hours', kind: 'door' },
   paxi: { name: 'PAXI store to store', fee: 60, time: '7 to 9 days', kind: 'paxi' },
   'paxi-fast': { name: 'PAXI store to store, faster', fee: 110, time: '3 to 5 days', kind: 'paxi' },
   postnet: { name: 'PostNet to PostNet', fee: 109, time: '2 to 3 working days to main centres', kind: 'postnet' },
@@ -230,7 +230,7 @@ function receiptHtml(o) {
     <tr><td colspan="3" style="padding:10px 6px;text-align:right;font-weight:bold;border-top:2px solid #39343D">Total paid</td><td style="padding:10px 6px;text-align:right;font-weight:bold;border-top:2px solid #39343D">${rand(o.amount_cents / 100)}</td></tr>
   </table>
   <p style="margin:18px 0 6px"><b>What happens next</b><br>Your order is part of ${esc(o.drop_name || 'the next drop')}. It is made, checked and pre-washed by us, then delivered within 3 to 4 weeks after the drop closes. We send tracking when it ships.</p>
-  <p style="margin:0 0 6px"><b>Returns</b><br>7-day cooling-off period on unworn units with seals intact, and a 6-month guarantee on defects. Full terms: zantebeauty.co.za/terms</p>
+  <p style="margin:0 0 6px"><b>Returns</b><br>7-day cooling-off period on unworn units with seals intact. Full terms: zantebeauty.co.za/terms</p>
   <p style="font-size:12px;color:#777;margin-top:18px">Questions? WhatsApp +27 68 695 4639 or reply to this email.</p>
 </div>`;
 }
